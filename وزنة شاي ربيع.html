@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وزنة شاهي ربيع</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 30px;
+        }
+        input[type="number"] {
+            padding: 10px;
+            width: 80%;
+            max-width: 300px;
+            font-size: 18px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 30px;
+            font-size: 20px;
+            color: #333;
+            background-color: #e8f5e9;
+            padding: 15px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1>وزنة شاهي ربيع</h1>
+    <p>أدخل كمية الماء بالمليلتر:</p>
+    <input type="number" id="waterInput" placeholder="مثلاً 1500">
+    <br>
+    <button onclick="calculateTea()">احسب النسبة</button>
+
+    <div id="result" class="result" style="display:none;"></div>
+
+    <script>
+        function calculateTea() {
+            let waterMl = parseFloat(document.getElementById('waterInput').value);
+            if (isNaN(waterMl) || waterMl <= 0) {
+                alert('رجاءً أدخل كمية ماء صحيحة بالمليلتر');
+                return;
+            }
+
+            let sugarGrams = (84 * waterMl / 1000).toFixed(2);
+            let teaGrams = (12 * waterMl / 1000).toFixed(2);
+            let sugarGlass = (1 * waterMl / 1000).toFixed(2);
+            let teaGlass = (0.75 * waterMl / 1000).toFixed(2);
+
+            let resultDiv = document.getElementById('result');
+            resultDiv.innerHTML =
+                `<b>لـ ${waterMl} مل ماء:</b><br><br>
+                 السكر: ${sugarGrams} جم (${sugarGlass} بيالة)<br>
+                 الشاي: ${teaGrams} جم (${teaGlass} بيالة)`;
+            resultDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
