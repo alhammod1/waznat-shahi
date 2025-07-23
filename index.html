@@ -115,6 +115,9 @@
             color: blue;
             font-weight: bold;
         }
+        .blue-text {
+            color: blue;
+        }
     </style>
 </head>
 <body>
@@ -198,7 +201,7 @@
 
             let resultDiv = document.getElementById('result');
             resultDiv.innerHTML =
-                `<b>لـ ${formatNumber(waterMl)} مل ماء:</b><br><br>
+                `<b>لـ <span class="blue-text">${formatNumber(waterMl)}</span> مل ماء:</b><br><br>
                  السكر: ${formatNumber(sugarGrams)} جم (${formatNumber(sugarGlass.toFixed(2))} بيالة)<br>
                  الشاي: ${formatNumber(teaGrams)} جم (${formatNumber(teaGlass.toFixed(2))} بيالة)`;
             resultDiv.style.display = 'block';
