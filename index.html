@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>وزنة شاهي ربيع</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Cairo', Arial, sans-serif;
             background-color: #f7f7f7;
             color: #333;
             text-align: center;
@@ -14,18 +15,28 @@
         }
         h1 {
             color: #4CAF50;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
         }
-        input[type="number"] {
+        .note-top {
+            color: red;
+            margin-bottom: 20px;
+        }
+        .note-top span {
+            color: blue;
+        }
+        input[type="text"] {
             padding: 10px;
             width: 80%;
             max-width: 300px;
             font-size: 18px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 8px;
+            text-align: center;
         }
         button {
+            display: block;
+            margin: 10px auto;
             padding: 10px 20px;
             font-size: 18px;
             background-color: #4CAF50;
@@ -38,7 +49,7 @@
             background-color: #45a049;
         }
         .result {
-            margin-top: 30px;
+            margin-top: 20px;
             font-size: 20px;
             color: #333;
             background-color: #e8f5e9;
@@ -46,36 +57,170 @@
             border-radius: 10px;
             display: inline-block;
         }
+        .glass-container {
+            display: inline-block;
+            margin: 20px;
+            position: relative;
+        }
+        .glass {
+            width: 168px;
+            height: 225px;
+            border-left: 2px dotted #555;
+            border-right: 2px dotted #555;
+            border-bottom: 2px solid #555;
+            position: relative;
+            margin: 0 auto;
+            border-radius: 0 0 15px 15px;
+        }
+        .level {
+            position: absolute;
+            left: -10%;
+            width: 120%;
+            height: 2px;
+            background-color: red;
+        }
+        .scale {
+            position: absolute;
+            left: 105%;
+            top: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            font-size: 12px;
+            color: green;
+        }
+        .scale div {
+            position: relative;
+        }
+        .scale div::before {
+            content: "";
+            position: absolute;
+            right: 100%;
+            width: 10px;
+            height: 2px;
+            background-color: #333;
+            top: 50%;
+        }
+        .note {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #d32f2f;
+        }
+        .blue-number {
+            color: blue;
+            font-weight: bold;
+        }
+        .blue-plus {
+            color: blue;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <h1>وزنة شاهي ربيع</h1>
+    <p class="note-top">ملاحظة: <span>الخدرة لمدة نصف ساعة</span></p>
+
     <p>أدخل كمية الماء بالمليلتر:</p>
-    <input type="number" id="waterInput" placeholder="مثلاً 1500">
+    <input type="text" id="waterInput" placeholder="مثلاً 4000 أو ٤٠٠٠">
     <br>
     <button onclick="calculateTea()">احسب النسبة</button>
 
     <div id="result" class="result" style="display:none;"></div>
 
+    <div class="glass-container">
+        <p>السكر</p>
+        <div class="glass" id="sugarGlass">
+            <div class="level" id="sugarLevel"></div>
+            <div class="scale">
+                <div>100%</div>
+                <div>75%</div>
+                <div>50%</div>
+                <div>25%</div>
+                <div>10%</div>
+            </div>
+        </div>
+        <p class="note" id="sugarNote"></p>
+    </div>
+
+    <div class="glass-container">
+        <p>الشاي</p>
+        <div class="glass" id="teaGlass">
+            <div class="level" id="teaLevel"></div>
+            <div class="scale">
+                <div>100%</div>
+                <div>75%</div>
+                <div>50%</div>
+                <div>25%</div>
+                <div>10%</div>
+            </div>
+        </div>
+        <p class="note" id="teaNote"></p>
+    </div>
+
     <script>
+        function clamp(value, min, max) {
+            return Math.min(Math.max(value, min), max);
+        }
+
+        function toArabicNumbers(str) {
+            return str.replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+        }
+
         function calculateTea() {
-            let waterMl = parseFloat(document.getElementById('waterInput').value);
+            let inputValue = document.getElementById('waterInput').value.trim();
+            let waterMl = parseFloat(inputValue.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[^\d\.]/g, ''));
             if (isNaN(waterMl) || waterMl <= 0) {
                 alert('رجاءً أدخل كمية ماء صحيحة بالمليلتر');
                 return;
             }
 
+            const glassHeight = 225;
+
+            let useArabicNumbers = /[٠-٩]/.test(inputValue);
+
             let sugarGrams = (84 * waterMl / 1000).toFixed(2);
             let teaGrams = (12 * waterMl / 1000).toFixed(2);
-            let sugarGlass = (1 * waterMl / 1000).toFixed(2);
-            let teaGlass = (0.75 * waterMl / 1000).toFixed(2);
+            let sugarGlass = (1 * waterMl / 1000);
+            let teaGlass = (0.75 * waterMl / 1000);
+
+            let sugarFull = Math.floor(sugarGlass);
+            let sugarRemainderPercent = ((sugarGlass - sugarFull) * 100);
+            let teaFull = Math.floor(teaGlass);
+            let teaRemainderPercent = ((teaGlass - teaFull) * 100);
+
+            let sugarWord = (sugarFull === 1 || sugarFull === 2 || sugarFull >= 11) ? 'بيالة' : 'بيالات';
+            let teaWord = (teaFull === 1 || teaFull === 2 || teaFull >= 11) ? 'بيالة' : 'بيالات';
+
+            function formatNumber(num) {
+                return useArabicNumbers ? toArabicNumbers(num.toString()) : num;
+            }
 
             let resultDiv = document.getElementById('result');
             resultDiv.innerHTML =
-                `<b>لـ ${waterMl} مل ماء:</b><br><br>
-                 السكر: ${sugarGrams} جم (${sugarGlass} بيالة)<br>
-                 الشاي: ${teaGrams} جم (${teaGlass} بيالة)`;
+                `<b>لـ ${formatNumber(waterMl)} مل ماء:</b><br><br>
+                 السكر: ${formatNumber(sugarGrams)} جم (${formatNumber(sugarGlass.toFixed(2))} بيالة)<br>
+                 الشاي: ${formatNumber(teaGrams)} جم (${formatNumber(teaGlass.toFixed(2))} بيالة)`;
             resultDiv.style.display = 'block';
+
+            let sugarNote = `<span class="blue-number">${formatNumber(sugarFull)}</span> ${sugarWord} ممتلئة`;
+            if (sugarRemainderPercent > 0) {
+                sugarNote += ` <span class="blue-plus">+</span> ${formatNumber(sugarRemainderPercent.toFixed(0))}% من البيالة`;
+            }
+
+            let teaNote = `<span class="blue-number">${formatNumber(teaFull)}</span> ${teaWord} ممتلئة`;
+            if (teaRemainderPercent > 0) {
+                teaNote += ` <span class="blue-plus">+</span> ${formatNumber(teaRemainderPercent.toFixed(0))}% من البيالة`;
+            }
+
+            document.getElementById('sugarNote').innerHTML = sugarNote;
+            document.getElementById('teaNote').innerHTML = teaNote;
+
+            let sugarLevelPx = (sugarRemainderPercent > 0 || sugarFull === 0) ? (glassHeight * sugarRemainderPercent / 100) : glassHeight;
+            let teaLevelPx = (teaRemainderPercent > 0 || teaFull === 0) ? (glassHeight * teaRemainderPercent / 100) : glassHeight;
+
+            document.getElementById('sugarLevel').style.bottom = clamp(sugarLevelPx, 0, glassHeight) + 'px';
+            document.getElementById('teaLevel').style.bottom = clamp(teaLevelPx, 0, glassHeight) + 'px';
         }
     </script>
 </body>
