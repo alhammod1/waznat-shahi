@@ -118,6 +118,9 @@
         .blue-text {
             color: blue;
         }
+        .red-text {
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -202,8 +205,8 @@
             let resultDiv = document.getElementById('result');
             resultDiv.innerHTML =
                 `<b>لـ <span class="blue-text">${formatNumber(waterMl)}</span> مل ماء:</b><br><br>
-                 السكر: ${formatNumber(sugarGrams)} جم (${formatNumber(sugarGlass.toFixed(2))} بيالة)<br>
-                 الشاي: ${formatNumber(teaGrams)} جم (${formatNumber(teaGlass.toFixed(2))} بيالة)`;
+                 السكر: <span class="red-text">${formatNumber(sugarGrams)} جم</span> (<span class="blue-text">${formatNumber(sugarGlass.toFixed(2))} بيالة</span>)<br>
+                 الشاي: <span class="red-text">${formatNumber(teaGrams)} جم</span> (<span class="blue-text">${formatNumber(teaGlass.toFixed(2))} بيالة</span>)`;
             resultDiv.style.display = 'block';
 
             let sugarNote = `<span class="blue-number">${formatNumber(sugarFull)}</span> ${sugarWord} ممتلئة`;
