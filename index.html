@@ -227,35 +227,76 @@ function calculateTea() {
     }
 
     const glassHeight = 225;
+    let singleTeaGrams = 21;
     let useArabicNumbers = /[٠-٩]/.test(inputValue);
 
     let sugarGrams = (55 * waterMl / 1000).toFixed(2);
     let teaGrams = (12 * waterMl / 1000).toFixed(2);
+    let sugarGlass = (1 * waterMl / 1000);
+    let teaGlass = (0.75 * waterMl / 1000);
 
-    let sugarLevelPx = clamp((glassHeight * sugarGrams / 84), 0, glassHeight);
-    let teaLevelPx = clamp((glassHeight * teaGrams / 21), 0, glassHeight);
+    let sugarFull = Math.floor(sugarGlass);
+    let sugarRemainderPercent = ((sugarGlass - sugarFull) * 100);
+
+    let teaFull = Math.floor(teaGlass);
+    let teaGramsValue = parseFloat(teaGrams);
+    let teaSingleLevelPercent = (teaGramsValue % singleTeaGrams) / singleTeaGrams * 100;
+
+    let sugarWord = (sugarFull === 1 || sugarFull === 2 || sugarFull >= 11) ? 'بيالة' : 'بيالات';
+    let teaWord = (teaFull === 1 || teaFull === 2 || teaFull >= 11) ? 'بيالة' : 'بيالات';
+
+    function formatNumber(num) {
+        return useArabicNumbers ? toArabicNumbers(num.toString()) : num;
+    }
 
     let resultDiv = document.getElementById('result');
     resultDiv.innerHTML =
-        `<b>لـ <span class="blue-text">${useArabicNumbers ? toArabicNumbers(waterMl) : waterMl}</span> مل ماء:</b><br><br>
-         السكر: <span class="red-text">${useArabicNumbers ? toArabicNumbers(sugarGrams) : sugarGrams} جم</span><br>
-         الشاي: <span class="red-text">${useArabicNumbers ? toArabicNumbers(teaGrams) : teaGrams} جم</span>`;
+        `<b>لـ <span class="blue-text">${formatNumber(waterMl)}</span> مل ماء:</b><br><br>
+         السكر: <span class="red-text">${formatNumber(sugarGrams)} جم</span> (<span class="blue-text">${formatNumber(sugarGlass.toFixed(2))} بيالة</span>)<br>
+         الشاي: <span class="red-text">${formatNumber(teaGrams)} جم</span> (<span class="blue-text">${formatNumber(teaGlass.toFixed(2))} بيالة</span>)`;
     resultDiv.style.display = 'block';
 
-    ['sugarLevel', 'teaLevel'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.remove();
-    });
+    let sugarNote = `<span class="blue-number">${formatNumber(sugarFull)}</span> ${sugarWord} ممتلئة`;
+    if (sugarRemainderPercent > 0) {
+        sugarNote += ` <span class="blue-plus">+</span> ${formatNumber(sugarRemainderPercent.toFixed(0))}% من البيالة`;
+    }
 
-    const sugarLine = document.createElement('div');
-    sugarLine.id = 'sugarLevel';
-    sugarLine.style.cssText = `position:absolute;left:-10%;width:120%;height:2px;background:red;bottom:${sugarLevelPx}px`;
-    document.getElementById('sugarGlass').appendChild(sugarLine);
+    let teaNote = `<span class="blue-number">${formatNumber(teaFull)}</span> ${teaWord} ممتلئة`;
+    if (teaSingleLevelPercent > 0) {
+        teaNote += ` <span class="blue-plus">+</span> ${formatNumber(teaSingleLevelPercent.toFixed(0))}% من البيالة`;
+    }
 
-    const teaLine = document.createElement('div');
-    teaLine.id = 'teaLevel';
-    teaLine.style.cssText = `position:absolute;left:-10%;width:120%;height:2px;background:red;bottom:${teaLevelPx}px`;
-    document.getElementById('teaGlass').appendChild(teaLine);
+    document.getElementById('sugarNote').innerHTML = sugarNote;
+    document.getElementById('teaNote').innerHTML = teaNote;
+
+    let sugarLevelPx = (sugarRemainderPercent > 0 || sugarFull === 0) ? (glassHeight * sugarRemainderPercent / 100) : glassHeight;
+    let teaLevelPx = (teaSingleLevelPercent > 0 || teaFull === 0) ? (glassHeight * teaSingleLevelPercent / 100) : glassHeight;
+
+    let existingSugar = document.getElementById('sugarLevel');
+    if (existingSugar) existingSugar.remove();
+
+    let existingTea = document.getElementById('teaLevel');
+    if (existingTea) existingTea.remove();
+
+    let sugarLevel = document.createElement('div');
+    sugarLevel.id = 'sugarLevel';
+    sugarLevel.style.position = 'absolute';
+    sugarLevel.style.left = '-10%';
+    sugarLevel.style.width = '120%';
+    sugarLevel.style.height = '2px';
+    sugarLevel.style.backgroundColor = 'red';
+    sugarLevel.style.bottom = clamp(sugarLevelPx, 0, glassHeight) + 'px';
+    document.getElementById('sugarGlass').appendChild(sugarLevel);
+
+    let teaLevel = document.createElement('div');
+    teaLevel.id = 'teaLevel';
+    teaLevel.style.position = 'absolute';
+    teaLevel.style.left = '-10%';
+    teaLevel.style.width = '120%';
+    teaLevel.style.height = '2px';
+    teaLevel.style.backgroundColor = 'red';
+    teaLevel.style.bottom = clamp(teaLevelPx, 0, glassHeight) + 'px';
+    document.getElementById('teaGlass').appendChild(teaLevel);
 }
 </script>
 </body>
