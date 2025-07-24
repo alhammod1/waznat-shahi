@@ -60,10 +60,10 @@
             display: inline-block;
         }
         .glass-container {
-            display: inline-block;
-            margin: 20px;
-            position: relative;
-        }
+    display: inline-block;
+    margin: 20px 40px;
+    position: relative;
+}
         .glass {
             width: 168px;
             height: 225px;
@@ -74,13 +74,7 @@
             margin: 0 auto;
             border-radius: 0 0 15px 15px;
         }
-        .level {
-            position: absolute;
-            left: -10%;
-            width: 120%;
-            height: 2px;
-            background-color: red;
-        }
+        
         .scale, .gram-scale {
             position: absolute;
             top: 0;
@@ -151,22 +145,7 @@
     <div class="glass-container">
         <p>السكر</p>
         <div class="glass" id="sugarGlass">
-            <div class="level" id="sugarLevel"></div>
-            <div class="scale">
-                <div>100%</div>
-                <div>75%</div>
-                <div>50%</div>
-                <div>25%</div>
-                <div>10%</div>
-            </div>
-        </div>
-        <p class="note" id="sugarNote"></p>
-    </div>
-
-    <div class="glass-container">
-        <p>الشاي</p>
-        <div class="glass" id="teaGlass">
-            <div class="level" id="teaLevel"></div>
+            
             <div class="scale">
                 <div>100%</div>
                 <div>75%</div>
@@ -184,6 +163,21 @@
                 <div>21</div>
                 <div>10.5</div>
                 <div>5.25</div>
+            </div>
+        </div>
+        <p class="note" id="sugarNote"></p>
+    </div>
+
+    <div class="glass-container">
+        <p>الشاي</p>
+        <div class="glass" id="teaGlass">
+            
+            <div class="scale">
+                <div>100%</div>
+                <div>75%</div>
+                <div>50%</div>
+                <div>25%</div>
+                <div>10%</div>
             </div>
             <div class="gram-scale">
                 <div>21</div>
@@ -264,8 +258,39 @@
             let sugarLevelPx = (sugarRemainderPercent > 0 || sugarFull === 0) ? (glassHeight * sugarRemainderPercent / 100) : glassHeight;
             let teaLevelPx = (teaSingleLevelPercent > 0 || teaFull === 0) ? (glassHeight * teaSingleLevelPercent / 100) : glassHeight;
 
-            document.getElementById('sugarLevel').style.bottom = clamp(sugarLevelPx, 0, glassHeight) + 'px';
-            document.getElementById('teaLevel').style.bottom = clamp(teaLevelPx, 0, glassHeight) + 'px';
+            let existingSugar = document.getElementById('sugarLevel');
+            if (existingSugar) existingSugar.remove();
+
+            let existingTea = document.getElementById('teaLevel');
+            if (existingTea) existingTea.remove();
+
+            let sugarLevel = document.createElement('div');
+            sugarLevel.id = 'sugarLevel';
+            sugarLevel.style.position = 'absolute';
+            sugarLevel.style.left = '-10%';
+            sugarLevel.style.width = '120%';
+            sugarLevel.style.height = '2px';
+            sugarLevel.style.backgroundColor = 'red';
+            sugarLevel.style.bottom = clamp(sugarLevelPx, 0, glassHeight) + 'px';
+            document.getElementById('sugarGlass').appendChild(sugarLevel);
+
+            let teaLevel = document.createElement('div');
+            teaLevel.id = 'teaLevel';
+            teaLevel.style.position = 'absolute';
+            teaLevel.style.left = '-10%';
+            teaLevel.style.width = '120%';
+            teaLevel.style.height = '2px';
+            teaLevel.style.backgroundColor = 'red';
+            teaLevel.style.bottom = clamp(teaLevelPx, 0, glassHeight) + 'px';
+            document.getElementById('teaGlass').appendChild(teaLevel);
+
+            sugarLevel.style.bottom = clamp(sugarLevelPx, 0, glassHeight) + 'px';
+            sugarLevel.style.display = 'block';
+            sugarLevel.style.backgroundColor = 'red';
+
+            teaLevel.style.bottom = clamp(teaLevelPx, 0, glassHeight) + 'px';
+            teaLevel.style.display = 'block';
+            teaLevel.style.backgroundColor = 'red';
         }
     </script>
 </body>
