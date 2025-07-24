@@ -81,28 +81,40 @@
             height: 2px;
             background-color: red;
         }
-        .scale {
+        .scale, .gram-scale {
             position: absolute;
-            left: 105%;
             top: 0;
             height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             font-size: 12px;
+        }
+        .scale {
+            left: 105%;
             color: green;
         }
-        .scale div {
+        .gram-scale {
+            right: 105%;
+            color: blue;
+        }
+        .scale div, .gram-scale div {
             position: relative;
         }
-        .scale div::before {
+        .scale div::before, .gram-scale div::before {
             content: "";
             position: absolute;
-            right: 100%;
             width: 10px;
             height: 2px;
-            background-color: #333;
             top: 50%;
+        }
+        .scale div::before {
+            right: 100%;
+            background-color: #333;
+        }
+        .gram-scale div::before {
+            left: 100%;
+            background-color: #00f;
         }
         .note {
             margin-top: 10px;
@@ -162,6 +174,13 @@
                 <div>25%</div>
                 <div>10%</div>
             </div>
+            <div class="gram-scale">
+                <div>21</div>
+                <div>15.75</div>
+                <div>10.5</div>
+                <div>5.25</div>
+                <div>2.1</div>
+            </div>
         </div>
         <p class="note" id="teaNote"></p>
     </div>
@@ -194,8 +213,10 @@
 
             let sugarFull = Math.floor(sugarGlass);
             let sugarRemainderPercent = ((sugarGlass - sugarFull) * 100);
+
             let teaFull = Math.floor(teaGlass);
-            let teaRemainderPercent = ((teaGlass - teaFull) * 100);
+            let teaRemainder = (teaGlass - teaFull) * 21;
+            let teaRemainderPercent = (teaRemainder / 21) * 100;
 
             let sugarWord = (sugarFull === 1 || sugarFull === 2 || sugarFull >= 11) ? 'بيالة' : 'بيالات';
             let teaWord = (teaFull === 1 || teaFull === 2 || teaFull >= 11) ? 'بيالة' : 'بيالات';
