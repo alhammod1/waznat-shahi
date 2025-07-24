@@ -176,9 +176,13 @@
             </div>
             <div class="gram-scale">
                 <div>21</div>
+                <div>18.9</div>
                 <div>15.75</div>
+                <div>13.65</div>
                 <div>10.5</div>
+                <div>8.4</div>
                 <div>5.25</div>
+                <div>3.15</div>
                 <div>2.1</div>
             </div>
         </div>
@@ -203,6 +207,7 @@
             }
 
             const glassHeight = 225;
+            let singleTeaGrams = 21;
 
             let useArabicNumbers = /[٠-٩]/.test(inputValue);
 
@@ -215,8 +220,8 @@
             let sugarRemainderPercent = ((sugarGlass - sugarFull) * 100);
 
             let teaFull = Math.floor(teaGlass);
-            let teaRemainder = (teaGlass - teaFull) * 21;
-            let teaRemainderPercent = (teaRemainder / 21) * 100;
+            let teaGramsValue = parseFloat(teaGrams);
+            let teaSingleLevelPercent = (teaGramsValue % singleTeaGrams) / singleTeaGrams * 100;
 
             let sugarWord = (sugarFull === 1 || sugarFull === 2 || sugarFull >= 11) ? 'بيالة' : 'بيالات';
             let teaWord = (teaFull === 1 || teaFull === 2 || teaFull >= 11) ? 'بيالة' : 'بيالات';
@@ -238,15 +243,15 @@
             }
 
             let teaNote = `<span class="blue-number">${formatNumber(teaFull)}</span> ${teaWord} ممتلئة`;
-            if (teaRemainderPercent > 0) {
-                teaNote += ` <span class="blue-plus">+</span> ${formatNumber(teaRemainderPercent.toFixed(0))}% من البيالة`;
+            if (teaSingleLevelPercent > 0) {
+                teaNote += ` <span class="blue-plus">+</span> ${formatNumber(teaSingleLevelPercent.toFixed(0))}% من البيالة`;
             }
 
             document.getElementById('sugarNote').innerHTML = sugarNote;
             document.getElementById('teaNote').innerHTML = teaNote;
 
             let sugarLevelPx = (sugarRemainderPercent > 0 || sugarFull === 0) ? (glassHeight * sugarRemainderPercent / 100) : glassHeight;
-            let teaLevelPx = (teaRemainderPercent > 0 || teaFull === 0) ? (glassHeight * teaRemainderPercent / 100) : glassHeight;
+            let teaLevelPx = (teaSingleLevelPercent > 0 || teaFull === 0) ? (glassHeight * teaSingleLevelPercent / 100) : glassHeight;
 
             document.getElementById('sugarLevel').style.bottom = clamp(sugarLevelPx, 0, glassHeight) + 'px';
             document.getElementById('teaLevel').style.bottom = clamp(teaLevelPx, 0, glassHeight) + 'px';
