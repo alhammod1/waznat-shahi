@@ -1,6 +1,3 @@
-<p align="center">
-  <img src="img/README.jpg" alt="معاينة المشروع">
-</p>
 
 # وزنة شاهي ☕
 
