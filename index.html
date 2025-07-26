@@ -6,6 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>وزنة شاهي ربيع</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+    <button id="themeToggle" style="position: absolute; top: 10px; left: 10px;">
+  🌓 تبديل الوضع
+</button>
+<style>
+  body.light {
+    background-color: #fff;
+    color: #000;
+  }
+
+  body.dark {
+    background-color: #121212;
+    color: #eee;
+  }
+
+  .container, .result {
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  body.dark .result {
+    background-color: #1e1e1e;
+    color: #fff;
+  }
+
+  body.light .result {
+    background-color: #f9f9f9;
+    color: #000;
+  }
+</style>
     <style>
         body {
             font-family: 'Cairo', Arial, sans-serif;
@@ -312,5 +340,29 @@ function calculateTea() {
   GitHub commit: adf8e83fc502d83246ac7bd66650288033386b57
   Date: July 24, 2025
 -->
+<script>
+  const toggleBtn = document.getElementById('themeToggle');
+  const body = document.body;
+
+  // لو فيه تفضيل محفوظ
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+    body.classList.add(savedTheme);
+  } else {
+    body.classList.add('light'); // الوضع الافتراضي
+  }
+
+  toggleBtn.onclick = () => {
+    if (body.classList.contains('light')) {
+      body.classList.remove('light');
+      body.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      body.classList.remove('dark');
+      body.classList.add('light');
+      localStorage.setItem('theme', 'light');
+    }
+  };
+</script>
 </body>
 </html>
