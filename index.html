@@ -1,12 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>وزنة شاهي ربيع</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Cairo', Arial, sans-serif;
@@ -17,21 +15,22 @@
         }
         h1 {
             color: #4CAF50;
-            margin-bottom: 10px;
-        }
-        .note-top {
-            color: red;
             margin-bottom: 20px;
         }
-        .note-top span {
-            color: blue;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         input[type="text"] {
             padding: 10px;
             width: 80%;
             max-width: 300px;
             font-size: 18px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 8px;
             text-align: center;
@@ -40,7 +39,7 @@
         button {
             display: block;
             margin: 10px auto;
-            padding: 10px 20px;
+            padding: 12px 25px;
             font-size: 18px;
             background-color: #4CAF50;
             color: white;
@@ -48,6 +47,7 @@
             border-radius: 8px;
             cursor: pointer;
             font-family: 'Cairo', Arial, sans-serif;
+            font-weight: bold;
         }
         button:hover {
             background-color: #45a049;
@@ -56,15 +56,30 @@
             margin-top: 20px;
             font-size: 20px;
             color: #333;
-            background-color: none;
+            background-color: #f7fcf7;
             padding: 15px;
             border-radius: 10px;
             display: inline-block;
+            border: 1px solid #d6e8d6;
+        }
+        .result span, .note .value { color: red; font-weight: bold; }
+        .visual-container {
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+            margin-top: 40px;
+            flex-wrap: wrap;
         }
         .glass-container {
-            display: inline-block;
-            margin: 20px 40px;
-            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .glass-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
         }
         .glass {
             width: 168px;
@@ -75,243 +90,223 @@
             position: relative;
             margin: 0 auto;
             border-radius: 0 0 15px 15px;
+            background-color: transparent;
         }
-        .scale, .gram-scale {
+        .scale {
             position: absolute;
             top: 0;
             height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            font-size: 12px;
-        }
-        .scale {
-            left: 105%;
-            color: green;
+            width: 60px;
         }
         .gram-scale {
-            right: 105%;
+            right: calc(100% + 5px);
+        }
+        .percentage-scale {
+            left: calc(100% + 5px);
+        }
+        .scale div {
+            position: absolute;
+            width: 100%;
+            font-size: 13px;
+            font-weight: bold;
+            white-space: nowrap;
+            transform: translateY(50%);
+        }
+        .gram-scale div {
             color: blue;
+            padding-right: 15px;
+            text-align: right;
         }
-        .scale div, .gram-scale div {
-            position: relative;
+        .percentage-scale div {
+            color: green;
+            padding-left: 15px;
         }
-        .scale div::before, .gram-scale div::before {
-            content: "";
+        .scale div::before {
+            content: '';
             position: absolute;
             width: 10px;
             height: 2px;
+            background-color: #555;
             top: 50%;
+            transform: translateY(-50%);
         }
-        .scale div::before {
-            right: 100%;
-            background-color: #333;
-        }
-        .gram-scale div::before {
-            left: 100%;
-            background-color: #00f;
+        .gram-scale div::before { right: 0; }
+        .percentage-scale div::before { left: 0; }
+
+        #sugarLevel, #teaLevel {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background-color: rgba(230, 0, 0, 0.6);
+            bottom: 0;
+            border-radius: 0 0 13px 13px;
+            transition: height 0.5s ease-in-out;
         }
         .note {
-            margin-top: 10px;
-            font-size: 16px;
-            color: #d32f2f;
-        }
-        .blue-number {
-            color: blue;
+            margin-top: 15px;
+            font-size: 1.1em;
+            color: #333;
+            background-color: #f0f0f0;
+            padding: 8px 15px;
+            border-radius: 10px;
             font-weight: bold;
         }
-        .blue-plus {
-            color: blue;
-            font-weight: bold;
+        .note .plus { color: blue; font-weight: bold; }
+
+        /* --- STYLES FOR FOOTER TEXT --- */
+        .footer-notes {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-size: 18px;
+            line-height: 2;
+            color: #333;
         }
-        .blue-text {
-            color: blue;
+        .footer-notes p {
+            margin-bottom: 25px;
         }
-        .red-text {
+        .footer-notes .red-text { color: red; }
+        .footer-notes .green-text { color: green; }
+        .footer-notes .blue-text { color: blue; }
+        .footer-notes .underlined-red {
             color: red;
+            border-bottom: 2px solid black;
+            padding-bottom: 2px;
         }
+
     </style>
 </head>
 <body>
-    <h1>وزنة شاهي ربيع</h1>
-    <p class="note-top">ملاحظة: <span>الخدرة لمدة نصف ساعة</span></p>
-
-    <p>أدخل كمية الماء بالمليلتر:</p>
+<div class="container">
+    <h1>وزنة شاي ربيع</h1>
+    <p>أدخل كمية الماء بالمليلتر</p>
     <input type="text" id="waterInput" placeholder="مثلاً 4000 أو ٤٠٠٠">
-    <br>
     <button onclick="calculateTea()">احسب النسبة</button>
-
     <div id="result" class="result" style="display:none;"></div>
 
-    <div class="glass-container">
-        <p>السكر</p>
-        <div class="glass" id="sugarGlass">
-            <div class="scale">
-                <div>100%</div>
-                <div>75%</div>
-                <div>50%</div>
-                <div>25%</div>
-                <div>10%</div>
+    <div class="visual-container">
+        <div class="glass-container">
+            <p class="glass-title">السكر</p>
+            <div class="glass" id="sugarGlass">
+                <div id="sugarLevel"></div>
+                <div class="scale gram-scale">
+                    <div style="bottom: 100%;">84</div>
+                    <div style="bottom: 87.5%;">73.5</div>
+                    <div style="bottom: 75%;">63</div>
+                    <div style="bottom: 62.5%;">52.5</div>
+                    <div style="bottom: 50%;">42</div>
+                    <div style="bottom: 37.5%;">31.5</div>
+                    <div style="bottom: 25%;">21</div>
+                    <div style="bottom: 12.5%;">10.5</div>
+                    <div style="bottom: 6.25%;">5.25</div>
+                </div>
+                <div class="scale percentage-scale">
+                    <div style="bottom: 100%;">100%</div>
+                    <div style="bottom: 75%;">75%</div>
+                    <div style="bottom: 50%;">50%</div>
+                    <div style="bottom: 25%;">25%</div>
+                    <div style="bottom: 10%;">10%</div>
+                </div>
             </div>
-            <div class="gram-scale">
-                <div>84</div>
-                <div>73.5</div>
-                <div>63</div>
-                <div>52.5</div>
-                <div>42</div>
-                <div>31.5</div>
-                <div>21</div>
-                <div>10.5</div>
-                <div>5.25</div>
-            </div>
+            <p class="note" id="sugarNote" style="display: none;"></p>
         </div>
-        <p class="note" id="sugarNote"></p>
+        <div class="glass-container">
+            <p class="glass-title">الشاي</p>
+            <div class="glass" id="teaGlass">
+                 <div id="teaLevel"></div>
+                 <div class="scale gram-scale">
+                    <div style="bottom: 100%;">21</div>
+                    <div style="bottom: 90%;">18.9</div>
+                    <div style="bottom: 75%;">15.75</div>
+                    <div style="bottom: 65%;">13.65</div>
+                    <div style="bottom: 50%;">10.5</div>
+                    <div style="bottom: 40%;">8.4</div>
+                    <div style="bottom: 25%;">5.25</div>
+                    <div style="bottom: 15%;">3.15</div>
+                    <div style="bottom: 10%;">2.1</div>
+                 </div>
+                 <div class="scale percentage-scale">
+                    <div style="bottom: 100%;">100%</div>
+                    <div style="bottom: 75%;">75%</div>
+                    <div style="bottom: 50%;">50%</div>
+                    <div style="bottom: 25%;">25%</div>
+                    <div style="bottom: 10%;">10%</div>
+                 </div>
+            </div>
+            <p class="note" id="teaNote" style="display: none;"></p>
+        </div>
+    </div>
+    
+    <div class="footer-notes">
+        <p><span class="underlined-red">البيالة المستخدمة في القياس هي بيالة "بادريق"</span></p>
+        <p>البيالة العادية من الماء إلى المستوى الطبيعي المتعارف عليه تساوي تقريبا <span class="red-text">66.2</span> مل، أي أن <span class="red-text">1</span> لتر يساوي <span class="red-text">15</span> بيالة.</p>
+        <p class="green-text">لجميع انواع الشاهي تقريبا هذه الوزنة مناسبة للجميع مع التعديل حسب الحاجة لواحد لتر</p>
+        <p><span class="red-text">السكر: 50 إلى 55 جم</span><br>
+        <span class="red-text">الشاي: 12 إلى 12.5 جم</span></p>
+        <p><strong class="red-text">طريقة الحساب:</strong> لحساب كمية <span class="red-text">السكر</span> و<span class="red-text">الشاي</span> بناءً على كمية الماء:<br>
+        <span class="red-text">السكر (جم)</span> = (كمية الماء بالمللتر ÷ 1000) × <span class="blue-text">50 إلى 55</span><br>
+        <span class="red-text">الشاي (جم)</span> = (كمية الماء بالمللتر ÷ 1000) × <span class="blue-text">12 إلى 12.5</span></p>
+        <p><strong class="red-text">ملاحظة:</strong> قد تختلف النتيجة حسب نوع الشاي، يفضل التجربة والضبط حسب الذوق.</p>
     </div>
 
-    <div class="glass-container">
-        <p>الشاي</p>
-        <div class="glass" id="teaGlass">
-            <div class="scale">
-                <div>100%</div>
-                <div>75%</div>
-                <div>50%</div>
-                <div>25%</div>
-                <div>10%</div>
-            </div>
-            <div class="gram-scale">
-                <div>21</div>
-                <div>18.9</div>
-                <div>15.75</div>
-                <div>13.65</div>
-                <div>10.5</div>
-                <div>8.4</div>
-                <div>5.25</div>
-                <div>3.15</div>
-                <div>2.1</div>
-            </div>
-        </div>
-        <p class="note" id="teaNote"></p>
-    </div>
-    <p style="margin-top: 10px;">
-  <span style="color: red; border-bottom: 2px solid black; padding-bottom: 0.2px;">
-     البيالة المستخدمة في القياس هي بيالة "بادريق"
-  </span>
-</p>
-   <p style="margin-top: 8px;">
-  البيالة العادية من الماء إلى المستوى الطبيعي المتعارف عليه تساوي تقريبا 
-  <span style="color: red;">66.2</span> مل، 
-  أي أن <span style="color: red;">1</span> لتر يساوي 
-  <span style="color: red;">15</span> بيالة.
-</p>
-    <div style="margin-top: 60px; font-family: 'Cairo', Arial, sans-serif;">
-      <p style="color: green; font-size: 18px;">
-         لجميع انواع الشاهي تقريبا هذه الوزنة مناسبة للجميع مع التعديل حسب الحاجة لواحد لتر<br>
-        <span style='color:red;'>السكر:</span> 50 إلى 55 جم<br>
-        <span style='color:red;'>الشاي:</span> 12 إلى 12.5 جم
-      </p>
-      <div style="margin-top: 20px; font-family: 'Cairo', Arial, sans-serif; font-size: 16px;">
-        <p style="color: black;">
-          <span style="color:red;">طريقة الحساب:</span> لحساب كمية <span style="color:red;">السكر</span> و<span style="color:red;">الشاي</span> بناءً على كمية الماء:<br>
-          <span style="color:red;">السكر (جم)</span> = (كمية الماء بالمللتر ÷ 1000) × <span style="color:blue;">50 إلى 55</span><br>
-          <span style="color:red;">الشاي (جم)</span> = (كمية الماء بالمللتر ÷ 1000) × <span style="color:blue;">12 إلى 12.5</span>
-        </p>
-      </div>
-      <p style="color: red; font-size: 16px;">
-        <span style='color:blue;'>ملاحظة:</span> قد تختلف النتيجة حسب نوع الشاي، يفضل التجربة والضبط حسب الذوق.
-      </p>
-    </div>
+</div>
 
 <script>
-function clamp(value, min, max) {
-    return Math.min(Math.max(value, min), max);
-}
-
-function toArabicNumbers(str) {
-    return str.replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
-}
-
-function calculateTea() {
-    let inputValue = document.getElementById('waterInput').value.trim();
-    let waterMl = parseFloat(inputValue.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[^\d\.]/g, ''));
-    if (isNaN(waterMl) || waterMl <= 0) {
-        alert('رجاءً أدخل كمية ماء صحيحة بالمليلتر');
-        return;
+    function toArabicNumbers(str) {
+        return str.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
     }
 
-    const glassHeight = 225;
-    let useArabicNumbers = /[٠-٩]/.test(inputValue);
+    function calculateTea() {
+        let inputValue = document.getElementById('waterInput').value.trim();
+        let waterMl = parseFloat(inputValue.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[^\d\.]/g, ''));
 
-    let sugarGrams = (84 * waterMl / 1000).toFixed(2);
-    let teaGrams = (12 * waterMl / 1000).toFixed(2);
+        if (isNaN(waterMl) || waterMl <= 0) {
+            alert('الرجاء إدخال كمية ماء صحيحة بالمليلتر.');
+            return;
+        }
 
-    let sugarFull = Math.floor(sugarGrams / 84);
-    let sugarRemainder = sugarGrams % 84;
+        const glassHeight = 225;
+        let useArabicNumbers = /[٠-٩]/.test(inputValue);
 
-    let teaFull = Math.floor(teaGrams / 21);
-    let teaRemainder = teaGrams % 21;
+        let sugarGrams = parseFloat((84 * waterMl / 1000).toFixed(2));
+        let teaGrams = parseFloat((12 * waterMl / 1000).toFixed(2));
 
-    let sugarWord = (sugarFull === 1 || sugarFull === 2 || sugarFull >= 11) ? 'بيالة' : 'بيالات';
-    let teaWord = (teaFull === 1 || teaFull === 2 || teaFull >= 11) ? 'بيالة' : 'بيالات';
+        const sugarPerCup = 84;
+        const teaPerCup = 21;
 
-    function formatNumber(num) {
-        return useArabicNumbers ? toArabicNumbers(num.toString()) : num;
+        let sugarFullCups = Math.floor(sugarGrams / sugarPerCup);
+        let sugarRemainderGrams = sugarGrams % sugarPerCup;
+
+        let teaFullCups = Math.floor(teaGrams / teaPerCup);
+        let teaRemainderGrams = teaGrams % teaPerCup;
+
+        function formatNumber(num) {
+            let numStr = num.toFixed(2);
+            numStr = numStr.replace(/\.00$/, '');
+            return useArabicNumbers ? toArabicNumbers(numStr) : numStr;
+        }
+        
+        let resultDiv = document.getElementById('result');
+        resultDiv.innerHTML =
+            `لـ ${formatNumber(waterMl)} مل ماء: تحتاج <span>${formatNumber(sugarGrams)} جم</span> سكر و <span>${formatNumber(teaGrams)} جم</span> شاي`;
+        resultDiv.style.display = 'inline-block';
+
+        let sugarNote = document.getElementById('sugarNote');
+        sugarNote.innerHTML = `<span class="value">${formatNumber(sugarFullCups)}</span> بيالة ممتلئة <span class="plus">+</span> <span class="value">${formatNumber(sugarRemainderGrams)}</span> جم`;
+        sugarNote.style.display = 'inline-block';
+
+        let teaNote = document.getElementById('teaNote');
+        teaNote.innerHTML = `<span class="value">${formatNumber(teaFullCups)}</span> بيالة ممتلئة <span class="plus">+</span> <span class="value">${formatNumber(teaRemainderGrams)}</span> جم`;
+        teaNote.style.display = 'inline-block';
+        
+        let sugarFillPercentage = sugarRemainderGrams / sugarPerCup;
+        let teaFillPercentage = teaRemainderGrams / teaPerCup;
+
+        document.getElementById('sugarLevel').style.height = `${glassHeight * sugarFillPercentage}px`;
+        document.getElementById('teaLevel').style.height = `${glassHeight * teaFillPercentage}px`;
     }
-
-    let resultDiv = document.getElementById('result');
-    resultDiv.innerHTML =
-        `<b>لـ <span class="blue-text">${formatNumber(waterMl)}</span> مل ماء:</b><br>
-         السكر: <span class="red-text">${formatNumber(sugarGrams)} جم</span><br>
-         الشاي: <span class="red-text">${formatNumber(teaGrams)} جم</span>`;
-    resultDiv.style.display = 'block';
-
-    let sugarNote = `<span class="blue-number">${formatNumber(sugarFull)}</span> ${sugarWord} ممتلئة`;
-    if (sugarRemainder > 0) {
-        sugarNote += ` <span class="blue-plus">+</span> ${formatNumber(sugarRemainder.toFixed(1))} جم`;
-    }
-
-    let teaNote = `<span class="blue-number">${formatNumber(teaFull)}</span> ${teaWord} ممتلئة`;
-    if (teaRemainder > 0) {
-        teaNote += ` <span class="blue-plus">+</span> ${formatNumber(teaRemainder.toFixed(1))} جم`;
-    }
-
-    document.getElementById('sugarNote').innerHTML = sugarNote;
-    document.getElementById('teaNote').innerHTML = teaNote;
-
-    let sugarLevelPx = (sugarRemainder > 0 || sugarFull === 0) ? (glassHeight * (sugarRemainder / 84)) : glassHeight;
-    let teaLevelPx = (teaRemainder > 0 || teaFull === 0) ? (glassHeight * (teaRemainder / 21)) : glassHeight;
-
-    let existingSugar = document.getElementById('sugarLevel');
-    if (existingSugar) existingSugar.remove();
-
-    let existingTea = document.getElementById('teaLevel');
-    if (existingTea) existingTea.remove();
-
-    let sugarLevel = document.createElement('div');
-    sugarLevel.id = 'sugarLevel';
-    sugarLevel.style.position = 'absolute';
-    sugarLevel.style.left = '-10%';
-    sugarLevel.style.width = '120%';
-    sugarLevel.style.height = '2px';
-    sugarLevel.style.backgroundColor = 'red';
-    sugarLevel.style.bottom = clamp(sugarLevelPx, 0, glassHeight) + 'px';
-    document.getElementById('sugarGlass').appendChild(sugarLevel);
-
-    let teaLevel = document.createElement('div');
-    teaLevel.id = 'teaLevel';
-    teaLevel.style.position = 'absolute';
-    teaLevel.style.left = '-10%';
-    teaLevel.style.width = '120%';
-    teaLevel.style.height = '2px';
-    teaLevel.style.backgroundColor = 'red';
-    teaLevel.style.bottom = clamp(teaLevelPx, 0, glassHeight) + 'px';
-    document.getElementById('teaGlass').appendChild(teaLevel);
-}
 </script>
-    
-<!-- 
-  Code developed by alhammod1
-  GitHub commit: adf8e83fc502d83246ac7bd66650288033386b57
-  Date: July 24, 2025
--->
+
 </body>
 </html>
