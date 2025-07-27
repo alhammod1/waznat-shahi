@@ -6,212 +6,86 @@
     <title>وزنة شاهي ربيع</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* --- Base & Light Mode Variables --- */
         :root {
-            --bg-color: #f7f7f7;
-            --container-bg: #fff;
-            --text-color: #333;
-            --secondary-text: #555;
-            --border-color: #eee;
-            --glass-border: #555;
-            --accent-color: #4CAF50;
-            --note-bg: #f0f0f0;
-            --shadow-color: rgba(0,0,0,0.05);
+            --bg-color: #f7f7f7; --container-bg: #fff; --text-color: #333; --secondary-text: #555;
+            --border-color: #eee; --glass-border: #555; --accent-color: #4CAF50; --note-bg: #f0f0f0;
+            --shadow-color: rgba(0,0,0,0.05); --active-btn-bg: #4CAF50; --active-btn-text: #fff;
         }
-
-        /* --- Dark Mode Variables --- */
         .dark-mode {
-            --bg-color: #121212;
-            --container-bg: #1e1e1e;
-            --text-color: #e0e0e0;
-            --secondary-text: #aaa;
-            --border-color: #333;
-            --glass-border: #777;
-            --accent-color: #5cb85c;
-            --note-bg: #2a2a2a;
-            --shadow-color: rgba(0,0,0,0.2);
+            --bg-color: #121212; --container-bg: #1e1e1e; --text-color: #e0e0e0; --secondary-text: #aaa;
+            --border-color: #333; --glass-border: #777; --accent-color: #5cb85c; --note-bg: #2a2a2a;
+            --shadow-color: rgba(0,0,0,0.2); --active-btn-bg: #5cb85c;
         }
-
         body {
-            font-family: 'Cairo', Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            text-align: center;
-            padding: 20px;
-            transition: background-color 0.3s, color 0.3s;
+            font-family: 'Cairo', Arial, sans-serif; background-color: var(--bg-color); color: var(--text-color);
+            text-align: center; padding: 20px; transition: background-color 0.3s, color 0.3s;
         }
         .container {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: var(--container-bg);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px var(--shadow-color);
-            transition: background-color 0.3s;
+            position: relative; max-width: 800px; margin: 0 auto; background-color: var(--container-bg);
+            padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px var(--shadow-color); transition: background-color 0.3s;
         }
-        h1 {
-            color: var(--accent-color);
-            margin-bottom: 20px;
+        h1 { color: var(--accent-color); margin-bottom: 20px; }
+        #theme-toggle {
+            position: absolute; top: 20px; right: 20px; background: none; border: 1px solid var(--border-color);
+            color: var(--text-color); border-radius: 50%; width: 40px; height: 40px; font-size: 20px; cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s; display: flex; justify-content: center; align-items: center;
+        }
+        #theme-toggle:hover { background-color: rgba(128,128,128,0.1); transform: scale(1.1); }
+
+        .input-area { display: flex; flex-direction: column; align-items: center; gap: 15px; margin-bottom: 20px; }
+        #input-label { font-weight: bold; font-size: 1.1em; margin-bottom: 0; }
+        input[type="text"], select {
+            padding: 10px; width: 80%; max-width: 300px; font-size: 18px; border: 1px solid var(--border-color);
+            background-color: var(--bg-color); color: var(--text-color); border-radius: 8px; text-align: center; font-family: 'Cairo', Arial, sans-serif;
+        }
+        select { text-align: center; padding-right: 29px; }
+        #waterSlider { width: 80%; max-width: 310px; cursor: pointer; }
+
+        .controls-container { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; width: 100%; max-width: 350px; }
+        .control-group { display: flex; justify-content: center; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); }
+        .control-group button {
+            flex-grow: 1; background-color: transparent; border: none; padding: 10px; color: var(--text-color);
+            font-family: 'Cairo', Arial, sans-serif; font-size: 16px; cursor: pointer; transition: background-color 0.3s;
+            border-left: 1px solid var(--border-color);
+        }
+        .control-group button:last-child { border-left: none; }
+        .control-group button.active { background-color: var(--active-btn-bg); color: var(--active-btn-text); }
+        .control-label {
+            font-weight: bold;
+            color: var(--secondary-text);
+            margin: 10px 0 5px 0;
         }
         
-        #theme-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 20px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        #theme-toggle:hover {
-            background-color: rgba(128,128,128,0.1);
-            transform: scale(1.1);
-        }
-
-        /* --- Input Controls Container (MODIFIED) --- */
-        .input-controls {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 25px; /* Increased space to move slider down */
-            margin-bottom: 20px;
-        }
-
-        input[type="text"] {
-            padding: 10px;
-            width: 80%;
-            max-width: 300px;
-            font-size: 18px;
-            border: 1px solid var(--border-color);
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            border-radius: 8px;
-            text-align: center;
-            font-family: 'Cairo', Arial, sans-serif;
-        }
-        #waterSlider {
-            width: 80%;
-            max-width: 310px;
-            cursor: pointer;
-        }
-
-        .result {
-            margin-top: 20px;
-            font-size: 20px;
-            padding: 15px;
-            border-radius: 10px;
-            display: inline-block;
-            border: 1px solid var(--border-color);
-            background-color: var(--bg-color);
-        }
+        .result { margin-top: 20px; font-size: 20px; padding: 15px; border-radius: 10px; display: inline-block; border: 1px solid var(--border-color); background-color: var(--bg-color); }
         .result span, .note .value { color: red; font-weight: bold; }
-        .visual-container {
-            display: flex;
-            justify-content: center;
-            gap: 100px;
-            margin-top: 40px;
-            flex-wrap: wrap;
-        }
-        .glass-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .glass-title {
-            font-size: 1.8em;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
+        .visual-container { display: flex; justify-content: center; gap: 100px; margin-top: 40px; flex-wrap: wrap; }
+        .glass-container { display: flex; flex-direction: column; align-items: center; }
+        .glass-title { font-size: 1.8em; font-weight: bold; margin-bottom: 15px; }
         .glass {
-            width: 168px;
-            height: 225px;
-            border-left: 2px dotted var(--glass-border);
-            border-right: 2px dotted var(--glass-border);
-            border-bottom: 2px solid var(--glass-border);
-            position: relative;
-            margin: 0 auto;
-            border-radius: 0 0 15px 15px;
-            background-color: transparent;
+            width: 168px; height: 225px; border-left: 2px dotted var(--glass-border); border-right: 2px dotted var(--glass-border);
+            border-bottom: 2px solid var(--glass-border); position: relative; margin: 0 auto; border-radius: 0 0 15px 15px; background-color: transparent;
         }
-        .scale {
-            position: absolute;
-            top: 0;
-            height: 100%;
-            width: 60px;
-        }
-        .gram-scale {
-            right: calc(100% + 5px);
-        }
-        .percentage-scale {
-            left: calc(100% + 5px);
-        }
-        .scale div {
-            position: absolute;
-            width: 100%;
-            font-size: 13px;
-            font-weight: bold;
-            white-space: nowrap;
-            transform: translateY(50%);
-        }
-        .gram-scale div {
-            color: #007bff;
-            padding-right: 15px;
-            text-align: right;
-        }
+        .scale { position: absolute; top: 0; height: 100%; width: 60px; }
+        .gram-scale { right: calc(100% + 5px); }
+        .percentage-scale { left: calc(100% + 5px); }
+        .scale div { position: absolute; width: 100%; font-size: 13px; font-weight: bold; white-space: nowrap; transform: translateY(50%); }
+        .gram-scale div { color: #007bff; padding-right: 15px; text-align: right; }
         .dark-mode .gram-scale div { color: #58a6ff; }
-        .percentage-scale div {
-            color: #28a745;
-            padding-left: 15px;
-        }
+        .percentage-scale div { color: #28a745; padding-left: 15px; }
         .dark-mode .percentage-scale div { color: #3fb950; }
-
-        .scale div::before {
-            content: '';
-            position: absolute;
-            width: 10px;
-            height: 2px;
-            background-color: var(--secondary-text);
-            top: 50%;
-            transform: translateY(-50%);
-        }
+        .scale div::before { content: ''; position: absolute; width: 10px; height: 2px; background-color: var(--secondary-text); top: 50%; transform: translateY(-50%); }
         .gram-scale div::before { right: 0; }
         .percentage-scale div::before { left: 0; }
 
         #sugarLevel, #teaLevel {
-            position: absolute;
-            left: 0;
-            width: 100%;
-            height: 0;
-            background-color: rgba(230, 0, 0, 0.6);
-            bottom: 0;
-            border-radius: 0 0 13px 13px;
-            transition: height 0.6s ease-out;
+            position: absolute; left: 0; width: 100%; height: 0; background-color: rgba(230, 0, 0, 0.6);
+            bottom: 0; border-radius: 0 0 13px 13px; transition: height 0.6s ease-out;
         }
-        .note {
-            margin-top: 15px;
-            font-size: 1.1em;
-            background-color: var(--note-bg);
-            padding: 8px 15px;
-            border-radius: 10px;
-            font-weight: bold;
-        }
+        .note { margin-top: 15px; font-size: 1.1em; background-color: var(--note-bg); padding: 8px 15px; border-radius: 10px; font-weight: bold; }
         .note .plus { color: blue; font-weight: bold; }
-        
         .footer-notes {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border-color);
-            font-size: 18px;
-            line-height: 2;
+            margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-color);
+            font-size: 18px; line-height: 2; color: var(--text-color);
         }
         .footer-notes p { margin-bottom: 25px; }
         .footer-notes .red-text { color: #dc3545; }
@@ -221,9 +95,7 @@
         .footer-notes .blue-text { color: #007bff; }
         .dark-mode .footer-notes .blue-text { color: #58a6ff; }
         .footer-notes .underlined-red {
-            color: #dc3545;
-            border-bottom: 2px solid var(--text-color);
-            padding-bottom: 2px;
+            color: #dc3545; border-bottom: 2px solid var(--text-color); padding-bottom: 2px;
         }
         .dark-mode .footer-notes .underlined-red { color: #ff7b72; }
     </style>
@@ -231,12 +103,38 @@
 <body>
 <div class="container">
     <button id="theme-toggle">🌙</button>
-    <h1>وزنة الشاي</h1>
-    <p>أدخل كمية الماء بالمليلتر</p>
+    <h1>وزنة شاهي ربيع</h1>
+    
+    <div class="input-area">
+        <p style="margin: 0;"><strong>طريقة الحساب:</strong></p>
+        <select id="calcMode" onchange="changeCalcMode()">
+            <option value="water" selected>الحساب بالماء</option>
+            <option value="sugar">الحساب بالسكر</option>
+            <option value="tea">الحساب بالشاي</option>
+        </select>
 
-    <div class="input-controls">
-        <input type="text" id="waterInput" placeholder="مثلاً 4000 أو ٤٠٠٠" oninput="syncControls(this)">
-        <input type="range" id="waterSlider" min="0" max="10000" step="50" value="0" oninput="syncControls(this)">
+        <p id="input-label">أدخل كمية الماء بالمليلتر:</p>
+        <input type="text" id="mainInput" placeholder="أدخل القيمة هنا" oninput="runCalculation()">
+        <input type="range" id="waterSlider" min="0" max="10000" step="50" value="0" oninput="runCalculation(true)">
+        
+        <div class="controls-container">
+            <div>
+                <p class="control-label">مستوى الحلاوة</p>
+                <div class="control-group" id="sweetness-controls">
+                    <button data-value="-10">خفيفة</button>
+                    <button class="active" data-value="0">معتدلة</button>
+                    <button data-value="10">حالي زيادة</button>
+                </div>
+            </div>
+            <div>
+                <p class="control-label">مستوى الشاهي</p>
+                <div class="control-group" id="strength-controls">
+                    <button data-value="11">خفيف</button>
+                    <button class="active" data-value="12">وسط</button>
+                    <button data-value="13">ثقيل</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div id="result" class="result" style="visibility:hidden;"></div>
@@ -285,90 +183,154 @@
 </div>
 
 <script>
-    const waterInput = document.getElementById('waterInput');
+    const mainInput = document.getElementById('mainInput');
     const waterSlider = document.getElementById('waterSlider');
     const themeToggleButton = document.getElementById('theme-toggle');
+    const calcModeSelect = document.getElementById('calcMode');
+    const inputLabel = document.getElementById('input-label');
+    const sweetnessControls = document.getElementById('sweetness-controls');
+    const strengthControls = document.getElementById('strength-controls');
 
-    // --- Theme Toggler ---
+    let sweetnessAdjustment = 0;
+    let strengthMultiplier = 12;
+
+    sweetnessControls.addEventListener('click', (e) => {
+        if (e.target.tagName === 'BUTTON') {
+            sweetnessControls.querySelector('.active').classList.remove('active');
+            e.target.classList.add('active');
+            sweetnessAdjustment = parseFloat(e.target.dataset.value);
+            runCalculation();
+        }
+    });
+
+    strengthControls.addEventListener('click', (e) => {
+        if (e.target.tagName === 'BUTTON') {
+            strengthControls.querySelector('.active').classList.remove('active');
+            e.target.classList.add('active');
+            strengthMultiplier = parseFloat(e.target.dataset.value);
+            runCalculation();
+        }
+    });
+    
+    function changeCalcMode() {
+        const mode = calcModeSelect.value;
+        const labels = {
+            water: "أدخل كمية الماء بالمليلتر:",
+            sugar: "أدخل كمية السكر بالجرام:",
+            tea: "أدخل كمية الشاي بالجرام:"
+        };
+        inputLabel.textContent = labels[mode];
+        waterSlider.style.display = (mode === 'water') ? 'block' : 'none';
+        mainInput.value = '';
+        runCalculation(); 
+    }
+    
+    function runCalculation(isSlider = false) {
+        if (isSlider) {
+            mainInput.value = waterSlider.value;
+        }
+        
+        let waterMl, sugarGrams, teaGrams;
+        const mode = calcModeSelect.value;
+        const baseSugarPerLiter = 84;
+        let inputValue = mainInput.value.trim();
+        let value = parseFloat(inputValue.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[^\d\.]/g, ''));
+
+        const resultElements = document.querySelectorAll('.result, .note');
+        if (isNaN(value) || value <= 0) {
+            resultElements.forEach(el => el.style.visibility = 'hidden');
+            document.getElementById('sugarLevel').style.height = '0px';
+            document.getElementById('teaLevel').style.height = '0px';
+            if (mode === 'water') waterSlider.value = 0;
+            return;
+        }
+        resultElements.forEach(el => el.style.visibility = 'visible');
+
+        switch (mode) {
+            case 'sugar':
+                const targetSugar = value;
+                const baseSugar = targetSugar - sweetnessAdjustment;
+                waterMl = (baseSugar * 1000) / baseSugarPerLiter;
+                teaGrams = (strengthMultiplier * waterMl) / 1000;
+                sugarGrams = targetSugar;
+                break;
+            case 'tea':
+                teaGrams = value;
+                waterMl = (teaGrams * 1000) / strengthMultiplier;
+                sugarGrams = ((baseSugarPerLiter * waterMl) / 1000) + sweetnessAdjustment;
+                break;
+            default: // 'water'
+                waterMl = value;
+                if(isSlider) mainInput.value = waterMl;
+                else waterSlider.value = waterMl;
+                sugarGrams = ((baseSugarPerLiter * waterMl) / 1000) + sweetnessAdjustment;
+                teaGrams = (strengthMultiplier * waterMl) / 1000;
+                break;
+        }
+        
+        waterMl = Math.max(0, waterMl);
+        sugarGrams = Math.max(0, sugarGrams);
+        teaGrams = Math.max(0, teaGrams);
+
+        updateDisplay(waterMl, sugarGrams, teaGrams);
+    }
+
+    function updateDisplay(waterMl, sugarGrams, teaGrams) {
+        const useArabicNumbers = /[٠-٩]/.test(mainInput.value.trim());
+        function formatNumber(num) {
+            if (typeof num !== 'number') return num;
+            let numStr = num.toFixed(2).replace(/\.00$/, '').replace(/\.0$/, '');
+            return useArabicNumbers ? toArabicNumbers(numStr) : numStr;
+        }
+
+        let resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = `النتيجة: <span>${formatNumber(waterMl)}</span> مل ماء | <span>${formatNumber(sugarGrams)}</span> جم سكر | <span>${formatNumber(teaGrams)}</span> جم شاي`;
+        
+        const sugarPerCup = 84;
+        const teaPerCup = 21;
+
+        let sugarFullCups = Math.floor(sugarGrams / sugarPerCup);
+        let sugarRemainderGrams = sugarGrams % sugarPerCup;
+        let teaFullCups = Math.floor(teaGrams / teaPerCup);
+        let teaRemainderGrams = teaGrams % teaPerCup;
+        
+        document.getElementById('sugarNote').innerHTML = `<span class="value">${formatNumber(sugarFullCups)}</span> بيالة <span class="plus">+</span> <span class="value">${formatNumber(sugarRemainderGrams)}</span> جم`;
+        document.getElementById('teaNote').innerHTML = `<span class="value">${formatNumber(teaFullCups)}</span> بيالة <span class="plus">+</span> <span class="value">${formatNumber(teaRemainderGrams)}</span> جم`;
+        
+        let sugarFillPercentage;
+        if (sugarGrams > 0 && sugarRemainderGrams.toFixed(2) == 0.00) {
+            sugarFillPercentage = 1;
+        } else {
+            sugarFillPercentage = sugarRemainderGrams / sugarPerCup;
+        }
+
+        let teaFillPercentage;
+        if (teaGrams > 0 && teaRemainderGrams.toFixed(2) == 0.00) {
+            teaFillPercentage = 1;
+        } else {
+            teaFillPercentage = teaRemainderGrams / teaPerCup;
+        }
+
+        document.getElementById('sugarLevel').style.height = `${sugarFillPercentage * 225}px`;
+        document.getElementById('teaLevel').style.height = `${teaFillPercentage * 225}px`;
+    }
+
+    // --- Theme Toggler Logic ---
     themeToggleButton.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
         const isDarkMode = document.body.classList.contains('dark-mode');
         themeToggleButton.textContent = isDarkMode ? '☀️' : '🌙';
         localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
     });
-
-    // --- Load Theme from localStorage ---
     document.addEventListener('DOMContentLoaded', () => {
         const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
+        if (savedTheme !== 'light') { // Dark mode is default unless 'light' is saved
             document.body.classList.add('dark-mode');
             themeToggleButton.textContent = '☀️';
         }
     });
-    
-    // --- Sync Slider and Text Input ---
-    function syncControls(sourceElement) {
-        const value = sourceElement.value;
-        if (sourceElement.id === 'waterInput') {
-            waterSlider.value = value;
-        } else {
-            waterInput.value = value;
-        }
-        calculateTea();
-    }
-    
     function toArabicNumbers(str) {
         return str.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
-    }
-
-    function calculateTea() {
-        let inputValue = waterInput.value.trim();
-        let waterMl = parseFloat(inputValue.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[^\d\.]/g, ''));
-
-        const resultElements = document.querySelectorAll('.result, .note');
-        if (isNaN(waterMl) || waterMl <= 0) {
-            resultElements.forEach(el => el.style.visibility = 'hidden');
-            document.getElementById('sugarLevel').style.height = '0px';
-            document.getElementById('teaLevel').style.height = '0px';
-            return;
-        }
-        resultElements.forEach(el => el.style.visibility = 'visible');
-
-        const glassHeight = 225;
-        let useArabicNumbers = /[٠-٩]/.test(inputValue);
-
-        let sugarGrams = parseFloat((84 * waterMl / 1000).toFixed(2));
-        let teaGrams = parseFloat((12 * waterMl / 1000).toFixed(2));
-
-        const sugarPerCup = 84;
-        const teaPerCup = 21;
-
-        let sugarFullCups = Math.floor(sugarGrams / sugarPerCup);
-        let sugarRemainderGrams = sugarGrams % sugarPerCup;
-
-        let teaFullCups = Math.floor(teaGrams / teaPerCup);
-        let teaRemainderGrams = teaGrams % teaPerCup;
-
-        function formatNumber(num) {
-            let numStr = num.toFixed(2).replace(/\.00$/, '').replace(/\.0$/, '');
-            return useArabicNumbers ? toArabicNumbers(numStr) : numStr;
-        }
-        
-        let resultDiv = document.getElementById('result');
-        resultDiv.innerHTML =
-            `لـ ${formatNumber(waterMl)} مل ماء: تحتاج <span>${formatNumber(sugarGrams)} جم</span> سكر و <span>${formatNumber(teaGrams)} جم</span> شاي`;
-
-        let sugarNote = document.getElementById('sugarNote');
-        sugarNote.innerHTML = `<span class="value">${formatNumber(sugarFullCups)}</span> بيالة ممتلئة <span class="plus">+</span> <span class="value">${formatNumber(sugarRemainderGrams)}</span> جم`;
-
-        let teaNote = document.getElementById('teaNote');
-        teaNote.innerHTML = `<span class="value">${formatNumber(teaFullCups)}</span> بيالة ممتلئة <span class="plus">+</span> <span class="value">${formatNumber(teaRemainderGrams)}</span> جم`;
-        
-        let sugarFillPercentage = sugarRemainderGrams / sugarPerCup;
-        let teaFillPercentage = teaRemainderGrams / teaPerCup;
-
-        document.getElementById('sugarLevel').style.height = `${glassHeight * sugarFillPercentage}px`;
-        document.getElementById('teaLevel').style.height = `${glassHeight * teaFillPercentage}px`;
     }
 </script>
 
