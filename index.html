@@ -129,9 +129,9 @@
             <div>
                 <p class="control-label">مستوى الشاهي</p>
                 <div class="control-group" id="strength-controls">
-                    <button data-value="11">خفيف</button>
-                    <button class="active" data-value="12">وسط</button>
-                    <button data-value="13">ثقيل</button>
+                    <button data-value="9.61">خفيف</button>
+                    <button class="active" data-value="10.48">وسط</button>
+                    <button data-value="11.35">ثقيل</button>
                 </div>
             </div>
         </div>
@@ -194,7 +194,7 @@
 
     // --- State Variables ---
     let sweetnessAdjustment = 0;
-    let strengthMultiplier = 12;
+    let strengthMultiplier = 10.48; // UPDATED: New base for medium tea
 
     // --- Event Listeners ---
     sweetnessControls.addEventListener('click', (e) => {
@@ -243,7 +243,8 @@
         
         let waterMl, sugarGrams, teaGrams;
         const mode = calcModeSelect.value;
-        const baseSugarPerLiter = 84;
+        // UPDATED: New base sugar amount per 1000ml
+        const baseSugarPerLiter = 73.36; 
         let inputValue = mainInput.value.trim();
         let value = parseFloat(inputValue.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[^\d\.]/g, ''));
 
