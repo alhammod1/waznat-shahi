@@ -68,6 +68,7 @@
             border-radius: 8px;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s;
+            margin-top: 10px;
         }
         #blend-button.active {
             background-color: var(--blend-btn-bg);
@@ -95,7 +96,45 @@
         .dark-mode #blend-result .value { color: #58a6ff; }
 
         .visual-container { display: flex; justify-content: center; gap: 100px; margin-top: 40px; flex-wrap: wrap; }
-        /* Other styles remain the same */
+        .glass-container { display: flex; flex-direction: column; align-items: center; }
+        .glass-title { font-size: 1.8em; font-weight: bold; margin-bottom: 15px; }
+        .glass {
+            width: 168px; height: 225px; border-left: 2px dotted var(--glass-border); border-right: 2px dotted var(--glass-border);
+            border-bottom: 2px solid var(--glass-border); position: relative; margin: 0 auto; border-radius: 0 0 15px 15px; background-color: transparent;
+        }
+        .scale { position: absolute; top: 0; height: 100%; width: 60px; }
+        .gram-scale { right: calc(100% + 5px); }
+        .percentage-scale { left: calc(100% + 5px); }
+        .scale div { position: absolute; width: 100%; font-size: 13px; font-weight: bold; white-space: nowrap; transform: translateY(50%); }
+        .gram-scale div { color: #007bff; padding-right: 15px; text-align: right; }
+        .dark-mode .gram-scale div { color: #58a6ff; }
+        .percentage-scale div { color: #28a745; padding-left: 15px; }
+        .dark-mode .percentage-scale div { color: #3fb950; }
+        .scale div::before { content: ''; position: absolute; width: 10px; height: 2px; background-color: var(--secondary-text); top: 50%; transform: translateY(-50%); }
+        .gram-scale div::before { right: 0; }
+        .percentage-scale div::before { left: 0; }
+
+        #sugarLevel, #teaLevel {
+            position: absolute; left: 0; width: 100%; height: 0; background-color: rgba(230, 0, 0, 0.6);
+            bottom: 0; border-radius: 0 0 13px 13px; transition: height 0.6s ease-out;
+        }
+        .note { margin-top: 15px; font-size: 1.1em; background-color: var(--note-bg); padding: 8px 15px; border-radius: 10px; font-weight: bold; }
+        .note .plus { color: blue; font-weight: bold; }
+        .footer-notes {
+            margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-color);
+            font-size: 18px; line-height: 2; color: var(--text-color);
+        }
+        .footer-notes p { margin-bottom: 25px; }
+        .footer-notes .red-text { color: #dc3545; }
+        .dark-mode .footer-notes .red-text { color: #ff7b72; }
+        .footer-notes .green-text { color: #28a745; }
+        .dark-mode .footer-notes .green-text { color: #3fb950; }
+        .footer-notes .blue-text { color: #007bff; }
+        .dark-mode .footer-notes .blue-text { color: #58a6ff; }
+        .footer-notes .underlined-red {
+            color: #dc3545; border-bottom: 2px solid var(--text-color); padding-bottom: 2px;
+        }
+        .dark-mode .footer-notes .underlined-red { color: #ff7b72; }
     </style>
 </head>
 <body>
@@ -131,7 +170,7 @@
                     <button class="active" data-value="10.48">وسط</button>
                     <button data-value="11.35">ثقيل</button>
                 </div>
-                 <button id="blend-button" data-value="10.48" data-mode="blend">خلطتي</button>
+                <button id="blend-button" data-value="10.48" data-mode="blend">خلطتي</button>
             </div>
             <div id="blend-result" class="result" style="visibility:hidden; margin-top: 0;"></div>
         </div>
@@ -140,12 +179,46 @@
     
     <div id="result" class="result" style="visibility:hidden;"></div>
 
-    <div class="visual-container" style="display:none;">
-        <!-- Visuals are hidden for brevity but exist in the full code -->
+    <div class="visual-container">
+        <!-- Visuals -->
+        <div class="glass-container">
+            <p class="glass-title">السكر</p>
+            <div class="glass" id="sugarGlass">
+                <div id="sugarLevel"></div>
+                <div class="scale gram-scale">
+                    <div style="bottom: 100%;">84</div><div style="bottom: 87.5%;">73.5</div><div style="bottom: 75%;">63</div><div style="bottom: 62.5%;">52.5</div><div style="bottom: 50%;">42</div><div style="bottom: 37.5%;">31.5</div><div style="bottom: 25%;">21</div><div style="bottom: 12.5%;">10.5</div><div style="bottom: 6.25%;">5.25</div>
+                </div>
+                <div class="scale percentage-scale">
+                    <div style="bottom: 100%;">100%</div><div style="bottom: 75%;">75%</div><div style="bottom: 50%;">50%</div><div style="bottom: 25%;">25%</div><div style="bottom: 10%;">10%</div>
+                </div>
+            </div>
+            <p class="note" id="sugarNote" style="visibility:hidden;"></p>
+        </div>
+        <div class="glass-container">
+            <p class="glass-title">الشاي</p>
+            <div class="glass" id="teaGlass">
+                 <div id="teaLevel"></div>
+                 <div class="scale gram-scale">
+                    <div style="bottom: 100%;">21</div><div style="bottom: 90%;">18.9</div><div style="bottom: 75%;">15.75</div><div style="bottom: 65%;">13.65</div><div style="bottom: 50%;">10.5</div><div style="bottom: 40%;">8.4</div><div style="bottom: 25%;">5.25</div><div style="bottom: 15%;">3.15</div><div style="bottom: 10%;">2.1</div>
+                 </div>
+                 <div class="scale percentage-scale">
+                    <div style="bottom: 100%;">100%</div><div style="bottom: 75%;">75%</div><div style="bottom: 50%;">50%</div><div style="bottom: 25%;">25%</div><div style="bottom: 10%;">10%</div>
+                 </div>
+            </div>
+            <p class="note" id="teaNote" style="visibility:hidden;"></p>
+        </div>
     </div>
     
-    <div class="footer-notes" style="display:none;">
-        <!-- Footer content is hidden for brevity but exists in the full code -->
+    <div class="footer-notes">
+        <p><span class="underlined-red">البيالة المستخدمة في القياس هي بيالة "بادريق"</span></p>
+        <p>البيالة العادية من الماء إلى المستوى الطبيعي المتعارف عليه تساوي تقريبا <span class="red-text">66.2</span> مل، أي أن <span class="red-text">1</span> لتر يساوي <span class="red-text">15</span> بيالة.</p>
+		<p><span style="color: red;">(لجميع انواع الشاهي)</span> تقريبا هذه الوزنة مناسبة للجميع مع التعديل حسب الحاجة لواحد لتر</p>
+        <p><span class="red-text">السكر: 50 إلى 55 جم</span><br>
+        <span class="red-text">الشاي: 12 إلى 12.5 جم</span></p>
+        <p><strong class="red-text">طريقة الحساب:</strong> لحساب كمية <span class="red-text">السكر</span> و<span class="red-text">الشاي</span> بناءً على كمية الماء:<br>
+        <span class="red-text">السكر (جم)</span> = (كمية الماء بالمللتر ÷ 1000) × <span class="blue-text">50 إلى 55</span><br>
+        <span class="red-text">الشاي (جم)</span> = (كمية الماء بالمللتر ÷ 1000) × <span class="blue-text">12 إلى 12.5</span></p>
+        <p><strong class="red-text">ملاحظة:</strong> قد تختلف النتيجة حسب نوع الشاي، يفضل التجربة والضبط حسب الذوق.</p>
     </div>
 
 </div>
