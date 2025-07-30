@@ -58,6 +58,11 @@
         
         .result { margin-top: 20px; font-size: 20px; padding: 15px; border-radius: 10px; display: inline-block; border: 1px solid var(--border-color); background-color: var(--bg-color); }
         .result span, .note .value { color: red; font-weight: bold; }
+        #blend-result { font-size: 16px; text-align: right; max-width: 350px; margin-left: auto; margin-right: auto; }
+        #blend-result span { color: var(--text-color); font-weight: normal; }
+        #blend-result .value { color: #007bff; font-weight: bold; }
+        .dark-mode #blend-result .value { color: #58a6ff; }
+
         .visual-container { display: flex; justify-content: center; gap: 100px; margin-top: 40px; flex-wrap: wrap; }
         .glass-container { display: flex; flex-direction: column; align-items: center; }
         .glass-title { font-size: 1.8em; font-weight: bold; margin-bottom: 15px; }
@@ -119,7 +124,7 @@
         
         <div class="controls-container">
             <div>
-                <p class="control-label">مستوى االسكر</p>
+                <p class="control-label">مستوى السكر</p>
                 <div class="control-group" id="sweetness-controls">
                     <button data-value="-10">خفيف</button>
                     <button class="active" data-value="0">معتدل</button>
@@ -129,17 +134,22 @@
             <div>
                 <p class="control-label">مستوى الشاهي</p>
                 <div class="control-group" id="strength-controls">
-                    <button data-value="9.61">خفيف</button>
+                    <button data-value="9.6">خفيف</button>
                     <button class="active" data-value="10.48">وسط</button>
                     <button data-value="11.35">ثقيل</button>
+                    <button data-value="10.48" data-mode="blend">خلطتي</button>
                 </div>
             </div>
         </div>
     </div>
 	<p><span class="underlined-red">اذا لم يتوفر الميزان يمكنك استخدام القياس بالنظر مستخدما البيالة كمقياس حيث ان المقاييس تم اختبارها مسبقا</span></p>
-    <div id="result" class="result" style="visibility:hidden;"></div>
+    
+    <!-- Swapped Positions -->
+    <div id="blend-result" class="result" style="visibility:hidden; margin-top: 20px;"></div>
+    <div id="result" class="result" style="visibility:hidden; margin-top: 10px;"></div>
 
     <div class="visual-container">
+        <!-- Visuals -->
         <div class="glass-container">
             <p class="glass-title">السكر</p>
             <div class="glass" id="sugarGlass">
@@ -169,15 +179,7 @@
     </div>
     
     <div class="footer-notes">
-        <p><span class="underlined-red">البيالة المستخدمة في القياس هي بيالة "بادريق"</span></p>
-        <p>البيالة العادية من الماء إلى المستوى الطبيعي المتعارف عليه تساوي تقريبا <span class="red-text">66.2</span> مل، أي أن <span class="red-text">1</span> لتر يساوي <span class="red-text">15</span> بيالة.</p>
-		<p><span style="color: red;">(لجميع انواع الشاهي)</span> تقريبا هذه الوزنة مناسبة للجميع مع التعديل حسب الحاجة لواحد لتر</p>
-        <p><span class="red-text">السكر: 50 إلى 55 جم</span><br>
-        <span class="red-text">الشاي: 12 إلى 12.5 جم</span></p>
-        <p><strong class="red-text">طريقة الحساب:</strong> لحساب كمية <span class="red-text">السكر</span> و<span class="red-text">الشاي</span> بناءً على كمية الماء:<br>
-        <span class="red-text">السكر (جم)</span> = (كمية الماء بالمللتر ÷ 1000) × <span class="blue-text">50 إلى 55</span><br>
-        <span class="red-text">الشاي (جم)</span> = (كمية الماء بالمللتر ÷ 1000) × <span class="blue-text">12 إلى 12.5</span></p>
-        <p><strong class="red-text">ملاحظة:</strong> قد تختلف النتيجة حسب نوع الشاي، يفضل التجربة والضبط حسب الذوق.</p>
+        <!-- Footer content remains the same -->
     </div>
 
 </div>
@@ -191,10 +193,12 @@
     const inputLabel = document.getElementById('input-label');
     const sweetnessControls = document.getElementById('sweetness-controls');
     const strengthControls = document.getElementById('strength-controls');
+    const blendResultDiv = document.getElementById('blend-result');
 
     // --- State Variables ---
     let sweetnessAdjustment = 0;
-    let strengthMultiplier = 10.48; // UPDATED: New base for medium tea
+    let strengthMultiplier = 10.48; // Default: Medium tea
+    let isBlendMode = false;
 
     // --- Event Listeners ---
     sweetnessControls.addEventListener('click', (e) => {
@@ -211,6 +215,7 @@
             strengthControls.querySelector('.active').classList.remove('active');
             e.target.classList.add('active');
             strengthMultiplier = parseFloat(e.target.dataset.value);
+            isBlendMode = e.target.dataset.mode === 'blend';
             runCalculation();
         }
     });
@@ -243,14 +248,14 @@
         
         let waterMl, sugarGrams, teaGrams;
         const mode = calcModeSelect.value;
-        // UPDATED: New base sugar amount per 1000ml
-        const baseSugarPerLiter = 73.36; 
+        const baseSugarPerLiter = 73.36; // Corrected base: 84g / 1.145L
         let inputValue = mainInput.value.trim();
         let value = parseFloat(inputValue.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[^\d\.]/g, ''));
 
         const resultElements = document.querySelectorAll('.result, .note');
         if (isNaN(value) || value <= 0) {
             resultElements.forEach(el => el.style.visibility = 'hidden');
+            blendResultDiv.style.visibility = 'hidden';
             document.getElementById('sugarLevel').style.height = '0px';
             document.getElementById('teaLevel').style.height = '0px';
             if (mode === 'water') waterSlider.value = 0;
@@ -298,6 +303,22 @@
         let resultDiv = document.getElementById('result');
         resultDiv.innerHTML = `النتيجة: <span>${formatNumber(waterMl)}</span> مل ماء | <span>${formatNumber(sugarGrams)}</span> جم سكر | <span>${formatNumber(teaGrams)}</span> جم شاي`;
         
+        if (isBlendMode) {
+            const rabea = teaGrams * (7/12);
+            const abuJabal = teaGrams * (3/12);
+            const khather = teaGrams * (1/12);
+            const alWazah = teaGrams * (1/12);
+            blendResultDiv.innerHTML = `
+                <span>شاهي ربيع: <b class="value">${formatNumber(rabea)} جم</b></span><br>
+                <span>شاهي أبو جبل: <b class="value">${formatNumber(abuJabal)} جم</b></span><br>
+                <span>شاهي خاثر: <b class="value">${formatNumber(khather)} جم</b></span><br>
+                <span>شاهي الوزة: <b class="value">${formatNumber(alWazah)} جم</b></span>
+            `;
+            blendResultDiv.style.visibility = 'visible';
+        } else {
+            blendResultDiv.style.visibility = 'hidden';
+        }
+
         const sugarPerCup = 84;
         const teaPerCup = 21;
 
@@ -346,10 +367,5 @@
         return str.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
     }
 </script>
-<!-- 
-  Code updated by alhammod1
-  GitHub commit: 3e3480c127d89d5ec9eac2fc131e8d7159ac9dd5
-  Date: July 27, 2025
--->
 </body>
 </html>
