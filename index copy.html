@@ -166,15 +166,16 @@
             <div>
                 <p class="control-label">مستوى الشاهي</p>
                 <div class="control-group" id="strength-controls">
-                    <button data-value="11">خفيف</button>
-                    <button class="active" data-value="12">وسط</button>
-                    <button data-value="13">ثقيل</button>
+                    <button data-value="9.6">خفيف</button>
+                    <button class="active" data-value="10.48">وسط</button>
+                    <button data-value="11.35">ثقيل</button>
                 </div>
-                <button id="blend-button" data-value="12" data-mode="blend">خلطتي</button>
+                <button id="blend-button" data-value="10.48" data-mode="blend">خلطتي</button>
             </div>
             <div id="blend-result" class="result" style="visibility:hidden; margin-top: 0;"></div>
         </div>
     </div>
+   <span style="color:red;">للخدرة السريعة</span> "<span style="color:red;">10</span> دقائق" اضف "<span style="color:red;">5</span> جرام" شاهي زيادة
 	<p><span class="underlined-red">اذا لم يتوفر الميزان يمكنك استخدام القياس بالنظر مستخدما البيالة كمقياس حيث ان المقاييس تم اختبارها مسبقا</span></p>
     
     <div id="result" class="result" style="visibility:hidden;"></div>
@@ -237,7 +238,7 @@
 
     // --- State Variables ---
     let sweetnessAdjustment = 0;
-    let strengthMultiplier = 12; // REVERTED: Back to original base
+    let strengthMultiplier = 10.48; // Default: Medium tea
     let isBlendMode = false;
 
     // --- Event Listeners ---
@@ -299,7 +300,7 @@
         
         let waterMl, sugarGrams, teaGrams;
         const mode = calcModeSelect.value;
-        const baseSugarPerLiter = 84; // REVERTED: Back to original base
+        const baseSugarPerLiter = 73.36;
         let inputValue = mainInput.value.trim();
         let value = parseFloat(inputValue.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[^\d\.]/g, ''));
 
