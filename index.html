@@ -237,7 +237,7 @@
 
     // --- State Variables ---
     let sweetnessAdjustment = 0;
-    let strengthMultiplier = 12; // REVERTED: Back to original base
+    let strengthMultiplier = 12; 
     let isBlendMode = false;
 
     // --- Event Listeners ---
@@ -299,7 +299,7 @@
         
         let waterMl, sugarGrams, teaGrams;
         const mode = calcModeSelect.value;
-        const baseSugarPerLiter = 84; // REVERTED: Back to original base
+        const baseSugarPerLiter = isBlendMode ? 115 : 84;
         let inputValue = mainInput.value.trim();
         let value = parseFloat(inputValue.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[^\d\.]/g, ''));
 
@@ -370,7 +370,7 @@
             blendResultDiv.style.visibility = 'hidden';
         }
 
-        const sugarPerCup = 84;
+        const sugarPerCup = 84; // Standard cup size for visual representation
         const teaPerCup = 21;
 
         let sugarFullCups = Math.floor(sugarGrams / sugarPerCup);
@@ -384,15 +384,15 @@
         if(teaNote) teaNote.innerHTML = `<span class="value">${formatNumber(teaFullCups)}</span> بيالة <span class="plus">+</span> <span class="value">${formatNumber(teaRemainderGrams)}</span> جم`;
         
         let sugarFillPercentage;
-        if (sugarGrams > 0 && sugarRemainderGrams.toFixed(2) == 0.00) {
-            sugarFillPercentage = 1;
+        if (sugarGrams > 0 && sugarFullCups > 0 && sugarRemainderGrams.toFixed(2) == 0.00) {
+             sugarFillPercentage = 1; // It's exactly one or more full cups
         } else {
             sugarFillPercentage = sugarRemainderGrams / sugarPerCup;
         }
 
         let teaFillPercentage;
-        if (teaGrams > 0 && teaRemainderGrams.toFixed(2) == 0.00) {
-            teaFillPercentage = 1;
+        if (teaGrams > 0 && teaFullCups > 0 && teaRemainderGrams.toFixed(2) == 0.00) {
+            teaFillPercentage = 1; // It's exactly one or more full cups
         } else {
             teaFillPercentage = teaRemainderGrams / teaPerCup;
         }
@@ -424,3 +424,4 @@
 </script>
 </body>
 </html>
+
