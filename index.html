@@ -170,7 +170,7 @@
                     <button class="active" data-value="12">وسط</button>
                     <button data-value="13">ثقيل</button>
                 </div>
-                <button id="blend-button" data-value="12" data-mode="blend">خلطتي</button>
+                <button id="blend-button" data-value="14" data-mode="blend">خلطتي</button>
             </div>
             <div id="blend-result" class="result" style="visibility:hidden; margin-top: 0;"></div>
         </div>
@@ -234,6 +234,7 @@
     const strengthControls = document.getElementById('strength-controls');
     const blendButton = document.getElementById('blend-button');
     const blendResultDiv = document.getElementById('blend-result');
+    const resultDiv = document.getElementById('result');
 
     // --- State Variables ---
     let sweetnessAdjustment = 0;
@@ -246,6 +247,8 @@
             sweetnessControls.querySelector('.active').classList.remove('active');
             e.target.classList.add('active');
             sweetnessAdjustment = parseFloat(e.target.dataset.value);
+            isBlendMode = false;
+            blendButton.classList.remove('active');
             runCalculation();
         }
     });
@@ -263,10 +266,11 @@
     });
 
     blendButton.addEventListener('click', (e) => {
+        // Deactivate all other buttons
+        sweetnessControls.querySelector('.active')?.classList.remove('active');
         strengthControls.querySelector('.active')?.classList.remove('active');
-        e.target.classList.add('active');
 
-        strengthMultiplier = parseFloat(e.target.dataset.value);
+        e.target.classList.add('active');
         isBlendMode = true;
         runCalculation();
     });
@@ -299,7 +303,6 @@
         
         let waterMl, sugarGrams, teaGrams;
         const mode = calcModeSelect.value;
-        const baseSugarPerLiter = isBlendMode ? 115 : 84;
         let inputValue = mainInput.value.trim();
         let value = parseFloat(inputValue.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[^\d\.]/g, ''));
 
@@ -314,28 +317,47 @@
         }
         resultElements.forEach(el => el.style.visibility = 'visible');
 
-        switch (mode) {
-            case 'sugar':
-                const targetSugar = value;
-                const baseSugar = targetSugar - sweetnessAdjustment;
-                waterMl = (baseSugar * 1000) / baseSugarPerLiter;
-                teaGrams = (strengthMultiplier * waterMl) / 1000;
-                sugarGrams = targetSugar;
-                break;
-            case 'tea':
+        // Logic for blend mode
+        if (isBlendMode) {
+            const baseSugarPerLiter = 115;
+            const blendTeaPerLiter = 14;
+            if (mode === 'water') {
+                waterMl = value;
+                if(isSlider) mainInput.value = waterMl;
+                else waterSlider.value = waterMl;
+                sugarGrams = (baseSugarPerLiter * waterMl) / 1000;
+                teaGrams = (blendTeaPerLiter * waterMl) / 1000;
+            } else if (mode === 'sugar') {
+                sugarGrams = value;
+                waterMl = (sugarGrams * 1000) / baseSugarPerLiter;
+                teaGrams = (blendTeaPerLiter * waterMl) / 1000;
+            } else if (mode === 'tea') {
                 teaGrams = value;
-                waterMl = (teaGrams * 1000) / strengthMultiplier;
-                sugarGrams = ((baseSugarPerLiter * waterMl) / 1000) + sweetnessAdjustment;
-                break;
-            default: // 'water'
+                waterMl = (teaGrams * 1000) / blendTeaPerLiter;
+                sugarGrams = (baseSugarPerLiter * waterMl) / 1000;
+            }
+            sweetnessAdjustment = 0; // Reset adjustment in blend mode
+        } else { // Logic for other options
+            const baseSugarPerLiter = 84;
+            if (mode === 'water') {
                 waterMl = value;
                 if(isSlider) mainInput.value = waterMl;
                 else waterSlider.value = waterMl;
                 sugarGrams = ((baseSugarPerLiter * waterMl) / 1000) + sweetnessAdjustment;
                 teaGrams = (strengthMultiplier * waterMl) / 1000;
-                break;
+            } else if (mode === 'sugar') {
+                const targetSugar = value;
+                const baseSugar = targetSugar - sweetnessAdjustment;
+                waterMl = (baseSugar * 1000) / baseSugarPerLiter;
+                teaGrams = (strengthMultiplier * waterMl) / 1000;
+                sugarGrams = targetSugar;
+            } else if (mode === 'tea') {
+                teaGrams = value;
+                waterMl = (teaGrams * 1000) / strengthMultiplier;
+                sugarGrams = ((baseSugarPerLiter * waterMl) / 1000) + sweetnessAdjustment;
+            }
         }
-        
+
         waterMl = Math.max(0, waterMl);
         sugarGrams = Math.max(0, sugarGrams);
         teaGrams = Math.max(0, teaGrams);
@@ -350,27 +372,32 @@
             let numStr = num.toFixed(2).replace(/\.00$/, '').replace(/\.0$/, '');
             return useArabicNumbers ? toArabicNumbers(numStr) : numStr;
         }
-
+        
         let resultDiv = document.getElementById('result');
-        resultDiv.innerHTML = `النتيجة: <span>${formatNumber(waterMl)}</span> مل ماء | <span>${formatNumber(sugarGrams)}</span> جم سكر | <span>${formatNumber(teaGrams)}</span> جم شاي`;
         
         if (isBlendMode) {
-            const rabea = teaGrams * (7/12);
-            const abuJabal = teaGrams * (3/12);
-            const khather = teaGrams * (1/12);
-            const alWazah = teaGrams * (1/12);
+            const rabea = teaGrams * (11/14);
+            const abuJabal = teaGrams * (1/14);
+            const alWazah = teaGrams * (1/14);
+            const khather = teaGrams * (1/14);
+            
             blendResultDiv.innerHTML = `
                 <span>شاهي ربيع: <b class="value">${formatNumber(rabea)} جم</b></span><br>
                 <span>شاهي أبو جبل: <b class="value">${formatNumber(abuJabal)} جم</b></span><br>
-                <span>شاهي خاثر: <b class="value">${formatNumber(khather)} جم</b></span><br>
-                <span>شاهي الوزة: <b class="value">${formatNumber(alWazah)} جم</b></span>
+                <span>شاهي الوزة: <b class="value">${formatNumber(alWazah)} جم</b></span><br>
+                <span>شاهي خاثر: <b class="value">${formatNumber(khather)} جم</b></span>
             `;
             blendResultDiv.style.visibility = 'visible';
+            
+            resultDiv.innerHTML = `النتيجة: <span>${formatNumber(waterMl)}</span> مل ماء | <span>${formatNumber(sugarGrams)}</span> جم سكر | <span>${formatNumber(teaGrams)}</span> جم شاي`;
         } else {
             blendResultDiv.style.visibility = 'hidden';
+            resultDiv.innerHTML = `النتيجة: <span>${formatNumber(waterMl)}</span> مل ماء | <span>${formatNumber(sugarGrams)}</span> جم سكر | <span>${formatNumber(teaGrams)}</span> جم شاي`;
         }
-
-        const sugarPerCup = 84; // Standard cup size for visual representation
+        
+        // Sugar is 84g for 1000ml (or 1 biyalh of water). Let's use 84g as a reference.
+        // Tea is 12g for 1000ml. Let's use 21g as a reference for a full biyalh.
+        const sugarPerCup = 84;
         const teaPerCup = 21;
 
         let sugarFullCups = Math.floor(sugarGrams / sugarPerCup);
@@ -384,17 +411,23 @@
         if(teaNote) teaNote.innerHTML = `<span class="value">${formatNumber(teaFullCups)}</span> بيالة <span class="plus">+</span> <span class="value">${formatNumber(teaRemainderGrams)}</span> جم`;
         
         let sugarFillPercentage;
-        if (sugarGrams > 0 && sugarFullCups > 0 && sugarRemainderGrams.toFixed(2) == 0.00) {
-             sugarFillPercentage = 1; // It's exactly one or more full cups
+        if (sugarGrams > 0) {
+             sugarFillPercentage = sugarRemainderGrams / sugarPerCup;
+             if (sugarFullCups > 0 && sugarRemainderGrams.toFixed(2) == 0.00) {
+                 sugarFillPercentage = 1; 
+            }
         } else {
-            sugarFillPercentage = sugarRemainderGrams / sugarPerCup;
+            sugarFillPercentage = 0;
         }
 
         let teaFillPercentage;
-        if (teaGrams > 0 && teaFullCups > 0 && teaRemainderGrams.toFixed(2) == 0.00) {
-            teaFillPercentage = 1; // It's exactly one or more full cups
-        } else {
+        if (teaGrams > 0) {
             teaFillPercentage = teaRemainderGrams / teaPerCup;
+             if (teaFullCups > 0 && teaRemainderGrams.toFixed(2) == 0.00) {
+                 teaFillPercentage = 1; 
+            }
+        } else {
+            teaFillPercentage = 0;
         }
 
         const sugarLevel = document.getElementById('sugarLevel');
@@ -424,4 +457,3 @@
 </script>
 </body>
 </html>
-
