@@ -46,7 +46,7 @@
         .control-group { display: flex; justify-content: center; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); }
         .control-group button {
             flex-grow: 1; background-color: transparent; border: none; padding: 10px; color: var(--text-color);
-            font-family: 'Cairo', Arial, sans-serif; font-size: 16px; cursor: pointer; transition: background-color 0.3s;
+            font-family: 'Cairo', Arial, sans-serif; font-size: 16px; cursor: pointer; transition: background-color 0.3s, color 0.3s;
             border-left: 1px solid var(--border-color);
         }
         .control-group button:last-child { border-left: none; }
@@ -55,6 +55,10 @@
             font-weight: bold;
             color: var(--secondary-text);
             margin: 10px 0 5px 0;
+        }
+        .control-group button:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
         }
         
         #blend-button {
@@ -229,12 +233,12 @@
     const waterSlider = document.getElementById('waterSlider');
     const themeToggleButton = document.getElementById('theme-toggle');
     const calcModeSelect = document.getElementById('calcMode');
-    const inputLabel = document.getElementById('input-label');
     const sweetnessControls = document.getElementById('sweetness-controls');
     const strengthControls = document.getElementById('strength-controls');
     const blendButton = document.getElementById('blend-button');
     const blendResultDiv = document.getElementById('blend-result');
     const resultDiv = document.getElementById('result');
+    const inputLabel = document.getElementById('input-label');
 
     // --- State Variables ---
     let sweetnessAdjustment = 0;
@@ -243,35 +247,42 @@
 
     // --- Event Listeners ---
     sweetnessControls.addEventListener('click', (e) => {
+        if (isBlendMode) return; // Prevent interaction if blend mode is active
         if (e.target.tagName === 'BUTTON') {
             sweetnessControls.querySelector('.active').classList.remove('active');
             e.target.classList.add('active');
             sweetnessAdjustment = parseFloat(e.target.dataset.value);
-            isBlendMode = false;
-            blendButton.classList.remove('active');
             runCalculation();
         }
     });
 
     strengthControls.addEventListener('click', (e) => {
+        if (isBlendMode) return; // Prevent interaction if blend mode is active
         if (e.target.tagName === 'BUTTON') {
-            blendButton.classList.remove('active');
             strengthControls.querySelector('.active')?.classList.remove('active');
             e.target.classList.add('active');
             
             strengthMultiplier = parseFloat(e.target.dataset.value);
-            isBlendMode = false;
             runCalculation();
         }
     });
 
     blendButton.addEventListener('click', (e) => {
-        // Deactivate all other buttons
-        sweetnessControls.querySelector('.active')?.classList.remove('active');
-        strengthControls.querySelector('.active')?.classList.remove('active');
-
-        e.target.classList.add('active');
-        isBlendMode = true;
+        isBlendMode = !isBlendMode; // Toggle blend mode
+        if (isBlendMode) {
+            e.target.classList.add('active');
+            sweetnessControls.querySelectorAll('button').forEach(btn => btn.disabled = true);
+            strengthControls.querySelectorAll('button').forEach(btn => btn.disabled = true);
+            // Reset to default active state when blend mode is entered
+            sweetnessControls.querySelector('.active')?.classList.remove('active');
+            strengthControls.querySelector('.active')?.classList.remove('active');
+            sweetnessControls.querySelector('[data-value="0"]').classList.add('active');
+            strengthControls.querySelector('[data-value="12"]').classList.add('active');
+        } else {
+            e.target.classList.remove('active');
+            sweetnessControls.querySelectorAll('button').forEach(btn => btn.disabled = false);
+            strengthControls.querySelectorAll('button').forEach(btn => btn.disabled = false);
+        }
         runCalculation();
     });
 
@@ -336,7 +347,6 @@
                 waterMl = (teaGrams * 1000) / blendTeaPerLiter;
                 sugarGrams = (baseSugarPerLiter * waterMl) / 1000;
             }
-            sweetnessAdjustment = 0; // Reset adjustment in blend mode
         } else { // Logic for other options
             const baseSugarPerLiter = 84;
             if (mode === 'water') {
@@ -412,9 +422,9 @@
         
         let sugarFillPercentage;
         if (sugarGrams > 0) {
-             sugarFillPercentage = sugarRemainderGrams / sugarPerCup;
-             if (sugarFullCups > 0 && sugarRemainderGrams.toFixed(2) == 0.00) {
-                 sugarFillPercentage = 1; 
+            sugarFillPercentage = sugarRemainderGrams / sugarPerCup;
+            if (sugarFullCups > 0 && sugarRemainderGrams.toFixed(2) == 0.00) {
+                sugarFillPercentage = 1; 
             }
         } else {
             sugarFillPercentage = 0;
@@ -423,8 +433,8 @@
         let teaFillPercentage;
         if (teaGrams > 0) {
             teaFillPercentage = teaRemainderGrams / teaPerCup;
-             if (teaFullCups > 0 && teaRemainderGrams.toFixed(2) == 0.00) {
-                 teaFillPercentage = 1; 
+            if (teaFullCups > 0 && teaRemainderGrams.toFixed(2) == 0.00) {
+                teaFillPercentage = 1; 
             }
         } else {
             teaFillPercentage = 0;
