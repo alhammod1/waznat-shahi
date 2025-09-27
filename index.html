@@ -215,7 +215,7 @@
     
     <div class="footer-notes">
         <p><span class="underlined-red">البيالة المستخدمة في القياس هي بيالة "بادريق"</span></p>
-        <p>بيالة مليانة ماء تساوي 88 مل<span class="red-text"></span> أي أن <span class="red-text">1</span> لتر يساوي <span class="red-text">11</span> بيالة.</p>
+        <p>البيالة العادية من الماء إلى المستوى الطبيعي المتعارف عليه تساوي تقريبا <span class="red-text">66.2</span> مل، أي أن <span class="red-text">1</span> لتر يساوي <span class="red-text">15</span> بيالة.</p>
 		<p><span style="color: red;">(لجميع انواع الشاهي)</span> تقريبا هذه الوزنة مناسبة للجميع مع التعديل حسب الحاجة لواحد لتر</p>
         <p><span class="red-text">السكر: 50 إلى 55 جم</span><br>
         <span class="red-text">الشاي: 12 إلى 12.5 جم</span></p>
@@ -330,7 +330,8 @@
 
         // Logic for blend mode
         if (isBlendMode) {
-            const baseSugarPerLiter = 115;
+            // Updated blend sugar amount: 110 grams per liter
+            const baseSugarPerLiter = 110; 
             const blendTeaPerLiter = 14;
             if (mode === 'water') {
                 waterMl = value;
@@ -405,8 +406,8 @@
             resultDiv.innerHTML = `النتيجة: <span>${formatNumber(waterMl)}</span> مل ماء | <span>${formatNumber(sugarGrams)}</span> جم سكر | <span>${formatNumber(teaGrams)}</span> جم شاي`;
         }
         
-        // Sugar is 84g for 1000ml (or 1 biyalh of water). Let's use 84g as a reference.
-        // Tea is 12g for 1000ml. Let's use 21g as a reference for a full biyalh.
+        // Sugar reference: 84g (Full Cup)
+        // Tea reference: 21g (Full Cup)
         const sugarPerCup = 84;
         const teaPerCup = 21;
 
@@ -422,9 +423,16 @@
         
         let sugarFillPercentage;
         if (sugarGrams > 0) {
-            sugarFillPercentage = sugarRemainderGrams / sugarPerCup;
-            if (sugarFullCups > 0 && sugarRemainderGrams.toFixed(2) == 0.00) {
-                sugarFillPercentage = 1; 
+            // If the total sugar is less than one cup, or it's just the remainder
+            if (sugarGrams < sugarPerCup || sugarFullCups === 0) {
+                 sugarFillPercentage = sugarGrams / sugarPerCup;
+            } else {
+                // If it's more than one cup, we show the remainder fill level, 
+                // unless the remainder is exactly zero, in which case we show 100% fill.
+                sugarFillPercentage = sugarRemainderGrams / sugarPerCup;
+                if (sugarRemainderGrams.toFixed(2) == 0.00) {
+                    sugarFillPercentage = 1; 
+                }
             }
         } else {
             sugarFillPercentage = 0;
@@ -432,9 +440,13 @@
 
         let teaFillPercentage;
         if (teaGrams > 0) {
-            teaFillPercentage = teaRemainderGrams / teaPerCup;
-            if (teaFullCups > 0 && teaRemainderGrams.toFixed(2) == 0.00) {
-                teaFillPercentage = 1; 
+            if (teaGrams < teaPerCup || teaFullCups === 0) {
+                teaFillPercentage = teaGrams / teaPerCup;
+            } else {
+                teaFillPercentage = teaRemainderGrams / teaPerCup;
+                 if (teaRemainderGrams.toFixed(2) == 0.00) {
+                    teaFillPercentage = 1; 
+                }
             }
         } else {
             teaFillPercentage = 0;
