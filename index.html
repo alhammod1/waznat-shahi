@@ -330,9 +330,9 @@
 
         // Logic for blend mode
         if (isBlendMode) {
-            // Updated blend sugar amount: 110 grams per liter
-            const baseSugarPerLiter = 110; 
-            const blendTeaPerLiter = 14;
+            // New blend ratios: Sugar: 90g/L, Tea: 12g/L
+            const baseSugarPerLiter = 90; 
+            const blendTeaPerLiter = 12;
             if (mode === 'water') {
                 waterMl = value;
                 if(isSlider) mainInput.value = waterMl;
@@ -387,10 +387,16 @@
         let resultDiv = document.getElementById('result');
         
         if (isBlendMode) {
-            const rabea = teaGrams * (11/14);
-            const abuJabal = teaGrams * (1/14);
-            const alWazah = teaGrams * (1/14);
-            const khather = teaGrams * (1/14);
+            // Recalculate component ratios based on the old total (14) applied to the new total (12)
+            const oldTotalTea = 14; 
+            const newTotalTea = 12;
+
+            // Individual component grams in the old blend: 11, 1, 1, 1.
+            // Component ratio: (Old Component / Old Total) * New Total
+            const rabea = (11 / oldTotalTea) * teaGrams;
+            const abuJabal = (1 / oldTotalTea) * teaGrams;
+            const alWazah = (1 / oldTotalTea) * teaGrams;
+            const khather = (1 / oldTotalTea) * teaGrams;
             
             blendResultDiv.innerHTML = `
                 <span>شاهي ربيع: <b class="value">${formatNumber(rabea)} جم</b></span><br>
