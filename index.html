@@ -245,6 +245,16 @@
     let strengthMultiplier = 12; 
     let isBlendMode = false;
 
+    // --- Blend Ratios (Fixed Ratios for Blend Mode) ---
+    // Total tea in blend mode is 12g (9 + 1 + 1 + 1)
+    const BLEND_TEA_RATIOS = {
+        rabea: 9,
+        abuJabal: 1,
+        alWazah: 1,
+        khather: 1,
+        total: 12 // Total blend tea grams per liter
+    };
+    
     // --- Event Listeners ---
     sweetnessControls.addEventListener('click', (e) => {
         if (isBlendMode) return; // Prevent interaction if blend mode is active
@@ -330,9 +340,9 @@
 
         // Logic for blend mode
         if (isBlendMode) {
-            // New blend ratios: Sugar: 90g/L, Tea: 12g/L
+            // Blend ratios: Sugar: 90g/L, Tea: 12g/L (from BLEND_TEA_RATIOS.total)
             const baseSugarPerLiter = 90; 
-            const blendTeaPerLiter = 12;
+            const blendTeaPerLiter = BLEND_TEA_RATIOS.total;
             if (mode === 'water') {
                 waterMl = value;
                 if(isSlider) mainInput.value = waterMl;
@@ -387,16 +397,12 @@
         let resultDiv = document.getElementById('result');
         
         if (isBlendMode) {
-            // Recalculate component ratios based on the old total (14) applied to the new total (12)
-            const oldTotalTea = 14; 
-            const newTotalTea = 12;
-
-            // Individual component grams in the old blend: 11, 1, 1, 1.
-            // Component ratio: (Old Component / Old Total) * New Total
-            const rabea = (11 / oldTotalTea) * teaGrams;
-            const abuJabal = (1 / oldTotalTea) * teaGrams;
-            const alWazah = (1 / oldTotalTea) * teaGrams;
-            const khather = (1 / oldTotalTea) * teaGrams;
+            // Calculate actual grams for each blend component
+            const ratio = teaGrams / BLEND_TEA_RATIOS.total;
+            const rabea = BLEND_TEA_RATIOS.rabea * ratio;
+            const abuJabal = BLEND_TEA_RATIOS.abuJabal * ratio;
+            const alWazah = BLEND_TEA_RATIOS.alWazah * ratio;
+            const khather = BLEND_TEA_RATIOS.khather * ratio;
             
             blendResultDiv.innerHTML = `
                 <span>شاهي ربيع: <b class="value">${formatNumber(rabea)} جم</b></span><br>
