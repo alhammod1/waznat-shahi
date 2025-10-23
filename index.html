@@ -11,11 +11,15 @@
             --border-color: #eee; --glass-border: #555; --accent-color: #4CAF50; --note-bg: #f0f0f0;
             --shadow-color: rgba(0,0,0,0.05); --active-btn-bg: #4CAF50; --active-btn-text: #fff;
             --blend-btn-bg: #007bff; --blend-btn-text: #fff;
+            --calc-bg: #e0f7fa; /* New color for the small calculator */
+            --calc-header: #00bcd4;
         }
         .dark-mode {
             --bg-color: #121212; --container-bg: #1e1e1e; --text-color: #e0e0e0; --secondary-text: #aaa;
             --border-color: #333; --glass-border: #777; --accent-color: #5cb85c; --note-bg: #2a2a2a;
             --shadow-color: rgba(0,0,0,0.2); --active-btn-bg: #5cb85c; --blend-btn-bg: #58a6ff;
+            --calc-bg: #1c313a; 
+            --calc-header: #4dd0e1;
         }
         body {
             font-family: 'Cairo', Arial, sans-serif; background-color: var(--bg-color); color: var(--text-color);
@@ -139,6 +143,41 @@
             color: #dc3545; border-bottom: 2px solid var(--text-color); padding-bottom: 2px;
         }
         .dark-mode .footer-notes .underlined-red { color: #ff7b72; }
+        
+        /* New Sugar Converter Styles */
+        .sugar-converter {
+            max-width: 450px;
+            margin: 40px auto 0;
+            padding: 20px;
+            border-radius: 12px;
+            background-color: var(--calc-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 10px var(--shadow-color);
+        }
+        .converter-header {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--calc-header);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .converter-input input {
+            background-color: var(--container-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+        }
+        .converter-result {
+            padding: 10px;
+            background-color: var(--calc-header);
+            border-radius: 8px;
+            margin-top: 15px;
+            color: var(--blend-btn-text);
+            text-align: center;
+        }
+        .converter-result-value {
+            font-size: 2.2em;
+            font-weight: extra-bold;
+        }
     </style>
 </head>
 <body>
@@ -213,6 +252,34 @@
         </div>
     </div>
     
+    <!-- New Sugar Converter Tool -->
+    <div class="sugar-converter">
+        <h2 class="converter-header">حاسبة السكر للتر من البيالة (73 ملل)</h2>
+        <div class="converter-input">
+            <label for="sugarCupInput" style="display: block; margin-bottom: 8px;">
+                أدخل كمية السكر (بالجرام) التي ناسبتك في البيالة:
+            </label>
+            <input 
+                type="number" 
+                id="sugarCupInput" 
+                placeholder="مثال: 7"
+                min="0"
+                step="0.1"
+                style="width: 100%; padding: 10px; border-radius: 8px; font-size: 16px; text-align: center;"
+                oninput="calculateSugarPerLiterFromCup()"
+            >
+        </div>
+
+        <div id="converterResultContainer" class="converter-result" style="display: none;">
+            <p style="font-size: 1em; margin-bottom: 5px;">الوزنة المكافئة للتر الواحد (1000 ملل):</p>
+            <p id="converterResultText" class="converter-result-value">--</p>
+            <p style="font-size: 1em; margin-top: 5px;">جرام سكر / لتر</p>
+        </div>
+
+        <p id="converterErrorMsg" style="color: #f44336; text-align: center; margin-top: 10px; display: none;">الرجاء إدخال قيمة صحيحة وموجبة.</p>
+    </div>
+    <!-- End New Sugar Converter Tool -->
+
     <div class="footer-notes">
         <p><span class="underlined-red">البيالة المستخدمة في القياس هي بيالة "بادريق"</span></p>
         <p>البيالة العادية من الماء إلى المستوى الطبيعي المتعارف عليه تساوي تقريبا <span class="red-text">66.2</span> مل، أي أن <span class="red-text">1</span> لتر يساوي <span class="red-text">15</span> بيالة.</p>
@@ -487,6 +554,36 @@
 
     function toArabicNumbers(str) {
         return str.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+    }
+    
+    // --- New Sugar Converter Logic ---
+    const SUGAR_CUP_VOLUME_ML = 73; // حجم البيالة المعتمد للحاسبة الجديدة
+    const SUGAR_LITER_VOLUME_ML = 1000;
+    const SUGAR_CONVERSION_FACTOR = SUGAR_LITER_VOLUME_ML / SUGAR_CUP_VOLUME_ML; 
+
+    function calculateSugarPerLiterFromCup() {
+        const inputElement = document.getElementById('sugarCupInput');
+        const resultContainer = document.getElementById('converterResultContainer');
+        const resultText = document.getElementById('converterResultText');
+        const errorMsg = document.getElementById('converterErrorMsg');
+
+        const sugarInCup = parseFloat(inputElement.value);
+
+        // التحقق من المدخلات
+        if (isNaN(sugarInCup) || sugarInCup <= 0) {
+            resultContainer.style.display = 'none';
+            errorMsg.style.display = 'block';
+            return;
+        }
+
+        errorMsg.style.display = 'none';
+        
+        // الحساب:
+        const sugarPerLiter = sugarInCup * SUGAR_CONVERSION_FACTOR;
+
+        // عرض النتيجة
+        resultText.textContent = sugarPerLiter.toFixed(2);
+        resultContainer.style.display = 'block';
     }
 </script>
 </body>
