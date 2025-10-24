@@ -60,30 +60,20 @@
             color: var(--secondary-text);
             margin: 10px 0 5px 0;
         }
-        .control-group button:disabled {
-            cursor: not-allowed;
-            opacity: 0.5;
-        }
         
-        #blend-button {
-            width: 100%;
-            border: 1px solid var(--border-color);
-            background-color: transparent;
-            color: var(--text-color);
-            padding: 10px;
-            font-family: 'Cairo', Arial, sans-serif;
-            font-size: 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-            margin-top: 10px;
-        }
-        #blend-button.active {
+        #blend-controls .control-group button.active {
             background-color: var(--blend-btn-bg);
             color: var(--blend-btn-text);
-            border-color: var(--blend-btn-bg);
         }
 
+        #blend-result { 
+            font-size: 16px; 
+            text-align: right; 
+        }
+        #blend-result span { color: var(--text-color); font-weight: normal; }
+        #blend-result .value { color: #007bff; font-weight: bold; }
+        .dark-mode #blend-result .value { color: #58a6ff; }
+        
         .result { 
             display: block;
             max-width: 350px;
@@ -95,13 +85,6 @@
             background-color: var(--bg-color); 
         }
         .result span, .note .value { color: red; font-weight: bold; }
-        #blend-result { 
-            font-size: 16px; 
-            text-align: right; 
-        }
-        #blend-result span { color: var(--text-color); font-weight: normal; }
-        #blend-result .value { color: #007bff; font-weight: bold; }
-        .dark-mode #blend-result .value { color: #58a6ff; }
 
         .visual-container { display: flex; justify-content: center; gap: 100px; margin-top: 40px; flex-wrap: wrap; }
         .glass-container { display: flex; flex-direction: column; align-items: center; }
@@ -199,21 +182,31 @@
         
         <div class="controls-container">
             <div>
-                <p class="control-label">مستوى السكر</p>
+                <p class="control-label">مستوى السكر القياسي (70 جم/لتر)</p>
                 <div class="control-group" id="sweetness-controls">
-                    <button data-value="-10">خفيف</button>
-                    <button data-value="0" class="active">معتدل</button>
-                    <button data-value="10">حالي زيادة</button>
+                    <button data-type="sweetness" data-value="57" data-blend="false">خفيف</button>
+                    <button data-type="sweetness" data-value="70" data-blend="false" class="active">معتدل</button>
+                    <button data-type="sweetness" data-value="90" data-blend="false">حالي زيادة</button>
                 </div>
             </div>
+            
             <div>
-                <p class="control-label">مستوى الشاهي</p>
+                <p class="control-label">مستوى الشاهي القياسي (12 جم/لتر)</p>
                 <div class="control-group" id="strength-controls">
-                    <button data-value="11">خفيف</button>
-                    <button data-value="12" class="active">وسط</button>
-                    <button data-value="13">ثقيل</button>
+                    <button data-type="strength" data-value="11" data-blend="false">خفيف</button>
+                    <button data-type="strength" data-value="12" data-blend="false" class="active">وسط</button>
+                    <button data-type="strength" data-value="13" data-blend="false">ثقيل</button>
                 </div>
-                <button id="blend-button" data-value="14" data-mode="blend">خلطتي</button>
+            </div>
+
+            <div>
+                <p class="control-label">خلطتي (بنسبة الشاي المخصصة)</p>
+                <div class="control-group" id="blend-controls">
+                    <!-- Data values represent the sugar amount per liter for the blend -->
+                    <button data-type="blend" data-value="57" data-blend-level="light">خفيف</button>
+                    <button data-type="blend" data-value="70" data-blend-level="medium">وسط</button>
+                    <button data-type="blend" data-value="90" data-blend-level="heavy">حالي زيادة</button>
+                </div>
             </div>
             <div id="blend-result" class="result" style="visibility:hidden; margin-top: 0;"></div>
         </div>
@@ -223,6 +216,7 @@
     <div id="result" class="result" style="visibility:hidden;"></div>
 
     <div class="visual-container">
+        <!-- Visuals -->
         <div class="glass-container">
             <p class="glass-title">السكر</p>
             <div class="glass" id="sugarGlass">
@@ -251,6 +245,7 @@
         </div>
     </div>
     
+    <!-- New Sugar Converter Tool -->
     <div class="sugar-converter">
         <h2 class="converter-header">حاسبة السكر للتر من البيالة (73 ملل)</h2>
         <div class="converter-input">
@@ -276,6 +271,8 @@
 
         <p id="converterErrorMsg" style="color: #f44336; text-align: center; margin-top: 10px; display: none;">الرجاء إدخال قيمة صحيحة وموجبة.</p>
     </div>
+    <!-- End New Sugar Converter Tool -->
+
     <div class="footer-notes">
         <p><span class="underlined-red">البيالة المستخدمة في القياس هي بيالة "بادريق"</span></p>
         <p>البيالة العادية من الماء إلى المستوى الطبيعي المتعارف عليه تساوي تقريبا <span class="red-text">73</span> ملل، أي أن <span class="red-text">1</span> لتر يساوي <span class="red-text">13.69</span> بيالة.</p>
@@ -298,66 +295,104 @@
     const calcModeSelect = document.getElementById('calcMode');
     const sweetnessControls = document.getElementById('sweetness-controls');
     const strengthControls = document.getElementById('strength-controls');
-    const blendButton = document.getElementById('blend-button');
+    const blendControls = document.getElementById('blend-controls');
     const blendResultDiv = document.getElementById('blend-result');
     const resultDiv = document.getElementById('result');
     const inputLabel = document.getElementById('input-label');
+    
+    // Get all buttons within the three control groups
+    const allSweetnessButtons = [...sweetnessControls.querySelectorAll('button'), ...blendControls.querySelectorAll('button')];
+    const allStrengthButtons = [...strengthControls.querySelectorAll('button')];
 
     // --- State Variables ---
-    let sweetnessAdjustment = 0;
-    let strengthMultiplier = 12; 
+    const BASE_SUGAR_PER_LITER = 70; // This value is now informational/contextual only in standard mode
+    
+    let standardSugarPerLiter = 70; // This variable now holds the explicit sugar value (57, 70, or 90)
+    let strengthMultiplier = 12; // Only used in standard mode
     let isBlendMode = false;
+    let blendSugarPerLiter = 70; // Default blend sugar (medium)
+    let blendTeaPerLiter = 12; // Default blend tea
 
     // --- Blend Ratios (Fixed Ratios for Blend Mode) ---
-    // Total tea in blend mode is 12g (9 + 1 + 1 + 1)
     const BLEND_TEA_RATIOS = {
         rabea: 9,
         abuJabal: 1,
         alWazah: 1,
         khather: 1,
-        total: 12 // Total blend tea grams per liter
+        total: 12 // Total tea grams per liter for the base blend
     };
     
     // --- Event Listeners ---
+
+    // Unified listener for standard sweetness controls
     sweetnessControls.addEventListener('click', (e) => {
-        if (isBlendMode) return; // Prevent interaction if blend mode is active
         if (e.target.tagName === 'BUTTON') {
-            sweetnessControls.querySelector('.active').classList.remove('active');
-            e.target.classList.add('active');
-            sweetnessAdjustment = parseFloat(e.target.dataset.value);
-            runCalculation();
+            selectOption(e.target, 'sweetness');
         }
     });
 
+    // Unified listener for standard strength controls
     strengthControls.addEventListener('click', (e) => {
-        if (isBlendMode) return; // Prevent interaction if blend mode is active
         if (e.target.tagName === 'BUTTON') {
-            strengthControls.querySelector('.active')?.classList.remove('active');
-            e.target.classList.add('active');
-            
-            strengthMultiplier = parseFloat(e.target.dataset.value);
-            runCalculation();
+            selectOption(e.target, 'strength');
         }
     });
+    
+    // Unified listener for blend controls (our new mode)
+    blendControls.addEventListener('click', (e) => {
+        if (e.target.tagName === 'BUTTON') {
+            selectOption(e.target, 'blend');
+        }
+    });
+    
+    function selectOption(targetElement, type) {
+        // --- 1. Cleanup: Remove active class from ALL relevant buttons ---
+        if (type === 'blend' || type === 'sweetness') {
+            allSweetnessButtons.forEach(btn => btn.classList.remove('active'));
+        }
+        if (type === 'strength') {
+             allStrengthButtons.forEach(btn => btn.classList.remove('active'));
+        }
+        
+        // --- 2. Set Active State for the clicked button ---
+        targetElement.classList.add('active');
 
-    blendButton.addEventListener('click', (e) => {
-        isBlendMode = !isBlendMode; // Toggle blend mode
-        if (isBlendMode) {
-            e.target.classList.add('active');
-            sweetnessControls.querySelectorAll('button').forEach(btn => btn.disabled = true);
-            strengthControls.querySelectorAll('button').forEach(btn => btn.disabled = true);
-            // Reset to default active state when blend mode is entered
-            sweetnessControls.querySelector('.active')?.classList.remove('active');
-            strengthControls.querySelector('.active')?.classList.remove('active');
-            sweetnessControls.querySelector('[data-value="0"]').classList.add('active');
-            strengthControls.querySelector('[data-value="12"]').classList.add('active');
-        } else {
-            e.target.classList.remove('active');
-            sweetnessControls.querySelectorAll('button').forEach(btn => btn.disabled = false);
-            strengthControls.querySelectorAll('button').forEach(btn => btn.disabled = false);
+        // --- 3. Update State Variables ---
+        if (type === 'sweetness') {
+            isBlendMode = false;
+            // Now, we set the sugar value directly, not an adjustment
+            standardSugarPerLiter = parseFloat(targetElement.dataset.value);
+            
+            // Ensure a default strength is active when switching back from blend mode
+            if (!strengthControls.querySelector('.active')) {
+                strengthControls.querySelector('[data-value="12"]').classList.add('active');
+                strengthMultiplier = 12;
+            }
+        } else if (type === 'strength') {
+            isBlendMode = false;
+            strengthMultiplier = parseFloat(targetElement.dataset.value);
+            // Ensure a default sweetness is active when switching back from blend mode
+             if (!sweetnessControls.querySelector('.active')) {
+                sweetnessControls.querySelector('[data-value="70"]').classList.add('active');
+                standardSugarPerLiter = 70;
+            }
+        } else if (type === 'blend') {
+            isBlendMode = true;
+            blendSugarPerLiter = parseFloat(targetElement.dataset.value);
+            
+            // Apply tea adjustment based on the blend level
+            const level = targetElement.dataset.blendLevel;
+            // The base blend tea is 12g. Only "heavy" (حالي زيادة) gets +1g.
+            blendTeaPerLiter = (level === 'heavy') ? BLEND_TEA_RATIOS.total + 1 : BLEND_TEA_RATIOS.total;
+            
+            // Ensure standard strength buttons are deactivated visually and functionally
+            allStrengthButtons.forEach(btn => btn.classList.remove('active'));
         }
+        
+        // --- 4. Recalculate ---
         runCalculation();
-    });
+    }
+
 
     calcModeSelect.addEventListener('change', changeCalcMode);
     mainInput.addEventListener('input', () => runCalculation());
@@ -401,45 +436,40 @@
         }
         resultElements.forEach(el => el.style.visibility = 'visible');
 
-        // Logic for blend mode
+        // Determine which base ratios to use
+        let activeSugarPerLiter;
+        let activeTeaPerLiter;
+        
         if (isBlendMode) {
-            // UPDATED Blend ratios: Sugar: 70g/L, Tea: 12g/L (from BLEND_TEA_RATIOS.total)
-            const baseSugarPerLiter = 70; 
-            const blendTeaPerLiter = BLEND_TEA_RATIOS.total;
-            if (mode === 'water') {
-                waterMl = value;
-                if(isSlider) mainInput.value = waterMl;
-                else waterSlider.value = waterMl;
-                sugarGrams = (baseSugarPerLiter * waterMl) / 1000;
-                teaGrams = (blendTeaPerLiter * waterMl) / 1000;
-            } else if (mode === 'sugar') {
-                sugarGrams = value;
-                waterMl = (sugarGrams * 1000) / baseSugarPerLiter;
-                teaGrams = (blendTeaPerLiter * waterMl) / 1000;
-            } else if (mode === 'tea') {
-                teaGrams = value;
-                waterMl = (teaGrams * 1000) / blendTeaPerLiter;
-                sugarGrams = (baseSugarPerLiter * waterMl) / 1000;
-            }
-        } else { // Logic for other options
-            const baseSugarPerLiter = 84;
-            if (mode === 'water') {
-                waterMl = value;
-                if(isSlider) mainInput.value = waterMl;
-                else waterSlider.value = waterMl;
-                sugarGrams = ((baseSugarPerLiter * waterMl) / 1000) + sweetnessAdjustment;
-                teaGrams = (strengthMultiplier * waterMl) / 1000;
-            } else if (mode === 'sugar') {
-                const targetSugar = value;
-                const baseSugar = targetSugar - sweetnessAdjustment;
-                waterMl = (base_sugar * 1000) / baseSugarPerLiter;
-                teaGrams = (strengthMultiplier * waterMl) / 1000;
-                sugarGrams = targetSugar;
-            } else if (mode === 'tea') {
-                teaGrams = value;
-                waterMl = (teaGrams * 1000) / strengthMultiplier;
-                sugarGrams = ((baseSugarPerLiter * waterMl) / 1000) + sweetnessAdjustment;
-            }
+            activeSugarPerLiter = blendSugarPerLiter;
+            activeTeaPerLiter = blendTeaPerLiter;
+        } else {
+            // Standard mode uses the explicit standardSugarPerLiter value (57, 70, 90)
+            activeSugarPerLiter = standardSugarPerLiter; 
+            activeTeaPerLiter = strengthMultiplier;
+        }
+
+        // --- Core Calculation Logic ---
+        if (mode === 'water') {
+            waterMl = value;
+            if(isSlider) mainInput.value = waterMl;
+            else waterSlider.value = waterMl;
+            
+            sugarGrams = (activeSugarPerLiter * waterMl) / 1000;
+            teaGrams = (activeTeaPerLiter * waterMl) / 1000;
+            
+        } else if (mode === 'sugar') {
+            sugarGrams = value;
+            
+            // When calculating base on sugar, we use the activeSugarPerLiter directly
+            waterMl = (sugarGrams * 1000) / activeSugarPerLiter;
+            teaGrams = (activeTeaPerLiter * waterMl) / 1000;
+
+        } else if (mode === 'tea') {
+            teaGrams = value;
+            waterMl = (teaGrams * 1000) / activeTeaPerLiter;
+            
+            sugarGrams = (activeSugarPerLiter * waterMl) / 1000;
         }
 
         waterMl = Math.max(0, waterMl);
@@ -460,18 +490,23 @@
         let resultDiv = document.getElementById('result');
         
         if (isBlendMode) {
-            // Calculate actual grams for each blend component
-            const ratio = teaGrams / BLEND_TEA_RATIOS.total;
-            const rabea = BLEND_TEA_RATIOS.rabea * ratio;
-            const abuJabal = BLEND_TEA_RATIOS.abuJabal * ratio;
-            const alWazah = BLEND_TEA_RATIOS.alWazah * ratio;
-            const khather = BLEND_TEA_RATIOS.khather * ratio;
+            
+            // The blend uses a fixed ratio of 9 (Rabea): 1 (Abu Jabal): 1 (Al Wazah): 1 (Khather) for a total of 12 parts.
+            // This calculation distributes the calculated 'teaGrams' proportionally across the 12 parts.
+            const totalBaseParts = 12; 
+            const partValue = teaGrams / totalBaseParts;
+
+            const rabeaGrams = partValue * BLEND_TEA_RATIOS.rabea; // Rabea: 9 parts
+            const abuJabalGrams = partValue * BLEND_TEA_RATIOS.abuJabal; // Abu Jabal: 1 part
+            const alWazahGrams = partValue * BLEND_TEA_RATIOS.alWazah; // Al Wazah: 1 part
+            const khatherGrams = partValue * BLEND_TEA_RATIOS.khather; // Khather: 1 part
+
             
             blendResultDiv.innerHTML = `
-                <span>شاهي ربيع: <b class="value">${formatNumber(rabea)} جم</b></span><br>
-                <span>شاهي أبو جبل: <b class="value">${formatNumber(abuJabal)} جم</b></span><br>
-                <span>شاهي الوزة: <b class="value">${formatNumber(alWazah)} جم</b></span><br>
-                <span>شاهي خاثر: <b class="value">${formatNumber(khather)} جم</b></span>
+                <span>شاهي ربيع: <b class="value">${formatNumber(rabeaGrams)} جم</b></span><br>
+                <span>شاهي أبو جبل: <b class="value">${formatNumber(abuJabalGrams)} جم</b></span><br>
+                <span>شاهي الوزة: <b class="value">${formatNumber(alWazahGrams)} جم</b></span><br>
+                <span>شاهي خاثر: <b class="value">${formatNumber(khatherGrams)} جم</b></span>
             `;
             blendResultDiv.style.visibility = 'visible';
             
@@ -481,8 +516,7 @@
             resultDiv.innerHTML = `النتيجة: <span>${formatNumber(waterMl)}</span> مل ماء | <span>${formatNumber(sugarGrams)}</span> جم سكر | <span>${formatNumber(teaGrams)}</span> جم شاي`;
         }
         
-        // Sugar reference: 84g (Full Cup)
-        // Tea reference: 21g (Full Cup)
+        // Visual updates (same as before)
         const sugarPerCup = 84;
         const teaPerCup = 21;
 
@@ -498,12 +532,9 @@
         
         let sugarFillPercentage;
         if (sugarGrams > 0) {
-            // If the total sugar is less than one cup, or it's just the remainder
             if (sugarGrams < sugarPerCup || sugarFullCups === 0) {
                  sugarFillPercentage = sugarGrams / sugarPerCup;
             } else {
-                // If it's more than one cup, we show the remainder fill level, 
-                // unless the remainder is exactly zero, in which case we show 100% fill.
                 sugarFillPercentage = sugarRemainderGrams / sugarPerCup;
                 if (sugarRemainderGrams.toFixed(2) == 0.00) {
                     sugarFillPercentage = 1; 
@@ -546,6 +577,13 @@
             document.body.classList.add('dark-mode');
             themeToggleButton.textContent = '☀️';
         }
+        
+        // Set default active buttons on load (Standard: Muted, Strength: Muted)
+        sweetnessControls.querySelector('[data-value="70"]').classList.add('active'); // Changed default to 70
+        strengthControls.querySelector('[data-value="12"]').classList.add('active');
+
+        // Initial calculation
+        runCalculation();
     }
 
     function toArabicNumbers(str) {
@@ -584,4 +622,3 @@
 </script>
 </body>
 </html>
-```eof
