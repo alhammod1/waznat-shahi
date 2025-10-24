@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>وزنة شاهي ربيع</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght=400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #f7f7f7; --container-bg: #fff; --text-color: #333; --secondary-text: #555;
@@ -275,20 +275,8 @@
             <button data-sugar-liter="70" onclick="setSugarCupValue(this.dataset.sugarLiter)">وسط</button>
             <button data-sugar-liter="90" onclick="setSugarCupValue(this.dataset.sugarLiter)">حالي زيادة</button>
         </div>
-        <div class="converter-input">
-            <label for="sugarCupInput" style="display: block; margin-bottom: 8px;">
-                أدخل كمية السكر (بالجرام) التي ناسبتك في البيالة:
-            </label>
-            <input 
-                type="number" 
-                id="sugarCupInput" 
-                placeholder="مثال: 7"
-                min="0"
-                step="0.1"
-                style="width: 100%; padding: 10px; border-radius: 8px; font-size: 16px; text-align: center;"
-                oninput="calculateSugarPerLiterFromCup()"
-            >
-        </div>
+        <!-- Removed converter-input div -->
+        
 
         <div id="converterResultContainer" class="converter-result">
             <p style="font-size: 1em; margin-bottom: 5px;">كمية السكر المطلوبة للبيالة (73 ملل):</p>
@@ -642,17 +630,32 @@
         const sugarInCup = (parsedGramsPerLiter * SUGAR_CUP_VOLUME_ML) / SUGAR_LITER_VOLUME_ML;
         
         // Update input field (Optional: we are now just displaying the result)
-        const inputElement = document.getElementById('sugarCupInput');
-        inputElement.value = sugarInCup.toFixed(2); // Set the input to the calculated value
+        // inputElement.value = sugarInCup.toFixed(2); // REMOVED: No longer needed
 
         // Force the calculator to run and update result
-        calculateSugarPerLiterFromCup();
+        // calculateSugarPerLiterFromCup(); // REMOVED: No longer needed
 
         // Highlight the result as it's a fixed preset
         const resultContainer = document.getElementById('converterResultContainer');
         resultContainer.style.display = 'block';
         const resultText = document.getElementById('converterResultText');
         resultText.textContent = sugarInCup.toFixed(2);
+        
+        // Ensure manual input field is empty and hidden elements are handled
+        const inputElement = document.getElementById('sugarCupInput');
+        inputElement.value = ''; 
+        const errorMsg = document.getElementById('converterErrorMsg');
+        errorMsg.style.display = 'none';
+        
+        // Highlight the selected button
+        const presetButtons = presetControls.querySelectorAll('button');
+        presetButtons.forEach(btn => {
+             if (btn.dataset.sugarLiter === gramsPerLiter) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
     }
 
     function calculateSugarPerLiterFromCup() {
