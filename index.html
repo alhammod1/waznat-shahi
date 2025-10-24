@@ -202,7 +202,7 @@
                 <p class="control-label">مستوى السكر</p>
                 <div class="control-group" id="sweetness-controls">
                     <button data-value="-10">خفيف</button>
-                    <button class="active" data-value="0">معتدل</button>
+                    <button data-value="0" class="active">معتدل</button>
                     <button data-value="10">حالي زيادة</button>
                 </div>
             </div>
@@ -210,7 +210,7 @@
                 <p class="control-label">مستوى الشاهي</p>
                 <div class="control-group" id="strength-controls">
                     <button data-value="11">خفيف</button>
-                    <button class="active" data-value="12">وسط</button>
+                    <button data-value="12" class="active">وسط</button>
                     <button data-value="13">ثقيل</button>
                 </div>
                 <button id="blend-button" data-value="14" data-mode="blend">خلطتي</button>
@@ -223,7 +223,6 @@
     <div id="result" class="result" style="visibility:hidden;"></div>
 
     <div class="visual-container">
-        <!-- Visuals -->
         <div class="glass-container">
             <p class="glass-title">السكر</p>
             <div class="glass" id="sugarGlass">
@@ -252,7 +251,6 @@
         </div>
     </div>
     
-    <!-- New Sugar Converter Tool -->
     <div class="sugar-converter">
         <h2 class="converter-header">حاسبة السكر للتر من البيالة (73 ملل)</h2>
         <div class="converter-input">
@@ -278,11 +276,9 @@
 
         <p id="converterErrorMsg" style="color: #f44336; text-align: center; margin-top: 10px; display: none;">الرجاء إدخال قيمة صحيحة وموجبة.</p>
     </div>
-    <!-- End New Sugar Converter Tool -->
-
     <div class="footer-notes">
         <p><span class="underlined-red">البيالة المستخدمة في القياس هي بيالة "بادريق"</span></p>
-        <p>البيالة العادية من الماء إلى المستوى الطبيعي المتعارف عليه تساوي تقريبا <span class="red-text">73 ملل</span> أي أن <span class="red-text">1</span> لتر يساوي <span class="red-text">13.6</span> بيالة.</p>
+        <p>البيالة العادية من الماء إلى المستوى الطبيعي المتعارف عليه تساوي تقريبا <span class="red-text">73</span> ملل، أي أن <span class="red-text">1</span> لتر يساوي <span class="red-text">13.69</span> بيالة.</p>
 		<p><span style="color: red;">(لجميع انواع الشاهي)</span> تقريبا هذه الوزنة مناسبة للجميع مع التعديل حسب الحاجة لواحد لتر</p>
         <p><span class="red-text">السكر: 50 إلى 55 جم</span><br>
         <span class="red-text">الشاي: 12 إلى 12.5 جم</span></p>
@@ -407,8 +403,8 @@
 
         // Logic for blend mode
         if (isBlendMode) {
-            // Blend ratios: Sugar: 90g/L, Tea: 12g/L (from BLEND_TEA_RATIOS.total)
-            const baseSugarPerLiter = 90; 
+            // UPDATED Blend ratios: Sugar: 70g/L, Tea: 12g/L (from BLEND_TEA_RATIOS.total)
+            const baseSugarPerLiter = 70; 
             const blendTeaPerLiter = BLEND_TEA_RATIOS.total;
             if (mode === 'water') {
                 waterMl = value;
@@ -436,7 +432,7 @@
             } else if (mode === 'sugar') {
                 const targetSugar = value;
                 const baseSugar = targetSugar - sweetnessAdjustment;
-                waterMl = (baseSugar * 1000) / baseSugarPerLiter;
+                waterMl = (base_sugar * 1000) / baseSugarPerLiter;
                 teaGrams = (strengthMultiplier * waterMl) / 1000;
                 sugarGrams = targetSugar;
             } else if (mode === 'tea') {
@@ -588,3 +584,4 @@
 </script>
 </body>
 </html>
+```eof
