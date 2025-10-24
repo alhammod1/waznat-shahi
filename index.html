@@ -61,7 +61,8 @@
             margin: 10px 0 5px 0;
         }
         
-        #blend-controls .control-group button.active {
+        #blend-controls .control-group button.active,
+        #preset-controls button.active { /* Added style for preset buttons */
             background-color: var(--blend-btn-bg);
             color: var(--blend-btn-text);
         }
@@ -161,6 +162,27 @@
             font-size: 2.2em;
             font-weight: extra-bold;
         }
+        .preset-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+        .preset-controls button {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            font-family: 'Cairo', Arial, sans-serif;
+            flex-grow: 1;
+        }
+        .preset-controls button:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
     </style>
 </head>
 <body>
@@ -247,7 +269,12 @@
     
     <!-- New Sugar Converter Tool -->
     <div class="sugar-converter">
-        <h2 class="converter-header">حاسبة السكر للتر من البيالة (73 ملل)</h2>
+        <h2 class="converter-header">حاسبة السكر للبيالة (73 ملل)</h2>
+        <div class="preset-controls" id="preset-controls">
+            <button data-sugar-liter="57" onclick="setSugarCupValue(this.dataset.sugarLiter)">خفيف</button>
+            <button data-sugar-liter="70" onclick="setSugarCupValue(this.dataset.sugarLiter)">وسط</button>
+            <button data-sugar-liter="90" onclick="setSugarCupValue(this.dataset.sugarLiter)">حالي زيادة</button>
+        </div>
         <div class="converter-input">
             <label for="sugarCupInput" style="display: block; margin-bottom: 8px;">
                 أدخل كمية السكر (بالجرام) التي ناسبتك في البيالة:
@@ -263,10 +290,10 @@
             >
         </div>
 
-        <div id="converterResultContainer" class="converter-result" style="display: none;">
-            <p style="font-size: 1em; margin-bottom: 5px;">الوزنة المكافئة للتر الواحد (1000 ملل):</p>
+        <div id="converterResultContainer" class="converter-result">
+            <p style="font-size: 1em; margin-bottom: 5px;">كمية السكر المطلوبة للبيالة (73 ملل):</p>
             <p id="converterResultText" class="converter-result-value">--</p>
-            <p style="font-size: 1em; margin-top: 5px;">جرام سكر / لتر</p>
+            <p style="font-size: 1em; margin-top: 5px;">جرام سكر / بيالة</p>
         </div>
 
         <p id="converterErrorMsg" style="color: #f44336; text-align: center; margin-top: 10px; display: none;">الرجاء إدخال قيمة صحيحة وموجبة.</p>
@@ -299,6 +326,7 @@
     const blendResultDiv = document.getElementById('blend-result');
     const resultDiv = document.getElementById('result');
     const inputLabel = document.getElementById('input-label');
+    const presetControls = document.getElementById('preset-controls');
     
     // Get all buttons within the three control groups
     const allSweetnessButtons = [...sweetnessControls.querySelectorAll('button'), ...blendControls.querySelectorAll('button')];
@@ -345,6 +373,18 @@
         }
     });
     
+    // Listener for sugar converter presets
+    presetControls.addEventListener('click', (e) => {
+        if (e.target.tagName === 'BUTTON') {
+            // Remove active state from all presets before setting the new one
+            presetControls.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+            e.target.classList.add('active');
+            
+            setSugarCupValue(e.target.dataset.sugarLiter, e.target);
+        }
+    });
+
+    
     function selectOption(targetElement, type) {
         // --- 1. Cleanup: Remove active class from ALL relevant buttons ---
         if (type === 'blend' || type === 'sweetness') {
@@ -360,7 +400,6 @@
         // --- 3. Update State Variables ---
         if (type === 'sweetness') {
             isBlendMode = false;
-            // Now, we set the sugar value directly, not an adjustment
             standardSugarPerLiter = parseFloat(targetElement.dataset.value);
             
             // Ensure a default strength is active when switching back from blend mode
@@ -595,13 +634,39 @@
     const SUGAR_LITER_VOLUME_ML = 1000;
     const SUGAR_CONVERSION_FACTOR = SUGAR_LITER_VOLUME_ML / SUGAR_CUP_VOLUME_ML; 
 
+    // Helper function to calculate and set the cup sugar value
+    function setSugarCupValue(gramsPerLiter) {
+        const parsedGramsPerLiter = parseFloat(gramsPerLiter);
+        
+        // Calculate the required sugar for 73ml (one cup)
+        const sugarInCup = (parsedGramsPerLiter * SUGAR_CUP_VOLUME_ML) / SUGAR_LITER_VOLUME_ML;
+        
+        // Update input field (Optional: we are now just displaying the result)
+        const inputElement = document.getElementById('sugarCupInput');
+        inputElement.value = sugarInCup.toFixed(2); // Set the input to the calculated value
+
+        // Force the calculator to run and update result
+        calculateSugarPerLiterFromCup();
+
+        // Highlight the result as it's a fixed preset
+        const resultContainer = document.getElementById('converterResultContainer');
+        resultContainer.style.display = 'block';
+        const resultText = document.getElementById('converterResultText');
+        resultText.textContent = sugarInCup.toFixed(2);
+    }
+
     function calculateSugarPerLiterFromCup() {
         const inputElement = document.getElementById('sugarCupInput');
         const resultContainer = document.getElementById('converterResultContainer');
         const resultText = document.getElementById('converterResultText');
         const errorMsg = document.getElementById('converterErrorMsg');
+        const presetButtons = presetControls.querySelectorAll('button');
 
         const sugarInCup = parseFloat(inputElement.value);
+
+        // Remove active state from all presets when manual input occurs
+        presetButtons.forEach(btn => btn.classList.remove('active'));
+
 
         // التحقق من المدخلات
         if (isNaN(sugarInCup) || sugarInCup <= 0) {
@@ -612,12 +677,22 @@
 
         errorMsg.style.display = 'none';
         
-        // الحساب:
+        // الحساب: (Convert cup value back to liter equivalent for informational display)
         const sugarPerLiter = sugarInCup * SUGAR_CONVERSION_FACTOR;
 
-        // عرض النتيجة
-        resultText.textContent = sugarPerLiter.toFixed(2);
+        // Display the calculated cup value (which is the input value)
+        resultText.textContent = sugarInCup.toFixed(2);
         resultContainer.style.display = 'block';
+        
+        // Check if the calculated value matches any preset value and highlight it
+        // We compare the final grams/liter value for accuracy
+        presetButtons.forEach(btn => {
+            const presetGrams = parseFloat(btn.dataset.sugarLiter);
+            // Check for close proximity (e.g., within 0.01g difference)
+            if (Math.abs(sugarPerLiter - presetGrams) < 0.01) {
+                btn.classList.add('active');
+            }
+        });
     }
 </script>
 </body>
