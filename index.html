@@ -309,6 +309,7 @@
         <span class="red-text">السكر (جم)</span> = (كمية الماء بالمللتر ÷ 1000) × <span class="blue-text">50 إلى 55</span><br>
         <span class="red-text">الشاي (جم)</span> = (كمية الماء بالمللتر ÷ 1000) × <span class="blue-text">12 إلى 12.5</span></p>
         <p><strong class="red-text">ملاحظة:</strong> قد تختلف النتيجة حسب نوع الشاي، يفضل التجربة والضبط حسب الذوق.</p>
+        <p>للمزيد من المعلومات حول تصنيفات الشاي، تفضل بزيارة: <a href="المرجع_الكامل_لتصنيفات_الشاي_الأسود.html">تصنيفات الشاي</a></p>
     </div>
 
 </div>
@@ -327,8 +328,12 @@
     const inputLabel = document.getElementById('input-label');
     const converterResultContainer = document.getElementById('converterResultContainer');
     const converterResultText = document.getElementById('converterResultText');
-    const allPresetButtons = document.querySelectorAll('.preset-controls button'); // New
-    const allSweetnessButtons = [...sweetnessControls.querySelectorAll('button'), ...blendControls.querySelectorAll('button')]; // Unified list
+    const allPresetButtons = document.querySelectorAll('.preset-controls button'); 
+    
+    // Unified list of all sweetness buttons
+    const allSweetnessButtons = [];
+    sweetnessControls.querySelectorAll('button').forEach(btn => allSweetnessButtons.push(btn));
+    blendControls.querySelectorAll('button').forEach(btn => allSweetnessButtons.push(btn));
 
     // --- State Variables ---
     let strengthMultiplier = 12; 
@@ -350,7 +355,7 @@
 
     function selectOption(element, isBlend, type) {
         if (type === 'sugar') {
-            // 1. Clean up active state from ALL sugar buttons
+            // 1. Clean up active state from ALL sugar buttons (both standard and blend)
             allSweetnessButtons.forEach(btn => btn.classList.remove('active'));
             
             // 2. Set active state on the clicked button
@@ -388,17 +393,14 @@
     // --- Event Listeners ---
     // Note: Event listeners for sweetness/blend controls are handled directly via onclick='selectOption(this, ...)'
 
-    strengthControls.addEventListener('click', (e) => {
-        if (e.target.tagName === 'BUTTON') {
-             // Handled by selectOption via onclick
-        }
-    });
-
     calcModeSelect.addEventListener('change', changeCalcMode);
     mainInput.addEventListener('input', () => runCalculation());
     waterSlider.addEventListener('input', () => runCalculation(true));
     themeToggleButton.addEventListener('click', toggleTheme);
-    document.addEventListener('DOMContentLoaded', loadTheme);
+    document.addEventListener('DOMContentLoaded', () => {
+        loadTheme();
+        runCalculation(); // Initial run to set default values
+    });
 
     function changeCalcMode() {
         const mode = calcModeSelect.value;
@@ -438,16 +440,14 @@
         let baseSugarPerLiter = activeSugarPerLiter;
         let teaMultiplier = strengthMultiplier;
 
-        // Apply blend mode specific tea adjustment
+        // Apply blend mode specific tea adjustment (for tea multiplier)
         if (isBlendMode) {
             teaMultiplier = BLEND_TEA_RATIOS.total; // 12g/L base for blend
 
-            // Check if blend is 'heavy' to add 1g of tea only for 'حالي زيادة'
+            // Check if blend is 'heavy' to add 1g of tea
             if (blendOption === 'heavy') {
                  teaMultiplier += 1; // 13g/L for heavy blend tea
             }
-            
-            // Note: sugarPerLiter is already set to the blend preset value (57, 75, or 90)
         }
         
         // --- Calculation Logic based on Mode ---
@@ -485,35 +485,17 @@
         let resultDiv = document.getElementById('result');
         
         if (isBlendMode) {
-            // Calculate actual grams for each blend component
             let blendTeaTotal = BLEND_TEA_RATIOS.total;
-             if (blendOption === 'heavy') {
-                blendTeaTotal += 1; // Adjust total tea for heavy blend
-             }
+            if (blendOption === 'heavy') {
+                blendTeaTotal += 1; // The total tea used for calculation
+            }
 
-            const ratio = teaGrams / blendTeaTotal; // Ratio based on new blend total
+            const ratio = teaGrams / blendTeaTotal;
             
             const rabeaGrams = BLEND_TEA_RATIOS.rabea * ratio;
             const abuJabalGrams = BLEND_TEA_RATIOS.abuJabal * ratio;
             const alWazahGrams = BLEND_TEA_RATIOS.alWazah * ratio;
-            let khatherGrams = BLEND_TEA_RATIOS.khather * ratio;
-            
-            // Add the extra 1g of tea to Rabea/Khather if heavy blend is active. 
-            // We'll add it to Khather here for demonstration (original logic was ambiguous, 
-            // but the total must match the calculated teaGrams).
-            if (blendOption === 'heavy') {
-                 // Redistribute the extra gram proportionally, ensuring the total is correct.
-                 // A simpler way is just to show the blend ratios and let the teaGrams value handle the rest.
-                 // The calculated rabeaGrams + abuJabalGrams + alWazahGrams + khatherGrams should sum to teaGrams.
-                 
-                 // Let's adjust the Khather share to reflect the added complexity if needed,
-                 // but for simplicity, the split is applied proportionally.
-                 // If the user wants 1g added to a specific component when heavy blend is chosen, 
-                 // we must calculate that adjustment here.
-
-                 // Since the request was "only in current increase is 1 gram of tea added to the total", 
-                 // the proportional split handles the increase already. We display the proportional split based on BLEND_TEA_RATIOS.
-            }
+            const khatherGrams = BLEND_TEA_RATIOS.khather * ratio;
 
             blendResultDiv.innerHTML = `
                 <span>شاهي ربيع: <b class="value">${formatNumber(rabeaGrams)} جم</b></span><br>
