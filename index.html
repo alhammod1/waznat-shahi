@@ -246,7 +246,7 @@
             <div id="blend-result" class="result" style="visibility:hidden; margin-top: 0;"></div>
         </div>
     </div>
-	<!DOCTYPE html>
+<!DOCTYPE html>
 <html dir="rtl" lang="ar">
 <head>
     <meta charset="utf-8">
@@ -259,103 +259,113 @@
             direction: rtl;
             background-color: #fafafa;
             color: #222;
-            padding: 20px;
+            padding: 5px; /* تقليل الهامش الخارجي */
         }
         .calculator-container {
-            max-width: 400px;
+            max-width: 250px; /* تصغير الحد الأقصى للعرض */
             margin: 0 auto;
             background-color: #ffffff;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            border-top: 5px solid #1b4332;
+            padding: 10px; /* تقليل التبطين */
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            border: 1px solid #95d5b2;
         }
         h3 {
             text-align: center;
-            color: #2d6a4f;
-            margin-bottom: 20px;
-            font-size: 1.5em;
+            color: #1b4332;
+            margin-bottom: 10px;
+            font-size: 1.1em; /* تصغير حجم العنوان */
         }
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 3px;
             font-weight: 600;
             color: #333;
+            font-size: 0.8em;
         }
         input[type="number"] {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
+            padding: 6px; /* تصغير التبطين داخل الحقل */
+            margin-bottom: 10px;
             border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 1em;
+            border-radius: 4px;
+            font-size: 0.9em;
             text-align: right;
             box-sizing: border-box;
         }
         .result-box {
-            background-color: #d8f3dc;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 5px solid #2d6a4f;
-            margin-top: 20px;
+            background-color: #f1faee; 
+            padding: 8px; /* تصغير التبطين الداخلي */
+            border-radius: 5px;
+            border: 1px solid #95d5b2;
+            font-size: 0.8em; /* تصغير حجم الخط للنتائج */
         }
         .result-item {
-            margin-bottom: 10px;
-            font-size: 1.1em;
+            margin-bottom: 3px;
+            display: flex; 
+            justify-content: space-between;
         }
         .result-item strong {
-            color: #1b4332;
+            color: #2d6a4f;
+            font-weight: 700;
         }
     </style>
 </head>
 <body>
 
 <div class="calculator-container">
-    <h3>حاسبة كميات الشاي ⚖️</h3>
+    <h3>حاسبة الشاي ⚖️</h3>
 
-    <label for="waterQuantity">كمية الماء (باللتر):</label>
-    <input type="number" id="waterQuantity" value="1.0" min="0.1" step="0.1" oninput="calculateTea()">
+    <label for="waterQuantity">الماء (مليلتر):</label>
+    <input type="number" id="waterQuantity" value="200" min="1" step="10" oninput="calculateTea()">
 
     <div class="result-box">
-        <p class="result-item">نسبة التحضير المعتمدة:</p>
-        <p class="result-item">الشاي الأسود: $10.5g$ / الشاي الأخضر: $1.5g$ لكل $1$ لتر.</p>
-        <hr style="border: 0; height: 1px; background-color: #95d5b2; margin: 10px 0;">
-        <p class="result-item"><strong>الكميات المطلوبة:</strong></p>
-        <p class="result-item">الشاي الأسود: <span id="blackTeaResult">10.5</span> جرام</p>
-        <p class="result-item">الشاي الأخضر: <span id="greenTeaResult">1.5</span> جرام</p>
+        <p class="result-item"><strong>الكمية المطلوبة:</strong></p>
+        <p class="result-item">
+            <span>شاي أسود:</span>
+            <span id="blackTeaResult">2.1</span> جرام
+        </p>
+        <p class="result-item">
+            <span>شاي أخضر:</span>
+            <span id="greenTeaResult">0.3</span> جرام
+        </p>
     </div>
 </div>
 
 <script>
-    // القيم الثابتة بناءً على نسبتك لكل 1 لتر
-    const BLACK_TEA_PER_LITER = 10.5; // جرام
-    const GREEN_TEA_PER_LITER = 1.5; // جرام
+    // القيم الثابتة: 10.5g أسود و 1.5g أخضر لكل 1000 مل
+    const BLACK_TEA_PER_1000ML = 10.5;
+    const GREEN_TEA_PER_1000ML = 1.5;
+
+    // النسبة المطلوبة لكل 1 مللتر (للحسابات)
+    const BLACK_TEA_PER_ML = BLACK_TEA_PER_1000ML / 1000;
+    const GREEN_TEA_PER_ML = GREEN_TEA_PER_1000ML / 1000;
+
 
     function calculateTea() {
-        // استدعاء قيمة الماء من حقل الإدخال
         const waterInput = document.getElementById('waterQuantity');
-        let waterLiters = parseFloat(waterInput.value);
+        let waterML = parseFloat(waterInput.value);
 
-        // التعامل مع حالات الإدخال الفارغ أو غير الصحيح
-        if (isNaN(waterLiters) || waterLiters <= 0) {
-            waterLiters = 0; // لعرض 0 جرام إذا لم يكن هناك ماء
+        if (isNaN(waterML) || waterML <= 0) {
+            waterML = 0;
         }
 
-        // حساب الكميات المطلوبة
-        const blackTeaNeeded = (waterLiters * BLACK_TEA_PER_LITER).toFixed(1);
-        const greenTeaNeeded = (waterLiters * GREEN_TEA_PER_LITER).toFixed(1);
+        // حساب الكميات المطلوبة وتقريبها لرقمين عشريين
+        const blackTeaNeeded = (waterML * BLACK_TEA_PER_ML).toFixed(2);
+        const greenTeaNeeded = (waterML * GREEN_TEA_PER_ML).toFixed(2);
 
         // عرض النتائج
         document.getElementById('blackTeaResult').textContent = blackTeaNeeded;
         document.getElementById('greenTeaResult').textContent = greenTeaNeeded;
     }
 
-    // تشغيل الدالة عند تحميل الصفحة لعرض القيم الأولية
+    // تشغيل الدالة عند تحميل الصفحة
     window.onload = calculateTea;
 </script>
 
 </body>
 </html>
+
 	<p><span class="underlined-red">اذا لم يتوفر الميزان يمكنك استخدام القياس بالنظر مستخدما البيالة كمقياس حيث ان المقاييس تم اختبارها مسبقا</span></p>
     
     <div id="result" class="result" style="visibility:hidden;"></div>
