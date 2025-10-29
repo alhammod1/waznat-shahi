@@ -605,7 +605,7 @@
         }
     }
 </script>
-	<!DOCTYPE html>
+<!DOCTYPE html>
 <html dir="rtl" lang="ar">
 <head>
     <meta charset="utf-8">
@@ -613,51 +613,66 @@
     <title>حاسبة نسب الشاي</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+        
+        /* الألوان للمظهر الداكن */
+        :root {
+            --dark-background: #1e1e1e; /* خلفية داكنة جداً */
+            --card-background: #2d2d2d; /* خلفية البطاقة أفتح قليلاً */
+            --text-color: #f0f0f0; /* لون النص الفاتح */
+            --primary-color: #95d5b2; /* اللون الأخضر الأساسي (فاتح) */
+            --secondary-color: #4a4a4a; /* خلفية حقل النتائج */
+            --input-border: #666;
+            --input-bg: #3c3c3c;
+        }
+
         body {
             font-family: 'Cairo', sans-serif;
             direction: rtl;
-            background-color: #fafafa;
-            color: #222;
-            padding: 5px; /* تقليل الهامش الخارجي */
+            background-color: var(--dark-background); /* تطبيق الخلفية الداكنة */
+            color: var(--text-color); /* تطبيق لون النص الفاتح */
+            padding: 5px;
         }
         .calculator-container {
-            max-width: 250px; /* تصغير الحد الأقصى للعرض */
+            max-width: 250px;
             margin: 0 auto;
-            background-color: #ffffff;
-            padding: 10px; /* تقليل التبطين */
+            background-color: var(--card-background); /* خلفية داكنة للبطاقة */
+            padding: 10px;
             border-radius: 6px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-            border: 1px solid #95d5b2;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--primary-color);
         }
         h3 {
             text-align: center;
-            color: #1b4332;
+            color: var(--primary-color); /* العنوان باللون الأخضر الفاتح */
             margin-bottom: 10px;
-            font-size: 1.1em; /* تصغير حجم العنوان */
+            font-size: 1.1em;
         }
         label {
             display: block;
             margin-bottom: 3px;
             font-weight: 600;
-            color: #333;
+            color: var(--text-color);
             font-size: 0.8em;
         }
         input[type="number"] {
             width: 100%;
-            padding: 6px; /* تصغير التبطين داخل الحقل */
+            padding: 6px;
             margin-bottom: 10px;
-            border: 1px solid #ccc;
+            border: 1px solid var(--input-border);
             border-radius: 4px;
             font-size: 0.9em;
             text-align: right;
             box-sizing: border-box;
+            background-color: var(--input-bg); /* خلفية داكنة لحقل الإدخال */
+            color: var(--text-color);
         }
         .result-box {
-            background-color: #f1faee; 
-            padding: 8px; /* تصغير التبطين الداخلي */
+            background-color: var(--secondary-color); /* خلفية داكنة لحقل النتائج */
+            padding: 8px;
             border-radius: 5px;
-            border: 1px solid #95d5b2;
-            font-size: 0.8em; /* تصغير حجم الخط للنتائج */
+            border: 1px solid var(--primary-color);
+            font-size: 0.8em;
+            color: var(--text-color);
         }
         .result-item {
             margin-bottom: 3px;
@@ -665,7 +680,7 @@
             justify-content: space-between;
         }
         .result-item strong {
-            color: #2d6a4f;
+            color: var(--primary-color);
             font-weight: 700;
         }
     </style>
