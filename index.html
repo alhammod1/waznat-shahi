@@ -299,7 +299,140 @@
 
     </div>
     <!-- End New Sugar Converter Tool -->
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حاسبة نسب الشاي</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+        
+        /* الألوان للمظهر الداكن */
+        :root {
+            --dark-background: #1e1e1e; /* خلفية داكنة جداً */
+            --card-background: #2d2d2d; /* خلفية البطاقة أفتح قليلاً */
+            --text-color: #f0f0f0; /* لون النص الفاتح */
+            --primary-color: #95d5b2; /* اللون الأخضر الأساسي (فاتح) */
+            --secondary-color: #4a4a4a; /* خلفية حقل النتائج */
+            --input-border: #666;
+            --input-bg: #3c3c3c;
+        }
 
+        body {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+            background-color: var(--dark-background); /* تطبيق الخلفية الداكنة */
+            color: var(--text-color); /* تطبيق لون النص الفاتح */
+            padding: 5px;
+        }
+        .calculator-container {
+            max-width: 250px;
+            margin: 0 auto;
+            background-color: var(--card-background); /* خلفية داكنة للبطاقة */
+            padding: 10px;
+            border-radius: 6px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--primary-color);
+        }
+        h3 {
+            text-align: center;
+            color: var(--primary-color); /* العنوان باللون الأخضر الفاتح */
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        label {
+            display: block;
+            margin-bottom: 3px;
+            font-weight: 600;
+            color: var(--text-color);
+            font-size: 0.8em;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 6px;
+            margin-bottom: 10px;
+            border: 1px solid var(--input-border);
+            border-radius: 4px;
+            font-size: 0.9em;
+            text-align: right;
+            box-sizing: border-box;
+            background-color: var(--input-bg); /* خلفية داكنة لحقل الإدخال */
+            color: var(--text-color);
+        }
+        .result-box {
+            background-color: var(--secondary-color); /* خلفية داكنة لحقل النتائج */
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid var(--primary-color);
+            font-size: 0.8em;
+            color: var(--text-color);
+        }
+        .result-item {
+            margin-bottom: 3px;
+            display: flex; 
+            justify-content: space-between;
+        }
+        .result-item strong {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator-container">
+    <h3>حاسبة الشاي ⚖️</h3>
+
+    <label for="waterQuantity">الماء (مليلتر):</label>
+    <input type="number" id="waterQuantity" value="200" min="1" step="10" oninput="calculateTea()">
+
+    <div class="result-box">
+        <p class="result-item"><strong>الكمية المطلوبة:</strong></p>
+        <p class="result-item">
+            <span>شاي أسود:</span>
+            <span id="blackTeaResult">2.1</span> جرام
+        </p>
+        <p class="result-item">
+            <span>شاي أخضر:</span>
+            <span id="greenTeaResult">0.3</span> جرام
+        </p>
+    </div>
+</div>
+
+<script>
+    // القيم الثابتة: 10.5g أسود و 1.5g أخضر لكل 1000 مل
+    const BLACK_TEA_PER_1000ML = 10.5;
+    const GREEN_TEA_PER_1000ML = 1.5;
+
+    // النسبة المطلوبة لكل 1 مللتر (للحسابات)
+    const BLACK_TEA_PER_ML = BLACK_TEA_PER_1000ML / 1000;
+    const GREEN_TEA_PER_ML = GREEN_TEA_PER_1000ML / 1000;
+
+
+    function calculateTea() {
+        const waterInput = document.getElementById('waterQuantity');
+        let waterML = parseFloat(waterInput.value);
+
+        if (isNaN(waterML) || waterML <= 0) {
+            waterML = 0;
+        }
+
+        // حساب الكميات المطلوبة وتقريبها لرقمين عشريين
+        const blackTeaNeeded = (waterML * BLACK_TEA_PER_ML).toFixed(2);
+        const greenTeaNeeded = (waterML * GREEN_TEA_PER_ML).toFixed(2);
+
+        // عرض النتائج
+        document.getElementById('blackTeaResult').textContent = blackTeaNeeded;
+        document.getElementById('greenTeaResult').textContent = greenTeaNeeded;
+    }
+
+    // تشغيل الدالة عند تحميل الصفحة
+    window.onload = calculateTea;
+</script>
+
+</body>
+</html>
     <div class="footer-notes">
         <p><span class="underlined-red">البيالة المستخدمة في القياس هي بيالة "بادريق"</span></p>
         <p>البيالة العادية من الماء إلى المستوى الطبيعي المتعارف عليه تساوي تقريبا <span class="red-text">73</span> ملل، أي أن <span class="red-text">1</span> لتر يساوي <span class="red-text">13.69</span> بيالة.</p>
@@ -605,140 +738,7 @@
         }
     }
 </script>
-<!DOCTYPE html>
-<html dir="rtl" lang="ar">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حاسبة نسب الشاي</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
-        
-        /* الألوان للمظهر الداكن */
-        :root {
-            --dark-background: #1e1e1e; /* خلفية داكنة جداً */
-            --card-background: #2d2d2d; /* خلفية البطاقة أفتح قليلاً */
-            --text-color: #f0f0f0; /* لون النص الفاتح */
-            --primary-color: #95d5b2; /* اللون الأخضر الأساسي (فاتح) */
-            --secondary-color: #4a4a4a; /* خلفية حقل النتائج */
-            --input-border: #666;
-            --input-bg: #3c3c3c;
-        }
 
-        body {
-            font-family: 'Cairo', sans-serif;
-            direction: rtl;
-            background-color: var(--dark-background); /* تطبيق الخلفية الداكنة */
-            color: var(--text-color); /* تطبيق لون النص الفاتح */
-            padding: 5px;
-        }
-        .calculator-container {
-            max-width: 250px;
-            margin: 0 auto;
-            background-color: var(--card-background); /* خلفية داكنة للبطاقة */
-            padding: 10px;
-            border-radius: 6px;
-            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
-            border: 1px solid var(--primary-color);
-        }
-        h3 {
-            text-align: center;
-            color: var(--primary-color); /* العنوان باللون الأخضر الفاتح */
-            margin-bottom: 10px;
-            font-size: 1.1em;
-        }
-        label {
-            display: block;
-            margin-bottom: 3px;
-            font-weight: 600;
-            color: var(--text-color);
-            font-size: 0.8em;
-        }
-        input[type="number"] {
-            width: 100%;
-            padding: 6px;
-            margin-bottom: 10px;
-            border: 1px solid var(--input-border);
-            border-radius: 4px;
-            font-size: 0.9em;
-            text-align: right;
-            box-sizing: border-box;
-            background-color: var(--input-bg); /* خلفية داكنة لحقل الإدخال */
-            color: var(--text-color);
-        }
-        .result-box {
-            background-color: var(--secondary-color); /* خلفية داكنة لحقل النتائج */
-            padding: 8px;
-            border-radius: 5px;
-            border: 1px solid var(--primary-color);
-            font-size: 0.8em;
-            color: var(--text-color);
-        }
-        .result-item {
-            margin-bottom: 3px;
-            display: flex; 
-            justify-content: space-between;
-        }
-        .result-item strong {
-            color: var(--primary-color);
-            font-weight: 700;
-        }
-    </style>
-</head>
-<body>
-
-<div class="calculator-container">
-    <h3>حاسبة الشاي ⚖️</h3>
-
-    <label for="waterQuantity">الماء (مليلتر):</label>
-    <input type="number" id="waterQuantity" value="200" min="1" step="10" oninput="calculateTea()">
-
-    <div class="result-box">
-        <p class="result-item"><strong>الكمية المطلوبة:</strong></p>
-        <p class="result-item">
-            <span>شاي أسود:</span>
-            <span id="blackTeaResult">2.1</span> جرام
-        </p>
-        <p class="result-item">
-            <span>شاي أخضر:</span>
-            <span id="greenTeaResult">0.3</span> جرام
-        </p>
-    </div>
-</div>
-
-<script>
-    // القيم الثابتة: 10.5g أسود و 1.5g أخضر لكل 1000 مل
-    const BLACK_TEA_PER_1000ML = 10.5;
-    const GREEN_TEA_PER_1000ML = 1.5;
-
-    // النسبة المطلوبة لكل 1 مللتر (للحسابات)
-    const BLACK_TEA_PER_ML = BLACK_TEA_PER_1000ML / 1000;
-    const GREEN_TEA_PER_ML = GREEN_TEA_PER_1000ML / 1000;
-
-
-    function calculateTea() {
-        const waterInput = document.getElementById('waterQuantity');
-        let waterML = parseFloat(waterInput.value);
-
-        if (isNaN(waterML) || waterML <= 0) {
-            waterML = 0;
-        }
-
-        // حساب الكميات المطلوبة وتقريبها لرقمين عشريين
-        const blackTeaNeeded = (waterML * BLACK_TEA_PER_ML).toFixed(2);
-        const greenTeaNeeded = (waterML * GREEN_TEA_PER_ML).toFixed(2);
-
-        // عرض النتائج
-        document.getElementById('blackTeaResult').textContent = blackTeaNeeded;
-        document.getElementById('greenTeaResult').textContent = greenTeaNeeded;
-    }
-
-    // تشغيل الدالة عند تحميل الصفحة
-    window.onload = calculateTea;
-</script>
-
-</body>
-</html>
 
 </body>
 </html>
