@@ -18,6 +18,23 @@
             margin: 0;
             padding: 15px;
             line-height: 1.7;
+			
+			.image-gallery {
+			    display: flex;
+			    flex-direction: column; /* يجعل الصور تحت بعضها */
+			    align-items: center;    /* لتوسيطها في المنتصف */
+			    gap: 20px;              /* مسافة بين الصور */
+			}
+
+			.image-card {
+			    text-align: center;     /* لتوسيط النص أسفل كل صورة */
+			}
+
+			.image-card img {
+			    display: block;
+			    margin: 0 auto;         /* لتوسيط الصورة داخل البطاقة */
+			}
+			
             /* منع التمرير الأفقي للصفحة ككل بشكل قاطع */
             overflow-x: hidden; 
         }
