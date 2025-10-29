@@ -26,14 +26,14 @@
             --active-btn-text: #fff;
             --blend-btn-bg: #007bff;
             --blend-btn-text: #fff;
-            --calc-bg: #e0f7fa; /* خلفية حاسبة السكر (فاتح) - غير مستخدمة الآن */
-            --calc-header: #00bcd4; /* غير مستخدمة الآن */
+            --calc-bg: #e0f7fa; 
+            --calc-header: #00bcd4; 
 
             /* متغيرات حاسبة النسب الصغيرة (Light Mode) */
-            --small-calc-card-bg: #fff; /* موحد مع الخلفية الداخلية */
-            --small-calc-text: #333; /* النص الداخلي */
-            --small-calc-primary: #4CAF50; /* لون العنوان والنتائج */
-            --small-calc-secondary: #f0f0f0; /* خلفية حقل النتائج */
+            --small-calc-card-bg: #fff; 
+            --small-calc-text: #333; 
+            --small-calc-primary: #4CAF50; 
+            --small-calc-secondary: #f0f0f0; 
             --small-calc-input-bg: #fff; 
             --small-calc-input-border: #ccc;
         }
@@ -55,7 +55,7 @@
 
             /* متغيرات حاسبة النسب الصغيرة (Dark Mode) */
             --small-calc-card-bg: #2d2d2d;
-            --small-calc-text: #f0f0f0; /* النص الداخلي */
+            --small-calc-text: #f0f0f0; 
             --small-calc-primary: #95d5b2; 
             --small-calc-secondary: #4a4a4a; 
             --small-calc-input-bg: #3c3c3c;
@@ -222,17 +222,17 @@
         .calculator-container-small {
             max-width: 250px;
             margin: 20px auto 0;
-            /* استخدام متغيرات الآلة الحاسبة الصغيرة التي تم إصلاحها */
-            background-color: var(--small-calc-card-bg); 
+            /* توحيد الخلفية مع خلفية الـ container */
+            background-color: var(--container-bg); 
             padding: 10px;
             border-radius: 6px;
-            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
-            border: 1px solid var(--small-calc-primary);
-            color: var(--small-calc-text); /* إصلاح لون النص */
+            box-shadow: 0 1px 5px var(--shadow-color);
+            border: 1px solid var(--accent-color);
+            color: var(--text-color);
         }
         .calculator-container-small h3 {
             text-align: center;
-            color: var(--small-calc-primary); 
+            color: var(--accent-color); 
             margin-bottom: 10px;
             font-size: 1.1em;
         }
@@ -240,28 +240,28 @@
             display: block;
             margin-bottom: 3px;
             font-weight: 600;
-            color: var(--small-calc-text); /* إصلاح لون النص */
+            color: var(--text-color);
             font-size: 0.8em;
         }
         .calculator-container-small input[type="number"] {
             width: 100%;
             padding: 6px;
             margin-bottom: 10px;
-            border: 1px solid var(--small-calc-input-border);
+            border: 1px solid var(--input-border);
             border-radius: 4px;
             font-size: 0.9em;
             text-align: right;
             box-sizing: border-box;
-            background-color: var(--small-calc-input-bg); 
-            color: var(--small-calc-text); /* إصلاح لون النص */
+            background-color: var(--input-bg); 
+            color: var(--text-color);
         }
         .calculator-container-small .result-box {
-            background-color: var(--small-calc-secondary); 
+            background-color: var(--note-bg); 
             padding: 8px;
             border-radius: 5px;
-            border: 1px solid var(--small-calc-primary);
+            border: 1px solid var(--accent-color);
             font-size: 0.8em;
-            color: var(--small-calc-text); /* إصلاح لون النص */
+            color: var(--text-color);
         }
         .calculator-container-small .result-item {
             margin-bottom: 3px;
@@ -269,10 +269,10 @@
             justify-content: space-between;
         }
         .calculator-container-small .result-item strong {
-            color: var(--small-calc-primary);
+            color: var(--accent-color);
             font-weight: 700;
         }
-
+        
     </style>
 </head>
 <body>
@@ -312,9 +312,9 @@
             <div>
                 <p class="control-label">خلطتي (12 جم شاي/لتر)</p>
                 <div class="blend-controls" id="blend-controls">
-                    <button data-value="57" data-blend-type="light" onclick="selectOption(this, true, 'sugar')">خفيف</button>
-                    <button data-value="75" data-blend-type="medium" onclick="selectOption(this, true, 'sugar')">وسط</button>
-                    <button data-value="90" data-blend-type="heavy" onclick="selectOption(this, true, 'sugar')">حالي زيادة</button>
+                    <button data-value="11" data-blend-type="light" onclick="selectOption(this, true, 'tea')">خفيف</button>
+                    <button data-value="12" data-blend-type="medium" onclick="selectOption(this, true, 'tea')">وسط</button>
+                    <button data-value="13" data-blend-type="heavy" onclick="selectOption(this, true, 'tea')">ثقيل</button>
                 </div>
             </div>
             <div id="blend-result" class="result" style="visibility:hidden; margin-top: 0;"></div>
@@ -343,13 +343,13 @@
         <div class="glass-container">
             <p class="glass-title">الشاي</p>
             <div class="glass" id="teaGlass">
-                 <div id="teaLevel"></div>
-                 <div class="scale gram-scale">
-                    <div style="bottom: 100%;">21</div><div style="bottom: 90%;">18.9</div><div style="bottom: 75%;">15.75</div><div style="bottom: 65%;">13.65</div><div style="bottom: 50%;">10.5</div><div style="bottom: 40%;">8.4</div><div style="bottom: 25%;">5.25</div><div style="bottom: 15%;">3.15</div><div style="bottom: 10%;">2.1</div>
-                 </div>
-                 <div class="scale percentage-scale">
-                    <div style="bottom: 100%;">100%</div><div style="bottom: 75%;">75%</div><div style="bottom: 50%;">50%</div><div style="bottom: 25%;">25%</div><div style="bottom: 10%;">10%</div>
-                 </div>
+                   <div id="teaLevel"></div>
+                   <div class="scale gram-scale">
+                        <div style="bottom: 100%;">21</div><div style="bottom: 90%;">18.9</div><div style="bottom: 75%;">15.75</div><div style="bottom: 65%;">13.65</div><div style="bottom: 50%;">10.5</div><div style="bottom: 40%;">8.4</div><div style="bottom: 25%;">5.25</div><div style="bottom: 15%;">3.15</div><div style="bottom: 10%;">2.1</div>
+                   </div>
+                   <div class="scale percentage-scale">
+                        <div style="bottom: 100%;">100%</div><div style="bottom: 75%;">75%</div><div style="bottom: 50%;">50%</div><div style="bottom: 25%;">25%</div><div style="bottom: 10%;">10%</div>
+                   </div>
             </div>
             <p class="note" id="teaNote" style="visibility:hidden;"></p>
         </div>
@@ -359,14 +359,11 @@
         <p><span class="underlined-red">البيالة المستخدمة في القياس هي بيالة "بادريق"</span></p>
         <p>البيالة العادية من الماء إلى المستوى الطبيعي المتعارف عليه تساوي تقريبا <span class="red-text">73</span> ملل، أي أن <span class="red-text">1</span> لتر يساوي <span class="red-text">13.69</span> بيالة.</p>
 		<p><span style="color: red;">(لجميع انواع الشاهي)</span> تقريبا هذه الوزنة مناسبة للجميع مع التعديل حسب الحاجة لواحد لتر</p>
-        <p><span class="red-text">السكر: 50 إلى 55 جم</span><br>
-        <span class="red-text">الشاي: 12 إلى 12.5 جم</span></p>
         <p><strong class="red-text">طريقة الحساب:</strong> لحساب كمية <span class="red-text">السكر</span> و<span class="red-text">الشاي</span> بناءً على كمية الماء:<br>
         <span class="red-text">السكر (جم)</span> = (كمية الماء بالمللتر ÷ 1000) × <span class="blue-text">50 إلى 55</span><br>
         <span class="red-text">الشاي (جم)</span> = (كمية الماء بالمللتر ÷ 1000) × <span class="blue-text">12 إلى 12.5</span></p>
         <p><strong class="red-text">ملاحظة:</strong> قد تختلف النتيجة حسب نوع الشاي، يفضل التجربة والضبط حسب الذوق.</p>
-        <p>للمزيد من المعلومات حول تصنيفات الشاي، تفضل بزيارة: <a href="BlackTeaGradingReference.html
-">تصنيفات الشاي</a></p>
+        <p>للمزيد من المعلومات حول تصنيفات الشاي، تفضل بزيارة: <a href="BlackTeaGradingReference.html">تصنيفات الشاي</a></p>
     </div>
 
 </div>
@@ -383,51 +380,31 @@
     const blendResultDiv = document.getElementById('blend-result');
     const resultDiv = document.getElementById('result');
     const inputLabel = document.getElementById('input-label');
-    // const converterResultContainer = document.getElementById('converterResultContainer'); // محذوف
-    // const converterResultText = document.getElementById('converterResultText'); // محذوف
-    // const allPresetButtons = document.querySelectorAll('.preset-controls button'); // محذوف 
     
     // Unified list of all sweetness buttons
     const allSweetnessButtons = [];
     sweetnessControls.querySelectorAll('button').forEach(btn => allSweetnessButtons.push(btn));
-    blendControls.querySelectorAll('button').forEach(btn => allSweetnessButtons.push(btn));
 
     // --- State Variables ---
     let strengthMultiplier = 12; 
     let isBlendMode = false;
-    let standardSugarPerLiter = 75; // Base value for standard controls
     let activeSugarPerLiter = 75; // The sugar value currently active (57, 75, or 90)
-    let blendOption = 'medium'; // 'light', 'medium', 'heavy'
     
     // --- Blend Ratios (Fixed Ratios for Blend Mode) ---
-    const ORIGINAL_BLACK_TEA_TOTAL = 12.0;
-    const GREEN_TEA_PER_LITER = 1.6;
-    const NEW_BLACK_TEA_TOTAL = ORIGINAL_BLACK_TEA_TOTAL - GREEN_TEA_PER_LITER; // 12.0 - 1.6 = 10.4
-    const ADJUSTMENT_FACTOR = NEW_BLACK_TEA_TOTAL / ORIGINAL_BLACK_TEA_TOTAL; // 10.4 / 12.0
-
+    // تم إعادة النسبة إلى الوضع الأصلي: الإجمالي هو 12، وهو مقسم 9:1:1:1
     const BLEND_TEA_RATIOS = {
-        rabea: 9,
-        abuJabal: 1,
-        alWazah: 1,
-        khather: 1,
+        'شاهي ربيع': 9,
+        'شاهي أبو جبل': 1,
+        'شاهي الوزة': 1,
+        'شاهي خاثر': 1,
     };
+    const BLEND_TEA_TOTAL_RATIO = Object.values(BLEND_TEA_RATIOS).reduce((a, b) => a + b, 0); // 12
     
-    // القيم المعدلة بعد إضافة الشاي الأخضر (المجموع 10.4 جم)
-    const ADJUSTED_BLEND_TEA_RATIOS = {
-        rabea: BLEND_TEA_RATIOS.rabea * ADJUSTMENT_FACTOR, // 7.8
-        abuJabal: BLEND_TEA_RATIOS.abuJabal * ADJUSTMENT_FACTOR, // 0.8666
-        alWazah: BLEND_TEA_RATIOS.alWazah * ADJUSTMENT_FACTOR, // 0.8666
-        khather: BLEND_TEA_RATIOS.khather * ADJUSTMENT_FACTOR, // 0.8666
-        total: NEW_BLACK_TEA_TOTAL, // 10.4
-        green: GREEN_TEA_PER_LITER // 1.6
-    };
-
-
     // --- Functions ---
 
     function selectOption(element, isBlend, type) {
         if (type === 'sugar') {
-            // 1. Clean up active state from ALL sugar buttons (both standard and blend)
+            // 1. Clean up active state from standard sugar buttons
             allSweetnessButtons.forEach(btn => btn.classList.remove('active'));
             
             // 2. Set active state on the clicked button
@@ -436,40 +413,58 @@
             // 3. Update active sugar value
             activeSugarPerLiter = parseFloat(element.dataset.value);
             
-            // 4. Update mode and blend option
-            isBlendMode = isBlend;
-            if (isBlend) {
-                 blendOption = element.dataset.blendType;
-            } else {
-                 // For standard controls, determine blend option based on value
-                 if (activeSugarPerLiter === 57) blendOption = 'light';
-                 else if (activeSugarPerLiter === 75) blendOption = 'medium';
-                 else if (activeSugarPerLiter === 90) blendOption = 'heavy';
-            }
+            // 4. Disable blend mode when standard sugar is selected
+            isBlendMode = false;
+            blendControls.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+            strengthControls.querySelectorAll('button').forEach(btn => {
+                if (parseFloat(btn.dataset.value) === strengthMultiplier) {
+                    btn.classList.add('active');
+                }
+            });
+
 
         } else if (type === 'tea') {
-            // 1. Clean up active state from all tea buttons
-            strengthControls.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
             
-            // 2. Set active state on the clicked button
-            element.classList.add('active');
-            
-            // 3. Update strength multiplier
-            strengthMultiplier = parseFloat(element.dataset.value);
+            // Handle standard strength buttons
+            if (!isBlend) {
+                strengthControls.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+                element.classList.add('active');
+                strengthMultiplier = parseFloat(element.dataset.value);
+                isBlendMode = false;
+                
+                // Also remove active from blend buttons if standard is selected
+                blendControls.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+                
+            } 
+            // Handle blend buttons
+            else {
+                blendControls.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+                element.classList.add('active');
+                
+                // Set the total tea multiplier based on the blend button's data-value (11, 12, 13)
+                strengthMultiplier = parseFloat(element.dataset.value);
+                isBlendMode = true;
+                
+                // Ensure standard strength buttons are inactive when blend is selected
+                strengthControls.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+            }
         }
         
-        // 5. Run main calculation
+        // Run main calculation
         runCalculation();
     }
 
     // --- Event Listeners ---
-    // Note: Event listeners for sweetness/blend controls are handled directly via onclick='selectOption(this, ...)'
-
     calcModeSelect.addEventListener('change', changeCalcMode);
     mainInput.addEventListener('input', () => runCalculation());
     waterSlider.addEventListener('input', () => runCalculation(true));
     themeToggleButton.addEventListener('click', toggleTheme);
-    
+
+    // Initial load setup
+    document.addEventListener('DOMContentLoaded', () => {
+        loadTheme();
+        runCalculation(); 
+    });
 
     function changeCalcMode() {
         const mode = calcModeSelect.value;
@@ -507,20 +502,7 @@
 
         // Determine base sugar and tea multipliers
         let baseSugarPerLiter = activeSugarPerLiter;
-        let teaMultiplier; // قيمة مضاعف الشاي (بالجرام/لتر)
-
-        // تحديد مضاعف الشاي بناءً على الوضع
-        if (isBlendMode) {
-            // في وضع الخلطة، الإجمالي يكون 12.0 جم/لتر (10.4 أسود + 1.6 أخضر)
-            teaMultiplier = ORIGINAL_BLACK_TEA_TOTAL; 
-            if (blendOption === 'heavy') {
-                 // في حال "حالي زيادة" يتم إضافة 1 جم للوزن الكلي (12 + 1 = 13 جم/لتر)
-                 teaMultiplier += 1; 
-            }
-        } else {
-            // في الوضع القياسي، يتم استخدام القيمة المحددة من أزرار Strength controls (11, 12, 13)
-            teaMultiplier = strengthMultiplier;
-        }
+        let teaMultiplier = strengthMultiplier; // Total tea g/L (11, 12, or 13)
         
         // --- Calculation Logic based on Mode ---
         if (mode === 'water') {
@@ -550,7 +532,6 @@
         const useArabicNumbers = /[٠-٩]/.test(mainInput.value.trim());
         function formatNumber(num) {
             if (typeof num !== 'number') return num;
-            // يجب تقريب الكسور بشكل صحيح قبل التحويل للعربية
             let numStr = num.toFixed(2).replace(/\.00$/, '').replace(/\.0$/, '');
             return useArabicNumbers ? toArabicNumbers(numStr) : numStr;
         }
@@ -558,40 +539,26 @@
         let resultDiv = document.getElementById('result');
         
         if (isBlendMode) {
-            // في وضع الخلطة، قيمة teaGrams هي الإجمالي المطلوب (12 أو 13)
-            let totalTeaPerLiter = ORIGINAL_BLACK_TEA_TOTAL;
-             if (blendOption === 'heavy') {
-                 totalTeaPerLiter += 1; 
+            // منطق الخلطة الأصلي (الشاي الكلي مقسم 9:1:1:1)
+            
+            // 1. نسبة الماء المستخدمة (استخدم قوة الخلطة المختارة)
+            const ratio = teaGrams / strengthMultiplier; 
+
+            // 2. حساب المكونات بناءً على النسبة
+            const blackTeaComponents = {};
+            for (const name in BLEND_TEA_RATIOS) {
+                // المجموع الكلي للشاي مقسم على المكونات الأربعة
+                blackTeaComponents[name] = BLEND_TEA_RATIOS[name] * ratio;
             }
             
-            // نسبة الماء المستخدمة (سواء كان الحساب بالماء أو السكر أو الشاي)
-            const ratio = teaGrams / totalTeaPerLiter; 
-
-            // حساب المكونات بناءً على النسب المعدلة (الجديدة)
-            const rabeaGrams = ADJUSTED_BLEND_TEA_RATIOS.rabea * ratio;
-            const abuJabalGrams = ADJUSTED_BLEND_TEA_RATIOS.abuJabal * ratio;
-            const alWazahGrams = ADJUSTED_BLEND_TEA_RATIOS.alWazah * ratio;
-            const khatherGrams = ADJUSTED_BLEND_TEA_RATIOS.khather * ratio;
-            const greenTeaGrams = ADJUSTED_BLEND_TEA_RATIOS.green * ratio;
-
-            // إذا كان الوضع "حالي زيادة"، نزيد نسبة الشاي الأسود بمقدار 1 جم
-            let blackTeaAdjustment = 0;
-            if (blendOption === 'heavy') {
-                 blackTeaAdjustment = 1 * ratio; // 1 جم إضافي يضاف إلى الأسود
+            // 3. بناء HTML للنتائج
+            let blendHtml = '';
+            for (const [name, grams] of Object.entries(blackTeaComponents)) {
+                // استخدام تنسيق بسيط لكل عنصر
+                blendHtml += `<div class="result-item" style="display:flex; justify-content:space-between;"><span>${name}:</span> <b class="value">${formatNumber(grams)} جم</b></div>`;
             }
-
-            const rabeaFinal = rabeaGrams + (blackTeaAdjustment * (BLEND_TEA_RATIOS.rabea / ORIGINAL_BLACK_TEA_TOTAL));
-            const abuJabalFinal = abuJabalGrams + (blackTeaAdjustment * (BLEND_TEA_RATIOS.abuJabal / ORIGINAL_BLACK_TEA_TOTAL));
-            const alWazahFinal = alWazahGrams + (blackTeaAdjustment * (BLEND_TEA_RATIOS.alWazah / ORIGINAL_BLACK_TEA_TOTAL));
-            const khatherFinal = khatherGrams + (blackTeaAdjustment * (BLEND_TEA_RATIOS.khather / ORIGINAL_BLACK_TEA_TOTAL));
-
-            blendResultDiv.innerHTML = `
-                <span>شاهي ربيع: <b class="value">${formatNumber(rabeaFinal)} جم</b></span><br>
-                <span>شاهي أبو جبل: <b class="value">${formatNumber(abuJabalFinal)} جم</b></span><br>
-                <span>شاهي الوزة: <b class="value">${formatNumber(alWazahFinal)} جم</b></span><br>
-                <span>شاهي خاثر: <b class="value">${formatNumber(khatherFinal)} جم</b></span><br>
-                <span style="color: #28a745;">شاهي أخضر: <b class="value" style="color: #28a745;">${formatNumber(greenTeaGrams)} جم</b></span>
-            `;
+            
+            blendResultDiv.innerHTML = blendHtml;
             blendResultDiv.style.visibility = 'visible';
             
             resultDiv.innerHTML = `النتيجة: <span>${formatNumber(waterMl)}</span> مل ماء | <span>${formatNumber(sugarGrams)}</span> جم سكر | <span>${formatNumber(teaGrams)}</span> جم شاي (الإجمالي)`;
@@ -600,6 +567,7 @@
             resultDiv.innerHTML = `النتيجة: <span>${formatNumber(waterMl)}</span> مل ماء | <span>${formatNumber(sugarGrams)}</span> جم سكر | <span>${formatNumber(teaGrams)}</span> جم شاي`;
         }
         
+        // Visuals and Notes (Unchanged)
         // Sugar reference: 84g (Full Cup)
         // Tea reference: 21g (Full Cup)
         const sugarPerCup = 84;
@@ -619,7 +587,7 @@
         if (sugarGrams > 0) {
             // If the total sugar is less than one cup, or it's just the remainder
             if (sugarGrams < sugarPerCup || sugarFullCups === 0) {
-                 sugarFillPercentage = sugarGrams / sugarPerCup;
+                sugarFillPercentage = sugarGrams / sugarPerCup;
             } else {
                 // If it's more than one cup, we show the remainder fill level, 
                 // unless the remainder is exactly zero, in which case we show 100% fill.
@@ -638,7 +606,7 @@
                 teaFillPercentage = teaGrams / teaPerCup;
             } else {
                 teaFillPercentage = teaRemainderGrams / teaPerCup;
-                 if (teaRemainderGrams.toFixed(2) == 0.00) {
+                if (teaRemainderGrams.toFixed(2) == 0.00) {
                     teaFillPercentage = 1; 
                 }
             }
@@ -661,7 +629,6 @@
 
     function loadTheme() {
         const savedTheme = localStorage.getItem('theme');
-        // تم إصلاح المنطق: إذا لم يكن 'light'، طبق 'dark-mode'
         if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) { 
             document.body.classList.add('dark-mode');
             themeToggleButton.textContent = '☀️';
@@ -674,36 +641,6 @@
     function toArabicNumbers(str) {
         return str.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
     }
-    
-    // --- Script for the small calculator (Second part) ---
-    const BLACK_TEA_PER_1000ML = 10.5;
-    const GREEN_TEA_PER_1000ML = 1.5;
-
-    const BLACK_TEA_PER_ML = BLACK_TEA_PER_1000ML / 1000;
-    const GREEN_TEA_PER_ML = GREEN_TEA_PER_1000ML / 1000;
-
-    function calculateTea() {
-        // نستخدم معرف مختلف لهذه الآلة الحاسبة لتجنب التعارض (waterQuantity_small)
-        const waterInput = document.getElementById('waterQuantity'); 
-        let waterML = parseFloat(waterInput.value);
-
-        if (isNaN(waterML) || waterML <= 0) {
-            waterML = 0;
-        }
-
-        const blackTeaNeeded = (waterML * BLACK_TEA_PER_ML).toFixed(2);
-        const greenTeaNeeded = (waterML * GREEN_TEA_PER_ML).toFixed(2);
-
-        document.getElementById('blackTeaResult').textContent = blackTeaNeeded;
-        document.getElementById('greenTeaResult').textContent = greenTeaNeeded;
-    }
-
-    // تشغيل الدالة عند تحميل الصفحة
-    document.addEventListener('DOMContentLoaded', () => {
-        loadTheme();
-        runCalculation(); 
-        calculateTea(); 
-    });
 
 </script>
 
