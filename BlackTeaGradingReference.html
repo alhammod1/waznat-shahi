@@ -1,649 +1,554 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+
+<html dir="rtl" lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>وزنة شاهي ربيع</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="utf-8"/>
+    <!-- إضافة وسم viewport لضمان التجاوب مع شاشات الجوال -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>المرجع الكامل لتصنيفات الشاي الأسود </title>
     <style>
-		
-        /* ==================================== */
-        /* 1. متغيرات الألوان العامة (Theming)  */
-        /* ==================================== */
-
-        :root {
-            /* الخلفية موحدة للوضع العادي */
-            --bg-color: #FFFFFF; 
-            --container-bg: #fff; 
-            --text-color: #333; 
-            --secondary-text: #555;
-            --border-color: #eee; 
-            --glass-border: #555; 
-            --accent-color: #4CAF50; /* أخضر الربيع */
-            --note-bg: #f0f0f0;
-            --shadow-color: rgba(0,0,0,0.05); 
-            --active-btn-bg: #4CAF50; 
-            --active-btn-text: #fff;
-            --blend-btn-bg: #007bff;
-            --blend-btn-text: #fff;
-            --calc-bg: #e0f7fa; 
-            --calc-header: #00bcd4; 
-
-            /* متغيرات حاسبة النسب الصغيرة (Light Mode) */
-            --small-calc-card-bg: #fff; 
-            --small-calc-text: #333; 
-            --small-calc-primary: #4CAF50; 
-            --small-calc-secondary: #f0f0f0; 
-            --small-calc-input-bg: #fff; 
-            --small-calc-input-border: #ccc;
-        }
-
-        .dark-mode {
-            --bg-color: #121212; 
-            --container-bg: #1e1e1e; 
-            --text-color: #e0e0e0; 
-            --secondary-text: #aaa;
-            --border-color: #333; 
-            --glass-border: #777; 
-            --accent-color: #5cb85c; 
-            --note-bg: #2a2a2a;
-            --shadow-color: rgba(0,0,0,0.2); 
-            --active-btn-bg: #5cb85c; 
-            --blend-btn-bg: #58a6ff;
-            --calc-bg: #1c313a; 
-            --calc-header: #4dd0e1;
-
-            /* متغيرات حاسبة النسب الصغيرة (Dark Mode) */
-            --small-calc-card-bg: #2d2d2d;
-            --small-calc-text: #f0f0f0; 
-            --small-calc-primary: #95d5b2; 
-            --small-calc-secondary: #4a4a4a; 
-            --small-calc-input-bg: #3c3c3c;
-            --small-calc-input-border: #666;
-        }
-
-        /* ==================================== */
-        /* 2. الأنماط الأساسية          */
-        /* ==================================== */
-
+        /* استيراد خط القاهرة */
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+        
         body {
-            font-family: 'Cairo', Arial, sans-serif; 
-            background-color: var(--bg-color); 
-            color: var(--text-color);
-            text-align: center; 
-            padding: 20px; 
-            transition: background-color 0.3s, color 0.3s;
-            direction: rtl; /* لتوحيد اتجاه العرض */
-        }
-        .container {
-            position: relative; 
-            max-width: 800px; 
-            margin: 0 auto; 
-            background-color: var(--container-bg);
-            padding: 30px; 
-            border-radius: 15px; 
-            box-shadow: 0 5px 15px var(--shadow-color); 
-            transition: background-color 0.3s;
-        }
-        h1 { color: var(--accent-color); margin-bottom: 20px; }
-        
-        /* زر تبديل الثيم */
-        #theme-toggle {
-            position: absolute; top: 20px; right: 20px; background: none; border: 1px solid var(--border-color);
-            color: var(--text-color); border-radius: 50%; width: 40px; height: 40px; font-size: 20px; cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s; display: flex; justify-content: center; align-items: center;
-        }
-        #theme-toggle:hover { background-color: rgba(128,128,128,0.1); transform: scale(1.1); }
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+            background-color: #fafafa;
+            color: #222;
+            margin: 0;
+            padding: 15px;
+            line-height: 1.7;
+			
+			.image-gallery {
+			    display: flex;
+			    flex-direction: column; /* يجعل الصور تحت بعضها */
+			    align-items: center;    /* لتوسيطها في المنتصف */
+			    gap: 20px;              /* مسافة بين الصور */
+			}
 
-        /* منطقة الإدخال */
-        .input-area { display: flex; flex-direction: column; align-items: center; gap: 15px; margin-bottom: 20px; }
-        #input-label { font-weight: bold; font-size: 1.1em; margin-bottom: 0; }
-        input[type="text"], select {
-            padding: 10px; width: 80%; max-width: 300px; font-size: 18px; border: 1px solid var(--border-color);
-            background-color: var(--bg-color); color: var(--text-color); border-radius: 8px; text-align: center; font-family: 'Cairo', Arial, sans-serif;
-        }
-        select { text-align: center; padding-right: 29px; }
-        #waterSlider { width: 80%; max-width: 310px; cursor: pointer; }
+			.image-card {
+			    text-align: center;     /* لتوسيط النص أسفل كل صورة */
+			}
 
-        /* الأزرار والمجموعات */
-        .controls-container { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; width: 100%; max-width: 350px; }
-        .control-group { 
-            display: flex; 
-            justify-content: center; 
-            border-radius: 8px; 
-            overflow: hidden; 
-            border: 1px solid var(--border-color); 
-            width: 100%; /* ضمان العرض الكامل داخل الحاوية */
+			.image-card img {
+			    display: block;
+			    margin: 0 auto;         /* لتوسيط الصورة داخل البطاقة */
+			}
+			
+            /* منع التمرير الأفقي للصفحة ككل بشكل قاطع */
+            overflow-x: hidden; 
         }
-        .control-group button {
-            flex-grow: 1; background-color: transparent; border: none; padding: 10px; color: var(--text-color);
-            font-family: 'Cairo', Arial, sans-serif; font-size: 16px; cursor: pointer; transition: background-color 0.3s, color 0.3s;
-            border-left: 1px solid var(--border-color);
-        }
-        .control-group button:last-child { border-left: none; }
-        .control-group button.active { background-color: var(--active-btn-bg); color: var(--active-btn-text); }
-        .control-label {
+        h1, h2, h3 {
             font-weight: bold;
-            color: var(--secondary-text);
-            margin: 10px 0 5px 0;
+            max-width: 100%; 
+            word-wrap: break-word;
         }
-        .control-group button:disabled {
-            cursor: not-allowed;
-            opacity: 0.5;
-        }
-        
-        /* تحكمات الخلطة */
-        .blend-controls {
-            display: flex;
-            justify-content: center;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-             width: 100%; /* ضمان العرض الكامل داخل الحاوية */
-        }
-        .blend-controls button {
-            flex-grow: 1; background-color: transparent; border: none; padding: 10px; color: var(--text-color);
-            font-family: 'Cairo', Arial, sans-serif; font-size: 16px; cursor: pointer; transition: background-color 0.3s, color 0.3s;
-            border-left: 1px solid var(--border-color);
-        }
-        .blend-controls button:last-child { border-left: none; }
-        .blend-controls button.active { 
-            background-color: var(--blend-btn-bg);
-            color: var(--blend-btn-text);
-        }
-
-        /* حقل النتيجة الرئيسية */
-        .result { 
-            display: block;
-            max-width: 350px;
-            margin: 10px auto;
-            font-size: 20px; 
-            padding: 15px; 
-            border-radius: 10px; 
-            border: 1px solid var(--border-color); 
-            background-color: var(--bg-color); 
-        }
-        .result span, .note .value { color: red; font-weight: bold; }
-        #blend-result { 
-            font-size: 16px; 
-            text-align: right; 
-        }
-        #blend-result span { color: var(--text-color); font-weight: normal; }
-        #blend-result .value { color: #007bff; font-weight: bold; }
-        .dark-mode #blend-result .value { color: #58a6ff; }
-
-        /* حاويات الأكواب البصرية */
-        .visual-container { display: flex; justify-content: center; gap: 100px; margin-top: 40px; flex-wrap: wrap; }
-        .glass-container { display: flex; flex-direction: column; align-items: center; }
-        .glass-title { font-size: 1.8em; font-weight: bold; margin-bottom: 15px; }
-        .glass {
-            width: 168px; height: 225px; border-left: 2px dotted var(--glass-border); border-right: 2px dotted var(--glass-border);
-            border-bottom: 2px solid var(--glass-border); position: relative; margin: 0 auto; border-radius: 0 0 15px 15px; background-color: transparent;
-        }
-        .scale { position: absolute; top: 0; height: 100%; width: 60px; }
-        .gram-scale { right: calc(100% + 5px); }
-        .percentage-scale { left: calc(100% + 5px); }
-        .scale div { position: absolute; width: 100%; font-size: 13px; font-weight: bold; white-space: nowrap; transform: translateY(50%); }
-        .gram-scale div { color: #007bff; padding-right: 15px; text-align: right; }
-        .dark-mode .gram-scale div { color: #58a6ff; }
-        .percentage-scale div { color: #28a745; padding-left: 15px; }
-        .dark-mode .percentage-scale div { color: #3fb950; }
-        .scale div::before { content: ''; position: absolute; width: 10px; height: 2px; background-color: var(--secondary-text); top: 50%; transform: translateY(-50%); }
-        .gram-scale div::before { right: 0; }
-        .percentage-scale div::before { left: 0; }
-
-        #sugarLevel, #teaLevel {
-            position: absolute; left: 0; width: 100%; height: 0; background-color: rgba(230, 0, 0, 0.6);
-            bottom: 0; border-radius: 0 0 13px 13px; transition: height 0.6s ease-out;
-        }
-        .note { margin-top: 15px; font-size: 1.1em; background-color: var(--note-bg); padding: 8px 15px; border-radius: 10px; font-weight: bold; }
-        .note .plus { color: blue; font-weight: bold; }
-
-        /* منطقة الملاحظات السفلية */
-        .footer-notes {
-            margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-color);
-            font-size: 18px; line-height: 2; color: var(--text-color);
-        }
-        .footer-notes p { margin-bottom: 25px; }
-        .footer-notes .red-text { color: #dc3545; }
-        .dark-mode .footer-notes .red-text { color: #ff7b72; }
-        .footer-notes .green-text { color: #28a745; }
-        .dark-mode .footer-notes .green-text { color: #3fb950; }
-        .footer-notes .blue-text { color: #007bff; }
-        .dark-mode .footer-notes .blue-text { color: #58a6ff; }
-        .footer-notes .underlined-red {
-            color: #dc3545; border-bottom: 2px solid var(--text-color); padding-bottom: 2px;
-        }
-        .dark-mode .footer-notes .underlined-red { color: #ff7b72; }
-        
-        /* ==================================== */
-        /* حاسبة النسب الصغيرة (Small Calculator) */
-        /* ==================================== */
-        .calculator-container-small {
-            max-width: 250px;
-            margin: 20px auto 0;
-            /* توحيد الخلفية مع خلفية الـ container */
-            background-color: var(--container-bg); 
-            padding: 10px;
-            border-radius: 6px;
-            box-shadow: 0 1px 5px var(--shadow-color);
-            border: 1px solid var(--accent-color);
-            color: var(--text-color);
-        }
-        .calculator-container-small h3 {
+        h1 {
             text-align: center;
-            color: var(--accent-color); 
-            margin-bottom: 10px;
-            font-size: 1.1em;
+            color: #1b4332;
+            font-size: 2em; 
+            margin-bottom: 20px;
         }
-        .calculator-container-small label {
-            display: block;
-            margin-bottom: 3px;
-            font-weight: 600;
-            color: var(--text-color);
+        h2 {
+            background-color: #d8f3dc;
+            border-right: 6px solid #2d6a4f;
+            padding: 10px 12px;
+            border-radius: 8px; 
+            color: #1b4332;
+            margin-top: 25px;
+            font-size: 1.4em;
+        }
+        h3 {
+            color: #145a32;
+            margin-top: 15px;
+            font-size: 1.2em;
+        }
+        p {
+            font-size: 1em; 
+        }
+        ul {
+            background-color: #f1faee;
+            padding: 10px 20px;
+            border-radius: 8px;
+            list-style-type: none;
+            max-width: 100%;
+        }
+        li {
+            padding: 4px 0;
+            /* التأكد من التفاف النص داخل القوائم النقطية */
+            word-wrap: break-word; 
+            white-space: normal;
+        }
+        .intro {
+            background-color: #e3f2fd;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #90caf9;
+            margin-bottom: 20px;
+        }
+        .code {
+            color: #1565c0;
+            font-weight: bold;
+            word-wrap: break-word; 
+            white-space: normal;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
             font-size: 0.8em;
+            color: #555;
         }
-        .calculator-container-small input[type="number"] {
-            width: 100%;
-            padding: 6px;
-            margin-bottom: 10px;
-            border: 1px solid var(--input-border);
-            border-radius: 4px;
+
+        /* ---------------------------------------------------- */
+        /* الجداول الرئيسية: نظام العرض المزدوج (جدول/بطاقات) */
+        /* ---------------------------------------------------- */
+        
+        /* تنسيق عام للبطاقات الجديدة */
+        .grade-card {
+            background-color: white;
+            border: 1px solid #b7e4c7;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .grade-card .grade-title {
+            background-color: #d8f3dc;
+            padding: 10px 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #1b4332;
+            text-align: center;
+            border-bottom: 2px solid #95d5b2;
+        }
+        .grade-card .detail-row {
+            padding: 8px 15px;
+            display: flex;
+            flex-direction: column;
+            border-bottom: 1px dashed #eee;
+        }
+        .grade-card .detail-row:last-child {
+            border-bottom: none;
+        }
+        .grade-card .detail-label {
+            font-weight: bold;
+            color: #2d6a4f;
+            margin-bottom: 2px;
             font-size: 0.9em;
-            text-align: right;
-            box-sizing: border-box;
-            background-color: var(--input-bg); 
-            color: var(--text-color);
         }
-        .calculator-container-small .result-box {
-            background-color: var(--note-bg); 
-            padding: 8px;
-            border-radius: 5px;
-            border: 1px solid var(--accent-color);
-            font-size: 0.8em;
-            color: var(--text-color);
+        .grade-card .detail-content {
+            font-size: 1em;
+            line-height: 1.5;
         }
-        .calculator-container-small .result-item {
-            margin-bottom: 3px;
-            display: flex; 
-            justify-content: space-between;
-        }
-        .calculator-container-small .result-item strong {
-            color: var(--accent-color);
-            font-weight: 700;
+
+        /* إخفاء البطاقات على سطح المكتب وإظهار الجدول */
+        @media (min-width: 769px) {
+            .mobile-grade-list, .mobile-comparison {
+                display: none; 
+            }
+            .desktop-grade-table, .desktop-comparison {
+                display: block; 
+            }
+            .desktop-grade-table table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 20px 0;
+            }
+            .desktop-grade-table tr td, .desktop-grade-table tr th {
+                padding: 10px;
+                border: 1px solid #eee;
+                white-space: normal;
+            }
+            .desktop-comparison table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 15px;
+            }
         }
         
+        /* إظهار البطاقات على الجوال وإخفاء الجدول */
+        @media (max-width: 768px) {
+            .desktop-grade-table, .desktop-comparison {
+                display: none; 
+            }
+            .mobile-grade-list, .mobile-comparison {
+                display: block;
+            }
+            .mobile-comparison {
+                padding-top: 15px;
+            }
+
+            /* تنسيق بطاقات المقارنة (نظام OP1, OP, OPA) */
+            .comparison-card {
+                display: block;
+                margin-bottom: 20px;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                overflow: hidden;
+            }
+            .comparison-card .category-header {
+                font-size: 1.1em;
+                padding: 10px;
+                text-align: center;
+                background-color: #2d6a4f;
+                color: white;
+            }
+            .comparison-card div:not(.category-header) {
+                padding: 10px 15px;
+                border-bottom: 1px dashed #ddd;
+                display: flex;
+                flex-direction: column; /* تحويل التسمية والقيمة إلى عمودية */
+                font-size: 0.95em;
+            }
+            .comparison-card div:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            .comparison-card .label {
+                font-weight: bold;
+                color: #2d6a4f;
+                margin-bottom: 2px;
+            }
+            /* تحديث هام: لضمان التفاف النص داخل بطاقات المقارنة */
+            .comparison-card div span {
+                word-break: break-word;
+            }
+        }
     </style>
 </head>
 <body>
-<div class="container">
-    <button id="theme-toggle">🌙</button>
-    <h1>وزنة شاهي ربيع</h1>
-    
-    <div class="input-area">
-        <p style="margin: 0;"><strong>طريقة الحساب:</strong></p>
-        <select id="calcMode">
-            <option value="water" selected>الحساب بالماء</option>
-            <option value="sugar">الحساب بالسكر</option>
-            <option value="tea">الحساب بالشاي</option>
-        </select>
+<h1>📜 المرجع الكامل لتصنيفات الشاي الأسود</h1>
+<div class="intro">
+<p>
+            يعتمد نظام تصنيف الشاي الأسود على حجم الورقة، وعدد البراعم الذهبية (Tips)، ومكان القطفة في النبات.
+            يُستخدم هذا النظام في الهند، وسريلانكا، ونيبال، وكينيا، وغيرها.
+            يهدف التصنيف إلى تحديد جودة الشاي ومظهره وطعمه.
+        </p>
+</div>
+<h2 style="background-color:#d8f3dc; padding:10px; border-right:6px solid #2d6a4f;">
+🌿 قائمة تصنيفات الشاي الأسود المشهورة
+</h2>
 
-        <p id="input-label">أدخل كمية الماء بالمليلتر:</p>
-        <input type="text" id="mainInput" placeholder="أدخل القيمة هنا">
-        <input type="range" id="waterSlider" min="0" max="10000" step="50" value="0">
-        
-        <div class="controls-container">
-            <div>
-                <p class="control-label">مستوى السكر القياسي (75 جم/لتر)</p>
-                <div class="control-group" id="sweetness-controls">
-                    <button data-value="57" onclick="selectOption(this, false, 'sugar')">خفيف</button>
-                    <button data-value="75" onclick="selectOption(this, false, 'sugar')" class="active">معتدل</button>
-                    <button data-value="90" onclick="selectOption(this, false, 'sugar')">حالي زيادة</button>
-                </div>
-            </div>
-            <div>
-                <p class="control-label">مستوى الشاهي</p>
-                <div class="control-group" id="strength-controls">
-                    <button data-value="11" onclick="selectOption(this, false, 'tea')">خفيف</button>
-                    <button data-value="12" onclick="selectOption(this, false, 'tea')" class="active">وسط</button>
-                    <button data-value="13" onclick="selectOption(this, false, 'tea')">ثقيل</button>
-                </div>
-            </div>
-            <div>
-                <p class="control-label">خلطتي (12 جم شاي/لتر)</p>
-                <div class="blend-controls" id="blend-controls">
-                    <button data-value="11" data-blend-type="light" onclick="selectOption(this, true, 'tea')">خفيف</button>
-                    <button data-value="12" data-blend-type="medium" onclick="selectOption(this, true, 'tea')">وسط</button>
-                    <button data-value="13" data-blend-type="heavy" onclick="selectOption(this, true, 'tea')">ثقيل</button>
-                </div>
-            </div>
-            <div id="blend-result" class="result" style="visibility:hidden; margin-top: 0;"></div>
-        </div>
-    </div>
-
-	<p><span class="underlined-red">اذا لم يتوفر الميزان يمكنك استخدام القياس بالنظر مستخدما البيالة كمقياس حيث ان المقاييس تم اختبارها مسبقا</span></p>
-    
-    <div id="result" class="result" style="visibility:hidden;"></div>
-
-    <div class="visual-container">
-        <!-- Visuals -->
-        <div class="glass-container">
-            <p class="glass-title">السكر</p>
-            <div class="glass" id="sugarGlass">
-                <div id="sugarLevel"></div>
-                <div class="scale gram-scale">
-                    <div style="bottom: 100%;">84</div><div style="bottom: 87.5%;">73.5</div><div style="bottom: 75%;">63</div><div style="bottom: 62.5%;">52.5</div><div style="bottom: 50%;">42</div><div style="bottom: 37.5%;">31.5</div><div style="bottom: 25%;">21</div><div style="bottom: 12.5%;">10.5</div><div style="bottom: 6.25%;">5.25</div>
-                </div>
-                <div class="scale percentage-scale">
-                    <div style="bottom: 100%;">100%</div><div style="bottom: 75%;">75%</div><div style="bottom: 50%;">50%</div><div style="bottom: 25%;">25%</div><div style="bottom: 10%;">10%</div>
-                </div>
-            </div>
-            <p class="note" id="sugarNote" style="visibility:hidden;"></p>
-        </div>
-        <div class="glass-container">
-            <p class="glass-title">الشاي</p>
-            <div class="glass" id="teaGlass">
-                   <div id="teaLevel"></div>
-                   <div class="scale gram-scale">
-                        <div style="bottom: 100%;">21</div><div style="bottom: 90%;">18.9</div><div style="bottom: 75%;">15.75</div><div style="bottom: 65%;">13.65</div><div style="bottom: 50%;">10.5</div><div style="bottom: 40%;">8.4</div><div style="bottom: 25%;">5.25</div><div style="bottom: 15%;">3.15</div><div style="bottom: 10%;">2.1</div>
-                   </div>
-                   <div class="scale percentage-scale">
-                        <div style="bottom: 100%;">100%</div><div style="bottom: 75%;">75%</div><div style="bottom: 50%;">50%</div><div style="bottom: 25%;">25%</div><div style="bottom: 10%;">10%</div>
-                   </div>
-            </div>
-            <p class="note" id="teaNote" style="visibility:hidden;"></p>
-        </div>
-    </div>
-
-    <div class="footer-notes">
-        <p><span class="underlined-red">البيالة المستخدمة في القياس هي بيالة "بادريق"</span></p>
-        <p>البيالة العادية من الماء إلى المستوى الطبيعي المتعارف عليه تساوي تقريبا <span class="red-text">73</span> ملل، أي أن <span class="red-text">1</span> لتر يساوي <span class="red-text">13.69</span> بيالة.</p>
-		<p><span style="color: red;">(لجميع انواع الشاهي)</span> تقريبا هذه الوزنة مناسبة للجميع مع التعديل حسب الحاجة لواحد لتر</p>
-        <p><strong class="red-text">طريقة الحساب:</strong> لحساب كمية <span class="red-text">السكر</span> و<span class="red-text">الشاي</span> بناءً على كمية الماء:<br>
-        <span class="red-text">السكر (جم)</span> = (كمية الماء بالمللتر ÷ 1000) × <span class="blue-text">50 إلى 55</span><br>
-        <span class="red-text">الشاي (جم)</span> = (كمية الماء بالمللتر ÷ 1000) × <span class="blue-text">12 إلى 12.5</span></p>
-        <p><strong class="red-text">ملاحظة:</strong> قد تختلف النتيجة حسب نوع الشاي، يفضل التجربة والضبط حسب الذوق.</p>
-        <p>للمزيد من المعلومات حول تصنيفات الشاي، تفضل بزيارة: <a href="BlackTeaGradingReference.html">تصنيفات الشاي</a></p>
-    </div>
-
+<!-- 1. محتوى الجدول الرئيسي في وضع سطح المكتب (يتم إخفاؤه في الجوال) -->
+<div class="desktop-grade-table">
+    <table style="width:100%; border-collapse:collapse; direction:rtl;">
+        <tr style="background-color:#d8f3dc; font-weight:bold;">
+            <th>التصنيف</th>
+            <th>نوع الورق</th>
+            <th>الطعم والمذاق المميز</th>
+        </tr>
+        <tr><td style="color:#1b4332;font-weight:bold;">SFTGFOP</td><td>ورقة كاملة جدًا مع أعلى نسبة من البراعم الذهبية (tips)</td><td>ناعم، عطري، حلو المذاق، غني بالنكهات الزهرية والفواكه. <span style="color:#cc5500;">بدون مرارة</span></td></tr>
+        <tr><td style="color:#1b4332;font-weight:bold;">FTGFOP</td><td>أوراق كاملة دقيقة تحتوي على براعم كثيرة</td><td>طعم فاخر ومتوازن بين الحلاوة والعطر الزهري، لون ذهبي مشرق. <span style="color:#cc5500;">بدون مرارة</span></td></tr>
+        <tr><td style="color:#1b4332;font-weight:bold;">TGFOP</td><td>أوراق كاملة مع كمية معتدلة من البراعم</td><td>نكهة زهرية خفيفة، قوام ناعم، لون كهرماني ذهبي. <span style="color:#cc5500;">بدون مرارة</span></td></tr>
+        <tr><td style="color:#1b4332;font-weight:bold;">GFOP</td><td>أوراق كاملة مع بعض البراعم الذهبية</td><td>نكهة متوسطة القوة، زهرية معتدلة، لون كهرماني. <span style="color:#cc5500;">مرارة خفيفة</span></td></tr>
+        <tr><td style="color:#1b4332;font-weight:bold;">FOP</td><td>أوراق كاملة تحتوي على براعم قليلة</td><td>نكهة زهرية ناعمة، قوام لطيف، لون ذهبي فاتح. <span style="color:#cc5500;">مرارة خفيفة</span></td></tr>
+        <tr><td style="color:#1b4332;font-weight:bold;">OP</td><td>أوراق كاملة متوسطة الحجم</td><td>نكهة ناعمة متوازنة، لون ذهبي مائل للعنبر. <span style="color:#cc5500;">بدون مرارة</span></td></tr>
+        <tr><td style="color:#1b4332;font-weight:bold;">OP1</td><td>أوراق كاملة أدق وأنحف من OP</td><td>طعم أنعم وأرقّ، لون ذهبي صافٍ، نكهة زهرية خفيفة. <span style="color:#cc5500;">بدون مرارة</span></td></tr>
+        <tr><td style="color:#1b4332;font-weight:bold;">OPA</td><td>أوراق أكبر حجمًا وأكثر خشونة</td><td>نكهة قوية وغنية، لون أحمر داكن، أقل نعومة من OP1. <span style="color:#cc5500;">مرارة خفيفة إلى متوسطة</span></td></tr>
+        <tr><td style="color:#1b4332;font-weight:bold;">BOP</td><td>أوراق مكسّرة متوسطة الحجم</td><td>طعم قوي وكثيف، لون أحمر نحاسي، مثالي لشاي الإفطار. <span style="color:#cc5500;">مرارة متوسطة</span></td></tr>
+        <tr><td style="color:#1b4332;font-weight:bold;">FBOP</td><td>أوراق مكسّرة مع بعض البراعم</td><td>نكهة متوازنة مع لمسة زهرية خفيفة. <span style="color:#cc5500;">مرارة متوسطة</span></td></tr>
+        <tr><td style="color:#1b4332;font-weight:bold;">FBOP1</td><td>أوراق مكسّرة دقيقة وبراعم أكثر</td><td>نكهة غنية متجانسة، لون داكن جميل، ملمس ناعم. <span style="color:#cc5500;">مرارة متوسطة</span></td></tr>
+        <tr><td style="color:#1b4332;font-weight:bold;">BOPF</td><td>فتات أوراق مكسّرة صغيرة</td><td>نكهة مركّزة قوية، لون أحمر داكن جدًا، يُستخدم في أكياس الشاي. <span style="color:#cc5500;">مرارة واضحة</span></td></tr>
+        <tr><td style="color:#1b4332;font-weight:bold;">PF</td><td>فتات ناعمة من أوراق الشاي</td><td>شاي سريع التحضير، طعم قوي مركز، قليل التعقيد. <span style="color:#cc5500;">مرارة واضحة</span></td></tr>
+        <tr><td style="color:#1b4332;font-weight:bold;">D / Dust</td><td>جزيئات دقيقة جدًا من الشاي</td><td>طعم قوي جدًا يميل للمرارة، لون داكن عميق، يُستخدم في الشاي التجاري. <span style="color:#cc5500;">مرارة قوية جدًا</span></td></tr>
+    </table>
 </div>
 
-<script>
-    // --- Element Constants ---
-    const mainInput = document.getElementById('mainInput');
-    const waterSlider = document.getElementById('waterSlider');
-    const themeToggleButton = document.getElementById('theme-toggle');
-    const calcModeSelect = document.getElementById('calcMode');
-    const sweetnessControls = document.getElementById('sweetness-controls');
-    const strengthControls = document.getElementById('strength-controls');
-    const blendControls = document.getElementById('blend-controls');
-    const blendResultDiv = document.getElementById('blend-result');
-    const resultDiv = document.getElementById('result');
-    const inputLabel = document.getElementById('input-label');
+<!-- 2. محتوى الجدول الرئيسي في وضع الجوال (بطاقات عمودية) -->
+<div class="mobile-grade-list">
     
-    // Unified list of all sweetness buttons
-    const allSweetnessButtons = [];
-    sweetnessControls.querySelectorAll('button').forEach(btn => allSweetnessButtons.push(btn));
-
-    // --- State Variables ---
-    let strengthMultiplier = 12; 
-    let isBlendMode = false;
-    let activeSugarPerLiter = 75; // The sugar value currently active (57, 75, or 90)
+    <!-- SFTGFOP -->
+    <div class="grade-card">
+        <div class="grade-title">SFTGFOP</div>
+        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">ورقة كاملة جدًا مع أعلى نسبة من البراعم الذهبية (tips)</span></div>
+        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">ناعم، عطري، حلو المذاق، غني بالنكهات الزهرية والفواكه. <span style="color:#cc5500; font-weight: bold;">بدون مرارة</span></span></div>
+    </div>
     
-    // --- Blend Ratios (Fixed Ratios for Blend Mode) ---
-    // تم إعادة النسبة إلى الوضع الأصلي: الإجمالي هو 12، وهو مقسم 9:1:1:1
-    const BLEND_TEA_RATIOS = {
-        'شاهي ربيع': 9,
-        'شاهي أبو جبل': 1,
-        'شاهي الوزة': 1,
-        'شاهي خاثر': 1,
-    };
-    const BLEND_TEA_TOTAL_RATIO = Object.values(BLEND_TEA_RATIOS).reduce((a, b) => a + b, 0); // 12
+    <!-- FTGFOP -->
+    <div class="grade-card">
+        <div class="grade-title">FTGFOP</div>
+        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">أوراق كاملة دقيقة تحتوي على براعم كثيرة</span></div>
+        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">طعم فاخر ومتوازن بين الحلاوة والعطر الزهري، لون ذهبي مشرق. <span style="color:#cc5500; font-weight: bold;">بدون مرارة</span></span></div>
+    </div>
+
+    <!-- TGFOP -->
+    <div class="grade-card">
+        <div class="grade-title">TGFOP</div>
+        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">أوراق كاملة مع كمية معتدلة من البراعم</span></div>
+        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">نكهة زهرية خفيفة، قوام ناعم، لون كهرماني ذهبي. <span style="color:#cc5500; font-weight: bold;">بدون مرارة</span></span></div>
+    </div>
+
+    <!-- GFOP -->
+    <div class="grade-card">
+        <div class="grade-title">GFOP</div>
+        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">أوراق كاملة مع بعض البراعم الذهبية</span></div>
+        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">نكهة متوسطة القوة، زهرية معتدلة، لون كهرماني. <span style="color:#cc5500; font-weight: bold;">مرارة خفيفة</span></span></div>
+    </div>
+
+    <!-- FOP -->
+    <div class="grade-card">
+        <div class="grade-title">FOP</div>
+        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">أوراق كاملة تحتوي على براعم قليلة</span></div>
+        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">نكهة زهرية ناعمة، قوام لطيف، لون ذهبي فاتح. <span style="color:#cc5500; font-weight: bold;">مرارة خفيفة</span></span></div>
+    </div>
+
+    <!-- OP -->
+    <div class="grade-card">
+        <div class="grade-title">OP</div>
+        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">أوراق كاملة متوسطة الحجم</span></div>
+        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">نكهة ناعمة متوازنة، لون ذهبي مائل للعنبر. <span style="color:#cc5500; font-weight: bold;">بدون مرارة</span></span></div>
+    </div>
+
+    <!-- OP1 -->
+    <div class="grade-card">
+        <div class="grade-title">OP1</div>
+        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">أوراق كاملة أدق وأنحف من OP</span></div>
+        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">طعم أنعم وأرقّ، لون ذهبي صافٍ، نكهة زهرية خفيفة. <span style="color:#cc5500; font-weight: bold;">بدون مرارة</span></span></div>
+    </div>
+
+    <!-- OPA -->
+    <div class="grade-card">
+        <div class="grade-title">OPA</div>
+        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">أوراق أكبر حجمًا وأكثر خشونة</span></div>
+        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">نكهة قوية وغنية، لون أحمر داكن، أقل نعومة من OP1. <span style="color:#cc5500; font-weight: bold;">مرارة خفيفة إلى متوسطة</span></span></div>
+    </div>
+
+    <!-- BOP -->
+    <div class="grade-card">
+        <div class="grade-title">BOP</div>
+        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">أوراق مكسّرة متوسطة الحجم</span></div>
+        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">طعم قوي وكثيف، لون أحمر نحاسي، مثالي لشاي الإفطار. <span style="color:#cc5500; font-weight: bold;">مرارة متوسطة</span></span></div>
+    </div>
+
+    <!-- FBOP -->
+    <div class="grade-card">
+        <div class="grade-title">FBOP</div>
+        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">أوراق مكسّرة مع بعض البراعم</span></div>
+        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">نكهة متوازنة مع لمسة زهرية خفيفة. <span style="color:#cc5500; font-weight: bold;">مرارة متوسطة</span></span></div>
+    </div>
+
+    <!-- FBOP1 -->
+    <div class="grade-card">
+        <div class="grade-title">FBOP1</div>
+        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">أوراق مكسّرة دقيقة وبراعم أكثر</span></div>
+        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">نكهة غنية متجانسة، لون داكن جميل، ملمس ناعم. <span style="color:#cc5500; font-weight: bold;">مرارة متوسطة</span></span></div>
+    </div>
+
+    <!-- BOPF -->
+    <div class="grade-card">
+        <div class="grade-title">BOPF</div>
+        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">فتات أوراق مكسّرة صغيرة</span></div>
+        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">نكهة مركّزة قوية، لون أحمر داكن جدًا، يُستخدم في أكياس الشاي. <span style="color:#cc5500; font-weight: bold;">مرارة واضحة</span></span></div>
+    </div>
+
+    <!-- PF -->
+    <div class="grade-card">
+        <div class="grade-title">PF</div>
+        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">فتات ناعمة من أوراق الشاي</span></div>
+        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">شاي سريع التحضير، طعم قوي مركز، قليل التعقيد. <span style="color:#cc5500; font-weight: bold;">مرارة واضحة</span></span></div>
+    </div>
+
+    <!-- D / Dust -->
+    <div class="grade-card">
+        <div class="grade-title">D / Dust</div>
+        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">جزيئات دقيقة جدًا من الشاي</span></div>
+        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">طعم قوي جدًا يميل للمرارة، لون داكن عميق، يُستخدم في الشاي التجاري. <span style="color:#cc5500; font-weight: bold;">مرارة قوية جدًا</span></span></div>
+    </div>
+
+</div> <!-- نهاية .mobile-grade-list -->
+
+<hr style="border:2px solid #b7e4c7; margin:25px 0;">
+
+
+<h2>🌿 أولاً: تصنيفات الورقة الكاملة (Whole Leaf Grades)</h2>
+<p>تُعد هذه الفئة الأعلى جودة، حيث تبقى الأوراق كاملة دون تكسير.</p>
+<ul>
+<li><span class="code">OP</span> – Orange Pekoe: أوراق كاملة متوسطة الحجم، نكهة ناعمة متوازنة.</li>
+<li><span class="code">FOP</span> – Flowery Orange Pekoe: تحتوي على بعض البراعم الزهرية، رائحة خفيفة.</li>
+<li><span class="code">GFOP</span> – Golden Flowery Orange Pekoe: أوراق تحتوي على براعم ذهبية، نكهة أغنى.</li>
+<li><span class="code">TGFOP</span> – Tippy Golden Flowery Orange Pekoe: نسبة عالية من البراعم الذهبية، جودة ممتازة.</li>
+<li><span class="code">FTGFOP</span> – Finest Tippy Golden Flowery Orange Pekoe: من أرقى الأنواع، نكهة متوازنة فاخرة.</li>
+<li><span class="code">FTGFOP1</span> – Grade 1: درجة تجارية فائقة من FTGFOP، تحتوي على نسبة عالية من البراعم الذهبية.</li>
+<li><span class="code">SFTGFOP</span> – Super Finest Tippy Golden Flowery Orange Pekoe: أعلى درجات الشاي الكامل الورقة، نادر وفاخر جدًا.</li>
+<li><span class="code">STGFOP1</span> – Special Tippy Golden Flowery Orange Pekoe: نوع خاص من الدرجة الممتازة، جودة فائقة.</li>
+</ul>
+<h2>🍃 ثانيًا: تصنيفات الأوراق المكسّرة (Broken Leaf Grades)</h2>
+<p>تُكسر الأوراق عمدًا لتسهيل الاستخلاص وإنتاج نكهة أقوى. تُستخدم عادة في المزج والشاي القوي.</p>
+<ul>
+<li><span class="code">BOP</span> – Broken Orange Pekoe: أوراق مكسّرة متوسطة الحجم، نكهة قوية.</li>
+<li><span class="code">BOP1</span> – Broken Orange Pekoe Grade 1: أوراق مكسرة ذات شكل منتظم ونكهة ناعمة.</li>
+<li><span class="code">FBOP</span> – Flowery Broken Orange Pekoe: تحتوي على بعض البراعم، نكهة زهرية لطيفة.</li>
+<li><span class="code">FBOP1</span> – Flowery Broken Orange Pekoe Grade 1: درجة أعلى من FBOP، تحتوي على المزيد من البراعم الذهبية.</li>
+<li><span class="code">FBOPF</span> – Flowery Broken Orange Pekoe Fannings: مزيج بين الأوراق المكسرة والفتات الصغيرة، نكهة مركزة.</li>
+<li><span class="code">FBOPF1</span> – Flowery Broken Orange Pekoe Fannings 1: درجة أعلى قليلاً من FBOPF، تحتوي على براعم أكثر.</li>
+<li><span class="code">FBOPFSP</span> – Special Flowery Broken Orange Pekoe Fannings: فئة خاصة عالية الجودة من الأوراق المكسرة.</li>
+<li><span class="code">FBOPFEXSP</span> – Extra Special Flowery Broken Orange Pekoe Fannings: درجة استثنائية نادرة، تُستخدم في الشاي الفاخر جدًا.</li>
+</ul>
+<h2>🍂 ثالثًا: تصنيفات الفتات (Fannings Grades)</h2>
+<p>فتات أوراق صغيرة تنتج أثناء الغربلة. تُستخدم في أكياس الشاي عالية الجودة.</p>
+<ul>
+<li><span class="code">PF</span> – Pekoe Fannings: فتات صغيرة من أوراق الشاي الجيدة.</li>
+<li><span class="code">BOPF</span> – Broken Orange Pekoe Fannings: نكهة قوية، تُستخدم في الشاي سريع الاستخلاص.</li>
+<li><span class="code">FBOPF</span> – Flowery Broken Orange Pekoe Fannings: نكهة متوازنة مع بعض البراعم.</li>
+<li><span class="code">TGFOPF</span> – Tippy Golden Flowery Orange Pekoe Fannings: فتات من شاي فاخر يحتوي على براعم ذهبية.</li>
+</ul>
+<h2>🌰 رابعًا: تصنيفات الغبار (Dust Grades)</h2>
+<p>أصغر جزيئات أوراق الشاي، تُستخدم في الشاي التجاري وأكياس الشاي الاقتصادية.</p>
+<ul>
+<li><span class="code">D</span> – Dust: جزيئات صغيرة جدًا من الشاي، نكهة قوية لكن أقل تعقيدًا.</li>
+<li><span class="code">PD</span> – Pekoe Dust: غبار شاي عالي الجودة من أوراق متوسطة.</li>
+<li><span class="code">FD</span> – Fine Dust: ناعم وسريع الاستخلاص، لون داكن جدًا.</li>
+<li><span class="code">GD</span> – Golden Dust: يحتوي على بعض البراعم الذهبية، نكهة أفضل من الغبار العادي.</li>
+</ul>
+<h2>🌸 خامسًا: رموز إضافية تُستخدم أحيانًا</h2>
+<ul>
+<li><span class="code">CH</span> – Choppy: يشير إلى أوراق مقطعة غير منتظمة الشكل.</li>
+<li><span class="code">CL</span> – Clonal: شاي منتج من نوع نبات محدد عالي الجودة (استنساخي).</li>
+<li><span class="code">S</span> – Special: يدل على دفعة خاصة أو مميزة من الشاي.</li>
+<li><span class="code">Ex</span> – Extra: جودة إضافية عن المعتاد في نفس الفئة.</li>
+<li><span class="code">SP</span> – Special / Supreme: أعلى مستوى من الجودة في نوع معين.</li>
+<li><span class="code">G</span> – Golden: وجود براعم ذهبية.</li>
+<li><span class="code">T</span> – Tippy: نسبة عالية من البراعم (Tips).</li>
+</ul>
+<h2>🍵 مقارنة تفصيلية بين OP و OP1 و OPA</h2>
+<p>تُستخدم هذه الرموز لتمييز درجات الشاي ضمن فئة <strong>Orange Pekoe</strong>، وهي من أكثر الفئات شهرة في الشاي السيلاني والهندي.</p>
+<!-- جدول سطح المكتب (يتم إخفاؤه على الجوال) -->
+<div class="desktop-comparison">
+    <table class="comparison-table" style="width:100%; border-collapse:collapse;">
+        <tr style="background-color:#2d6a4f; color:white;">
+            <th style="padding:10px;">الخاصية</th>
+            <th style="padding:10px;">OP</th>
+            <th style="padding:10px;">OP1</th>
+            <th style="padding:10px;">OPA</th>
+        </tr>
+        <tr style="background-color:#f1faee;">
+            <td style="padding:10px; color:#1b4332; font-weight:bold;">حجم الورقة</td>
+            <td style="padding:10px;">متوسطة وطويلة قليلاً</td>
+            <td style="padding:10px;">أدق وأنحف وأكثر تجانسًا</td>
+            <td style="padding:10px;">أكبر وأعرض وأكثر خشونة</td>
+        </tr>
+        <tr style="background-color:#ffffff;">
+            <td style="padding:10px; color:#1b4332; font-weight:bold;">المظهر</td>
+            <td style="padding:10px;">ورقة كاملة متوسطة الالتواء</td>
+            <td style="padding:10px;">ملفوفة بإتقان وناعمة الملمس</td>
+            <td style="padding:10px;">ورقة فضفاضة وخشنة المظهر</td>
+        </tr>
+        <tr style="background-color:#f1faee;">
+            <td style="padding:10px; color:#1b4332; font-weight:bold;">النكهة</td>
+            <td style="padding:10px;">ناعمة ومعتدلة</td>
+            <td style="padding:10px;">زهرية متوازنة ورقيقة الطعم</td>
+            <td style="padding:10px;">قوية وغنية وأثقل في الفم</td>
+        </tr>
+        <tr style="background-color:#ffffff;">
+            <td style="padding:10px; color:#1b4332; font-weight:bold;">لون الشاي في الكوب</td>
+            <td style="padding:10px;">ذهبي مائل للعنبر</td>
+            <td style="padding:10px;">ذهبي صافٍ وفاتح</td>
+            <td style="padding:10px;">كهرماني داكن</td>
+        </tr>
+        <tr style="background-color:#f1faee;">
+            <td style="padding:10px; color:#1b4332; font-weight:bold;">التصنيف العام</td>
+            <td style="padding:10px;">أساسي جيد</td>
+            <td style="padding:10px; font-weight:bold; color:#1565c0;">أعلى من OPA</td>
+            <td style="padding:10px;">أدنى من OP1 لكن بطعم أقوى</td>
+        </tr>
+    </table>
+</div>
+
+<!-- بطاقات الجوال (يتم إخفاؤها على سطح المكتب) -->
+<div class="mobile-comparison">
     
-    // --- Functions ---
+    <!-- OP -->
+    <div class="comparison-card">
+        <div class="category-header">OP - Orange Pekoe</div>
+        <div><span class="label">حجم الورقة:</span> <span>متوسطة وطويلة قليلاً</span></div>
+        <div><span class="label">المظهر:</span> <span>ورقة كاملة متوسطة الالتواء</span></div>
+        <div><span class="label">النكهة:</span> <span>ناعمة ومعتدلة</span></div>
+        <div><span class="label">لون الشاي في الكوب:</span> <span>ذهبي مائل للعنبر</span></div>
+        <div><span class="label">التصنيف العام:</span> <span>أساسي جيد</span></div>
+    </div>
 
-    function selectOption(element, isBlend, type) {
-        if (type === 'sugar') {
-            // 1. Clean up active state from standard sugar buttons
-            allSweetnessButtons.forEach(btn => btn.classList.remove('active'));
-            
-            // 2. Set active state on the clicked button
-            element.classList.add('active');
-            
-            // 3. Update active sugar value
-            activeSugarPerLiter = parseFloat(element.dataset.value);
-            
-            // 4. Disable blend mode when standard sugar is selected
-            isBlendMode = false;
-            blendControls.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
-            strengthControls.querySelectorAll('button').forEach(btn => {
-                if (parseFloat(btn.dataset.value) === strengthMultiplier) {
-                    btn.classList.add('active');
-                }
-            });
+    <!-- OP1 -->
+    <div class="comparison-card">
+        <div class="category-header">OP1 - Orange Pekoe Grade 1</div>
+        <div><span class="label">حجم الورقة:</span> <span>أدق وأنحف وأكثر تجانسًا</span></div>
+        <div><span class="label">المظهر:</span> <span>ملفوفة بإتقان وناعمة الملمس</span></div>
+        <div><span class="label">النكهة:</span> <span>زهرية متوازنة ورقيقة الطعم</span></div>
+        <div><span class="label">لون الشاي في الكوب:</span> <span>ذهبي صافٍ وفاتح</span></div>
+        <div><span class="label">التصنيف العام:</span> <span style="font-weight:bold; color:#1565c0;">أعلى من OPA</span></div>
+    </div>
 
+    <!-- OPA -->
+    <div class="comparison-card">
+        <div class="category-header">OPA - Orange Pekoe A</div>
+        <div><span class="label">حجم الورقة:</span> <span>أكبر وأعرض وأكثر خشونة</span></div>
+        <div><span class="label">المظهر:</span> <span>ورقة فضفاضة وخشنة المظهر</span></div>
+        <div><span class="label">النكهة:</span> <span>قوية وغنية وأثقل في الفم</span></div>
+        <div><span class="label">لون الشاي في الكوب:</span> <span>كهرماني داكن</span></div>
+        <div><span class="label">التصنيف العام:</span> <span>أدنى من OP1 لكن بطعم أقوى</span></div>
+    </div>
+</div>
 
-        } else if (type === 'tea') {
-            
-            // Handle standard strength buttons
-            if (!isBlend) {
-                strengthControls.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
-                element.classList.add('active');
-                strengthMultiplier = parseFloat(element.dataset.value);
-                isBlendMode = false;
-                
-                // Also remove active from blend buttons if standard is selected
-                blendControls.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
-                
-            } 
-            // Handle blend buttons
-            else {
-                blendControls.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
-                element.classList.add('active');
-                
-                // Set the total tea multiplier based on the blend button's data-value (11, 12, 13)
-                strengthMultiplier = parseFloat(element.dataset.value);
-                isBlendMode = true;
-                
-                // Ensure standard strength buttons are inactive when blend is selected
-                strengthControls.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
-            }
-        }
-        
-        // Run main calculation
-        runCalculation();
-    }
+<p style="margin-top:15px;">
+        🔹 باختصار: <strong>OP1</strong> هو الأفضل من حيث الدقة والعناية بالجودة، بينما <strong>OPA</strong> أقوى في الطعم وأقل نعومة.
+        يعتمد الاختيار على الذوق الشخصي بين النعومة أو القوة.
+    </p>
 
-    // --- Event Listeners ---
-    calcModeSelect.addEventListener('change', changeCalcMode);
-    mainInput.addEventListener('input', () => runCalculation());
-    waterSlider.addEventListener('input', () => runCalculation(true));
-    themeToggleButton.addEventListener('click', toggleTheme);
+<!-- معرض الصور المتجاوب -->
+<div class="image-gallery">
+    <!-- OP -->
+    <div class="image-card">
+        <img src="Screen Shot 2025-10-29 at 12.26.37 AM.png" onerror="this.onerror=null; this.src='https://alhammod1.github.io/waznat-shahi/';" alt="صنف الشاي OP - Orange Pekoe"/>
+        <div class="image-caption">OP - Orange Pekoe</div>
+    </div>
+    <!-- BOP -->
+    <div class="image-card">
+        <img src="Screen Shot 2025-10-29 at 12.26.49 AM.png" onerror="this.onerror=null; this.src='https://alhammod1.github.io/waznat-shahi/';" alt="صنف الشاي BOP - Broken Orange Pekoe"/>
+        <div class="image-caption">BOP - Broken Orange Pekoe</div>
+    </div>
+    <!-- OP1 -->
+    <div class="image-card">
+        <img src="Screen Shot 2025-10-29 at 12.27.07 AM.png" onerror="this.onerror=null; this.src='https://alhammod1.github.io/waznat-shahi/';" alt="صنف الشاي OP1"/>
+        <div class="image-caption">OP1</div>
+    </div>
+    <!-- OPA -->
+    <div class="image-card">
+        <img src="Screen Shot 2025-10-29 at 12.27.17 AM.png" onerror="this.onerror=null; this.src='https://alhammod1.github.io/waznat-shahi/';" alt="صنف الشاي OPA"/>
+        <div class="image-caption">OPA</div>
+    </div>
+    <!-- PEKOE -->
+    <div class="image-card">
+        <img src="Screen Shot 2025-10-29 at 12.28.09 AM.png" onerror="this.onerror=null; this.src='https://alhammod1.github.io/waznat-shahi/';" alt="صنف الشاي Pekoe"/>
+        <div class="image-caption">PEKOE</div>
+    </div>
+    <!-- BOP1 -->
+    <div class="image-card">
+        <img src="Screen Shot 2025-10-29 at 12.27.40 AM.png" onerror="this.onerror=null; this.src='https://alhammod1.github.io/waznat-shahi/';" alt="صنف الشاي BOP1"/>
+        <div class="image-caption">BOP1</div>
+    </div>
+    <!-- BOP1A -->
+    <div class="image-card">
+        <img src="Screen Shot 2025-10-29 at 12.27.53 AM.png" onerror="this.onerror=null; this.src='https://alhammod1.github.io/waznat-shahi/';" alt="صنف الشاي BOP1A"/>
+        <div class="image-caption">BOP1A</div>
+    </div>
+    <!-- BOPF -->
+    <div class="image-card">
+        <img src="Screen Shot 2025-10-29 at 12.28.01 AM.png" onerror="this.onerror=null; this.src='https://alhammod1.github.io/waznat-shahi/';" alt="صنف الشاي BOPF"/>
+        <div class="image-caption">BOPF</div>
+    </div>
+    <!-- FBOPFSP -->
+    <div class="image-card">
+        <img src="Screen Shot 2025-10-29 at 12.27.30 AM.png" onerror="this.onerror=null; this.src='https://alhammod1.github.io/waznat-shahi/';" alt="صنف الشاي FBOPFSP"/>
+        <div class="image-caption">FBOPFSP</div>
+    </div>
+    <!-- GREEN TEA - GP1 -->
+    <div class="image-card">
+        <img src="Screen Shot 2025-10-29 at 12.28.21 AM.png" onerror="this.onerror=null; this.src='https://alhammod1.github.io/waznat-shahi/';" alt="صنف الشاي الأخضر GP1"/>
+        <div class="image-caption">GREEN TEA - GP1 (شاي أخضر)</div>
+    </div>
+</div>
 
-    // Initial load setup
-    document.addEventListener('DOMContentLoaded', () => {
-        loadTheme();
-        runCalculation(); 
-    });
-
-    function changeCalcMode() {
-        const mode = calcModeSelect.value;
-        const labels = {
-            water: "أدخل كمية الماء بالمليلتر:",
-            sugar: "أدخل كمية السكر بالجرام:",
-            tea: "أدخل كمية الشاي بالجرام:"
-        };
-        inputLabel.textContent = labels[mode];
-        waterSlider.style.display = (mode === 'water') ? 'block' : 'none';
-        mainInput.value = '';
-        runCalculation(); 
-    }
-
-    function runCalculation(isSlider = false) {
-        if (isSlider) {
-            mainInput.value = waterSlider.value;
-        }
-        
-        let waterMl, sugarGrams, teaGrams;
-        const mode = calcModeSelect.value;
-        let inputValue = mainInput.value.trim();
-        let value = parseFloat(inputValue.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[^\d\.]/g, ''));
-
-        const resultElements = document.querySelectorAll('.result, .note');
-        if (isNaN(value) || value <= 0) {
-            resultElements.forEach(el => el.style.visibility = 'hidden');
-            blendResultDiv.style.visibility = 'hidden';
-            document.getElementById('sugarLevel')?.style.setProperty('height', '0px');
-            document.getElementById('teaLevel')?.style.setProperty('height', '0px');
-            if (mode === 'water') waterSlider.value = 0;
-            return;
-        }
-        resultElements.forEach(el => el.style.visibility = 'visible');
-
-        // Determine base sugar and tea multipliers
-        let baseSugarPerLiter = activeSugarPerLiter;
-        let teaMultiplier = strengthMultiplier; // Total tea g/L (11, 12, or 13)
-        
-        // --- Calculation Logic based on Mode ---
-        if (mode === 'water') {
-            waterMl = value;
-            if(isSlider) mainInput.value = waterMl;
-            else waterSlider.value = waterMl;
-            sugarGrams = (baseSugarPerLiter * waterMl) / 1000;
-            teaGrams = (teaMultiplier * waterMl) / 1000;
-        } else if (mode === 'sugar') {
-            sugarGrams = value;
-            waterMl = (sugarGrams * 1000) / baseSugarPerLiter;
-            teaGrams = (teaMultiplier * waterMl) / 1000;
-        } else if (mode === 'tea') {
-            teaGrams = value;
-            waterMl = (teaGrams * 1000) / teaMultiplier;
-            sugarGrams = (baseSugarPerLiter * waterMl) / 1000;
-        }
-
-        waterMl = Math.max(0, waterMl);
-        sugarGrams = Math.max(0, sugarGrams);
-        teaGrams = Math.max(0, teaGrams);
-
-        updateDisplay(waterMl, sugarGrams, teaGrams);
-    }
-
-    function updateDisplay(waterMl, sugarGrams, teaGrams) {
-        const useArabicNumbers = /[٠-٩]/.test(mainInput.value.trim());
-        function formatNumber(num) {
-            if (typeof num !== 'number') return num;
-            let numStr = num.toFixed(2).replace(/\.00$/, '').replace(/\.0$/, '');
-            return useArabicNumbers ? toArabicNumbers(numStr) : numStr;
-        }
-        
-        let resultDiv = document.getElementById('result');
-        
-        if (isBlendMode) {
-            // منطق الخلطة الأصلي (الشاي الكلي مقسم 9:1:1:1)
-            
-            // 1. نسبة الماء المستخدمة (استخدم قوة الخلطة المختارة)
-            const ratio = teaGrams / strengthMultiplier; 
-
-            // 2. حساب المكونات بناءً على النسبة
-            const blackTeaComponents = {};
-            for (const name in BLEND_TEA_RATIOS) {
-                // المجموع الكلي للشاي مقسم على المكونات الأربعة
-                blackTeaComponents[name] = BLEND_TEA_RATIOS[name] * ratio;
-            }
-            
-            // 3. بناء HTML للنتائج
-            let blendHtml = '';
-            for (const [name, grams] of Object.entries(blackTeaComponents)) {
-                // استخدام تنسيق بسيط لكل عنصر
-                blendHtml += `<div class="result-item" style="display:flex; justify-content:space-between;"><span>${name}:</span> <b class="value">${formatNumber(grams)} جم</b></div>`;
-            }
-            
-            blendResultDiv.innerHTML = blendHtml;
-            blendResultDiv.style.visibility = 'visible';
-            
-            resultDiv.innerHTML = `النتيجة: <span>${formatNumber(waterMl)}</span> مل ماء | <span>${formatNumber(sugarGrams)}</span> جم سكر | <span>${formatNumber(teaGrams)}</span> جم شاي (الإجمالي)`;
-        } else {
-            blendResultDiv.style.visibility = 'hidden';
-            resultDiv.innerHTML = `النتيجة: <span>${formatNumber(waterMl)}</span> مل ماء | <span>${formatNumber(sugarGrams)}</span> جم سكر | <span>${formatNumber(teaGrams)}</span> جم شاي`;
-        }
-        
-        // Visuals and Notes (Unchanged)
-        // Sugar reference: 84g (Full Cup)
-        // Tea reference: 21g (Full Cup)
-        const sugarPerCup = 84;
-        const teaPerCup = 21;
-
-        let sugarFullCups = Math.floor(sugarGrams / sugarPerCup);
-        let sugarRemainderGrams = sugarGrams % sugarPerCup;
-        let teaFullCups = Math.floor(teaGrams / teaPerCup);
-        let teaRemainderGrams = teaGrams % teaPerCup;
-        
-        const sugarNote = document.getElementById('sugarNote');
-        const teaNote = document.getElementById('teaNote');
-        if(sugarNote) sugarNote.innerHTML = `<span class="value">${formatNumber(sugarFullCups)}</span> بيالة <span class="plus">+</span> <span class="value">${formatNumber(sugarRemainderGrams)}</span> جم`;
-        if(teaNote) teaNote.innerHTML = `<span class="value">${formatNumber(teaFullCups)}</span> بيالة <span class="plus">+</span> <span class="value">${formatNumber(teaRemainderGrams)}</span> جم`;
-        
-        let sugarFillPercentage;
-        if (sugarGrams > 0) {
-            // If the total sugar is less than one cup, or it's just the remainder
-            if (sugarGrams < sugarPerCup || sugarFullCups === 0) {
-                sugarFillPercentage = sugarGrams / sugarPerCup;
-            } else {
-                // If it's more than one cup, we show the remainder fill level, 
-                // unless the remainder is exactly zero, in which case we show 100% fill.
-                sugarFillPercentage = sugarRemainderGrams / sugarPerCup;
-                if (sugarRemainderGrams.toFixed(2) == 0.00) {
-                    sugarFillPercentage = 1; 
-                }
-            }
-        } else {
-            sugarFillPercentage = 0;
-        }
-
-        let teaFillPercentage;
-        if (teaGrams > 0) {
-            if (teaGrams < teaPerCup || teaFullCups === 0) {
-                teaFillPercentage = teaGrams / teaPerCup;
-            } else {
-                teaFillPercentage = teaRemainderGrams / teaPerCup;
-                if (teaRemainderGrams.toFixed(2) == 0.00) {
-                    teaFillPercentage = 1; 
-                }
-            }
-        } else {
-            teaFillPercentage = 0;
-        }
-
-        const sugarLevel = document.getElementById('sugarLevel');
-        const teaLevel = document.getElementById('teaLevel');
-        if(sugarLevel) sugarLevel.style.height = `${sugarFillPercentage * 225}px`;
-        if(teaLevel) teaLevel.style.height = `${teaFillPercentage * 225}px`;
-    }
-
-    function toggleTheme() {
-        document.body.classList.toggle('dark-mode');
-        const isDarkMode = document.body.classList.contains('dark-mode');
-        themeToggleButton.textContent = isDarkMode ? '☀️' : '🌙';
-        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-    }
-
-    function loadTheme() {
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) { 
-            document.body.classList.add('dark-mode');
-            themeToggleButton.textContent = '☀️';
-        } else {
-            document.body.classList.remove('dark-mode');
-            themeToggleButton.textContent = '🌙';
-        }
-    }
-
-    function toArabicNumbers(str) {
-        return str.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
-    }
-
-</script>
-	
-
+<hr style="border:2px solid #b7e4c7; margin:25px 0;">
+<footer>
+<p>© 2025 المرجع الكامل لتصنيفات الشاي الأسود – إعداد أبو إبراهيم</p>
+</footer>
 </body>
 </html>
