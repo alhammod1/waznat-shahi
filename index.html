@@ -26,12 +26,12 @@
             --active-btn-text: #fff;
             --blend-btn-bg: #007bff;
             --blend-btn-text: #fff;
-            --calc-bg: #e0f7fa; /* خلفية حاسبة السكر (فاتح) */
-            --calc-header: #00bcd4;
+            --calc-bg: #e0f7fa; /* خلفية حاسبة السكر (فاتح) - غير مستخدمة الآن */
+            --calc-header: #00bcd4; /* غير مستخدمة الآن */
 
             /* متغيرات حاسبة النسب الصغيرة (Light Mode) */
             --small-calc-card-bg: #fff; /* موحد مع الخلفية الداخلية */
-            --small-calc-text: #333; /* النص الداخلي (تم الإصلاح) */
+            --small-calc-text: #333; /* النص الداخلي */
             --small-calc-primary: #4CAF50; /* لون العنوان والنتائج */
             --small-calc-secondary: #f0f0f0; /* خلفية حقل النتائج */
             --small-calc-input-bg: #fff; 
@@ -107,7 +107,14 @@
 
         /* الأزرار والمجموعات */
         .controls-container { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; width: 100%; max-width: 350px; }
-        .control-group { display: flex; justify-content: center; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); }
+        .control-group { 
+            display: flex; 
+            justify-content: center; 
+            border-radius: 8px; 
+            overflow: hidden; 
+            border: 1px solid var(--border-color); 
+            width: 100%; /* ضمان العرض الكامل داخل الحاوية */
+        }
         .control-group button {
             flex-grow: 1; background-color: transparent; border: none; padding: 10px; color: var(--text-color);
             font-family: 'Cairo', Arial, sans-serif; font-size: 16px; cursor: pointer; transition: background-color 0.3s, color 0.3s;
@@ -132,6 +139,7 @@
             border-radius: 8px;
             overflow: hidden;
             border: 1px solid var(--border-color);
+             width: 100%; /* ضمان العرض الكامل داخل الحاوية */
         }
         .blend-controls button {
             flex-grow: 1; background-color: transparent; border: none; padding: 10px; color: var(--text-color);
@@ -208,59 +216,6 @@
         }
         .dark-mode .footer-notes .underlined-red { color: #ff7b72; }
         
-        /* حاسبة السكر للبيالة (Sugar Converter) */
-        .sugar-converter {
-            max-width: 450px;
-            margin: 40px auto 0;
-            padding: 20px;
-            border-radius: 12px;
-            background-color: var(--calc-bg);
-            border: 1px solid var(--border-color);
-            box-shadow: 0 4px 10px var(--shadow-color);
-        }
-        .converter-header {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: var(--calc-header);
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        .converter-result {
-            padding: 10px;
-            background-color: var(--calc-header);
-            border-radius: 8px;
-            margin-top: 15px;
-            color: var(--blend-btn-text);
-            text-align: center;
-        }
-        .converter-result-value {
-            font-size: 2.2em;
-            font-weight: extra-bold;
-        }
-        .preset-controls {
-            display: flex;
-            justify-content: space-around;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        .preset-controls button {
-            flex-grow: 1;
-            padding: 10px 5px;
-            background-color: var(--container-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .preset-controls button.active {
-            background-color: var(--blend-btn-bg);
-            color: var(--blend-btn-text);
-        }
-        .preset-controls button:hover {
-            background-color: var(--note-bg);
-        }
-
         /* ==================================== */
         /* حاسبة النسب الصغيرة (Small Calculator) */
         /* ==================================== */
@@ -400,7 +355,7 @@
         </div>
     </div>
 	   
-    <!-- بداية محتوى الآلة الحاسبة الصغيرة (تم دمجه) -->
+    <!-- بداية محتوى الآلة الحاسبة الصغيرة (تم دمجها) -->
     <div class="calculator-container-small">
         <h3>حاسبة الشاي ⚖️</h3>
 
@@ -450,9 +405,9 @@
     const blendResultDiv = document.getElementById('blend-result');
     const resultDiv = document.getElementById('result');
     const inputLabel = document.getElementById('input-label');
-    const converterResultContainer = document.getElementById('converterResultContainer');
-    const converterResultText = document.getElementById('converterResultText');
-    const allPresetButtons = document.querySelectorAll('.preset-controls button'); 
+    // const converterResultContainer = document.getElementById('converterResultContainer'); // محذوف
+    // const converterResultText = document.getElementById('converterResultText'); // محذوف
+    // const allPresetButtons = document.querySelectorAll('.preset-controls button'); // محذوف 
     
     // Unified list of all sweetness buttons
     const allSweetnessButtons = [];
@@ -467,14 +422,29 @@
     let blendOption = 'medium'; // 'light', 'medium', 'heavy'
     
     // --- Blend Ratios (Fixed Ratios for Blend Mode) ---
+    const ORIGINAL_BLACK_TEA_TOTAL = 12.0;
+    const GREEN_TEA_PER_LITER = 1.6;
+    const NEW_BLACK_TEA_TOTAL = ORIGINAL_BLACK_TEA_TOTAL - GREEN_TEA_PER_LITER; // 12.0 - 1.6 = 10.4
+    const ADJUSTMENT_FACTOR = NEW_BLACK_TEA_TOTAL / ORIGINAL_BLACK_TEA_TOTAL; // 10.4 / 12.0
+
     const BLEND_TEA_RATIOS = {
         rabea: 9,
         abuJabal: 1,
         alWazah: 1,
         khather: 1,
-        total: 12 // Total blend tea grams per liter
     };
     
+    // القيم المعدلة بعد إضافة الشاي الأخضر (المجموع 10.4 جم)
+    const ADJUSTED_BLEND_TEA_RATIOS = {
+        rabea: BLEND_TEA_RATIOS.rabea * ADJUSTMENT_FACTOR, // 7.8
+        abuJabal: BLEND_TEA_RATIOS.abuJabal * ADJUSTMENT_FACTOR, // 0.8666
+        alWazah: BLEND_TEA_RATIOS.alWazah * ADJUSTMENT_FACTOR, // 0.8666
+        khather: BLEND_TEA_RATIOS.khather * ADJUSTMENT_FACTOR, // 0.8666
+        total: NEW_BLACK_TEA_TOTAL, // 10.4
+        green: GREEN_TEA_PER_LITER // 1.6
+    };
+
+
     // --- Functions ---
 
     function selectOption(element, isBlend, type) {
@@ -559,16 +529,19 @@
 
         // Determine base sugar and tea multipliers
         let baseSugarPerLiter = activeSugarPerLiter;
-        let teaMultiplier = strengthMultiplier;
+        let teaMultiplier; // قيمة مضاعف الشاي (بالجرام/لتر)
 
-        // Apply blend mode specific tea adjustment (for tea multiplier)
+        // تحديد مضاعف الشاي بناءً على الوضع
         if (isBlendMode) {
-            teaMultiplier = BLEND_TEA_RATIOS.total; // 12g/L base for blend
-
-            // Check if blend is 'heavy' to add 1g of tea
+            // في وضع الخلطة، الإجمالي يكون 12.0 جم/لتر (10.4 أسود + 1.6 أخضر)
+            teaMultiplier = ORIGINAL_BLACK_TEA_TOTAL; 
             if (blendOption === 'heavy') {
-                 teaMultiplier += 1; // 13g/L for heavy blend tea
+                 // في حال "حالي زيادة" يتم إضافة 1 جم للوزن الكلي (12 + 1 = 13 جم/لتر)
+                 teaMultiplier += 1; 
             }
+        } else {
+            // في الوضع القياسي، يتم استخدام القيمة المحددة من أزرار Strength controls (11, 12, 13)
+            teaMultiplier = strengthMultiplier;
         }
         
         // --- Calculation Logic based on Mode ---
@@ -599,6 +572,7 @@
         const useArabicNumbers = /[٠-٩]/.test(mainInput.value.trim());
         function formatNumber(num) {
             if (typeof num !== 'number') return num;
+            // يجب تقريب الكسور بشكل صحيح قبل التحويل للعربية
             let numStr = num.toFixed(2).replace(/\.00$/, '').replace(/\.0$/, '');
             return useArabicNumbers ? toArabicNumbers(numStr) : numStr;
         }
@@ -606,27 +580,43 @@
         let resultDiv = document.getElementById('result');
         
         if (isBlendMode) {
-            let blendTeaTotal = BLEND_TEA_RATIOS.total;
+            // في وضع الخلطة، قيمة teaGrams هي الإجمالي المطلوب (12 أو 13)
+            let totalTeaPerLiter = ORIGINAL_BLACK_TEA_TOTAL;
+             if (blendOption === 'heavy') {
+                 totalTeaPerLiter += 1; 
+            }
+            
+            // نسبة الماء المستخدمة (سواء كان الحساب بالماء أو السكر أو الشاي)
+            const ratio = teaGrams / totalTeaPerLiter; 
+
+            // حساب المكونات بناءً على النسب المعدلة (الجديدة)
+            const rabeaGrams = ADJUSTED_BLEND_TEA_RATIOS.rabea * ratio;
+            const abuJabalGrams = ADJUSTED_BLEND_TEA_RATIOS.abuJabal * ratio;
+            const alWazahGrams = ADJUSTED_BLEND_TEA_RATIOS.alWazah * ratio;
+            const khatherGrams = ADJUSTED_BLEND_TEA_RATIOS.khather * ratio;
+            const greenTeaGrams = ADJUSTED_BLEND_TEA_RATIOS.green * ratio;
+
+            // إذا كان الوضع "حالي زيادة"، نزيد نسبة الشاي الأسود بمقدار 1 جم
+            let blackTeaAdjustment = 0;
             if (blendOption === 'heavy') {
-                blendTeaTotal += 1; // The total tea used for calculation
+                 blackTeaAdjustment = 1 * ratio; // 1 جم إضافي يضاف إلى الأسود
             }
 
-            const ratio = teaGrams / blendTeaTotal;
-            
-            const rabeaGrams = BLEND_TEA_RATIOS.rabea * ratio;
-            const abuJabalGrams = BLEND_TEA_RATIOS.abuJabal * ratio;
-            const alWazahGrams = BLEND_TEA_RATIOS.alWazah * ratio;
-            const khatherGrams = BLEND_TEA_RATIOS.khather * ratio;
+            const rabeaFinal = rabeaGrams + (blackTeaAdjustment * (BLEND_TEA_RATIOS.rabea / ORIGINAL_BLACK_TEA_TOTAL));
+            const abuJabalFinal = abuJabalGrams + (blackTeaAdjustment * (BLEND_TEA_RATIOS.abuJabal / ORIGINAL_BLACK_TEA_TOTAL));
+            const alWazahFinal = alWazahGrams + (blackTeaAdjustment * (BLEND_TEA_RATIOS.alWazah / ORIGINAL_BLACK_TEA_TOTAL));
+            const khatherFinal = khatherGrams + (blackTeaAdjustment * (BLEND_TEA_RATIOS.khather / ORIGINAL_BLACK_TEA_TOTAL));
 
             blendResultDiv.innerHTML = `
-                <span>شاهي ربيع: <b class="value">${formatNumber(rabeaGrams)} جم</b></span><br>
-                <span>شاهي أبو جبل: <b class="value">${formatNumber(abuJabalGrams)} جم</b></span><br>
-                <span>شاهي الوزة: <b class="value">${formatNumber(alWazahGrams)} جم</b></span><br>
-                <span>شاهي خاثر: <b class="value">${formatNumber(khatherGrams)} جم</b></span>
+                <span>شاهي ربيع: <b class="value">${formatNumber(rabeaFinal)} جم</b></span><br>
+                <span>شاهي أبو جبل: <b class="value">${formatNumber(abuJabalFinal)} جم</b></span><br>
+                <span>شاهي الوزة: <b class="value">${formatNumber(alWazahFinal)} جم</b></span><br>
+                <span>شاهي خاثر: <b class="value">${formatNumber(khatherFinal)} جم</b></span><br>
+                <span style="color: #28a745;">شاهي أخضر: <b class="value" style="color: #28a745;">${formatNumber(greenTeaGrams)} جم</b></span>
             `;
             blendResultDiv.style.visibility = 'visible';
             
-            resultDiv.innerHTML = `النتيجة: <span>${formatNumber(waterMl)}</span> مل ماء | <span>${formatNumber(sugarGrams)}</span> جم سكر | <span>${formatNumber(teaGrams)}</span> جم شاي`;
+            resultDiv.innerHTML = `النتيجة: <span>${formatNumber(waterMl)}</span> مل ماء | <span>${formatNumber(sugarGrams)}</span> جم سكر | <span>${formatNumber(teaGrams)}</span> جم شاي (الإجمالي)`;
         } else {
             blendResultDiv.style.visibility = 'hidden';
             resultDiv.innerHTML = `النتيجة: <span>${formatNumber(waterMl)}</span> مل ماء | <span>${formatNumber(sugarGrams)}</span> جم سكر | <span>${formatNumber(teaGrams)}</span> جم شاي`;
@@ -707,27 +697,6 @@
         return str.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
     }
     
-    // --- New Sugar Converter Logic ---
-    const SUGAR_CUP_VOLUME_ML = 73; // حجم البيالة المعتمد للحاسبة الجديدة
-    const SUGAR_LITER_VOLUME_ML = 1000;
-    const SUGAR_CONVERSION_FACTOR = SUGAR_LITER_VOLUME_ML / SUGAR_CUP_VOLUME_ML; 
-
-    function setSugarCupValue(gramsPerLiter) {
-        // 1. Calculate the required grams for a single cup (73ml)
-        const sugarInCup = (gramsPerLiter * SUGAR_CUP_VOLUME_ML) / SUGAR_LITER_VOLUME_ML;
-        
-        // 2. Display the result
-        converterResultText.textContent = sugarInCup.toFixed(2);
-        converterResultContainer.style.display = 'block';
-        
-        // 3. Highlight the pressed button
-        allPresetButtons.forEach(btn => btn.classList.remove('active'));
-        const activeBtn = Array.from(allPresetButtons).find(btn => parseFloat(btn.dataset.value) === gramsPerLiter);
-        if (activeBtn) {
-            activeBtn.classList.add('active');
-        }
-    }
-
     // --- Script for the small calculator (Second part) ---
     const BLACK_TEA_PER_1000ML = 10.5;
     const GREEN_TEA_PER_1000ML = 1.5;
