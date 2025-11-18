@@ -144,7 +144,6 @@
             text-align: right; 
         }
         #blend-result span { color: var(--text-color); font-weight: normal; }
-        #blend-result .value { color: #007bff; font-weight: bold; }
         .dark-mode #blend-result .value { color: #58a6ff; }
 
         .visual-container { display: flex; justify-content: center; gap: 100px; margin-top: 40px; flex-wrap: wrap; }
@@ -188,54 +187,45 @@
         }
         .dark-mode .footer-notes .underlined-red { color: #ff7b72; }
         
-        /* New Sugar Converter Styles */
-        .sugar-converter {
-            max-width: 450px;
-            margin: 40px auto 0;
-            padding: 20px;
-            border-radius: 12px;
-            background-color: var(--calc-bg);
-            border: 1px solid var(--border-color);
-            box-shadow: 0 4px 10px var(--shadow-color);
-        }
-        .converter-header {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: var(--calc-header);
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        .converter-result {
-            padding: 10px;
-            background-color: var(--calc-header);
-            border-radius: 8px;
-            margin-top: 15px;
-            color: var(--blend-btn-text);
-            text-align: center;
-        }
-        .converter-result-value {
-            font-size: 2.2em;
-            font-weight: extra-bold;
-        }
-        .preset-controls {
+        /* Removed Sugar Converter Styles */
+        
+        /* New: Stepper Group for Converter (Removed, but keeping generic stepper styles just in case) */
+        .stepper-group {
             display: flex;
-            justify-content: space-around;
-            gap: 10px;
+            align-items: center;
+            justify-content: center;
             margin-top: 15px;
+            gap: 10px;
+            margin-bottom: 15px; 
         }
-        .preset-controls button {
-            flex-grow: 1;
-            padding: 10px 5px;
-            background-color: var(--container-bg);
+        .stepper-group-small {
+            margin: 5px 0 15px;
+        }
+
+        .stepper-input {
+            width: 100px; 
+            text-align: center;
+            font-size: 1.2em;
+            padding: 8px;
             border: 1px solid var(--border-color);
-            color: var(--text-color);
             border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-family: 'Cairo', Arial, sans-serif; 
+            background-color: var(--container-bg);
+            color: var(--text-color);
         }
-        .preset-controls button:hover {
-            background-color: var(--note-bg);
+
+        .stepper-button {
+            padding: 8px 15px;
+            background-color: #20b2aa; 
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            line-height: 1; 
+        }
+        .stepper-button.decrease {
+            background-color: #e57373; 
         }
     </style>
 </head>
@@ -322,23 +312,7 @@
         </div>
     </div>
     
-    <!-- New Sugar Converter Tool --><div class="sugar-converter">
-        <h2 class="converter-header">حاسبة السكر للبيالة (75 مل)</h2>
-        
-        <div class="preset-controls">
-            <button data-value="57" onclick="setSugarCupValue(57)">خفيف</button>
-            <button data-value="75" onclick="setSugarCupValue(75)">وسط</button>
-            <button data-value="90" onclick="setSugarCupValue(90)">حالي زيادة</button>
-        </div>
-
-        <div id="converterResultContainer" class="converter-result" style="display: none;">
-            <p style="font-size: 1em; margin-bottom: 5px;">كمية السكر المطلوبة للبيالة (75 مل):</p>
-            <p id="converterResultText" class="converter-result-value">--</p>
-            <p style="font-size: 1em; margin-top: 5px;">جرام سكر</p>
-        </div>
-
-    </div>
-    <!-- End New Sugar Converter Tool --><div class="footer-notes">
+    <!-- Removed Sugar Converter Tool --><div class="footer-notes">
         <p><span class="underlined-red">البيالة المستخدمة في القياس هي بيالة "بادريق"</span></p>
         <p>البيالة العادية من الماء إلى المستوى الطبيعي المتعارف عليه تساوي تقريبا <span class="red-text">75</span> مل، أي أن <span class="red-text">1</span> لتر يساوي <span class="red-text">13.33</span> بيالة.</p>
 		<p><span style="color: red;">(لجميع انواع الشاهي)</span> تقريبا هذه الوزنة مناسبة للجميع مع التعديل حسب الحاجة لواحد لتر</p>
@@ -361,11 +335,9 @@
     const blendResultDiv = document.getElementById('blend-result');
     const resultDiv = document.getElementById('result');
     const inputLabel = document.getElementById('input-label');
-    const converterResultContainer = document.getElementById('converterResultContainer');
-    const converterResultText = document.getElementById('converterResultText');
-    const allPresetButtons = document.querySelectorAll('.preset-controls button'); 
+    // Removed constants related to the converter: converterResultContainer, converterResultText, sugarPerLiterInput, customWaterDisplay, allPresetButtonsConverter
     
-    // Unified list of all sweetness buttons
+    // Unified list of all sweetness buttons for the MAIN calculator
     const allSweetnessButtons = [];
     sweetnessControls.querySelectorAll('button').forEach(btn => allSweetnessButtons.push(btn));
     blendControls.querySelectorAll('button').forEach(btn => allSweetnessButtons.push(btn));
@@ -373,10 +345,10 @@
     // --- State Variables ---
     let strengthMultiplier = 12; 
     let isBlendMode = false;
-    let standardSugarPerLiter = 75; // Base value for standard controls
-    let activeSugarPerLiter = 75; // The sugar value currently active (57, 75, or 90)
-    let blendOption = 'medium'; // 'light', 'medium', 'heavy'
-    let currentWaterAmount = 0; // State to track current water amount
+    let standardSugarPerLiter = 75; 
+    let activeSugarPerLiter = 75; 
+    let blendOption = 'medium'; 
+    let currentWaterAmount = 0; 
     
     // Define the constant step increment
     const WATER_INCREMENT = 25; 
@@ -391,99 +363,80 @@
         khather: 1,
         total: 12 // Total blend tea grams per liter
     };
-    
+
     // --- Functions ---
 
+    // NOTE: This function (selectOption) controls the MAIN calculator (water/sugar/tea input)
     function selectOption(element, isBlend, type) {
         if (type === 'sugar') {
-            // 1. Clean up active state from ALL sugar buttons (both standard and blend)
             allSweetnessButtons.forEach(btn => btn.classList.remove('active'));
-            
-            // 2. Set active state on the clicked button
             element.classList.add('active');
-            
-            // 3. Update active sugar value
             activeSugarPerLiter = parseFloat(element.dataset.value);
-            
-            // 4. Update mode and blend option
             isBlendMode = isBlend;
             if (isBlend) {
                  blendOption = element.dataset.blendType;
             } else {
-                 // For standard controls, determine blend option based on value
                  if (activeSugarPerLiter === 57) blendOption = 'light';
                  else if (activeSugarPerLiter === 75) blendOption = 'medium';
                  else if (activeSugarPerLiter === 90) blendOption = 'heavy';
             }
 
         } else if (type === 'tea') {
-            // 1. Clean up active state from all tea buttons
             strengthControls.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
-            
-            // 2. Set active state on the clicked button
             element.classList.add('active');
-            
-            // 3. Update strength multiplier
             strengthMultiplier = parseFloat(element.dataset.value);
         }
         
-        // 5. Run main calculation
         runCalculation();
     }
     
-    // New function for quick steps (FIXED INCREMENT LOGIC)
+    // Function for quick steps on the main water input
     function adjustWaterAmount(delta) {
-        // 1. Ensure currentWaterAmount reflects the input field if user typed manually
-        // We get the current value from the input field to allow manual starting point
         let currentValue = parseFloat(mainInput.value) || 0;
-        
-        // 2. Calculate the new amount
         let newAmount = currentValue + delta;
 
-        // 3. Clamp the value within min/max limits
         if (newAmount > WATER_MAX) {
             newAmount = WATER_MAX;
         } else if (newAmount < WATER_MIN) {
             newAmount = WATER_MIN;
         }
         
-        currentWaterAmount = newAmount; // Update state variable
+        currentWaterAmount = newAmount; 
 
-        // 4. Update input field and slider
         mainInput.value = newAmount;
         waterSlider.value = newAmount;
         
-        // 5. Ensure calculation mode is set to 'water' and run calculation
         calcModeSelect.value = 'water';
-        changeCalcMode(); // Update label/slider visibility and runs calculation internally
+        changeCalcMode(); 
     }
 
 
     // --- Event Listeners ---
-    // Note: Event listeners for sweetness/blend controls are handled directly via onclick='selectOption(this, ...)'
-
     calcModeSelect.addEventListener('change', changeCalcMode);
     mainInput.addEventListener('input', () => {
-        // Update slider visually and state variable when user types manually
         currentWaterAmount = parseFloat(mainInput.value) || 0;
         waterSlider.value = currentWaterAmount;
         runCalculation();
+        // Removed converter call: setSugarPerLiter(sugarPerLiterInput.value, false);
     });
     waterSlider.addEventListener('input', () => {
-        // Update state variable when user drags slider
         currentWaterAmount = parseFloat(waterSlider.value) || 0;
         mainInput.value = currentWaterAmount;
         runCalculation(true);
+        // Removed converter call: setSugarPerLiter(sugarPerLiterInput.value, false);
     });
     themeToggleButton.addEventListener('click', toggleTheme);
+    
+    // Removed converter event listener: sugarPerLiterInput.addEventListener('input', ...)
+    
     document.addEventListener('DOMContentLoaded', () => {
         loadTheme();
         
-        // Set default active buttons on load (Standard: Muted, Strength: Muted)
         sweetnessControls.querySelector('[data-value="75"]').classList.add('active'); 
         strengthControls.querySelector('[data-value="12"]').classList.add('active');
-
-        // Initial calculation
+        
+        // Removed converter initialization
+        
         runCalculation();
     });
 
@@ -495,7 +448,6 @@
             tea: "أدخل كمية الشاي بالجرام:"
         };
         inputLabel.textContent = labels[mode];
-        // Only show slider and step buttons if mode is 'water'
         const isWaterMode = (mode === 'water');
         waterSlider.style.display = isWaterMode ? 'block' : 'none';
         document.getElementById('waterStepControls').style.display = isWaterMode ? 'flex' : 'none';
@@ -513,32 +465,32 @@
         let inputValue = mainInput.value.trim();
         let value = parseFloat(inputValue.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[^\d\.]/g, ''));
 
+        // Handle NaN/Empty input in main calculation
         const resultElements = document.querySelectorAll('.result, .note');
         if (isNaN(value) || value <= 0) {
+            
             resultElements.forEach(el => el.style.visibility = 'hidden');
             blendResultDiv.style.visibility = 'hidden';
             document.getElementById('sugarLevel')?.style.setProperty('height', '0px');
             document.getElementById('teaLevel')?.style.setProperty('height', '0px');
             if (mode === 'water') waterSlider.value = 0;
+            
+            // Removed converter reset logic: customWaterDisplay.textContent = 0; converterResultText.textContent = '0.00';
             return;
         }
         resultElements.forEach(el => el.style.visibility = 'visible');
 
-        // Determine base sugar and tea multipliers
         let baseSugarPerLiter = activeSugarPerLiter;
         let teaMultiplier = strengthMultiplier;
 
-        // Apply blend mode specific tea adjustment (for tea multiplier)
         if (isBlendMode) {
-            teaMultiplier = BLEND_TEA_RATIOS.total; // 12g/L base for blend
+            teaMultiplier = BLEND_TEA_RATIOS.total; 
 
-            // Check if blend is 'heavy' to add 1g of tea
             if (blendOption === 'heavy') {
-                 teaMultiplier += 1; // 13g/L for heavy blend tea
+                 teaMultiplier += 1; 
             }
         }
         
-        // --- Calculation Logic based on Mode ---
         if (mode === 'water') {
             waterMl = value;
             if(isSlider) mainInput.value = waterMl;
@@ -575,7 +527,7 @@
         if (isBlendMode) {
             let blendTeaTotal = BLEND_TEA_RATIOS.total;
             if (blendOption === 'heavy') {
-                blendTeaTotal += 1; // The total tea used for calculation
+                blendTeaTotal += 1; 
             }
 
             const ratio = teaGrams / blendTeaTotal;
@@ -661,11 +613,9 @@
             themeToggleButton.textContent = '☀️';
         }
         
-        // Set default active buttons on load (Standard: Muted, Strength: Muted)
         sweetnessControls.querySelector('[data-value="75"]').classList.add('active'); 
         strengthControls.querySelector('[data-value="12"]').classList.add('active');
-
-        // Initial calculation
+        
         runCalculation();
     }
 
@@ -673,26 +623,9 @@
         return str.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
     }
     
-    // --- New Sugar Converter Logic ---
-    const SUGAR_CUP_VOLUME_ML = 73; // حجم البيالة المعتمد للحاسبة الجديدة
-    const SUGAR_LITER_VOLUME_ML = 1000;
-    const SUGAR_CONVERSION_FACTOR = SUGAR_LITER_VOLUME_ML / SUGAR_CUP_VOLUME_ML; 
-
-    function setSugarCupValue(gramsPerLiter) {
-        // 1. Calculate the required grams for a single cup (73ml)
-        const sugarInCup = (gramsPerLiter * SUGAR_CUP_VOLUME_ML) / SUGAR_LITER_VOLUME_ML;
-        
-        // 2. Display the result
-        converterResultText.textContent = sugarInCup.toFixed(2);
-        converterResultContainer.style.display = 'block';
-        
-        // 3. Highlight the pressed button
-        allPresetButtons.forEach(btn => btn.classList.remove('active'));
-        const activeBtn = Array.from(allPresetButtons).find(btn => parseFloat(btn.dataset.value) === gramsPerLiter);
-        if (activeBtn) {
-            activeBtn.classList.add('active');
-        }
-    }
+    // Removed all Sugar Converter Logic Functions
+    // Removed MIN_SUGAR_PER_LITER and MIN_CUSTOM_WATER constants
+    
 </script>
 </body>
 </html>
