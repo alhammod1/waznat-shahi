@@ -112,7 +112,7 @@
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.2s, transform 0.1s;
-            font-family: 'Cairo', Arial, sans-serif;
+            font-family: 'Cairo', Arial, sans-serif; /* Applied font */
             font-weight: bold;
         }
         .water-step-button:hover {
@@ -187,9 +187,57 @@
         }
         .dark-mode .footer-notes .underlined-red { color: #ff7b72; }
         
-        /* Removed Sugar Converter Styles */
-        
-        /* New: Stepper Group for Converter (Removed, but keeping generic stepper styles just in case) */
+        /* New Sugar Converter Styles */
+        .sugar-converter {
+            max-width: 450px;
+            margin: 40px auto 0;
+            padding: 20px;
+            border-radius: 12px;
+            background-color: var(--calc-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 10px var(--shadow-color);
+        }
+        .converter-header {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--calc-header);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .converter-result {
+            padding: 10px;
+            background-color: var(--calc-header);
+            border-radius: 8px;
+            margin-top: 15px;
+            color: var(--blend-btn-text);
+            text-align: center;
+        }
+        .converter-result-value {
+            font-size: 2.2em;
+            font-weight: extra-bold;
+        }
+        .preset-controls-converter { /* NEW CLASS FOR CONVERTER PRESETS */
+            display: flex;
+            justify-content: space-around;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .preset-controls-converter button {
+            flex-grow: 1;
+            padding: 10px 5px;
+            background-color: var(--container-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: 'Cairo', Arial, sans-serif; /* Applied font */
+        }
+        .preset-controls-converter button:hover {
+            background-color: var(--note-bg);
+        }
+
+        /* New: Stepper Group for Converter */
         .stepper-group {
             display: flex;
             align-items: center;
@@ -223,6 +271,7 @@
             cursor: pointer;
             transition: background-color 0.2s, transform 0.1s;
             line-height: 1; 
+            font-family: 'Cairo', Arial, sans-serif; /* Applied font */
         }
         .stepper-button.decrease {
             background-color: #e57373; 
@@ -312,7 +361,39 @@
         </div>
     </div>
     
-    <!-- Removed Sugar Converter Tool --><div class="footer-notes">
+    <!-- Start NEW Standalone Sugar Converter Tool -->
+    <div class="sugar-converter">
+        <h2 class="converter-header">حاسبة السكر</h2>
+        
+        <!-- Input for Custom Water Volume (mL) -->
+        <p class="control-label" style="margin-top: 0; color: var(--text-color);">كمية الماء المخصصة (مل):</p>
+        <div class="stepper-group stepper-group-small">
+             <button class="stepper-button decrease" onclick="adjustCustomWater(-5)">-</button>
+             <input type="text" id="customWaterInput" class="stepper-input" value="75" oninput="setCustomWater(this.value, true)">
+             <button class="stepper-button" onclick="adjustCustomWater(5)">+</button>
+        </div>
+
+        <!-- Hidden Sugar Grams/Liter Input and Stepper (We keep the values and logic for the presets) -->
+        <div style="display: none;">
+             <input type="text" id="sugarPerLiterInput" value="75">
+        </div>
+        
+        <div class="preset-controls-converter">
+            <button data-value="57" onclick="setSugarPerLiter(57, false, this)">خفيف</button>
+            <button data-value="75" onclick="setSugarPerLiter(75, false, this)" class="active">وسط</button>
+            <button data-value="90" onclick="setSugarPerLiter(90, false, this)">حالي زيادة</button>
+        </div>
+
+        <div id="converterResultContainer" class="converter-result">
+            <p style="font-size: 1em; margin-bottom: 5px;">كمية السكر المطلوبة لـ <span id="customWaterDisplay">75</span> مل:</p>
+            <p id="converterResultText" class="converter-result-value">5.63</p>
+            <p style="font-size: 1em; margin-top: 5px;">جرام سكر</p>
+        </div>
+
+    </div>
+    <!-- End NEW Standalone Sugar Converter Tool -->
+    
+    <div class="footer-notes">
         <p><span class="underlined-red">البيالة المستخدمة في القياس هي بيالة "بادريق"</span></p>
         <p>البيالة العادية من الماء إلى المستوى الطبيعي المتعارف عليه تساوي تقريبا <span class="red-text">75</span> مل، أي أن <span class="red-text">1</span> لتر يساوي <span class="red-text">13.33</span> بيالة.</p>
 		<p><span style="color: red;">(لجميع انواع الشاهي)</span> تقريبا هذه الوزنة مناسبة للجميع مع التعديل حسب الحاجة لواحد لتر</p>
@@ -335,7 +416,14 @@
     const blendResultDiv = document.getElementById('blend-result');
     const resultDiv = document.getElementById('result');
     const inputLabel = document.getElementById('input-label');
-    // Removed constants related to the converter: converterResultContainer, converterResultText, sugarPerLiterInput, customWaterDisplay, allPresetButtonsConverter
+    
+    // Standalone Converter Elements
+    const converterResultContainer = document.getElementById('converterResultContainer');
+    const converterResultText = document.getElementById('converterResultText');
+    const sugarPerLiterInput = document.getElementById('sugarPerLiterInput'); 
+    const customWaterInput = document.getElementById('customWaterInput');
+    const customWaterDisplay = document.getElementById('customWaterDisplay'); 
+    const allPresetButtonsConverter = document.querySelectorAll('.preset-controls-converter button'); 
     
     // Unified list of all sweetness buttons for the MAIN calculator
     const allSweetnessButtons = [];
@@ -345,15 +433,20 @@
     // --- State Variables ---
     let strengthMultiplier = 12; 
     let isBlendMode = false;
-    let standardSugarPerLiter = 75; 
     let activeSugarPerLiter = 75; 
     let blendOption = 'medium'; 
     let currentWaterAmount = 0; 
+    
+    // Standalone Converter State
+    let customWaterMl = 75; // Initial value for the standalone calculator
+    let sugarPerLiterSetting = 75; // Store the currently selected sugar concentration (75 default)
     
     // Define the constant step increment
     const WATER_INCREMENT = 25; 
     const WATER_MIN = 0;
     const WATER_MAX = 10000;
+    const MIN_SUGAR_PER_LITER = 0;
+    const MIN_CUSTOM_WATER = 0;
 
     // --- Blend Ratios (Fixed Ratios for Blend Mode) ---
     const BLEND_TEA_RATIOS = {
@@ -364,9 +457,8 @@
         total: 12 // Total blend tea grams per liter
     };
 
-    // --- Functions ---
+    // --- Functions for MAIN Calculator ---
 
-    // NOTE: This function (selectOption) controls the MAIN calculator (water/sugar/tea input)
     function selectOption(element, isBlend, type) {
         if (type === 'sugar') {
             allSweetnessButtons.forEach(btn => btn.classList.remove('active'));
@@ -390,7 +482,6 @@
         runCalculation();
     }
     
-    // Function for quick steps on the main water input
     function adjustWaterAmount(delta) {
         let currentValue = parseFloat(mainInput.value) || 0;
         let newAmount = currentValue + delta;
@@ -398,7 +489,7 @@
         if (newAmount > WATER_MAX) {
             newAmount = WATER_MAX;
         } else if (newAmount < WATER_MIN) {
-            newAmount = WATER_MIN;
+            newAmount = WATER_MIN; 
         }
         
         currentWaterAmount = newAmount; 
@@ -409,36 +500,6 @@
         calcModeSelect.value = 'water';
         changeCalcMode(); 
     }
-
-
-    // --- Event Listeners ---
-    calcModeSelect.addEventListener('change', changeCalcMode);
-    mainInput.addEventListener('input', () => {
-        currentWaterAmount = parseFloat(mainInput.value) || 0;
-        waterSlider.value = currentWaterAmount;
-        runCalculation();
-        // Removed converter call: setSugarPerLiter(sugarPerLiterInput.value, false);
-    });
-    waterSlider.addEventListener('input', () => {
-        currentWaterAmount = parseFloat(waterSlider.value) || 0;
-        mainInput.value = currentWaterAmount;
-        runCalculation(true);
-        // Removed converter call: setSugarPerLiter(sugarPerLiterInput.value, false);
-    });
-    themeToggleButton.addEventListener('click', toggleTheme);
-    
-    // Removed converter event listener: sugarPerLiterInput.addEventListener('input', ...)
-    
-    document.addEventListener('DOMContentLoaded', () => {
-        loadTheme();
-        
-        sweetnessControls.querySelector('[data-value="75"]').classList.add('active'); 
-        strengthControls.querySelector('[data-value="12"]').classList.add('active');
-        
-        // Removed converter initialization
-        
-        runCalculation();
-    });
 
     function changeCalcMode() {
         const mode = calcModeSelect.value;
@@ -465,7 +526,6 @@
         let inputValue = mainInput.value.trim();
         let value = parseFloat(inputValue.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[^\d\.]/g, ''));
 
-        // Handle NaN/Empty input in main calculation
         const resultElements = document.querySelectorAll('.result, .note');
         if (isNaN(value) || value <= 0) {
             
@@ -474,8 +534,6 @@
             document.getElementById('sugarLevel')?.style.setProperty('height', '0px');
             document.getElementById('teaLevel')?.style.setProperty('height', '0px');
             if (mode === 'water') waterSlider.value = 0;
-            
-            // Removed converter reset logic: customWaterDisplay.textContent = 0; converterResultText.textContent = '0.00';
             return;
         }
         resultElements.forEach(el => el.style.visibility = 'visible');
@@ -598,6 +656,94 @@
         if(sugarLevel) sugarLevel.style.height = `${sugarFillPercentage * 225}px`;
         if(teaLevel) teaLevel.style.height = `${teaFillPercentage * 225}px`;
     }
+    // End Functions for MAIN Calculator
+
+    // --- Functions for Standalone Converter ---
+
+    function setCustomWater(waterMl, updateInput) {
+        let value = parseFloat(waterMl) || 0;
+        value = Math.max(MIN_CUSTOM_WATER, value);
+        
+        customWaterMl = value; // Update standalone state
+
+        if (updateInput) {
+             customWaterInput.value = value;
+        }
+        
+        // Trigger calculation with the current sugar per liter setting
+        setSugarPerLiter(sugarPerLiterSetting, false);
+    }
+
+    function adjustCustomWater(delta) {
+        let currentValue = parseFloat(customWaterInput.value) || MIN_CUSTOM_WATER;
+        let newAmount = currentValue + delta;
+        
+        if (newAmount < MIN_CUSTOM_WATER) {
+            newAmount = MIN_CUSTOM_WATER;
+        }
+        
+        setCustomWater(newAmount, true);
+    }
+    
+    // Function to calculate and display sugar in cup based on gramsPerLiter and customWaterMl
+    function setSugarPerLiter(gramsPerLiter, updateInput, element = null) {
+        let value = parseFloat(gramsPerLiter);
+        
+        if (isNaN(value)) {
+            value = MIN_SUGAR_PER_LITER; 
+        }
+
+        value = Math.max(MIN_SUGAR_PER_LITER, value);
+        
+        // Store the selected/inputted concentration
+        sugarPerLiterSetting = value;
+        
+        // Read water volume directly from the standalone state
+        let waterVolumeMl = customWaterMl;
+
+        // 1. Calculate the required grams for the water volume in customWaterMl
+        // Formula: (Grams/Liter * Water Volume mL) / 1000
+        const sugarInCup = (value * waterVolumeMl) / 1000; 
+        
+        // 2. Update the custom water display text
+        customWaterDisplay.textContent = waterVolumeMl.toFixed(0); 
+
+        // 3. Update the input field if necessary (removed input field from HTML but kept this logic for state management)
+        if (updateInput) {
+             sugarPerLiterInput.value = value;
+        }
+        
+        // 4. Display the result
+        converterResultText.textContent = sugarInCup.toFixed(2);
+        converterResultContainer.style.display = 'block';
+
+        // 5. Handle button highlighting
+        allPresetButtonsConverter.forEach(btn => btn.classList.remove('active'));
+        if (element) {
+            element.classList.add('active');
+        } else {
+            // Check if the current setting matches a preset to highlight it.
+            const matchingPreset = Array.from(allPresetButtonsConverter).find(btn => parseFloat(btn.dataset.value) === value);
+            if (matchingPreset) {
+                matchingPreset.classList.add('active');
+            }
+        }
+    }
+
+    // This function is no longer used since the input field is removed, but we keep the logic for the step buttons in case they were left.
+    // We will keep the logic to handle the buttons if we decide to re-add them.
+    function adjustSugarPerLiter(delta) {
+        let currentValue = sugarPerLiterSetting; // Use state variable instead of input field
+        let newAmount = currentValue + delta;
+        
+        if (newAmount < MIN_SUGAR_PER_LITER) {
+            newAmount = MIN_SUGAR_PER_LITER;
+        }
+        
+        // Call setSugarPerLiter with the new value, treating it as a step adjustment (updateInput=true)
+        setSugarPerLiter(newAmount, true, null);
+    }
+    // End Functions for Standalone Converter
 
     function toggleTheme() {
         document.body.classList.toggle('dark-mode');
@@ -607,14 +753,27 @@
     }
 
     function loadTheme() {
+        // FIX: Ensuring reliable theme loading from localStorage
         const savedTheme = localStorage.getItem('theme');
-        if (savedTheme !== 'light') { 
+        
+        // New logic: Default to 'dark' if no saved theme is found (savedTheme === null)
+        const preferredTheme = savedTheme === null ? 'dark' : savedTheme; 
+
+        if (preferredTheme === 'dark') { 
             document.body.classList.add('dark-mode');
             themeToggleButton.textContent = '☀️';
+        } else {
+             document.body.classList.remove('dark-mode');
+             themeToggleButton.textContent = '🌙';
         }
         
+        // Initialize controls and state
         sweetnessControls.querySelector('[data-value="75"]').classList.add('active'); 
         strengthControls.querySelector('[data-value="12"]').classList.add('active');
+        
+        // Initialize Standalone Converter
+        setCustomWater(75, true); 
+        setSugarPerLiter(75, false, document.querySelector('.preset-controls-converter button[data-value="75"]')); 
         
         runCalculation();
     }
@@ -623,9 +782,26 @@
         return str.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
     }
     
-    // Removed all Sugar Converter Logic Functions
-    // Removed MIN_SUGAR_PER_LITER and MIN_CUSTOM_WATER constants
+    // Standalone Converter Event Listeners (Ensure they are registered)
+    customWaterInput.addEventListener('input', () => setCustomWater(customWaterInput.value, true));
     
+    document.addEventListener('DOMContentLoaded', () => {
+        loadTheme();
+        
+        // Initial calculation is run inside loadTheme
+    });
+    // Add event listeners for main input and slider to run calculation
+    mainInput.addEventListener('input', () => {
+        currentWaterAmount = parseFloat(mainInput.value) || 0;
+        waterSlider.value = currentWaterAmount;
+        runCalculation();
+    });
+    waterSlider.addEventListener('input', () => {
+        currentWaterAmount = parseFloat(waterSlider.value) || 0;
+        mainInput.value = currentWaterAmount;
+        runCalculation(true);
+    });
+    themeToggleButton.addEventListener('click', toggleTheme);
 </script>
 </body>
 </html>
