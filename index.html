@@ -18,6 +18,16 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    <script>
+        (function() {
+            const allowed = 'https://alhammod1.github.io/waznat-shahi';
+            const loc = location.href.split('?')[0].replace(/\/$/, '');
+            if (!loc.startsWith(allowed)) {
+                document.documentElement.innerHTML = '';
+                location.replace(allowed);
+            }
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>وزنة شاهي ربيع</title>
@@ -1010,6 +1020,7 @@
             </div>
             <div class="result-actions">
                 <button class="action-btn" onclick="copyResult()">📋 نسخ النتيجة</button>
+                <button class="action-btn" style="background:#25D366;color:#fff;border-color:#25D366;" onclick="shareWhatsApp()">📤 واتساب</button>
                 <button class="action-btn primary" onclick="saveToHistory()">📌 حفظ</button>
             </div>
         </div>
@@ -1202,8 +1213,9 @@
                     <span class="unit">جم</span>
                 </div>
             </div>
-            <div style="display:flex; justify-content:center;">
+            <div style="display:flex; justify-content:center; gap:10px;">
                 <button class="abujabal-copy-btn" onclick="ajCopyResult()">📋 نسخ النتيجة</button>
+                <button class="abujabal-copy-btn" style="background:#25D366;border-color:#25D366;" onclick="ajShareWhatsApp()">📤 واتساب</button>
             </div>
         </div>
     </div>
@@ -1475,6 +1487,13 @@ function copyResult() {
     }
 }
 
+function shareWhatsApp() {
+    const { waterMl, sugarGrams, teaGrams } = state;
+    if (!waterMl && !sugarGrams && !teaGrams) return;
+    const text = `وزنة شاهي ربيع 🍵\n💧 الماء: ${fmt(waterMl)} مل\n🍬 السكر: ${fmt(sugarGrams)} جم\n🫖 الشاي: ${fmt(teaGrams)} جم`;
+    window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+}
+
 // ── History ────────────────────────────────────────
 let history = [];
 
@@ -1497,12 +1516,16 @@ function saveToHistory() {
     history.unshift(item);
     if (history.length > 8) history.pop();
 
+    try { localStorage.setItem('shahi_history', JSON.stringify(history)); } catch(e) {}
     renderHistory();
     showToast('تم الحفظ 📌');
 }
 
 function loadHistory() {
-    history = [];
+    try {
+        const saved = localStorage.getItem('shahi_history');
+        history = saved ? JSON.parse(saved) : [];
+    } catch(e) { history = []; }
     renderHistory();
 }
 
@@ -1533,7 +1556,7 @@ function loadHistoryItem(i) {
 
 function clearHistory() {
     history = [];
-
+    try { localStorage.removeItem('shahi_history'); } catch(e) {}
     renderHistory();
     showToast('تم مسح السجل');
 }
@@ -1662,6 +1685,15 @@ function ajCopyResult() {
         document.body.removeChild(el);
         showToast('تم نسخ النتيجة ✓');
     }
+}
+
+function ajShareWhatsApp() {
+    const w = document.getElementById('ajResWater').textContent;
+    const s = document.getElementById('ajResSugar').textContent;
+    const t = document.getElementById('ajResTea').textContent;
+    if (w === '—') return;
+    const text = `شاهي أبو جبل 🍵\n💧 الماء: ${w} مل\n🍬 السكر: ${s} جم\n🫖 الشاي: ${t} جم`;
+    window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
 }
 </script>
 </body>
