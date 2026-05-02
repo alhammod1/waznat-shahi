@@ -644,6 +644,203 @@
         .dark .g { color: var(--green-light); }
         .underline-r { color: var(--red); border-bottom: 2px solid var(--text); padding-bottom: 2px; }
 
+        /* ── شاهي أبو جبل Section ── */
+        .abujabalsection-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+        .abujabalsection-header h2 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--green);
+        }
+        .abujabalsection-header .badge {
+            background: var(--green);
+            color: #fff;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 20px;
+        }
+        .abujabal-formula {
+            background: var(--surface2);
+            border: 1px dashed var(--green);
+            border-radius: 10px;
+            padding: 10px 16px;
+            margin-bottom: 16px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-align: center;
+            line-height: 1.9;
+        }
+        .abujabal-formula span { color: var(--green); font-weight: 800; }
+        .abujabal-tabs {
+            display: flex;
+            gap: 0;
+            background: var(--surface2);
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border);
+        }
+        .abujabal-tab {
+            flex: 1;
+            padding: 9px 8px;
+            text-align: center;
+            border-radius: 9px;
+            cursor: pointer;
+            font-family: 'Cairo', Arial, sans-serif;
+            font-size: 0.93rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: transparent;
+            border: none;
+            transition: all 0.2s;
+        }
+        .abujabal-tab.active {
+            background: var(--green);
+            color: #fff;
+            box-shadow: 0 2px 8px var(--shadow-lg);
+        }
+        .abujabal-input-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .abujabal-input-wrap {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+        }
+        .abujabal-input {
+            width: 100%;
+            padding: 12px 48px 12px 16px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-align: center;
+            background: var(--input-bg);
+            color: var(--text);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-family: 'Cairo', Arial, sans-serif;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+        .abujabal-input:focus { border-color: var(--green); }
+        .abujabal-input-unit {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            pointer-events: none;
+        }
+        .abujabal-clear {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 4px;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+        .abujabal-clear:hover { color: var(--red); }
+        .abujabal-result {
+            background: var(--result-bg);
+            border: 1px solid var(--green);
+            border-radius: 14px;
+            padding: 16px;
+            display: none;
+        }
+        .abujabal-result.visible { display: block; }
+        .abujabal-result-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .abujabal-tag {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            min-width: 95px;
+            gap: 2px;
+        }
+        .abujabal-tag.water { background: var(--tag-water); }
+        .abujabal-tag.sugar { background: var(--tag-sugar); }
+        .abujabal-tag.tea   { background: var(--tag-tea); }
+        .abujabal-tag .label { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; }
+        .abujabal-tag .value { font-size: 1.5rem; font-weight: 800; color: var(--green); line-height: 1; }
+        .abujabal-tag .unit  { font-size: 0.72rem; color: var(--text-muted); }
+        .abujabal-copy-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 7px 16px;
+            border-radius: 9px;
+            border: 1px solid var(--green);
+            background: var(--green);
+            color: #fff;
+            font-family: 'Cairo', Arial, sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 12px;
+        }
+        .abujabal-copy-btn:hover { opacity: 0.85; }
+        .abujabal-slider-wrap {
+            width: 100%;
+            max-width: 340px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        .abujabal-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: linear-gradient(to left, var(--green) var(--fill, 0%), var(--slider-track) var(--fill, 0%));
+            outline: none;
+            cursor: pointer;
+        }
+        .abujabal-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 2px 6px var(--shadow-lg);
+            cursor: pointer;
+            transition: transform 0.15s;
+        }
+        .abujabal-slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+        .abujabal-slider-labels {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            padding: 0 2px;
+        }
+
         /* ── Attribution ── */
         .attribution {
             text-align: center;
@@ -954,7 +1151,70 @@
     </div>
 </div>
 
+<!-- شاهي أبو جبل Calculator -->
+<div class="card">
+    <div class="card-inner">
+        <div class="abujabalsection-header">
+            <span style="font-size:1.5rem;">🍵</span>
+            <h2>شاهي أبو جبل</h2>
+            <span class="badge">وصفة ثابتة</span>
+        </div>
+        <div class="abujabal-formula">
+            لكل <span>١ لتر</span> ماء: &nbsp;🍬 سكر <span>٩٠ جم</span> &nbsp;|&nbsp; 🫖 شاهي <span>١٣.٥ جم</span>
+        </div>
+
+        <!-- Tabs -->
+        <div class="abujabal-tabs">
+            <button class="abujabal-tab active" data-ajmode="water" onclick="ajSetMode('water')">💧 بالماء</button>
+            <button class="abujabal-tab" data-ajmode="sugar" onclick="ajSetMode('sugar')">🍬 بالسكر</button>
+            <button class="abujabal-tab" data-ajmode="tea" onclick="ajSetMode('tea')">🫖 بالشاي</button>
+        </div>
+
+        <!-- Input -->
+        <div class="abujabal-input-section">
+            <div class="input-label" id="ajInputLabel">أدخل كمية الماء</div>
+            <div class="abujabal-input-wrap">
+                <input class="abujabal-input" id="ajInput" type="text" inputmode="decimal"
+                       placeholder="أدخل القيمة" autocomplete="off">
+                <span class="abujabal-input-unit" id="ajInputUnit">مل</span>
+                <button class="abujabal-clear" onclick="ajClearInput()">✕</button>
+            </div>
+            <div class="abujabal-slider-wrap" id="ajSliderWrap">
+                <input type="range" class="abujabal-slider" id="ajSlider" min="0" max="10000" step="50" value="0">
+                <div class="abujabal-slider-labels">
+                    <span>0</span><span>2500</span><span>5000</span><span>7500</span><span>10000 مل</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result -->
+        <div class="abujabal-result" id="ajResult">
+            <div class="abujabal-result-row">
+                <div class="abujabal-tag water">
+                    <span class="label">💧 الماء</span>
+                    <span class="value" id="ajResWater">—</span>
+                    <span class="unit">مل</span>
+                </div>
+                <div class="abujabal-tag sugar">
+                    <span class="label">🍬 السكر</span>
+                    <span class="value" id="ajResSugar">—</span>
+                    <span class="unit">جم</span>
+                </div>
+                <div class="abujabal-tag tea">
+                    <span class="label">🫖 الشاي</span>
+                    <span class="value" id="ajResTea">—</span>
+                    <span class="unit">جم</span>
+                </div>
+            </div>
+            <div style="display:flex; justify-content:center;">
+                <button class="abujabal-copy-btn" onclick="ajCopyResult()">📋 نسخ النتيجة</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Footer Notes -->
+
 <div class="card">
     <div class="card-inner">
         <div class="footer-card">
@@ -1310,6 +1570,102 @@ function showToast(msg) {
     t.classList.add('show');
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ── شاهي أبو جبل Calculator ──────────────────────
+const AJ_SUGAR = 90;   // جم/لتر
+const AJ_TEA   = 13.5; // جم/لتر
+
+const ajState = { mode: 'water', waterMl: 0, sugarGrams: 0, teaGrams: 0 };
+
+const ajInput     = document.getElementById('ajInput');
+const ajSlider    = document.getElementById('ajSlider');
+const ajSliderWrap = document.getElementById('ajSliderWrap');
+const ajResult    = document.getElementById('ajResult');
+const ajInputLabel = document.getElementById('ajInputLabel');
+const ajInputUnit  = document.getElementById('ajInputUnit');
+
+const AJ_MODE_LABELS = { water: 'أدخل كمية الماء', sugar: 'أدخل كمية السكر', tea: 'أدخل كمية الشاي' };
+const AJ_MODE_UNITS  = { water: 'مل', sugar: 'جم', tea: 'جم' };
+
+ajSlider.addEventListener('input', () => {
+    ajInput.value = ajSlider.value;
+    ajUpdateSlider();
+    ajCalculate();
+});
+ajInput.addEventListener('input', () => {
+    const v = parseFloat(normalizeInput(ajInput.value));
+    if (!isNaN(v) && ajState.mode === 'water') {
+        ajSlider.value = Math.min(v, 10000);
+        ajUpdateSlider();
+    }
+    ajCalculate();
+});
+
+function ajUpdateSlider() {
+    const pct = (ajSlider.value / ajSlider.max) * 100;
+    ajSlider.style.setProperty('--fill', pct + '%');
+}
+
+function ajSetMode(mode) {
+    ajState.mode = mode;
+    document.querySelectorAll('.abujabal-tab').forEach(t => t.classList.toggle('active', t.dataset.ajmode === mode));
+    ajInputLabel.textContent = AJ_MODE_LABELS[mode];
+    ajInputUnit.textContent  = AJ_MODE_UNITS[mode];
+    ajSliderWrap.style.display = mode === 'water' ? 'flex' : 'none';
+    ajInput.value = '';
+    ajResult.classList.remove('visible');
+}
+
+function ajClearInput() {
+    ajInput.value = '';
+    ajSlider.value = 0;
+    ajUpdateSlider();
+    ajResult.classList.remove('visible');
+}
+
+function ajCalculate() {
+    const raw = parseFloat(normalizeInput(ajInput.value));
+    if (isNaN(raw) || raw <= 0) { ajResult.classList.remove('visible'); return; }
+
+    let w, s, t;
+    if (ajState.mode === 'water') {
+        w = raw;
+        s = (AJ_SUGAR * w) / 1000;
+        t = (AJ_TEA   * w) / 1000;
+    } else if (ajState.mode === 'sugar') {
+        s = raw;
+        w = (s * 1000) / AJ_SUGAR;
+        t = (AJ_TEA * w) / 1000;
+    } else {
+        t = raw;
+        w = (t * 1000) / AJ_TEA;
+        s = (AJ_SUGAR * w) / 1000;
+    }
+
+    document.getElementById('ajResWater').textContent = fmt(Math.max(0, w));
+    document.getElementById('ajResSugar').textContent = fmt(Math.max(0, s));
+    document.getElementById('ajResTea').textContent   = fmt(Math.max(0, t));
+    ajResult.classList.add('visible');
+}
+
+function ajCopyResult() {
+    const w = document.getElementById('ajResWater').textContent;
+    const s = document.getElementById('ajResSugar').textContent;
+    const t = document.getElementById('ajResTea').textContent;
+    if (w === '—') return;
+    const text = `شاهي أبو جبل:\n💧 الماء: ${w} مل\n🍬 السكر: ${s} جم\n🫖 الشاي: ${t} جم`;
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => showToast('تم نسخ النتيجة ✓'));
+    } else {
+        const el = document.createElement('textarea');
+        el.value = text;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        showToast('تم نسخ النتيجة ✓');
+    }
 }
 </script>
 </body>
