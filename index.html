@@ -851,30 +851,6 @@
             padding: 0 2px;
         }
 
-        /* ── AbuJabal Cups ── */
-        .aj-cups-section {
-            display: flex;
-            justify-content: center;
-            gap: 60px;
-            margin: 8px 0 4px;
-            flex-wrap: wrap;
-        }
-        .aj-cup-note {
-            background: var(--note-bg);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 6px 12px;
-            font-size: 0.82rem;
-            font-weight: 700;
-            text-align: center;
-            min-width: 130px;
-            visibility: hidden;
-        }
-        .aj-cup-note.visible { visibility: visible; }
-        .aj-cup-note .cups { color: var(--red); }
-        .aj-cup-note .plus { color: var(--blue); }
-        .aj-cup-note .remainder { color: var(--red); }
-
         /* ── Attribution ── */
         .attribution {
             text-align: center;
@@ -1242,99 +1218,483 @@
                 <button class="abujabal-copy-btn" style="background:#25D366;border-color:#25D366;" onclick="ajShareWhatsApp()">📤 واتساب</button>
             </div>
         </div>
+    </div>
+</div>
 
-        <!-- Visual Cups — شاهي أبو جبل -->
-        <p style="text-align:center; font-size:0.8rem; color:var(--text-muted); margin: 14px 0 10px;">
-            <span class="underline-r">إذا لم يتوفر الميزان استخدم البيالة — المقاييس مختبرة مسبقاً</span>
-        </p>
-        <div class="aj-cups-section">
-            <!-- Sugar Cup -->
-            <div class="cup-wrapper">
-                <div class="cup-label">السكر</div>
-                <div class="cup-outer">
-                    <svg class="cup-svg" width="130" height="200" viewBox="0 0 130 200" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <clipPath id="ajSugarClip">
-                                <path d="M15 0 L115 0 L105 190 Q100 198 65 198 Q30 198 25 190 Z"/>
-                            </clipPath>
-                            <linearGradient id="ajSugarGrad" x1="0" y1="1" x2="0" y2="0">
-                                <stop offset="0%" stop-color="rgba(180,130,20,0.92)"/>
-                                <stop offset="100%" stop-color="rgba(220,180,60,0.80)"/>
-                            </linearGradient>
-                        </defs>
-                        <rect id="ajSugarFill" x="0" y="200" width="130" height="200" fill="url(#ajSugarGrad)" clip-path="url(#ajSugarClip)" style="transition: y 0.5s ease-out, height 0.5s ease-out;"/>
-                        <path d="M15 2 L115 2 L105 190 Q100 197 65 197 Q30 197 25 190 Z" fill="none" stroke="var(--cup-border)" stroke-width="2.5" stroke-dasharray="4 3" stroke-linecap="round"/>
-                        <g font-family="Cairo,Arial" font-size="11" fill="var(--blue)">
-                            <line x1="12" y1="2" x2="18" y2="2" stroke="var(--blue)" stroke-width="1.5"/>
-                            <text x="10" y="6" text-anchor="end">84</text>
-                            <line x1="12" y1="49" x2="18" y2="49" stroke="var(--blue)" stroke-width="1.5"/>
-                            <text x="10" y="53" text-anchor="end">63</text>
-                            <line x1="12" y1="96" x2="18" y2="96" stroke="var(--blue)" stroke-width="1.5"/>
-                            <text x="10" y="100" text-anchor="end">42</text>
-                            <line x1="12" y1="143" x2="18" y2="143" stroke="var(--blue)" stroke-width="1.5"/>
-                            <text x="10" y="147" text-anchor="end">21</text>
-                        </g>
-                        <g font-family="Cairo,Arial" font-size="11" fill="var(--green)">
-                            <line x1="112" y1="2" x2="118" y2="2" stroke="var(--green)" stroke-width="1.5"/>
-                            <text x="120" y="6">100%</text>
-                            <line x1="112" y1="49" x2="118" y2="49" stroke="var(--green)" stroke-width="1.5"/>
-                            <text x="120" y="53">75%</text>
-                            <line x1="112" y1="96" x2="118" y2="96" stroke="var(--green)" stroke-width="1.5"/>
-                            <text x="120" y="100">50%</text>
-                            <line x1="112" y1="143" x2="118" y2="143" stroke="var(--green)" stroke-width="1.5"/>
-                            <text x="120" y="147">25%</text>
-                        </g>
-                    </svg>
+<!-- Footer Notes -->
+
+<div class="card">
+    <div class="card-inner">
+        <div class="footer-card">
+            <details>
+                <summary>📖 ملاحظات وطريقة الحساب</summary>
+                <div class="footer-notes-content">
+                    <p><span class="underline-r">البيالة المستخدمة في القياس هي بيالة "بادريق"</span></p>
+                    <p>البيالة العادية من الماء إلى المستوى الطبيعي المتعارف عليه تساوي تقريباً <span class="r">73</span> مل، أي أن <span class="r">1</span> لتر يساوي <span class="r">13.69</span> بيالة.</p>
+                    <p><span style="color: red;">(لجميع أنواع الشاهي)</span> تقريباً هذه الوزنة مناسبة للجميع مع التعديل حسب الحاجة لواحد لتر</p>
+                    <p><span class="r">السكر: 50 إلى 55 جم</span><br><span class="r">الشاي: 12 إلى 12.5 جم</span></p>
+                    <p>
+                        <strong class="r">طريقة الحساب:</strong><br>
+                        <span class="r">السكر (جم)</span> = (الماء بالمل ÷ 1000) × <span class="b">50–55</span><br>
+                        <span class="r">الشاي (جم)</span> = (الماء بالمل ÷ 1000) × <span class="b">12–12.5</span>
+                    </p>
+                    <p><strong class="r">ملاحظة:</strong> قد تختلف النتيجة حسب نوع الشاي، يفضل التجربة والضبط حسب الذوق.</p>
                 </div>
-                <div class="aj-cup-note" id="ajSugarNote">
-                    <span class="cups" id="ajSugarCups">0</span> بيالة
-                    <span class="plus">+</span>
-                    <span class="remainder" id="ajSugarRemainder">0</span> جم
-                </div>
-            </div>
-            <!-- Tea Cup -->
-            <div class="cup-wrapper">
-                <div class="cup-label">الشاي</div>
-                <div class="cup-outer">
-                    <svg class="cup-svg" width="130" height="200" viewBox="0 0 130 200" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <clipPath id="ajTeaClip">
-                                <path d="M15 0 L115 0 L105 190 Q100 198 65 198 Q30 198 25 190 Z"/>
-                            </clipPath>
-                            <linearGradient id="ajTeaGrad" x1="0" y1="1" x2="0" y2="0">
-                                <stop offset="0%" stop-color="rgba(20,60,130,0.92)"/>
-                                <stop offset="100%" stop-color="rgba(60,140,200,0.78)"/>
-                            </linearGradient>
-                        </defs>
-                        <rect id="ajTeaFill" x="0" y="200" width="130" height="200" fill="url(#ajTeaGrad)" clip-path="url(#ajTeaClip)" style="transition: y 0.5s ease-out, height 0.5s ease-out;"/>
-                        <path d="M15 2 L115 2 L105 190 Q100 197 65 197 Q30 197 25 190 Z" fill="none" stroke="var(--cup-border)" stroke-width="2.5" stroke-dasharray="4 3" stroke-linecap="round"/>
-                        <g font-family="Cairo,Arial" font-size="11" fill="var(--blue)">
-                            <line x1="12" y1="2" x2="18" y2="2" stroke="var(--blue)" stroke-width="1.5"/>
-                            <text x="10" y="6" text-anchor="end">21</text>
-                            <line x1="12" y1="49" x2="18" y2="49" stroke="var(--blue)" stroke-width="1.5"/>
-                            <text x="10" y="53" text-anchor="end">15.75</text>
-                            <line x1="12" y1="96" x2="18" y2="96" stroke="var(--blue)" stroke-width="1.5"/>
-                            <text x="10" y="100" text-anchor="end">10.5</text>
-                            <line x1="12" y1="143" x2="18" y2="143" stroke="var(--blue)" stroke-width="1.5"/>
-                            <text x="10" y="147" text-anchor="end">5.25</text>
-                        </g>
-                        <g font-family="Cairo,Arial" font-size="11" fill="var(--green)">
-                            <line x1="112" y1="2" x2="118" y2="2" stroke="var(--green)" stroke-width="1.5"/>
-                            <text x="120" y="6">100%</text>
-                            <line x1="112" y1="49" x2="118" y2="49" stroke="var(--green)" stroke-width="1.5"/>
-                            <text x="120" y="53">75%</text>
-                            <line x1="112" y1="96" x2="118" y2="96" stroke="var(--green)" stroke-width="1.5"/>
-                            <text x="120" y="100">50%</text>
-                            <line x1="112" y1="143" x2="118" y2="143" stroke="var(--green)" stroke-width="1.5"/>
-                            <text x="120" y="147">25%</text>
-                        </g>
-                    </svg>
-                </div>
-                <div class="aj-cup-note" id="ajTeaNote">
-                    <span class="cups" id="ajTeaCups">0</span> بيالة
-                    <span class="plus">+</span>
-                    <span class="remainder" id="ajTeaRemainder">0</span> جم
-                </div>
-            </div>
+            </details>
         </div>
+    </div>
+</div>
 
+<!-- Tea Reference Link -->
+<div style="text-align:center; margin-bottom: 8px; font-size: 0.92rem; color: var(--text-muted);">
+    <p>للمزيد من المعلومات حول تصنيفات الشاي، تفضل بزيارة: <a href="BlackTeaGradingReference.html" style="color: var(--accent); text-decoration: none; font-weight: 700;">تصنيفات الشاي</a></p>
+</div>
+
+<!-- Attribution -->
+<div class="attribution">
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── State ──────────────────────────────────────────
+const state = {
+    mode: 'water',
+    sugarPerLiter: 75,
+    teaPerLiter: 12,
+    isBlend: false,
+    blendType: 'medium',
+    waterMl: 0,
+    sugarGrams: 0,
+    teaGrams: 0
+};
+
+const BLEND = { rabea: 9, abuJabal: 1, alWazah: 1, khather: 1, total: 12 };
+const CUP_ML = 73;
+const SUGAR_CUP = 84;  // max grams shown in glass
+const TEA_CUP = 21;    // max grams shown in glass
+
+// ── Elements ───────────────────────────────────────
+const mainInput   = document.getElementById('mainInput');
+const waterSlider = document.getElementById('waterSlider');
+const inputLabel  = document.getElementById('inputLabel');
+const inputUnit   = document.getElementById('inputUnit');
+const sliderWrap  = document.getElementById('sliderWrap');
+const resultCard  = document.getElementById('resultCard');
+const blendDetail = document.getElementById('blendDetail');
+
+// ── Init ───────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+    loadTheme();
+    loadHistory();
+    waterSlider.addEventListener('input', onSlider);
+    mainInput.addEventListener('input', onInputChange);
+    document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+    updateSliderGradient();
+});
+
+// ── Mode ───────────────────────────────────────────
+const MODE_LABELS = { water: 'أدخل كمية الماء', sugar: 'أدخل كمية السكر', tea: 'أدخل كمية الشاي' };
+const MODE_UNITS  = { water: 'مل', sugar: 'جم', tea: 'جم' };
+
+function setMode(mode) {
+    state.mode = mode;
+    document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.mode === mode));
+    inputLabel.textContent = MODE_LABELS[mode];
+    inputUnit.textContent  = MODE_UNITS[mode];
+    sliderWrap.style.display = mode === 'water' ? 'flex' : 'none';
+    mainInput.value = '';
+    clearDisplay();
+}
+
+// ── Sugar / Tea buttons ────────────────────────────
+function selectSugar(btn, isBlend) {
+    // Remove active from all sugar/blend buttons
+    document.querySelectorAll('#sugarGroup button, #blendGroup button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state.sugarPerLiter = parseFloat(btn.dataset.value);
+    state.isBlend = isBlend;
+    if (isBlend) {
+        state.blendType = btn.dataset.blendType;
+    } else {
+        state.blendType = btn.dataset.value === '57' ? 'light' : btn.dataset.value === '75' ? 'medium' : 'heavy';
+    }
+    calculate();
+}
+
+function selectTea(btn) {
+    document.querySelectorAll('#teaGroup button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state.teaPerLiter = parseFloat(btn.dataset.value);
+    calculate();
+}
+
+// ── Input handlers ─────────────────────────────────
+function onInputChange() {
+    const v = parseFloat(normalizeInput(mainInput.value));
+    if (!isNaN(v) && state.mode === 'water') {
+        waterSlider.value = Math.min(v, 10000);
+        updateSliderGradient();
+    }
+    calculate();
+}
+
+function onSlider() {
+    mainInput.value = waterSlider.value;
+    updateSliderGradient();
+    calculate();
+}
+
+function updateSliderGradient() {
+    const pct = (waterSlider.value / waterSlider.max) * 100;
+    waterSlider.style.setProperty('--fill', pct + '%');
+}
+
+function clearInput() {
+    mainInput.value = '';
+    if (state.mode === 'water') { waterSlider.value = 0; updateSliderGradient(); }
+    clearDisplay();
+}
+
+function normalizeInput(str) {
+    return str.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[^\d.]/g, '');
+}
+
+// ── Core Calculate ─────────────────────────────────
+function calculate() {
+    const raw = parseFloat(normalizeInput(mainInput.value));
+    if (isNaN(raw) || raw <= 0) { clearDisplay(); return; }
+
+    let teaMult = state.isBlend
+        ? (state.blendType === 'heavy' ? BLEND.total + 1 : BLEND.total)
+        : state.teaPerLiter;
+
+    let w, s, t;
+    if (state.mode === 'water') {
+        w = raw;
+        s = (state.sugarPerLiter * w) / 1000;
+        t = (teaMult * w) / 1000;
+    } else if (state.mode === 'sugar') {
+        s = raw;
+        w = (s * 1000) / state.sugarPerLiter;
+        t = (teaMult * w) / 1000;
+    } else {
+        t = raw;
+        w = (t * 1000) / teaMult;
+        s = (state.sugarPerLiter * w) / 1000;
+    }
+
+    state.waterMl   = Math.max(0, w);
+    state.sugarGrams = Math.max(0, s);
+    state.teaGrams  = Math.max(0, t);
+
+    updateDisplay();
+}
+
+// ── Update Display ─────────────────────────────────
+function fmt(n) {
+    if (typeof n !== 'number') return '0';
+    const s = n.toFixed(2).replace(/\.0+$/, '').replace(/(\.\d)0$/, '$1');
+    return s;
+}
+
+function updateDisplay() {
+    const { waterMl, sugarGrams, teaGrams } = state;
+
+    // Result card
+    document.getElementById('resWater').textContent = fmt(waterMl);
+    document.getElementById('resSugar').textContent = fmt(sugarGrams);
+    document.getElementById('resTea').textContent   = fmt(teaGrams);
+    resultCard.classList.add('visible');
+
+    // Blend detail
+    if (state.isBlend && teaGrams > 0) {
+        const blendTotal = state.blendType === 'heavy' ? BLEND.total + 1 : BLEND.total;
+        const ratio = teaGrams / blendTotal;
+        document.getElementById('rabeaGrams').textContent   = fmt(BLEND.rabea   * ratio);
+        document.getElementById('abuJabalGrams').textContent = fmt(BLEND.abuJabal * ratio);
+        document.getElementById('alWazahGrams').textContent  = fmt(BLEND.alWazah  * ratio);
+        document.getElementById('khatherGrams').textContent  = fmt(BLEND.khather  * ratio);
+        blendDetail.classList.add('visible');
+    } else {
+        blendDetail.classList.remove('visible');
+    }
+
+    // Cup notes
+    const sugarFullCups     = Math.floor(sugarGrams / SUGAR_CUP);
+    const sugarRemainder    = sugarGrams % SUGAR_CUP;
+    const teaFullCups       = Math.floor(teaGrams / TEA_CUP);
+    const teaRemainder      = teaGrams % TEA_CUP;
+
+    const sugarNote = document.getElementById('sugarNote');
+    const teaNote   = document.getElementById('teaNote');
+    document.getElementById('sugarCups').textContent     = fmt(sugarFullCups);
+    document.getElementById('sugarRemainder').textContent = fmt(sugarRemainder);
+    document.getElementById('teaCups').textContent       = fmt(teaFullCups);
+    document.getElementById('teaRemainder').textContent   = fmt(teaRemainder);
+    sugarNote.classList.add('visible');
+    teaNote.classList.add('visible');
+
+    // Cup fill animation
+    fillCup('sugarFill', sugarGrams, sugarFullCups, sugarRemainder, SUGAR_CUP);
+    fillCup('teaFill',   teaGrams,   teaFullCups,   teaRemainder,   TEA_CUP);
+}
+
+function fillCup(id, grams, fullCups, remainder, maxPerCup) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const cupHeight = 190; // usable fill height in SVG units
+
+    let pct;
+    if (grams <= 0) {
+        pct = 0;
+    } else if (grams < maxPerCup || fullCups === 0) {
+        pct = grams / maxPerCup;
+    } else {
+        pct = remainder < 0.005 ? 1 : remainder / maxPerCup;
+    }
+    pct = Math.max(0, Math.min(1, pct));
+    const fillH = pct * cupHeight;
+    el.setAttribute('y', 200 - fillH);
+    el.setAttribute('height', fillH + 10);
+}
+
+function clearDisplay() {
+    resultCard.classList.remove('visible');
+    blendDetail.classList.remove('visible');
+    document.getElementById('sugarNote').classList.remove('visible');
+    document.getElementById('teaNote').classList.remove('visible');
+    fillCup('sugarFill', 0, 0, 0, SUGAR_CUP);
+    fillCup('teaFill',   0, 0, 0, TEA_CUP);
+}
+
+// ── Copy Result ────────────────────────────────────
+function copyResult() {
+    const { waterMl, sugarGrams, teaGrams } = state;
+    if (!waterMl && !sugarGrams && !teaGrams) return;
+    const text = `وزنة شاهي ربيع:\n💧 الماء: ${fmt(waterMl)} مل\n🍬 السكر: ${fmt(sugarGrams)} جم\n🫖 الشاي: ${fmt(teaGrams)} جم`;
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => showToast('تم نسخ النتيجة ✓'));
+    } else {
+        const el = document.createElement('textarea');
+        el.value = text;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        showToast('تم نسخ النتيجة ✓');
+    }
+}
+
+function shareWhatsApp() {
+    const { waterMl, sugarGrams, teaGrams } = state;
+    if (!waterMl && !sugarGrams && !teaGrams) return;
+    const text = `وزنة شاهي ربيع 🍵\n💧 الماء: ${fmt(waterMl)} مل\n🍬 السكر: ${fmt(sugarGrams)} جم\n🫖 الشاي: ${fmt(teaGrams)} جم`;
+    window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+}
+
+// ── History ────────────────────────────────────────
+let history = [];
+
+function saveToHistory() {
+    const { waterMl, sugarGrams, teaGrams } = state;
+    if (!waterMl && !sugarGrams && !teaGrams) return;
+
+    const item = {
+        water: fmt(waterMl),
+        sugar: fmt(sugarGrams),
+        tea:   fmt(teaGrams),
+        time:  new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }),
+        date:  new Date().toLocaleDateString('ar-SA', { month: 'short', day: 'numeric' }),
+        mode:  state.mode,
+        waterRaw: waterMl,
+        sugarRaw: sugarGrams,
+        teaRaw:   teaGrams
+    };
+
+    history.unshift(item);
+    if (history.length > 8) history.pop();
+
+    try { localStorage.setItem('shahi_history', JSON.stringify(history)); } catch(e) {}
+    renderHistory();
+    showToast('تم الحفظ 📌');
+}
+
+function loadHistory() {
+    try {
+        const saved = localStorage.getItem('shahi_history');
+        history = saved ? JSON.parse(saved) : [];
+    } catch(e) { history = []; }
+    renderHistory();
+}
+
+function renderHistory() {
+    const list = document.getElementById('historyList');
+    if (!history.length) {
+        list.innerHTML = '<div class="history-empty">لا يوجد حسابات محفوظة بعد</div>';
+        return;
+    }
+    list.innerHTML = history.map((item, i) => `
+        <div class="history-item" onclick="loadHistoryItem(${i})" title="اضغط لتحميل">
+            <div class="hist-main">💧 ${item.water} مل &nbsp;|&nbsp; 🍬 ${item.sugar} جم &nbsp;|&nbsp; 🫖 ${item.tea} جم</div>
+            <div class="hist-meta">${item.date} ${item.time}</div>
+        </div>
+    `).join('');
+}
+
+function loadHistoryItem(i) {
+    const item = history[i];
+    if (!item) return;
+    setMode('water');
+    mainInput.value = item.waterRaw;
+    waterSlider.value = Math.min(item.waterRaw, 10000);
+    updateSliderGradient();
+    calculate();
+    showToast('تم تحميل الحساب ✓');
+}
+
+function clearHistory() {
+    history = [];
+    try { localStorage.removeItem('shahi_history'); } catch(e) {}
+    renderHistory();
+    showToast('تم مسح السجل');
+}
+
+// ── Converter ──────────────────────────────────────
+function setConvSugar(gPerLiter, btn) {
+    document.querySelectorAll('.conv-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const val = (gPerLiter * CUP_ML) / 1000;
+    document.getElementById('convValue').textContent = val.toFixed(2);
+    document.getElementById('convResult').classList.add('visible');
+}
+
+// ── Theme ──────────────────────────────────────────
+function toggleTheme() {
+    const isLight = document.body.classList.toggle('light');
+    document.getElementById('themeToggle').textContent = isLight ? '🌙' : '☀️';
+}
+
+function loadTheme() {
+    // Dark is default — no class needed
+    document.getElementById('themeToggle').textContent = '☀️';
+}
+
+// ── Toast ──────────────────────────────────────────
+let toastTimer;
+function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ── شاهي أبو جبل Calculator ──────────────────────
+const AJ_SUGAR = 90;   // جم/لتر
+const AJ_TEA   = 13; // جم/لتر
+
+const ajState = { mode: 'water', waterMl: 0, sugarGrams: 0, teaGrams: 0 };
+
+const ajInput     = document.getElementById('ajInput');
+const ajSlider    = document.getElementById('ajSlider');
+const ajSliderWrap = document.getElementById('ajSliderWrap');
+const ajResult    = document.getElementById('ajResult');
+const ajInputLabel = document.getElementById('ajInputLabel');
+const ajInputUnit  = document.getElementById('ajInputUnit');
+
+const AJ_MODE_LABELS = { water: 'أدخل كمية الماء', sugar: 'أدخل كمية السكر', tea: 'أدخل كمية الشاي' };
+const AJ_MODE_UNITS  = { water: 'مل', sugar: 'جم', tea: 'جم' };
+
+ajSlider.addEventListener('input', () => {
+    ajInput.value = ajSlider.value;
+    ajUpdateSlider();
+    ajCalculate();
+});
+ajInput.addEventListener('input', () => {
+    const v = parseFloat(normalizeInput(ajInput.value));
+    if (!isNaN(v) && ajState.mode === 'water') {
+        ajSlider.value = Math.min(v, 10000);
+        ajUpdateSlider();
+    }
+    ajCalculate();
+});
+
+function ajUpdateSlider() {
+    const pct = (ajSlider.value / ajSlider.max) * 100;
+    ajSlider.style.setProperty('--fill', pct + '%');
+}
+
+function ajSetMode(mode) {
+    ajState.mode = mode;
+    document.querySelectorAll('.abujabal-tab').forEach(t => t.classList.toggle('active', t.dataset.ajmode === mode));
+    ajInputLabel.textContent = AJ_MODE_LABELS[mode];
+    ajInputUnit.textContent  = AJ_MODE_UNITS[mode];
+    ajSliderWrap.style.display = mode === 'water' ? 'flex' : 'none';
+    ajInput.value = '';
+    ajResult.classList.remove('visible');
+}
+
+function ajClearInput() {
+    ajInput.value = '';
+    ajSlider.value = 0;
+    ajUpdateSlider();
+    ajResult.classList.remove('visible');
+}
+
+function ajCalculate() {
+    const raw = parseFloat(normalizeInput(ajInput.value));
+    if (isNaN(raw) || raw <= 0) { ajResult.classList.remove('visible'); return; }
+
+    let w, s, t;
+    if (ajState.mode === 'water') {
+        w = raw;
+        s = (AJ_SUGAR * w) / 1000;
+        t = (AJ_TEA   * w) / 1000;
+    } else if (ajState.mode === 'sugar') {
+        s = raw;
+        w = (s * 1000) / AJ_SUGAR;
+        t = (AJ_TEA * w) / 1000;
+    } else {
+        t = raw;
+        w = (t * 1000) / AJ_TEA;
+        s = (AJ_SUGAR * w) / 1000;
+    }
+
+    document.getElementById('ajResWater').textContent = fmt(Math.max(0, w));
+    document.getElementById('ajResSugar').textContent = fmt(Math.max(0, s));
+    document.getElementById('ajResTea').textContent   = fmt(Math.max(0, t));
+    ajResult.classList.add('visible');
+}
+
+function ajCopyResult() {
+    const w = document.getElementById('ajResWater').textContent;
+    const s = document.getElementById('ajResSugar').textContent;
+    const t = document.getElementById('ajResTea').textContent;
+    if (w === '—') return;
+    const text = `شاهي أبو جبل:\n💧 الماء: ${w} مل\n🍬 السكر: ${s} جم\n🫖 الشاي: ${t} جم`;
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => showToast('تم نسخ النتيجة ✓'));
+    } else {
+        const el = document.createElement('textarea');
+        el.value = text;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        showToast('تم نسخ النتيجة ✓');
+    }
+}
+
+function ajShareWhatsApp() {
+    const w = document.getElementById('ajResWater').textContent;
+    const s = document.getElementById('ajResSugar').textContent;
+    const t = document.getElementById('ajResTea').textContent;
+    if (w === '—') return;
+    const text = `شاهي أبو جبل 🍵\n💧 الماء: ${w} مل\n🍬 السكر: ${s} جم\n🫖 الشاي: ${t} جم`;
+    window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+}
+</script>
+</body>
+</html>
