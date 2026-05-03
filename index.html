@@ -1576,7 +1576,7 @@ function fillCup(id, grams, fullCups, remainder, maxPerCup) {
     pct = Math.max(0, Math.min(1, pct));
     const fillH = pct * cupHeight;
     el.setAttribute('y', 200 - fillH);
-    el.setAttribute('height', fillH + 10);
+    el.setAttribute('height', fillH);
 }
 
 function clearDisplay() {
