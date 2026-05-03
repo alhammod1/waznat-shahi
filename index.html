@@ -528,28 +528,38 @@
             pointer-events: none;
             transition: top 0.35s ease;
         }
-        .real-pointer::before {
-            content: "";
-            width: 62px;
-            height: 4px;
-            border-radius: 999px;
-            background: linear-gradient(90deg, #f36a6a, #ffb199);
-            box-shadow: 0 0 0 2px rgba(255,255,255,0.25), 0 0 12px rgba(243,106,106,0.45);
-        }
         .real-pointer::after {
             content: "";
-            width: 0;
-            height: 0;
-            border-top: 7px solid transparent;
-            border-bottom: 7px solid transparent;
-            border-left: 13px solid #ffffff;
-            filter: drop-shadow(0 0 2px #f36a6a) drop-shadow(0 0 10px rgba(255,255,255,0.45));
+            position: relative;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: radial-gradient(circle at center, #6f6f6f 0 2px, #d8d8d8 2px 4px, #1a1a1a 4px 100%);
+            box-shadow: inset 0 0 0 2px #2d2d2d, 0 0 0 2px rgba(255,255,255,0.12);
+        }
+        .real-pointer::after {
+            clip-path: circle(50% at 50% 50%);
+        }
+        .real-pointer::before {
+            content: "";
+            width: 54px;
+            height: 4px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #1c1c1c, #2d2d2d);
+            box-shadow: 0 0 0 1px rgba(255,255,255,0.08);
+            position: relative;
+        }
+        .real-pointer {
+            gap: 0;
+        }
+        .real-pointer .needle-tip {
+            display:none;
         }
         .real-pointer.tea::before {
-            background: linear-gradient(90deg, #64c3f2, #b9ecff);
+            background: linear-gradient(90deg, #1c1c1c, #2d2d2d);
         }
         .real-pointer.tea::after {
-            filter: drop-shadow(0 0 2px #64c3f2) drop-shadow(0 0 10px rgba(255,255,255,0.45));
+            box-shadow: inset 0 0 0 2px #2d2d2d, 0 0 0 2px rgba(255,255,255,0.12);
         }
         .real-scales {
             display: flex;
@@ -1053,26 +1063,31 @@
         }
         .aj-pointer::before {
             content: "";
-            width: 62px;
+            width: 54px;
             height: 4px;
             border-radius: 999px;
-            background: linear-gradient(90deg, #f36a6a, #ffb199);
-            box-shadow: 0 0 0 2px rgba(255,255,255,0.25), 0 0 12px rgba(243,106,106,0.45);
+            background: linear-gradient(90deg, #1c1c1c, #2d2d2d);
+            box-shadow: 0 0 0 1px rgba(255,255,255,0.08);
+            position: relative;
         }
         .aj-pointer::after {
             content: "";
-            width: 0;
-            height: 0;
-            border-top: 7px solid transparent;
-            border-bottom: 7px solid transparent;
-            border-left: 13px solid #ffffff;
-            filter: drop-shadow(0 0 2px #f36a6a) drop-shadow(0 0 10px rgba(255,255,255,0.45));
+            position: relative;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: radial-gradient(circle at center, #6f6f6f 0 2px, #d8d8d8 2px 4px, #1a1a1a 4px 100%);
+            box-shadow: inset 0 0 0 2px #2d2d2d, 0 0 0 2px rgba(255,255,255,0.12);
+            clip-path: circle(50% at 50% 50%);
+        }
+        .aj-pointer {
+            gap: 0;
         }
         .aj-pointer.tea::before {
-            background: linear-gradient(90deg, #64c3f2, #b9ecff);
+            background: linear-gradient(90deg, #1c1c1c, #2d2d2d);
         }
         .aj-pointer.tea::after {
-            filter: drop-shadow(0 0 2px #64c3f2) drop-shadow(0 0 10px rgba(255,255,255,0.45));
+            box-shadow: inset 0 0 0 2px #2d2d2d, 0 0 0 2px rgba(255,255,255,0.12);
         }
         .aj-scale-note {
             background: var(--note-bg);
@@ -1090,6 +1105,13 @@
         .aj-scale-note .cups { color: var(--red); }
         .aj-scale-note .plus { color: var(--blue); }
         .aj-scale-note .remainder { color: var(--red); }
+        .real-pointer::marker { content: ""; }
+        .real-pointer, .aj-pointer { position: absolute; }
+        .real-pointer::selection, .aj-pointer::selection { background: transparent; }
+        .real-pointer::before, .aj-pointer::before { margin-right: -2px; }
+        .real-pointer::after, .aj-pointer::after { z-index: 2; }
+        .real-pointer::before, .aj-pointer::before { z-index: 1; }
+        .real-pointer, .aj-pointer { }
 
         /* ── Attribution ── */
         .attribution {
