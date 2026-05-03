@@ -316,7 +316,7 @@ function setConvSugar(gPerLiter,btn){document.querySelectorAll('.conv-btn').forE
 function toggleTheme(){const isLight=document.body.classList.toggle('light');document.getElementById('themeToggle').textContent=isLight?'🌙':'☀️';}
 function loadTheme(){document.getElementById('themeToggle').textContent='☀️';}
 let toastTimer;function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2200);}
-const AJ_SUGAR=90,AJ_TEA=13,ajState={mode:'water',waterMl:0,sugarGrams:0,teaGrams:0};
+const AJ_SUGAR=90,AJ_TEA=13.25,ajState={mode:'water',waterMl:0,sugarGrams:0,teaGrams:0};
 const ajInput=document.getElementById('ajInput'),ajSlider=document.getElementById('ajSlider'),ajSliderWrap=document.getElementById('ajSliderWrap'),ajResult=document.getElementById('ajResult'),ajInputLabel=document.getElementById('ajInputLabel'),ajInputUnit=document.getElementById('ajInputUnit');
 const AJ_MODE_LABELS={water:'أدخل كمية الماء',sugar:'أدخل كمية السكر',tea:'أدخل كمية الشاي'},AJ_MODE_UNITS={water:'مل',sugar:'جم',tea:'جم'};
 ajSlider.addEventListener('input',()=>{ajInput.value=ajSlider.value;ajUpdateSlider();ajCalculate();});
