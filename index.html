@@ -1,20 +1,3 @@
-<!--
-   ______                            __
-  / ____/___  ____ ___  ____  __  __/ /____  _____
- / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
-/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
-\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
-                    /_/
-        Created with Perplexity Computer
-        https://www.perplexity.ai/computer
--->
-
-<!-- Perplexity Computer Attribution — SEO Meta Tags -->
-<meta name="generator" content="Perplexity Computer">
-<meta name="author" content="Perplexity Computer">
-<meta property="og:see_also" content="https://www.perplexity.ai/computer">
-<link rel="author" href="https://www.perplexity.ai/computer">
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -347,7 +330,7 @@
             background: var(--blue);
             color: #fff;
         }
-        .dark .btn-group.blend button.active {
+        .light .btn-group.blend button.active {
             background: var(--blue-light);
             color: #1a1a1a;
         }
@@ -356,7 +339,7 @@
             cursor: not-allowed;
         }
 
-        /* ── Blend result inline ── */
+        /* ── Blend result ── */
         .blend-detail {
             margin-top: 12px;
             display: none;
@@ -381,7 +364,7 @@
             font-weight: 800;
             color: var(--blue);
         }
-        .dark .blend-item .grams { color: var(--blue-light); }
+        .light .blend-item .grams { color: var(--blue-light); }
         .blend-item .unit { font-size: 0.72rem; color: var(--text-muted); }
 
         /* ── Main Result ── */
@@ -412,10 +395,10 @@
         }
         .result-tag.water { background: var(--tag-water); }
         .result-tag.sugar { background: var(--tag-sugar); }
-        .result-tag.tea { background: var(--tag-tea); }
+        .result-tag.tea   { background: var(--tag-tea); }
         .result-tag .label { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; }
         .result-tag .value { font-size: 1.5rem; font-weight: 800; color: var(--accent); line-height: 1; }
-        .result-tag .unit { font-size: 0.72rem; color: var(--text-muted); }
+        .result-tag .unit  { font-size: 0.72rem; color: var(--text-muted); }
         .result-actions {
             display: flex;
             justify-content: center;
@@ -445,7 +428,7 @@
         }
         .action-btn.primary:hover { background: var(--accent-dark); }
 
-        /* ── Cups Visual ── */
+        /* ── Cups Visual (الأساسية) ── */
         .cups-section {
             display: flex;
             justify-content: center;
@@ -650,8 +633,8 @@
         .r { color: var(--red); }
         .g { color: var(--green); }
         .b { color: var(--blue); }
-        .dark .b { color: var(--blue-light); }
-        .dark .g { color: var(--green-light); }
+        .light .b { color: var(--blue-light); }
+        .light .g { color: var(--green-light); }
         .underline-r { color: var(--red); border-bottom: 2px solid var(--text); padding-bottom: 2px; }
 
         /* ── شاهي أبو جبل Section ── */
@@ -796,6 +779,7 @@
         .abujabal-tag .label { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; }
         .abujabal-tag .value { font-size: 1.5rem; font-weight: 800; color: var(--green); line-height: 1; }
         .abujabal-tag .unit  { font-size: 0.72rem; color: var(--text-muted); }
+
         .abujabal-copy-btn {
             display: flex;
             align-items: center;
@@ -813,6 +797,7 @@
             margin-top: 12px;
         }
         .abujabal-copy-btn:hover { opacity: 0.85; }
+
         .abujabal-slider-wrap {
             width: 100%;
             max-width: 340px;
@@ -850,6 +835,30 @@
             color: var(--text-muted);
             padding: 0 2px;
         }
+
+        /* ── أكواب شاهي أبو جبل المستقلة ── */
+        .aj-cups-section {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin: 12px 0 4px;
+            flex-wrap: wrap;
+        }
+        .aj-cup-note {
+            background: var(--note-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 6px 12px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-align: center;
+            min-width: 130px;
+            visibility: hidden;
+        }
+        .aj-cup-note.visible { visibility: visible; }
+        .aj-cup-note .cups { color: var(--red); }
+        .aj-cup-note .plus { color: var(--blue); }
+        .aj-cup-note .remainder { color: var(--red); }
 
         /* ── Attribution ── */
         .attribution {
@@ -889,6 +898,7 @@
             body { padding: 10px; }
             .controls-grid { grid-template-columns: 1fr; }
             .cups-section { gap: 30px; }
+            .aj-cups-section { gap: 30px; }
             .result-row { gap: 8px; }
             .result-tag { min-width: 80px; padding: 8px 10px; }
             .converter-btns { flex-wrap: wrap; }
@@ -970,7 +980,7 @@
             <div class="control-block full-width">
                 <div class="control-title">🌿 خلطتي — ربيع 9 + أبو جبل 1 + الوزة 1 + خاثر 1 (12 جم/لتر)</div>
                 <div class="btn-group blend" id="blendGroup">
-                    <button data-value="57" data-blend-type="light" onclick="selectSugar(this, true)">خفيف</button>
+                    <button data-value="57" data-blend-type="light"  onclick="selectSugar(this, true)">خفيف</button>
                     <button data-value="75" data-blend-type="medium" onclick="selectSugar(this, true)">وسط</button>
                     <button data-value="90" data-blend-type="heavy" onclick="selectSugar(this, true)">حالي</button>
                 </div>
@@ -1025,7 +1035,7 @@
             </div>
         </div>
 
-        <!-- Visual Cups -->
+        <!-- Visual Cups (ربيع) -->
         <p style="text-align:center; font-size:0.8rem; color:var(--text-muted); margin-bottom:10px;">
             <span class="underline-r">إذا لم يتوفر الميزان استخدم البيالة — المقاييس مختبرة مسبقاً</span>
         </p>
@@ -1044,11 +1054,12 @@
                                 <stop offset="100%" stop-color="rgba(220,180,60,0.80)"/>
                             </linearGradient>
                         </defs>
-                        <!-- Fill level -->
-                        <rect id="sugarFill" x="0" y="200" width="130" height="200" fill="url(#sugarGrad)" clip-path="url(#sugarClip)" style="transition: y 0.5s ease-out, height 0.5s ease-out;"/>
-                        <!-- Cup outline -->
-                        <path d="M15 2 L115 2 L105 190 Q100 197 65 197 Q30 197 25 190 Z" fill="none" stroke="var(--cup-border)" stroke-width="2.5" stroke-dasharray="4 3" stroke-linecap="round"/>
-                        <!-- Scale marks — 4 even marks only -->
+                        <rect id="sugarFill" x="0" y="200" width="130" height="200"
+                              fill="url(#sugarGrad)" clip-path="url(#sugarClip)"
+                              style="transition: y 0.5s ease-out, height 0.5s ease-out;"/>
+                        <path d="M15 2 L115 2 L105 190 Q100 197 65 197 Q30 197 25 190 Z"
+                              fill="none" stroke="var(--cup-border)" stroke-width="2.5"
+                              stroke-dasharray="4 3" stroke-linecap="round"/>
                         <g font-family="Cairo,Arial" font-size="11" fill="var(--blue)">
                             <line x1="12" y1="22" x2="18" y2="22" stroke="var(--blue)" stroke-width="1.5"/>
                             <text x="10" y="26" text-anchor="end">84</text>
@@ -1091,8 +1102,12 @@
                                 <stop offset="100%" stop-color="rgba(60,140,200,0.78)"/>
                             </linearGradient>
                         </defs>
-                        <rect id="teaFill" x="0" y="200" width="130" height="200" fill="url(#teaGrad)" clip-path="url(#teaClip)" style="transition: y 0.5s ease-out, height 0.5s ease-out;"/>
-                        <path d="M15 2 L115 2 L105 190 Q100 197 65 197 Q30 197 25 190 Z" fill="none" stroke="var(--cup-border)" stroke-width="2.5" stroke-dasharray="4 3" stroke-linecap="round"/>
+                        <rect id="teaFill" x="0" y="200" width="130" height="200"
+                              fill="url(#teaGrad)" clip-path="url(#teaClip)"
+                              style="transition: y 0.5s ease-out, height 0.5s ease-out;"/>
+                        <path d="M15 2 L115 2 L105 190 Q100 197 65 197 Q30 197 25 190 Z"
+                              fill="none" stroke="var(--cup-border)" stroke-width="2.5"
+                              stroke-dasharray="4 3" stroke-linecap="round"/>
                         <g font-family="Cairo,Arial" font-size="11" fill="var(--blue)">
                             <line x1="12" y1="22" x2="18" y2="22" stroke="var(--blue)" stroke-width="1.5"/>
                             <text x="10" y="26" text-anchor="end">21</text>
@@ -1170,11 +1185,12 @@
             <h2>شاهي أبو جبل</h2>
             <span class="badge">وصفة ثابتة</span>
         </div>
+
         <!-- Tabs -->
         <div class="abujabal-tabs">
             <button class="abujabal-tab active" data-ajmode="water" onclick="ajSetMode('water')">💧 بالماء</button>
             <button class="abujabal-tab" data-ajmode="sugar" onclick="ajSetMode('sugar')">🍬 بالسكر</button>
-            <button class="abujabal-tab" data-ajmode="tea" onclick="ajSetMode('tea')">🫖 بالشاي</button>
+            <button class="abujabal-tab" data-ajmode="tea"   onclick="ajSetMode('tea')">🫖 بالشاي</button>
         </div>
 
         <!-- Input -->
@@ -1218,11 +1234,74 @@
                 <button class="abujabal-copy-btn" style="background:#25D366;border-color:#25D366;" onclick="ajShareWhatsApp()">📤 واتساب</button>
             </div>
         </div>
+
+        <!-- أكواب شاهي أبو جبل المستقلة -->
+        <p style="text-align:center; font-size:0.8rem; color:var(--text-muted); margin:14px 0 10px;">
+            <span class="underline-r">إذا لم يتوفر الميزان استخدم بيالة أبو جبل — هذه المقاييس خاصة بهذه الحاسبة</span>
+        </p>
+        <div class="aj-cups-section">
+            <!-- Sugar Cup Abu Jabal -->
+            <div class="cup-wrapper">
+                <div class="cup-label">سكر أبو جبل</div>
+                <div class="cup-outer">
+                    <svg class="cup-svg" width="130" height="200" viewBox="0 0 130 200" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <clipPath id="ajSugarClip">
+                                <path d="M15 0 L115 0 L105 190 Q100 198 65 198 Q30 198 25 190 Z"/>
+                            </clipPath>
+                            <linearGradient id="ajSugarGrad" x1="0" y1="1" x2="0" y2="0">
+                                <stop offset="0%" stop-color="rgba(180,130,20,0.92)"/>
+                                <stop offset="100%" stop-color="rgba(220,180,60,0.80)"/>
+                            </linearGradient>
+                        </defs>
+                        <rect id="ajSugarFill" x="0" y="200" width="130" height="200"
+                              fill="url(#ajSugarGrad)" clip-path="url(#ajSugarClip)"
+                              style="transition: y 0.5s ease-out, height 0.5s ease-out;"/>
+                        <path d="M15 2 L115 2 L105 190 Q100 197 65 197 Q30 197 25 190 Z"
+                              fill="none" stroke="var(--cup-border)" stroke-width="2.5"
+                              stroke-dasharray="4 3" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="aj-cup-note" id="ajSugarNote">
+                    <span class="cups" id="ajSugarCups">0</span> بيالة
+                    <span class="plus">+</span>
+                    <span class="remainder" id="ajSugarRemainder">0</span> جم
+                </div>
+            </div>
+
+            <!-- Tea Cup Abu Jabal -->
+            <div class="cup-wrapper">
+                <div class="cup-label">شاي أبو جبل</div>
+                <div class="cup-outer">
+                    <svg class="cup-svg" width="130" height="200" viewBox="0 0 130 200" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <clipPath id="ajTeaClip">
+                                <path d="M15 0 L115 0 L105 190 Q100 198 65 198 Q30 198 25 190 Z"/>
+                            </clipPath>
+                            <linearGradient id="ajTeaGrad" x1="0" y1="1" x2="0" y2="0">
+                                <stop offset="0%" stop-color="rgba(20,60,130,0.92)"/>
+                                <stop offset="100%" stop-color="rgba(60,140,200,0.78)"/>
+                            </linearGradient>
+                        </defs>
+                        <rect id="ajTeaFill" x="0" y="200" width="130" height="200"
+                              fill="url(#ajTeaGrad)" clip-path="url(#ajTeaClip)"
+                              style="transition: y 0.5s ease-out, height 0.5s ease-out;"/>
+                        <path d="M15 2 L115 2 L105 190 Q100 197 65 197 Q30 197 25 190 Z"
+                              fill="none" stroke="var(--cup-border)" stroke-width="2.5"
+                              stroke-dasharray="4 3" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="aj-cup-note" id="ajTeaNote">
+                    <span class="cups" id="ajTeaCups">0</span> بيالة
+                    <span class="plus">+</span>
+                    <span class="remainder" id="ajTeaRemainder">0</span> جم
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 <!-- Footer Notes -->
-
 <div class="card">
     <div class="card-inner">
         <div class="footer-card">
@@ -1247,18 +1326,18 @@
 
 <!-- Tea Reference Link -->
 <div style="text-align:center; margin-bottom: 8px; font-size: 0.92rem; color: var(--text-muted);">
-    <p>للمزيد من المعلومات حول تصنيفات الشاي، تفضل بزيارة: <a href="BlackTeaGradingReference.html" style="color: var(--accent); text-decoration: none; font-weight: 700;">تصنيفات الشاي</a></p>
+    <p>للمزيد من المعلومات حول تصنيفات الشاي، تفضل بزيارة:
+        <a href="BlackTeaGradingReference.html"
+           style="color: var(--accent); text-decoration: none; font-weight: 700;">تصنيفات الشاي</a></p>
 </div>
 
 <!-- Attribution -->
-<div class="attribution">
-</div>
+<div class="attribution"></div>
 
 <!-- Toast -->
 <div class="toast" id="toast"></div>
 
 <script>
-// ── State ──────────────────────────────────────────
 const state = {
     mode: 'water',
     sugarPerLiter: 75,
@@ -1272,10 +1351,9 @@ const state = {
 
 const BLEND = { rabea: 9, abuJabal: 1, alWazah: 1, khather: 1, total: 12 };
 const CUP_ML = 73;
-const SUGAR_CUP = 84;  // max grams shown in glass
-const TEA_CUP = 21;    // max grams shown in glass
+const SUGAR_CUP = 84;
+const TEA_CUP = 21;
 
-// ── Elements ───────────────────────────────────────
 const mainInput   = document.getElementById('mainInput');
 const waterSlider = document.getElementById('waterSlider');
 const inputLabel  = document.getElementById('inputLabel');
@@ -1284,7 +1362,6 @@ const sliderWrap  = document.getElementById('sliderWrap');
 const resultCard  = document.getElementById('resultCard');
 const blendDetail = document.getElementById('blendDetail');
 
-// ── Init ───────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     loadTheme();
     loadHistory();
@@ -1294,7 +1371,6 @@ document.addEventListener('DOMContentLoaded', () => {
     updateSliderGradient();
 });
 
-// ── Mode ───────────────────────────────────────────
 const MODE_LABELS = { water: 'أدخل كمية الماء', sugar: 'أدخل كمية السكر', tea: 'أدخل كمية الشاي' };
 const MODE_UNITS  = { water: 'مل', sugar: 'جم', tea: 'جم' };
 
@@ -1308,9 +1384,7 @@ function setMode(mode) {
     clearDisplay();
 }
 
-// ── Sugar / Tea buttons ────────────────────────────
 function selectSugar(btn, isBlend) {
-    // Remove active from all sugar/blend buttons
     document.querySelectorAll('#sugarGroup button, #blendGroup button').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     state.sugarPerLiter = parseFloat(btn.dataset.value);
@@ -1330,7 +1404,6 @@ function selectTea(btn) {
     calculate();
 }
 
-// ── Input handlers ─────────────────────────────────
 function onInputChange() {
     const v = parseFloat(normalizeInput(mainInput.value));
     if (!isNaN(v) && state.mode === 'water') {
@@ -1361,7 +1434,6 @@ function normalizeInput(str) {
     return str.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[^\d.]/g, '');
 }
 
-// ── Core Calculate ─────────────────────────────────
 function calculate() {
     const raw = parseFloat(normalizeInput(mainInput.value));
     if (isNaN(raw) || raw <= 0) { clearDisplay(); return; }
@@ -1392,7 +1464,6 @@ function calculate() {
     updateDisplay();
 }
 
-// ── Update Display ─────────────────────────────────
 function fmt(n) {
     if (typeof n !== 'number') return '0';
     const s = n.toFixed(2).replace(/\.0+$/, '').replace(/(\.\d)0$/, '$1');
@@ -1402,13 +1473,11 @@ function fmt(n) {
 function updateDisplay() {
     const { waterMl, sugarGrams, teaGrams } = state;
 
-    // Result card
     document.getElementById('resWater').textContent = fmt(waterMl);
     document.getElementById('resSugar').textContent = fmt(sugarGrams);
     document.getElementById('resTea').textContent   = fmt(teaGrams);
     resultCard.classList.add('visible');
 
-    // Blend detail
     if (state.isBlend && teaGrams > 0) {
         const blendTotal = state.blendType === 'heavy' ? BLEND.total + 1 : BLEND.total;
         const ratio = teaGrams / blendTotal;
@@ -1421,22 +1490,20 @@ function updateDisplay() {
         blendDetail.classList.remove('visible');
     }
 
-    // Cup notes
-    const sugarFullCups     = Math.floor(sugarGrams / SUGAR_CUP);
-    const sugarRemainder    = sugarGrams % SUGAR_CUP;
-    const teaFullCups       = Math.floor(teaGrams / TEA_CUP);
-    const teaRemainder      = teaGrams % TEA_CUP;
+    const sugarFullCups  = Math.floor(sugarGrams / SUGAR_CUP);
+    const sugarRemainder = sugarGrams % SUGAR_CUP;
+    const teaFullCups    = Math.floor(teaGrams / TEA_CUP);
+    const teaRemainder   = teaGrams % TEA_CUP;
 
     const sugarNote = document.getElementById('sugarNote');
     const teaNote   = document.getElementById('teaNote');
-    document.getElementById('sugarCups').textContent     = fmt(sugarFullCups);
+    document.getElementById('sugarCups').textContent      = fmt(sugarFullCups);
     document.getElementById('sugarRemainder').textContent = fmt(sugarRemainder);
-    document.getElementById('teaCups').textContent       = fmt(teaFullCups);
+    document.getElementById('teaCups').textContent        = fmt(teaFullCups);
     document.getElementById('teaRemainder').textContent   = fmt(teaRemainder);
     sugarNote.classList.add('visible');
     teaNote.classList.add('visible');
 
-    // Cup fill animation
     fillCup('sugarFill', sugarGrams, sugarFullCups, sugarRemainder, SUGAR_CUP);
     fillCup('teaFill',   teaGrams,   teaFullCups,   teaRemainder,   TEA_CUP);
 }
@@ -1444,7 +1511,7 @@ function updateDisplay() {
 function fillCup(id, grams, fullCups, remainder, maxPerCup) {
     const el = document.getElementById(id);
     if (!el) return;
-    const cupHeight = 190; // usable fill height in SVG units
+    const cupHeight = 190;
 
     let pct;
     if (grams <= 0) {
@@ -1469,7 +1536,6 @@ function clearDisplay() {
     fillCup('teaFill',   0, 0, 0, TEA_CUP);
 }
 
-// ── Copy Result ────────────────────────────────────
 function copyResult() {
     const { waterMl, sugarGrams, teaGrams } = state;
     if (!waterMl && !sugarGrams && !teaGrams) return;
@@ -1494,7 +1560,6 @@ function shareWhatsApp() {
     window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
 }
 
-// ── History ────────────────────────────────────────
 let history = [];
 
 function saveToHistory() {
@@ -1561,7 +1626,6 @@ function clearHistory() {
     showToast('تم مسح السجل');
 }
 
-// ── Converter ──────────────────────────────────────
 function setConvSugar(gPerLiter, btn) {
     document.querySelectorAll('.conv-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
@@ -1570,18 +1634,15 @@ function setConvSugar(gPerLiter, btn) {
     document.getElementById('convResult').classList.add('visible');
 }
 
-// ── Theme ──────────────────────────────────────────
 function toggleTheme() {
     const isLight = document.body.classList.toggle('light');
     document.getElementById('themeToggle').textContent = isLight ? '🌙' : '☀️';
 }
 
 function loadTheme() {
-    // Dark is default — no class needed
     document.getElementById('themeToggle').textContent = '☀️';
 }
 
-// ── Toast ──────────────────────────────────────────
 let toastTimer;
 function showToast(msg) {
     const t = document.getElementById('toast');
@@ -1591,16 +1652,16 @@ function showToast(msg) {
     toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
 }
 
-// ── شاهي أبو جبل Calculator ──────────────────────
-const AJ_SUGAR = 90;   // جم/لتر
-const AJ_TEA   = 13; // جم/لتر
+/* ── شاهي أبو جبل Calculator ── */
+const AJ_SUGAR = 90;
+const AJ_TEA   = 13;
 
 const ajState = { mode: 'water', waterMl: 0, sugarGrams: 0, teaGrams: 0 };
 
-const ajInput     = document.getElementById('ajInput');
-const ajSlider    = document.getElementById('ajSlider');
+const ajInput      = document.getElementById('ajInput');
+const ajSlider     = document.getElementById('ajSlider');
 const ajSliderWrap = document.getElementById('ajSliderWrap');
-const ajResult    = document.getElementById('ajResult');
+const ajResult     = document.getElementById('ajResult');
 const ajInputLabel = document.getElementById('ajInputLabel');
 const ajInputUnit  = document.getElementById('ajInputUnit');
 
@@ -1628,12 +1689,14 @@ function ajUpdateSlider() {
 
 function ajSetMode(mode) {
     ajState.mode = mode;
-    document.querySelectorAll('.abujabal-tab').forEach(t => t.classList.toggle('active', t.dataset.ajmode === mode));
+    document.querySelectorAll('.abujabal-tab')
+        .forEach(t => t.classList.toggle('active', t.dataset.ajmode === mode));
     ajInputLabel.textContent = AJ_MODE_LABELS[mode];
     ajInputUnit.textContent  = AJ_MODE_UNITS[mode];
     ajSliderWrap.style.display = mode === 'water' ? 'flex' : 'none';
     ajInput.value = '';
     ajResult.classList.remove('visible');
+    ajUpdateCups(0, 0);
 }
 
 function ajClearInput() {
@@ -1641,11 +1704,16 @@ function ajClearInput() {
     ajSlider.value = 0;
     ajUpdateSlider();
     ajResult.classList.remove('visible');
+    ajUpdateCups(0, 0);
 }
 
 function ajCalculate() {
     const raw = parseFloat(normalizeInput(ajInput.value));
-    if (isNaN(raw) || raw <= 0) { ajResult.classList.remove('visible'); return; }
+    if (isNaN(raw) || raw <= 0) {
+        ajResult.classList.remove('visible');
+        ajUpdateCups(0, 0);
+        return;
+    }
 
     let w, s, t;
     if (ajState.mode === 'water') {
@@ -1662,10 +1730,54 @@ function ajCalculate() {
         s = (AJ_SUGAR * w) / 1000;
     }
 
+    s = Math.max(0, s);
+    t = Math.max(0, t);
+
     document.getElementById('ajResWater').textContent = fmt(Math.max(0, w));
-    document.getElementById('ajResSugar').textContent = fmt(Math.max(0, s));
-    document.getElementById('ajResTea').textContent   = fmt(Math.max(0, t));
+    document.getElementById('ajResSugar').textContent = fmt(s);
+    document.getElementById('ajResTea').textContent   = fmt(t);
     ajResult.classList.add('visible');
+
+    ajUpdateCups(s, t);
+}
+
+/* أكواب أبو جبل – حساب وعدد البيالات */
+function ajUpdateCups(sugarGrams, teaGrams) {
+    const SUGAR_CUP_AJ = SUGAR_CUP; // نفس 84 جم للسكّر
+    const TEA_CUP_AJ   = TEA_CUP;   // نفس 21 جم للشاي
+
+    const sugarFull = Math.floor(sugarGrams / SUGAR_CUP_AJ);
+    const sugarRem  = sugarGrams % SUGAR_CUP_AJ;
+    const teaFull   = Math.floor(teaGrams / TEA_CUP_AJ);
+    const teaRem    = teaGrams % TEA_CUP_AJ;
+
+    document.getElementById('ajSugarCups').textContent      = fmt(sugarFull);
+    document.getElementById('ajSugarRemainder').textContent = fmt(sugarRem);
+    document.getElementById('ajTeaCups').textContent        = fmt(teaFull);
+    document.getElementById('ajTeaRemainder').textContent   = fmt(teaRem);
+
+    const sugarNote = document.getElementById('ajSugarNote');
+    const teaNote   = document.getElementById('ajTeaNote');
+
+    if (sugarGrams > 0) sugarNote.classList.add('visible');
+    else sugarNote.classList.remove('visible');
+
+    if (teaGrams > 0) teaNote.classList.add('visible');
+    else teaNote.classList.remove('visible');
+
+    ajFillCup('ajSugarFill', sugarGrams, SUGAR_CUP_AJ);
+    ajFillCup('ajTeaFill',   teaGrams,   TEA_CUP_AJ);
+}
+
+function ajFillCup(id, grams, maxPerCup) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const cupHeight = 190;
+
+    let pct = grams <= 0 ? 0 : Math.min(1, grams / maxPerCup);
+    const fillH = pct * cupHeight;
+    el.setAttribute('y', 200 - fillH);
+    el.setAttribute('height', fillH + 10);
 }
 
 function ajCopyResult() {
