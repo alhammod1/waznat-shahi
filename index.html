@@ -1,0 +1,2099 @@
+<!--
+   ______                            __
+  / ____/___  ____ ___  ____  __  __/ /____  _____
+ / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
+\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
+                    /_/
+        Created with Perplexity Computer
+        https://www.perplexity.ai/computer
+-->
+
+<!--
+    وزنة شاهي ربيع
+    تصميم وبرمجة: سليمان الحمود
+    https://alhammod1.github.io/waznat-shahi
+    جميع الحقوق محفوظة
+-->
+
+<!-- Perplexity Computer Attribution — SEO Meta Tags -->
+<meta name="generator" content="Perplexity Computer">
+<meta name="author" content="Perplexity Computer">
+<meta property="og:see_also" content="https://www.perplexity.ai/computer">
+<link rel="author" href="https://www.perplexity.ai/computer">
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <script>
+        (function() {
+            const allowed = 'https://alhammod1.github.io/waznat-shahi';
+            const loc = location.href.split('?')[0].replace(/\/$/, '');
+            if (loc.startsWith('file://') || loc.startsWith('http://127.0.0.1') || loc.startsWith('http://localhost')) return;
+            if (!loc.startsWith(allowed)) {
+                document.documentElement.innerHTML = '';
+                location.replace(allowed);
+            }
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وزنة شاهي ربيع</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0b0c1a;
+            --surface: #12142a;
+            --surface2: #181a32;
+            --text: #e8e6f0;
+            --text-muted: #8882aa;
+            --accent: #c9a84c;
+            --accent-light: #e0c070;
+            --accent-dark: #a8842a;
+            --green: #5fc89a;
+            --green-light: #7edeb4;
+            --blue: #6ab4e8;
+            --blue-light: #90ccf4;
+            --red: #e07890;
+            --red-light: #f0a0b4;
+            --border: #252840;
+            --shadow: rgba(0,0,0,0.50);
+            --shadow-lg: rgba(0,0,0,0.75);
+            --tea-color: rgba(201,168,76,0.65);
+            --cup-border: #c9a84c;
+            --result-bg: #0f1028;
+            --note-bg: #0d0f24;
+            --history-bg: #0c0e22;
+            --tag-sugar: #1e1a08;
+            --tag-tea: #0e1830;
+            --tag-water: #0a1820;
+            --input-bg: #10122a;
+            --slider-track: #252840;
+            --slider-thumb: #c9a84c;
+        }
+        .light {
+            --bg: #f4f2ff;
+            --surface: #ffffff;
+            --surface2: #ede9ff;
+            --text: #1a1730;
+            --text-muted: #5c5880;
+            --accent: #7c5cbf;
+            --accent-light: #9d80d8;
+            --accent-dark: #5c3fa0;
+            --green: #2e8a60;
+            --green-light: #4caf85;
+            --blue: #2a6eb0;
+            --blue-light: #4a90d0;
+            --red: #b02040;
+            --red-light: #d04060;
+            --border: #d4cef0;
+            --shadow: rgba(30,20,80,0.10);
+            --shadow-lg: rgba(30,20,80,0.18);
+            --tea-color: rgba(124,92,191,0.65);
+            --cup-border: #7c5cbf;
+            --result-bg: #ede9ff;
+            --note-bg: #e4deff;
+            --history-bg: #f0eeff;
+            --tag-sugar: #fef9c3;
+            --tag-tea: #ede9ff;
+            --tag-water: #ddf0ff;
+            --input-bg: #f8f6ff;
+            --slider-track: #d4cef0;
+            --slider-thumb: #7c5cbf;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Cairo', Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 16px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* ── Header ── */
+        .header {
+            max-width: 860px;
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 4px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+        }
+        .logo-text h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1;
+        }
+        .logo-text span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .icon-btn {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            box-shadow: 0 1px 4px var(--shadow);
+        }
+        .icon-btn:hover { transform: scale(1.08); background: var(--surface2); }
+
+        /* ── Main Card ── */
+        .card {
+            max-width: 860px;
+            margin: 0 auto 16px;
+            background: var(--surface);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px var(--shadow);
+            overflow: hidden;
+        }
+        .card-inner {
+            padding: 24px;
+        }
+
+        /* ── Tabs ── */
+        .tabs {
+            display: flex;
+            gap: 0;
+            background: var(--surface2);
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+        }
+        .tab {
+            flex: 1;
+            padding: 9px 8px;
+            text-align: center;
+            border-radius: 9px;
+            cursor: pointer;
+            font-family: 'Cairo', Arial, sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: transparent;
+            border: none;
+            transition: all 0.2s;
+        }
+        .tab.active {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 2px 8px var(--shadow-lg);
+        }
+
+        /* ── Input Area ── */
+        .input-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .input-label {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        .input-wrap {
+            position: relative;
+            width: 100%;
+            max-width: 320px;
+        }
+        .main-input {
+            width: 100%;
+            padding: 12px 48px 12px 16px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-align: center;
+            background: var(--input-bg);
+            color: var(--text);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-family: 'Cairo', Arial, sans-serif;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+        .main-input:focus { border-color: var(--accent); }
+        .input-unit {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            pointer-events: none;
+        }
+        .clear-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 4px;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+        .clear-btn:hover { color: var(--red); }
+
+        /* ── Slider ── */
+        .slider-wrap {
+            width: 100%;
+            max-width: 340px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        .slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: linear-gradient(to left, var(--accent) var(--fill, 0%), var(--slider-track) var(--fill, 0%));
+            outline: none;
+            cursor: pointer;
+        }
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--slider-thumb);
+            box-shadow: 0 2px 6px var(--shadow-lg);
+            cursor: pointer;
+            transition: transform 0.15s;
+        }
+        .slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+        .slider-labels {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            padding: 0 2px;
+        }
+
+        /* ── Controls ── */
+        .controls-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+        .control-block {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px;
+        }
+        .control-block.full-width {
+            grid-column: 1 / -1;
+        }
+        .control-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .btn-group {
+            display: flex;
+            border-radius: 9px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        .btn-group button {
+            flex: 1;
+            padding: 8px 4px;
+            border: none;
+            border-left: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            font-family: 'Cairo', Arial, sans-serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-group button:last-child { border-left: none; }
+        .btn-group button.active {
+            background: var(--accent);
+            color: #fff;
+        }
+        .btn-group.blend button.active {
+            background: var(--blue);
+            color: #fff;
+        }
+        .dark .btn-group.blend button.active {
+            background: var(--blue-light);
+            color: #1a1a1a;
+        }
+        .btn-group button:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+
+        /* ── Blend result inline ── */
+        .blend-detail {
+            margin-top: 12px;
+            display: none;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        .blend-detail.visible { display: grid; }
+        .blend-item {
+            background: var(--result-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 8px 10px;
+            text-align: center;
+        }
+        .blend-item .brand {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+        .blend-item .grams {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--blue);
+        }
+        .dark .blend-item .grams { color: var(--blue-light); }
+        .blend-item .unit { font-size: 0.72rem; color: var(--text-muted); }
+
+        /* ── Main Result ── */
+        .result-card {
+            background: var(--result-bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 20px;
+            display: block;
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .result-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .result-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .result-tag {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            min-width: 95px;
+            gap: 2px;
+        }
+        .result-tag.water { background: var(--tag-water); }
+        .result-tag.sugar { background: var(--tag-sugar); }
+        .result-tag.tea { background: var(--tag-tea); }
+        .result-tag .label { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; }
+        .result-tag .value { font-size: clamp(1.1rem, 4vw, 1.5rem); font-weight: 800; color: var(--accent); line-height: 1; }
+        .result-tag .unit { font-size: 0.72rem; color: var(--text-muted); }
+        .result-tag .sub-unit { font-size: 0.68rem; color: var(--text-muted); margin-top: 2px; font-weight: 600; }
+        .result-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 14px;
+        }
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 7px 16px;
+            border-radius: 9px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            font-family: 'Cairo', Arial, sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .action-btn:hover { background: var(--surface2); }
+        .action-btn.primary {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+        .action-btn.primary:hover { background: var(--accent-dark); }
+
+        /* ── Cups Visual ── */
+        .cups-section {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin: 8px 0 24px;
+            flex-wrap: wrap;
+        }
+        .cup-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .cup-label {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .cup-outer {
+            position: relative;
+            width: 130px;
+        }
+        .cup-svg { display: block; }
+        .cup-note {
+            background: var(--note-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 6px 12px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-align: center;
+            min-width: 130px;
+            visibility: hidden;
+        }
+        .cup-note.visible { visibility: visible; }
+        .cup-note .cups { color: var(--red); }
+        .cup-note .plus { color: var(--blue); }
+        .cup-note .remainder { color: var(--red); }
+        .real-scales {
+            display: flex;
+            justify-content: center;
+            gap: 22px;
+            margin: 8px 0 4px;
+            flex-wrap: wrap;
+        }
+        .scale-card {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 12px;
+        }
+        .scale-title {
+            text-align: center;
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+        .photo-wrap {
+            position: relative;
+            width: 220px;
+            aspect-ratio: 1 / 1;
+        }
+        .photo-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            border-radius: 12px;
+        }
+        .real-pointer {
+            position: absolute;
+            left: 49.1%;
+            transform: translate(-100%, -50%);
+            width: 125px;
+            height: 2px;
+            background: linear-gradient(to right, transparent 29%, #6b0000 29%, #c0392b 75%, #d96060 100%);
+            pointer-events: none;
+            transition: top 0.35s ease;
+            display: block;
+        }
+        .real-pointer::before {
+            content: "";
+            position: absolute;
+            left: 2px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 28px;
+            height: 9px;
+            background: #1a1a1a;
+            border-radius: 3px;
+            box-shadow: none;
+        }
+        .real-pointer::after {
+            content: "";
+            position: absolute;
+            left: 36px;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: radial-gradient(circle at center, white 2px, #c9a84c 2px, #c9a84c 5px, #2a2a2a 5px, #2a2a2a 6.5px, #c9a84c 6.5px);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.6);
+            z-index: 2;
+        }
+        .real-pointer.tea {
+            background: linear-gradient(to right, transparent 29%, #0d3f6e 29%, #2a78b8 75%, #64c3f2 100%);
+        }
+        .real-pointer.tea::before {
+            background: #1a1a1a;
+        }
+        .real-pointer.tea::after {
+            background: radial-gradient(circle at center, white 2px, #c9a84c 2px, #c9a84c 5px, #2a2a2a 5px, #2a2a2a 6.5px, #c9a84c 6.5px);
+        }
+        .real-scales {
+            display: flex;
+            justify-content: center;
+            gap: 22px;
+            margin: 8px 0 4px;
+            flex-wrap: wrap;
+        }
+        .scale-card {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 12px;
+        }
+        .scale-title {
+            text-align: center;
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+        .photo-wrap {
+            position: relative;
+            width: 220px;
+            aspect-ratio: 1 / 1;
+        }
+        .photo-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            border-radius: 12px;
+        }
+        .real-pointer {
+            position: absolute;
+            left: 49.1%;
+            transform: translate(-100%, -50%);
+            width: 125px;
+            height: 2px;
+            background: linear-gradient(to right, transparent 29%, #6b0000 29%, #c0392b 75%, #d96060 100%);
+            pointer-events: none;
+            transition: top 0.35s ease;
+            display: block;
+        }
+        .real-pointer::before {
+            content: "";
+            position: absolute;
+            left: 2px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 28px;
+            height: 9px;
+            background: #1a1a1a;
+            border-radius: 3px;
+            box-shadow: none;
+        }
+        .real-pointer::after {
+            content: "";
+            position: absolute;
+            left: 36px;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: radial-gradient(circle at center, white 2px, #c9a84c 2px, #c9a84c 5px, #2a2a2a 5px, #2a2a2a 6.5px, #c9a84c 6.5px);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.6);
+            z-index: 2;
+        }
+        .real-pointer.tea {
+            background: linear-gradient(to right, transparent 29%, #0d3f6e 29%, #2a78b8 75%, #64c3f2 100%);
+        }
+        .real-pointer.tea::before {
+            background: #1a1a1a;
+        }
+        .real-pointer.tea::after {
+            background: radial-gradient(circle at center, white 2px, #c9a84c 2px, #c9a84c 5px, #2a2a2a 5px, #2a2a2a 6.5px, #c9a84c 6.5px);
+        }
+
+        /* ── Mini Converter ── */
+        .converter-card {
+            background: linear-gradient(135deg, var(--surface2) 0%, var(--result-bg) 100%);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 16px;
+        }
+        .converter-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+        .converter-header h2 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        .converter-header span { font-size: 1.2rem; }
+        .converter-btns {
+            display: flex;
+            gap: 8px;
+        }
+        .conv-btn {
+            flex: 1;
+            padding: 10px 6px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            font-family: 'Cairo', Arial, sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .conv-btn:hover { background: var(--surface2); }
+        .conv-btn.active {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+        .conv-result {
+            margin-top: 12px;
+            background: var(--accent);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            color: #fff;
+            display: none;
+        }
+        .conv-result.visible { display: block; }
+        .conv-result .conv-label { font-size: 0.82rem; opacity: 0.9; margin-bottom: 4px; }
+        .conv-result .conv-value { font-size: 2rem; font-weight: 800; line-height: 1; }
+        .conv-result .conv-unit { font-size: 0.82rem; opacity: 0.9; margin-top: 2px; }
+
+        /* ── History ── */
+        .history-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 16px;
+        }
+        .history-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+        .history-header h2 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .clear-history-btn {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 3px 10px;
+            cursor: pointer;
+            font-family: 'Cairo', Arial, sans-serif;
+            transition: all 0.2s;
+        }
+        .clear-history-btn:hover { color: var(--red); border-color: var(--red); }
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .history-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--history-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            gap: 8px;
+        }
+        .history-item:hover { background: var(--surface2); border-color: var(--accent); }
+        .history-item .hist-main {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--text);
+            flex: 1;
+        }
+        .history-item .hist-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+        .history-empty {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            padding: 16px;
+        }
+
+        /* ── Footer Notes ── */
+        .footer-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-bottom: 16px;
+        }
+        .footer-card details summary {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--accent);
+            cursor: pointer;
+            padding: 4px 0;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .footer-card details summary::before {
+            content: '▶';
+            font-size: 0.65rem;
+            transition: transform 0.2s;
+            display: inline-block;
+        }
+        .footer-card details[open] summary::before { transform: rotate(90deg); }
+        .footer-notes-content {
+            margin-top: 14px;
+            font-size: 0.92rem;
+            line-height: 2.1;
+            color: var(--text);
+        }
+        .footer-notes-content p { margin-bottom: 14px; }
+        .r { color: var(--red); }
+        .g { color: var(--green); }
+        .b { color: var(--blue); }
+        .dark .b { color: var(--blue-light); }
+        .dark .g { color: var(--green-light); }
+        .underline-r { color: var(--red); border-bottom: 2px solid var(--text); padding-bottom: 2px; }
+
+        /* ── شاهي أبو جبل Section ── */
+        .abujabalsection-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+        .abujabalsection-header h2 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--green);
+        }
+        .abujabalsection-header .badge {
+            background: var(--green);
+            color: #fff;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 20px;
+        }
+        .abujabal-formula {
+            background: var(--surface2);
+            border: 1px dashed var(--green);
+            border-radius: 10px;
+            padding: 10px 16px;
+            margin-bottom: 16px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-align: center;
+            line-height: 1.9;
+        }
+        .abujabal-formula span { color: var(--green); font-weight: 800; }
+        .abujabal-tabs {
+            display: flex;
+            gap: 0;
+            background: var(--surface2);
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border);
+        }
+        .abujabal-tab {
+            flex: 1;
+            padding: 9px 8px;
+            text-align: center;
+            border-radius: 9px;
+            cursor: pointer;
+            font-family: 'Cairo', Arial, sans-serif;
+            font-size: 0.93rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: transparent;
+            border: none;
+            transition: all 0.2s;
+        }
+        .abujabal-tab.active {
+            background: var(--green);
+            color: #fff;
+            box-shadow: 0 2px 8px var(--shadow-lg);
+        }
+        .abujabal-input-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .abujabal-input-wrap {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+        }
+        .abujabal-input {
+            width: 100%;
+            padding: 12px 48px 12px 16px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-align: center;
+            background: var(--input-bg);
+            color: var(--text);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-family: 'Cairo', Arial, sans-serif;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+        .abujabal-input:focus { border-color: var(--green); }
+        .abujabal-input-unit {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            pointer-events: none;
+        }
+        .abujabal-clear {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 4px;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+        .abujabal-clear:hover { color: var(--red); }
+        .abujabal-result {
+            background: var(--result-bg);
+            border: 1px solid var(--green);
+            border-radius: 14px;
+            padding: 16px;
+            display: none;
+        }
+        .abujabal-result.visible { display: block; }
+        .abujabal-result-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .abujabal-tag {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            min-width: 95px;
+            gap: 2px;
+        }
+        .abujabal-tag.water { background: var(--tag-water); }
+        .abujabal-tag.sugar { background: var(--tag-sugar); }
+        .abujabal-tag.tea   { background: var(--tag-tea); }
+        .abujabal-tag .label { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; }
+        .abujabal-tag .value { font-size: 1.5rem; font-weight: 800; color: var(--green); line-height: 1; }
+        .abujabal-tag .unit  { font-size: 0.72rem; color: var(--text-muted); }
+        .abujabal-copy-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 7px 16px;
+            border-radius: 9px;
+            border: 1px solid var(--green);
+            background: var(--green);
+            color: #fff;
+            font-family: 'Cairo', Arial, sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 12px;
+        }
+        .abujabal-copy-btn:hover { opacity: 0.85; }
+        .abujabal-slider-wrap {
+            width: 100%;
+            max-width: 340px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        .abujabal-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: linear-gradient(to left, var(--green) var(--fill, 0%), var(--slider-track) var(--fill, 0%));
+            outline: none;
+            cursor: pointer;
+        }
+        .abujabal-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 2px 6px var(--shadow-lg);
+            cursor: pointer;
+            transition: transform 0.15s;
+        }
+        .abujabal-slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+        .abujabal-slider-labels {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            padding: 0 2px;
+        }
+
+        /* ── AbuJabal Cups ── */
+        .aj-cups-section {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin: 8px 0 4px;
+            flex-wrap: wrap;
+        }
+        .aj-cup-note {
+            background: var(--note-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 6px 12px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-align: center;
+            min-width: 130px;
+            visibility: hidden;
+        }
+        .aj-cup-note.visible { visibility: visible; }
+        .aj-cup-note .cups { color: var(--red); }
+        .aj-cup-note .plus { color: var(--blue); }
+        .aj-cup-note .remainder { color: var(--red); }
+        .aj-real-scales {
+            display: flex;
+            justify-content: center;
+            gap: 22px;
+            margin: 8px 0 4px;
+            flex-wrap: wrap;
+        }
+        .aj-scale-card {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 12px;
+        }
+        .aj-scale-title {
+            text-align: center;
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+        .aj-photo-wrap {
+            position: relative;
+            width: 220px;
+            aspect-ratio: 1 / 1;
+        }
+        .aj-photo-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            border-radius: 12px;
+        }
+        .aj-pointer {
+            position: absolute;
+            left: 49.1%;
+            transform: translate(-100%, -50%);
+            width: 125px;
+            height: 2px;
+            background: linear-gradient(to right, transparent 29%, #6b0000 29%, #c0392b 75%, #d96060 100%);
+            pointer-events: none;
+            transition: top 0.35s ease;
+            display: block;
+        }
+        .aj-pointer::before {
+            content: "";
+            position: absolute;
+            left: 2px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 28px;
+            height: 9px;
+            background: #1a1a1a;
+            border-radius: 3px;
+            box-shadow: none;
+        }
+        .aj-pointer::after {
+            content: "";
+            position: absolute;
+            left: 36px;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: radial-gradient(circle at center, white 2px, #c9a84c 2px, #c9a84c 5px, #2a2a2a 5px, #2a2a2a 6.5px, #c9a84c 6.5px);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.6);
+            z-index: 2;
+        }
+        .aj-pointer.tea {
+            background: linear-gradient(to right, transparent 29%, #0d3f6e 29%, #2a78b8 75%, #64c3f2 100%);
+        }
+        .aj-pointer.tea::before {
+            background: #1a1a1a;
+        }
+        .aj-pointer.tea::after {
+            background: radial-gradient(circle at center, white 2px, #c9a84c 2px, #c9a84c 5px, #2a2a2a 5px, #2a2a2a 6.5px, #c9a84c 6.5px);
+        }
+        .aj-scale-note {
+            background: var(--note-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 6px 12px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-align: center;
+            min-width: 130px;
+            visibility: hidden;
+            margin: 10px auto 0;
+        }
+        .aj-scale-note.visible { visibility: visible; }
+        .aj-scale-note .cups { color: var(--red); }
+        .aj-scale-note .plus { color: var(--blue); }
+        .aj-scale-note .remainder { color: var(--red); }
+
+        /* ── Attribution ── */
+        .attribution {
+            text-align: center;
+            padding: 12px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        .attribution a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .attribution a:hover { text-decoration: underline; }
+
+        /* ── Toast ── */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: var(--accent);
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            font-family: 'Cairo', Arial, sans-serif;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+            transition: transform 0.3s ease;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+        .toast.warn { background: #e07830; }
+        .history-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            background: var(--accent);
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin-right: 8px;
+            font-weight: 700;
+            vertical-align: middle;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .history-badge.visible { opacity: 1; }
+
+        /* ── Responsive ── */
+        @media (max-width: 520px) {
+            body { padding: 10px; }
+            .controls-grid { grid-template-columns: 1fr; }
+            .cups-section { gap: 30px; }
+            .result-row { gap: 8px; }
+            .result-tag { min-width: 80px; padding: 8px 10px; }
+            .converter-btns { flex-wrap: wrap; }
+            .logo-text h1 { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+    <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="شاهي ربيع">
+            <circle cx="24" cy="24" r="23" fill="var(--accent)" opacity="0.12" stroke="var(--accent)" stroke-width="1.5"/>
+            <!-- Cup shape -->
+            <path d="M14 16h20l-2.5 18a2 2 0 01-2 1.8H18.5a2 2 0 01-2-1.8L14 16z" fill="var(--accent)" opacity="0.9"/>
+            <path d="M34 20h2a3 3 0 010 6h-2" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>
+            <!-- Steam -->
+            <path d="M20 11 Q21 9 20 7" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" opacity="0.7"/>
+            <path d="M24 11 Q25 8.5 24 6" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" opacity="0.7"/>
+            <path d="M28 11 Q29 9 28 7" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" opacity="0.7"/>
+        </svg>
+        <div class="logo-text">
+            <h1>وزنة شاهي ربيع</h1>
+            <span>حاسبة الشاي والسكر</span>
+        </div>
+    </div>
+    <div class="header-actions">
+        <button class="icon-btn" id="themeToggle" title="تغيير المظهر" aria-label="تغيير المظهر">🌙</button>
+    </div>
+</div>
+
+<!-- Main Calculator Card -->
+<div class="card">
+    <div class="card-inner">
+
+        <!-- Mode Tabs -->
+        <div class="tabs" role="tablist" aria-label="طريقة الحساب">
+            <button class="tab active" role="tab" data-mode="water" onclick="setMode('water')">💧 بالماء</button>
+            <button class="tab" role="tab" data-mode="sugar" onclick="setMode('sugar')">🍬 بالسكر</button>
+            <button class="tab" role="tab" data-mode="tea" onclick="setMode('tea')">🫖 بالشاي</button>
+        </div>
+
+        <!-- Input -->
+        <div class="input-section">
+            <div class="input-label" id="inputLabel">أدخل كمية الماء</div>
+            <div class="input-wrap">
+                <input class="main-input" id="mainInput" type="text" inputmode="decimal"
+                       placeholder="أدخل القيمة" autocomplete="off" aria-label="قيمة الإدخال">
+                <span class="input-unit" id="inputUnit">مل</span>
+                <button class="clear-btn" onclick="clearInput()" aria-label="مسح">✕</button>
+            </div>
+            <div class="slider-wrap" id="sliderWrap">
+                <input type="range" class="slider" id="waterSlider" min="0" max="10000" step="50" value="0" aria-label="شريط تمرير الماء">
+                <div class="slider-labels">
+                    <span>0</span><span>2500</span><span>5000</span><span>7500</span><span>10000 مل</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls-grid">
+            <div class="control-block">
+                <div class="control-title">🍬 مستوى السكر (جم/لتر)</div>
+                <div class="btn-group" id="sugarGroup">
+                    <button data-value="57" onclick="selectSugar(this, false)">خفيف</button>
+                    <button data-value="75" onclick="selectSugar(this, false)" class="active">معتدل</button>
+                    <button data-value="90" onclick="selectSugar(this, false)">حالي</button>
+                </div>
+            </div>
+            <div class="control-block">
+                <div class="control-title">🫖 قوة الشاي (جم/لتر)</div>
+                <div class="btn-group" id="teaGroup">
+                    <button data-value="11" onclick="selectTea(this)">خفيف</button>
+                    <button data-value="12" onclick="selectTea(this)" class="active">وسط</button>
+                    <button data-value="13" onclick="selectTea(this)">ثقيل</button>
+                </div>
+            </div>
+            <div class="control-block full-width">
+                <div class="control-title">🌿 خلطتي — ربيع 9 + أبو جبل 1 + الوزة 1 + خاثر 1 (12 جم/لتر)</div>
+                <div class="btn-group blend" id="blendGroup">
+                    <button data-value="57" data-blend-type="light" onclick="selectSugar(this, true)">خفيف</button>
+                    <button data-value="75" data-blend-type="medium" onclick="selectSugar(this, true)">وسط</button>
+                    <button data-value="90" data-blend-type="heavy" onclick="selectSugar(this, true)">حالي</button>
+                </div>
+                <div class="blend-detail" id="blendDetail">
+                    <div class="blend-item">
+                        <div class="brand">شاهي ربيع</div>
+                        <div class="grams" id="rabeaGrams">—</div>
+                        <div class="unit">جرام</div>
+                    </div>
+                    <div class="blend-item">
+                        <div class="brand">أبو جبل</div>
+                        <div class="grams" id="abuJabalGrams">—</div>
+                        <div class="unit">جرام</div>
+                    </div>
+                    <div class="blend-item">
+                        <div class="brand">الوزة</div>
+                        <div class="grams" id="alWazahGrams">—</div>
+                        <div class="unit">جرام</div>
+                    </div>
+                    <div class="blend-item">
+                        <div class="brand">خاثر</div>
+                        <div class="grams" id="khatherGrams">—</div>
+                        <div class="unit">جرام</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Card -->
+        <div class="result-card" id="resultCard">
+            <div style="text-align:center; margin-bottom:8px;">
+                <span class="history-badge" id="historyBadge">📋 من السجل</span>
+            </div>
+            <div class="result-row">
+                <div class="result-tag water">
+                    <span class="label">💧 الماء</span>
+                    <span class="value" id="resWater">—</span>
+                    <span class="unit">مل</span>
+                    <span class="sub-unit" id="resWaterLiter"></span>
+                </div>
+                <div class="result-tag sugar">
+                    <span class="label">🍬 السكر</span>
+                    <span class="value" id="resSugar">—</span>
+                    <span class="unit">جم</span>
+                </div>
+                <div class="result-tag tea">
+                    <span class="label">🫖 الشاي</span>
+                    <span class="value" id="resTea">—</span>
+                    <span class="unit">جم</span>
+                </div>
+            </div>
+            <div class="result-actions">
+                <button class="action-btn" onclick="copyResult()">📋 نسخ النتيجة</button>
+                <button class="action-btn" style="background:#25D366;color:#fff;border-color:#25D366;" onclick="shareWhatsApp()">📤 واتساب</button>
+                <button class="action-btn primary" onclick="saveToHistory()">📌 حفظ</button>
+            </div>
+        </div>
+
+        <!-- Visual Cups -->
+        <p style="text-align:center; font-size:0.8rem; color:var(--text-muted); margin-bottom:10px;">
+            <span class="underline-r">إذا لم يتوفر الميزان استخدم البيالة — المقاييس مختبرة مسبقاً</span>
+        </p>
+        <div class="real-scales">
+            <div class="scale-card">
+                <div class="scale-title">سكر</div>
+                <div class="photo-wrap">
+                    <img src="sugar.jpg" alt="مقياس السكر الحقيقي" width="220" height="220">
+                    <div class="real-pointer" id="sugarPointer" aria-hidden="true"></div>
+                </div>
+                <div class="cup-note" id="sugarNote">
+                    <span class="cups" id="sugarCups">0</span> بيالة
+                    <span class="plus">+</span>
+                    <span class="remainder" id="sugarRemainder">0</span> جم
+                </div>
+            </div>
+            <div class="scale-card">
+                <div class="scale-title">شاهي</div>
+                <div class="photo-wrap">
+                    <img src="tea.jpg" alt="مقياس الشاهي الحقيقي" width="220" height="220">
+                    <div class="real-pointer tea" id="teaPointer" aria-hidden="true"></div>
+                </div>
+                <div class="cup-note" id="teaNote">
+                    <span class="cups" id="teaCups">0</span> بيالة
+                    <span class="plus">+</span>
+                    <span class="remainder" id="teaRemainder">0</span> جم
+                </div>
+            </div>
+        </div>
+
+<div class="card">
+    <div class="card-inner">
+        <div class="converter-card">
+            <div class="converter-header">
+                <span>🍬</span>
+                <h2>حاسبة السكر للبيالة (73 مل)</h2>
+            </div>
+            <div class="converter-btns">
+                <button class="conv-btn" data-value="57" onclick="setConvSugar(57, this)">خفيف<br><small>57 جم/لتر</small></button>
+                <button class="conv-btn" data-value="75" onclick="setConvSugar(75, this)">وسط<br><small>75 جم/لتر</small></button>
+                <button class="conv-btn" data-value="90" onclick="setConvSugar(90, this)">حالي<br><small>90 جم/لتر</small></button>
+            </div>
+            <div class="conv-result" id="convResult">
+                <div class="conv-label">كمية السكر للبيالة الواحدة (73 مل)</div>
+                <div class="conv-value" id="convValue">—</div>
+                <div class="conv-unit">جرام سكر</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- History -->
+<div class="card">
+    <div class="card-inner">
+        <div class="history-card">
+            <div class="history-header">
+                <h2>📋 سجل الحسابات</h2>
+                <button class="clear-history-btn" onclick="clearHistory()">مسح الكل</button>
+            </div>
+            <div class="history-list" id="historyList">
+                <div class="history-empty">لا يوجد حسابات محفوظة بعد</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- شاهي أبو جبل Calculator -->
+<div class="card">
+    <div class="card-inner">
+        <div class="abujabalsection-header">
+            <span style="font-size:1.5rem;">🍵</span>
+            <h2>شاهي أبو جبل</h2>
+            <span class="badge">وصفة ثابتة</span>
+        </div>
+        <!-- Tabs -->
+        <div class="abujabal-tabs">
+            <button class="abujabal-tab active" data-ajmode="water" onclick="ajSetMode('water')">💧 بالماء</button>
+            <button class="abujabal-tab" data-ajmode="sugar" onclick="ajSetMode('sugar')">🍬 بالسكر</button>
+            <button class="abujabal-tab" data-ajmode="tea" onclick="ajSetMode('tea')">🫖 بالشاي</button>
+        </div>
+
+        <!-- Input -->
+        <div class="abujabal-input-section">
+            <div class="input-label" id="ajInputLabel">أدخل كمية الماء</div>
+            <div class="abujabal-input-wrap">
+                <input class="abujabal-input" id="ajInput" type="text" inputmode="decimal"
+                       placeholder="أدخل القيمة" autocomplete="off">
+                <span class="abujabal-input-unit" id="ajInputUnit">مل</span>
+                <button class="abujabal-clear" onclick="ajClearInput()">✕</button>
+            </div>
+            <div class="abujabal-slider-wrap" id="ajSliderWrap">
+                <input type="range" class="abujabal-slider" id="ajSlider" min="0" max="10000" step="50" value="0">
+                <div class="abujabal-slider-labels">
+                    <span>0</span><span>2500</span><span>5000</span><span>7500</span><span>10000 مل</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result -->
+        <div class="abujabal-result" id="ajResult">
+            <div class="abujabal-result-row">
+                <div class="abujabal-tag water">
+                    <span class="label">💧 الماء</span>
+                    <span class="value" id="ajResWater">—</span>
+                    <span class="unit">مل</span>
+                </div>
+                <div class="abujabal-tag sugar">
+                    <span class="label">🍬 السكر</span>
+                    <span class="value" id="ajResSugar">—</span>
+                    <span class="unit">جم</span>
+                </div>
+                <div class="abujabal-tag tea">
+                    <span class="label">🫖 الشاي</span>
+                    <span class="value" id="ajResTea">—</span>
+                    <span class="unit">جم</span>
+                </div>
+            </div>
+            <div style="display:flex; justify-content:center; gap:10px;">
+                <button class="abujabal-copy-btn" onclick="ajCopyResult()">📋 نسخ النتيجة</button>
+                <button class="abujabal-copy-btn" style="background:#25D366;border-color:#25D366;" onclick="ajShareWhatsApp()">📤 واتساب</button>
+            </div>
+        </div>
+
+        <!-- Visual Cups — شاهي أبو جبل -->
+        <p style="text-align:center; font-size:0.8rem; color:var(--text-muted); margin: 14px 0 10px;">
+            <span class="underline-r">إذا لم يتوفر الميزان استخدم البيالة — المقاييس مختبرة مسبقاً</span>
+        </p>
+        <div class="aj-real-scales">
+            <div class="aj-scale-card">
+                <div class="aj-scale-title">سكر</div>
+                <div class="aj-photo-wrap">
+                    <img src="sugar.jpg" alt="مقياس سكر الحقيقي" width="220" height="220">
+                    <div class="aj-pointer" id="ajSugarPointer" aria-hidden="true"></div>
+                </div>
+                <div class="aj-scale-note" id="ajSugarNote">
+                    <span class="cups" id="ajSugarCups">0</span> بيالة
+                    <span class="plus">+</span>
+                    <span class="remainder" id="ajSugarRemainder">0</span> جم
+                </div>
+            </div>
+            <div class="aj-scale-card">
+                <div class="aj-scale-title">شاهي</div>
+                <div class="aj-photo-wrap">
+                    <img src="tea.jpg" alt="مقياس شاهي الحقيقي" width="220" height="220">
+                    <div class="aj-pointer tea" id="ajTeaPointer" aria-hidden="true"></div>
+                </div>
+                <div class="aj-scale-note" id="ajTeaNote">
+                    <span class="cups" id="ajTeaCups">0</span> بيالة
+                    <span class="plus">+</span>
+                    <span class="remainder" id="ajTeaRemainder">0</span> جم
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer Notes -->
+
+<div class="card">
+    <div class="card-inner">
+        <div class="footer-card">
+            <details>
+                <summary>📖 ملاحظات وطريقة الحساب</summary>
+                <div class="footer-notes-content">
+                    <p><span class="underline-r">البيالة المستخدمة في القياس هي بيالة "بادريق"</span></p>
+                    <p>البيالة العادية من الماء إلى المستوى الطبيعي المتعارف عليه تساوي تقريباً <span class="r">73</span> مل، أي أن <span class="r">1</span> لتر يساوي <span class="r">13.69</span> بيالة.</p>
+                    <p><span style="color: red;">(لجميع أنواع الشاهي)</span> تقريباً هذه الوزنة مناسبة للجميع مع التعديل حسب الحاجة لواحد لتر</p>
+                    <p><span class="r">السكر: 50 إلى 55 جم</span><br><span class="r">الشاي: 12 إلى 12.5 جم</span></p>
+                    <p>
+                        <strong class="r">طريقة الحساب:</strong><br>
+                        <span class="r">السكر (جم)</span> = (الماء بالمل ÷ 1000) × <span class="b">50–55</span><br>
+                        <span class="r">الشاي (جم)</span> = (الماء بالمل ÷ 1000) × <span class="b">12–12.5</span>
+                    </p>
+                    <p><strong class="r">ملاحظة:</strong> قد تختلف النتيجة حسب نوع الشاي، يفضل التجربة والضبط حسب الذوق.</p>
+                </div>
+            </details>
+        </div>
+    </div>
+</div>
+
+<!-- Tea Reference Link -->
+<div style="text-align:center; margin-bottom: 8px; font-size: 0.92rem; color: var(--text-muted);">
+    <p>للمزيد من المعلومات حول تصنيفات الشاي، تفضل بزيارة: <a href="BlackTeaGradingReference.html" style="color: var(--accent); text-decoration: none; font-weight: 700;">تصنيفات الشاي</a></p>
+</div>
+
+<!-- Attribution -->
+<div class="attribution">
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── State ──────────────────────────────────────────
+const state = {
+    mode: 'water',
+    sugarPerLiter: 75,
+    teaPerLiter: 12,
+    isBlend: false,
+    blendType: 'medium',
+    waterMl: 0,
+    sugarGrams: 0,
+    teaGrams: 0
+};
+
+const BLEND = { rabea: 9, abuJabal: 1, alWazah: 1, khather: 1, total: 12 };
+const CUP_ML = 73;
+const SUGAR_CUP = 84;  // max grams shown in glass
+const TEA_CUP = 21;    // max grams shown in glass
+
+// ── Elements ───────────────────────────────────────
+const mainInput   = document.getElementById('mainInput');
+const waterSlider = document.getElementById('waterSlider');
+const inputLabel  = document.getElementById('inputLabel');
+const inputUnit   = document.getElementById('inputUnit');
+const sliderWrap  = document.getElementById('sliderWrap');
+const resultCard  = document.getElementById('resultCard');
+const blendDetail = document.getElementById('blendDetail');
+
+// ── Init ───────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+    loadTheme();
+    loadHistory();
+    waterSlider.addEventListener('input', onSlider);
+    mainInput.addEventListener('input', onInputChange);
+    document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+    updateSliderGradient();
+});
+
+// ── Mode ───────────────────────────────────────────
+const MODE_LABELS = { water: 'أدخل كمية الماء', sugar: 'أدخل كمية السكر', tea: 'أدخل كمية الشاي' };
+const MODE_UNITS  = { water: 'مل', sugar: 'جم', tea: 'جم' };
+
+function setMode(mode) {
+    state.mode = mode;
+    document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.mode === mode));
+    inputLabel.textContent = MODE_LABELS[mode];
+    inputUnit.textContent  = MODE_UNITS[mode];
+    sliderWrap.style.display = mode === 'water' ? 'flex' : 'none';
+    mainInput.value = '';
+    clearDisplay();
+}
+
+// ── Sugar / Tea buttons ────────────────────────────
+function selectSugar(btn, isBlend) {
+    // Remove active from all sugar/blend buttons
+    document.querySelectorAll('#sugarGroup button, #blendGroup button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state.sugarPerLiter = parseFloat(btn.dataset.value);
+    state.isBlend = isBlend;
+    if (isBlend) {
+        state.blendType = btn.dataset.blendType;
+    } else {
+        state.blendType = btn.dataset.value === '57' ? 'light' : btn.dataset.value === '75' ? 'medium' : 'heavy';
+    }
+    calculate();
+}
+
+function selectTea(btn) {
+    document.querySelectorAll('#teaGroup button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state.teaPerLiter = parseFloat(btn.dataset.value);
+    calculate();
+}
+
+// ── Input handlers ─────────────────────────────────
+function onInputChange() {
+    const raw = mainInput.value;
+    checkEasterEgg(raw);
+    const v = parseFloat(normalizeInput(raw));
+    if (!isNaN(v) && state.mode === 'water') {
+        waterSlider.value = Math.min(v, 10000);
+        updateSliderGradient();
+    }
+    calculate();
+}
+
+function onSlider() {
+    mainInput.value = waterSlider.value;
+    updateSliderGradient();
+    calculate();
+}
+
+function updateSliderGradient() {
+    const pct = (waterSlider.value / waterSlider.max) * 100;
+    waterSlider.style.setProperty('--fill', pct + '%');
+}
+
+function clearInput() {
+    mainInput.value = '';
+    if (state.mode === 'water') { waterSlider.value = 0; updateSliderGradient(); }
+    clearDisplay();
+}
+
+function normalizeInput(str) {
+    return str.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[^\d.]/g, '');
+}
+
+// ── Core Calculate ─────────────────────────────────
+function calculate() {
+    const raw = parseFloat(normalizeInput(mainInput.value));
+    if (isNaN(raw) || raw <= 0) { clearDisplay(); return; }
+
+    // Fix 3: Warn on unrealistic values
+    const limits = { water: 50000, sugar: 5000, tea: 1000 };
+    if (raw > limits[state.mode]) {
+        showToast('⚠️ القيمة كبيرة جداً، تأكد من الإدخال', true);
+    }
+
+    let teaMult = state.isBlend
+        ? (state.blendType === 'heavy' ? BLEND.total + 1 : BLEND.total)
+        : state.teaPerLiter;
+
+    let w, s, t;
+    if (state.mode === 'water') {
+        w = raw;
+        s = (state.sugarPerLiter * w) / 1000;
+        t = (teaMult * w) / 1000;
+    } else if (state.mode === 'sugar') {
+        s = raw;
+        w = (s * 1000) / state.sugarPerLiter;
+        t = (teaMult * w) / 1000;
+    } else {
+        t = raw;
+        w = (t * 1000) / teaMult;
+        s = (state.sugarPerLiter * w) / 1000;
+    }
+
+    state.waterMl   = Math.max(0, w);
+    state.sugarGrams = Math.max(0, s);
+    state.teaGrams  = Math.max(0, t);
+
+    updateDisplay();
+}
+
+// ── Update Display ─────────────────────────────────
+function fmt(n) {
+    if (typeof n !== 'number') return '0';
+    const s = n.toFixed(2).replace(/\.0+$/, '').replace(/(\.\d)0$/, '$1');
+    return s;
+}
+
+function updateDisplay() {
+    const { waterMl, sugarGrams, teaGrams } = state;
+
+    // Result card
+    document.getElementById('resWater').textContent = fmt(waterMl);
+    document.getElementById('resSugar').textContent = fmt(sugarGrams);
+    document.getElementById('resTea').textContent   = fmt(teaGrams);
+
+    // Show liters if >= 1000ml
+    const literEl = document.getElementById('resWaterLiter');
+    if (waterMl >= 1000) {
+        literEl.textContent = '= ' + fmt(waterMl / 1000) + ' لتر';
+    } else {
+        literEl.textContent = '';
+    }
+
+    // Hide history badge on new calculation
+    document.getElementById('historyBadge').classList.remove('visible');
+
+    resultCard.classList.add('visible');
+
+    // Blend detail
+    if (state.isBlend && teaGrams > 0) {
+        const blendTotal = state.blendType === 'heavy' ? BLEND.total + 1 : BLEND.total;
+        const ratio = teaGrams / blendTotal;
+        document.getElementById('rabeaGrams').textContent   = fmt(BLEND.rabea   * ratio);
+        document.getElementById('abuJabalGrams').textContent = fmt(BLEND.abuJabal * ratio);
+        document.getElementById('alWazahGrams').textContent  = fmt(BLEND.alWazah  * ratio);
+        document.getElementById('khatherGrams').textContent  = fmt(BLEND.khather  * ratio);
+        blendDetail.classList.add('visible');
+    } else {
+        blendDetail.classList.remove('visible');
+    }
+
+    // Cup notes
+    const sugarFullCups     = Math.floor(sugarGrams / SUGAR_CUP);
+    const sugarRemainder    = sugarGrams % SUGAR_CUP;
+    const teaFullCups       = Math.floor(teaGrams / TEA_CUP);
+    const teaRemainder      = teaGrams % TEA_CUP;
+
+    const sugarNote = document.getElementById('sugarNote');
+    const teaNote   = document.getElementById('teaNote');
+    document.getElementById('sugarCups').textContent     = fmt(sugarFullCups);
+    document.getElementById('sugarRemainder').textContent = fmt(sugarRemainder);
+    document.getElementById('teaCups').textContent       = fmt(teaFullCups);
+    document.getElementById('teaRemainder').textContent   = fmt(teaRemainder);
+    sugarNote.classList.add('visible');
+    teaNote.classList.add('visible');
+
+    // Cup fill animation
+    setPointer('sugarPointer', (sugarRemainder <= 0.005 && sugarFullCups > 0) ? 100 : (sugarRemainder / SUGAR_CUP) * 100);
+    setPointer('teaPointer',   (teaRemainder <= 0.005 && teaFullCups > 0) ? 100 : (teaRemainder / TEA_CUP) * 100);
+}
+
+function setPointer(id, pct) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const track = { top: 28.9, bottom: 71.3 };
+    const safePct = Math.max(0, Math.min(100, pct));
+    const pos = track.bottom - ((track.bottom - track.top) * (safePct / 100));
+    el.style.top = Math.max(track.top, Math.min(track.bottom, pos)) + "%";
+}
+
+
+function clearDisplay() {
+    resultCard.classList.remove('visible');
+    blendDetail.classList.remove('visible');
+    document.getElementById('sugarNote').classList.remove('visible');
+    document.getElementById('teaNote').classList.remove('visible');
+    setPointer('sugarPointer', 0);
+    setPointer('teaPointer', 0);
+}
+
+// ── Copy Result ────────────────────────────────────
+function copyResult() {
+    const { waterMl, sugarGrams, teaGrams } = state;
+    if (!waterMl && !sugarGrams && !teaGrams) return;
+    const text = `وزنة شاهي ربيع:\n💧 الماء: ${fmt(waterMl)} مل\n🍬 السكر: ${fmt(sugarGrams)} جم\n🫖 الشاي: ${fmt(teaGrams)} جم`;
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => showToast('تم نسخ النتيجة ✓'));
+    } else {
+        const el = document.createElement('textarea');
+        el.value = text;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        showToast('تم نسخ النتيجة ✓');
+    }
+}
+
+function shareWhatsApp() {
+    const { waterMl, sugarGrams, teaGrams } = state;
+    if (!waterMl && !sugarGrams && !teaGrams) return;
+    const text = `وزنة شاهي ربيع 🍵\n💧 الماء: ${fmt(waterMl)} مل\n🍬 السكر: ${fmt(sugarGrams)} جم\n🫖 الشاي: ${fmt(teaGrams)} جم`;
+    window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+}
+
+// ── History ────────────────────────────────────────
+let calcHistory = [];
+
+function saveToHistory() {
+    const { waterMl, sugarGrams, teaGrams } = state;
+    if (!waterMl && !sugarGrams && !teaGrams) return;
+
+    const item = {
+        water: fmt(waterMl),
+        sugar: fmt(sugarGrams),
+        tea:   fmt(teaGrams),
+        time:  new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }),
+        date:  new Date().toLocaleDateString('ar-SA', { month: 'short', day: 'numeric' }),
+        mode:  state.mode,
+        waterRaw: waterMl,
+        sugarRaw: sugarGrams,
+        teaRaw:   teaGrams
+    };
+
+    calcHistory.unshift(item);
+    if (calcHistory.length > 8) calcHistory.pop();
+
+    try { localStorage.setItem('shahi_history', JSON.stringify(calcHistory)); } catch(e) {}
+    renderHistory();
+    showToast('تم الحفظ 📌');
+}
+
+function loadHistory() {
+    try {
+        const saved = localStorage.getItem('shahi_history');
+        calcHistory = saved ? JSON.parse(saved) : [];
+    } catch(e) { calcHistory = []; }
+    renderHistory();
+}
+
+function renderHistory() {
+    const list = document.getElementById('historyList');
+    if (!calcHistory.length) {
+        list.innerHTML = '<div class="history-empty">لا يوجد حسابات محفوظة بعد</div>';
+        return;
+    }
+    list.innerHTML = calcHistory.map((item, i) => `
+        <div class="history-item" onclick="loadHistoryItem(${i})" title="اضغط لتحميل">
+            <div class="hist-main">💧 ${item.water} مل &nbsp;|&nbsp; 🍬 ${item.sugar} جم &nbsp;|&nbsp; 🫖 ${item.tea} جم</div>
+            <div class="hist-meta">${item.date} ${item.time}</div>
+        </div>
+    `).join('');
+}
+
+function loadHistoryItem(i) {
+    const item = calcHistory[i];
+    if (!item) return;
+    setMode('water');
+    mainInput.value = item.waterRaw;
+    waterSlider.value = Math.min(item.waterRaw, 10000);
+    updateSliderGradient();
+    calculate();
+    // Fix 1: Show history badge
+    document.getElementById('historyBadge').classList.add('visible');
+    showToast('تم تحميل الحساب ✓');
+}
+
+function clearHistory() {
+    calcHistory = [];
+    try { localStorage.removeItem('shahi_history'); } catch(e) {}
+    renderHistory();
+    showToast('تم مسح السجل');
+}
+
+// ── Converter ──────────────────────────────────────
+function setConvSugar(gPerLiter, btn) {
+    document.querySelectorAll('.conv-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const val = (gPerLiter * CUP_ML) / 1000;
+    document.getElementById('convValue').textContent = val.toFixed(2);
+    document.getElementById('convResult').classList.add('visible');
+}
+
+// ── Theme ──────────────────────────────────────────
+function toggleTheme() {
+    const isLight = document.body.classList.toggle('light');
+    document.getElementById('themeToggle').textContent = isLight ? '🌙' : '☀️';
+    try { localStorage.setItem('shahi_theme', isLight ? 'light' : 'dark'); } catch(e) {}
+}
+
+function loadTheme() {
+    let saved = 'dark';
+    try { saved = localStorage.getItem('shahi_theme') || 'dark'; } catch(e) {}
+    if (saved === 'light') {
+        document.body.classList.add('light');
+        document.getElementById('themeToggle').textContent = '🌙';
+    } else {
+        document.getElementById('themeToggle').textContent = '☀️';
+    }
+}
+
+// ── Toast ──────────────────────────────────────────
+let toastTimer;
+function showToast(msg, isWarn = false) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.toggle('warn', isWarn);
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ── شاهي أبو جبل Calculator ──────────────────────
+const AJ_SUGAR = 90;   // جم/لتر
+const AJ_TEA   = 13; // جم/لتر
+
+const ajState = { mode: 'water', waterMl: 0, sugarGrams: 0, teaGrams: 0 };
+
+const ajInput     = document.getElementById('ajInput');
+const ajSlider    = document.getElementById('ajSlider');
+const ajSliderWrap = document.getElementById('ajSliderWrap');
+const ajResult    = document.getElementById('ajResult');
+const ajInputLabel = document.getElementById('ajInputLabel');
+const ajInputUnit  = document.getElementById('ajInputUnit');
+
+const AJ_MODE_LABELS = { water: 'أدخل كمية الماء', sugar: 'أدخل كمية السكر', tea: 'أدخل كمية الشاي' };
+const AJ_MODE_UNITS  = { water: 'مل', sugar: 'جم', tea: 'جم' };
+
+ajSlider.addEventListener('input', () => {
+    ajInput.value = ajSlider.value;
+    ajUpdateSlider();
+    ajCalculate();
+});
+ajInput.addEventListener('input', () => {
+    const v = parseFloat(normalizeInput(ajInput.value));
+    if (!isNaN(v) && ajState.mode === 'water') {
+        ajSlider.value = Math.min(v, 10000);
+        ajUpdateSlider();
+    }
+    ajCalculate();
+});
+
+function ajUpdateSlider() {
+    const pct = (ajSlider.value / ajSlider.max) * 100;
+    ajSlider.style.setProperty('--fill', pct + '%');
+}
+
+function ajSetMode(mode) {
+    ajState.mode = mode;
+    document.querySelectorAll('.abujabal-tab').forEach(t => t.classList.toggle('active', t.dataset.ajmode === mode));
+    ajInputLabel.textContent = AJ_MODE_LABELS[mode];
+    ajInputUnit.textContent  = AJ_MODE_UNITS[mode];
+    ajSliderWrap.style.display = mode === 'water' ? 'flex' : 'none';
+    ajInput.value = '';
+    ajResult.classList.remove('visible');
+    document.getElementById('ajSugarNote').classList.remove('visible');
+    document.getElementById('ajTeaNote').classList.remove('visible');
+    ajSetPointer('ajSugarPointer', 0);
+    ajSetPointer('ajTeaPointer', 0);
+}
+
+function ajClearInput() {
+    ajInput.value = '';
+    ajSlider.value = 0;
+    ajUpdateSlider();
+    ajResult.classList.remove('visible');
+    document.getElementById('ajSugarNote').classList.remove('visible');
+    document.getElementById('ajTeaNote').classList.remove('visible');
+    ajSetPointer('ajSugarPointer', 0);
+    ajSetPointer('ajTeaPointer', 0);
+}
+
+function ajCalculate() {
+    const raw = parseFloat(normalizeInput(ajInput.value));
+    if (isNaN(raw) || raw <= 0) { ajResult.classList.remove('visible'); return; }
+
+    let w, s, t;
+    if (ajState.mode === 'water') {
+        w = raw;
+        s = (AJ_SUGAR * w) / 1000;
+        t = (AJ_TEA   * w) / 1000;
+    } else if (ajState.mode === 'sugar') {
+        s = raw;
+        w = (s * 1000) / AJ_SUGAR;
+        t = (AJ_TEA * w) / 1000;
+    } else {
+        t = raw;
+        w = (t * 1000) / AJ_TEA;
+        s = (AJ_SUGAR * w) / 1000;
+    }
+
+    const ajW = Math.max(0, w);
+    const ajS = Math.max(0, s);
+    const ajT = Math.max(0, t);
+
+    document.getElementById('ajResWater').textContent = fmt(ajW);
+    document.getElementById('ajResSugar').textContent = fmt(ajS);
+    document.getElementById('ajResTea').textContent   = fmt(ajT);
+    ajResult.classList.add('visible');
+
+    // Cup notes
+    const ajSugarFullCups  = Math.floor(ajS / SUGAR_CUP);
+    const ajSugarRemainder = ajS % SUGAR_CUP;
+    const ajTeaFullCups    = Math.floor(ajT / TEA_CUP);
+    const ajTeaRemainder   = ajT % TEA_CUP;
+
+    document.getElementById('ajSugarCups').textContent      = fmt(ajSugarFullCups);
+    document.getElementById('ajSugarRemainder').textContent  = fmt(ajSugarRemainder);
+    document.getElementById('ajTeaCups').textContent        = fmt(ajTeaFullCups);
+    document.getElementById('ajTeaRemainder').textContent    = fmt(ajTeaRemainder);
+    document.getElementById('ajSugarNote').classList.add('visible');
+    document.getElementById('ajTeaNote').classList.add('visible');
+
+    // Real image pointers
+    ajSetPointer('ajSugarPointer', (ajSugarRemainder <= 0.005 && ajSugarFullCups > 0) ? 100 : (ajSugarRemainder / SUGAR_CUP) * 100);
+    ajSetPointer('ajTeaPointer',   (ajTeaRemainder <= 0.005 && ajTeaFullCups > 0) ? 100 : (ajTeaRemainder / TEA_CUP) * 100);
+}
+
+
+function ajSetPointer(id, pct) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const track = { top: 28.9, bottom: 71.3 };
+    const safePct = Math.max(0, Math.min(100, pct));
+    const pos = track.bottom - ((track.bottom - track.top) * (safePct / 100));
+    el.style.top = Math.max(track.top, Math.min(track.bottom, pos)) + '%';
+}
+
+function ajCopyResult() {
+    const w = document.getElementById('ajResWater').textContent;
+    const s = document.getElementById('ajResSugar').textContent;
+    const t = document.getElementById('ajResTea').textContent;
+    if (w === '—') return;
+    const text = `شاهي أبو جبل:\n💧 الماء: ${w} مل\n🍬 السكر: ${s} جم\n🫖 الشاي: ${t} جم`;
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => showToast('تم نسخ النتيجة ✓'));
+    } else {
+        const el = document.createElement('textarea');
+        el.value = text;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        showToast('تم نسخ النتيجة ✓');
+    }
+}
+
+function ajShareWhatsApp() {
+    const w = document.getElementById('ajResWater').textContent;
+    const s = document.getElementById('ajResSugar').textContent;
+    const t = document.getElementById('ajResTea').textContent;
+    if (w === '—') return;
+    const text = `شاهي أبو جبل 🍵\n💧 الماء: ${w} مل\n🍬 السكر: ${s} جم\n🫖 الشاي: ${t} جم`;
+    window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+}
+
+// ── Easter Egg ─────────────────────────────────────
+function checkEasterEgg(val) {
+    if (val.trim() === '0812') {
+        document.getElementById('easterModal').classList.add('visible');
+    }
+}
+
+function closeEaster() {
+    document.getElementById('easterModal').classList.remove('visible');
+}
+</script>
+
+<!-- Easter Egg Modal -->
+<div id="easterModal" class="easter-overlay" onclick="closeEaster()">
+    <div class="easter-box" onclick="event.stopPropagation()">
+        <div class="easter-icon">🍵</div>
+        <h2>وزنة شاهي ربيع</h2>
+        <p>تصميم وبرمجة</p>
+        <h3>سليمان الحمود</h3>
+        <p class="easter-sub">جميع الحقوق محفوظة © 2025</p>
+        <button onclick="closeEaster()">إغلاق</button>
+    </div>
+</div>
+
+<style>
+.easter-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+}
+.easter-overlay.visible { display: flex; }
+.easter-box {
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-radius: 20px;
+    padding: 36px 40px;
+    text-align: center;
+    max-width: 320px;
+    width: 90%;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    animation: popIn 0.3s ease;
+}
+@keyframes popIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+}
+.easter-icon { font-size: 3rem; margin-bottom: 12px; }
+.easter-box h2 { color: var(--accent); font-size: 1.3rem; margin-bottom: 8px; }
+.easter-box h3 { color: var(--accent-light); font-size: 1.5rem; margin: 8px 0; }
+.easter-box p  { color: var(--text-muted); font-size: 0.9rem; }
+.easter-sub    { margin-top: 6px; font-size: 0.78rem !important; }
+.easter-box button {
+    margin-top: 20px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 30px;
+    font-family: 'Cairo', Arial, sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+.easter-box button:hover { opacity: 0.85; }
+</style>
+</body>
+</html>
