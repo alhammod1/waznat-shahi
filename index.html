@@ -2006,6 +2006,11 @@ function ajShareWhatsApp() {
     const text = `شاهي أبو جبل 🍵\n💧 الماء: ${w} مل\n🍬 السكر: ${s} جم\n🫖 الشاي: ${t} جم`;
     window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
 }
+
+// ── Zoom toggle ────────────────────────────────────
+document.querySelectorAll('.photo-wrap, .aj-photo-wrap').forEach(el => {
+    el.addEventListener('click', () => el === document.activeElement ? el.blur() : el.focus());
+});
 </script>
 </body>
 </html>
