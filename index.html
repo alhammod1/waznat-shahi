@@ -1165,6 +1165,94 @@
             .converter-btns { flex-wrap: wrap; }
             .logo-text h1 { font-size: 1.2rem; }
         }
+
+        /* ── Cup Zoom Modal ── */
+        .cup-zoom-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.82);
+            z-index: 9000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(6px);
+            cursor: zoom-out;
+        }
+        .cup-zoom-overlay.open { display: flex; }
+        .cup-zoom-inner {
+            position: relative;
+            width: min(88vw, 88vh);
+            height: min(88vw, 88vh);
+            animation: zoomIn 0.28s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.6); opacity: 0; }
+            to   { transform: scale(1);   opacity: 1; }
+        }
+        .cup-zoom-inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 16px;
+            display: block;
+        }
+        .cup-zoom-pointer {
+            position: absolute;
+            left: 49.1%;
+            transform: translate(-100%, -50%);
+            width: 125px;
+            height: 2px;
+            pointer-events: none;
+            display: block;
+        }
+        .cup-zoom-pointer::before {
+            content: "";
+            position: absolute;
+            left: 2px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 28px;
+            height: 9px;
+            background: #1a1a1a;
+            border-radius: 3px;
+        }
+        .cup-zoom-pointer::after {
+            content: "";
+            position: absolute;
+            left: 36px;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: radial-gradient(circle at center, white 2px, #c9a84c 2px, #c9a84c 5px, #2a2a2a 5px, #2a2a2a 6.5px, #c9a84c 6.5px);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.6);
+            z-index: 2;
+        }
+        .cup-zoom-pointer.tea {
+            background: linear-gradient(to right, transparent 29%, #0d3f6e 29%, #2a78b8 75%, #64c3f2 100%);
+        }
+        .cup-zoom-pointer:not(.tea) {
+            background: linear-gradient(to right, transparent 29%, #6b0000 29%, #c0392b 75%, #d96060 100%);
+        }
+        .cup-zoom-close {
+            position: absolute;
+            top: -18px;
+            left: -18px;
+            width: 36px;
+            height: 36px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+            z-index: 1;
+        }
         </style>
 </head>
 <body>
@@ -1488,6 +1576,15 @@
 
 <!-- Toast -->
 <div class="toast" id="toast"></div>
+
+<!-- Cup Zoom Modal -->
+<div class="cup-zoom-overlay" id="cupZoomOverlay" onclick="closeCupZoom()">
+    <div class="cup-zoom-inner" onclick="event.stopPropagation()">
+        <button class="cup-zoom-close" onclick="closeCupZoom()">✕</button>
+        <img id="cupZoomImg" src="" alt="">
+        <div class="cup-zoom-pointer" id="cupZoomPointer"></div>
+    </div>
+</div>
 
 <script>
 // ── State ──────────────────────────────────────────
@@ -1975,6 +2072,40 @@ function ajShareWhatsApp() {
     const text = `شاهي أبو جبل 🍵\n💧 الماء: ${w} مل\n🍬 السكر: ${s} جم\n🫖 الشاي: ${t} جم`;
     window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
 }
+
+// ── Cup Zoom Modal ─────────────────────────────────
+function openCupZoom(imgSrc, topPct, isTea) {
+    document.getElementById('cupZoomImg').src = imgSrc;
+    const ptr = document.getElementById('cupZoomPointer');
+    ptr.style.top = topPct + '%';
+    ptr.classList.toggle('tea', isTea);
+    document.getElementById('cupZoomOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+function closeCupZoom() {
+    document.getElementById('cupZoomOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+}
+// Attach click to all cup photos
+document.addEventListener('DOMContentLoaded', () => {
+    [
+        { wrap: 'sugarPointer', img: 'sugar.jpg', tea: false },
+        { wrap: 'teaPointer',   img: 'tea.jpg',   tea: true  },
+        { wrap: 'ajSugarPointer', img: 'sugar.jpg', tea: false },
+        { wrap: 'ajTeaPointer',   img: 'tea.jpg',   tea: true  }
+    ].forEach(({ wrap, img, tea }) => {
+        const ptr = document.getElementById(wrap);
+        if (!ptr) return;
+        const photoWrap = ptr.closest('.photo-wrap, .aj-photo-wrap');
+        if (!photoWrap) return;
+        photoWrap.style.cursor = 'zoom-in';
+        photoWrap.addEventListener('click', () => {
+            const topPct = parseFloat(ptr.style.top) || 50;
+            openCupZoom(img, topPct, tea);
+        });
+    });
+});
+
 </script>
 </body>
 </html>
