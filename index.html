@@ -1,0 +1,401 @@
+<!--
+   ______                            __
+  / ____/___  ____ ___  ____  __  __/ /____  _____
+ / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
+\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
+                    /_/
+        Created with Perplexity Computer
+        https://www.perplexity.ai/computer
+-->
+
+<!-- Perplexity Computer Attribution — SEO Meta Tags -->
+<meta name="generator" content="Perplexity Computer">
+<meta name="author" content="Perplexity Computer">
+<meta property="og:see_also" content="https://www.perplexity.ai/computer">
+<link rel="author" href="https://www.perplexity.ai/computer">
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <script>
+        (function() {
+            const allowed = 'https://alhammod1.github.io/waznat-shahi';
+            const loc = location.href.split('?')[0].replace(/\/$/, '');
+            if (!loc.startsWith(allowed)) {
+                document.documentElement.innerHTML = '';
+                location.replace(allowed);
+            }
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وزنة شاهي ربيع</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+    <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="شاهي ربيع">
+            <circle cx="24" cy="24" r="23" fill="var(--accent)" opacity="0.12" stroke="var(--accent)" stroke-width="1.5"/>
+            <!-- Cup shape -->
+            <path d="M14 16h20l-2.5 18a2 2 0 01-2 1.8H18.5a2 2 0 01-2-1.8L14 16z" fill="var(--accent)" opacity="0.9"/>
+            <path d="M34 20h2a3 3 0 010 6h-2" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>
+            <!-- Steam -->
+            <path d="M20 11 Q21 9 20 7" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" opacity="0.7"/>
+            <path d="M24 11 Q25 8.5 24 6" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" opacity="0.7"/>
+            <path d="M28 11 Q29 9 28 7" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" opacity="0.7"/>
+        </svg>
+        <div class="logo-text">
+            <h1>وزنة شاهي ربيع</h1>
+            <span>حاسبة الشاي والسكر</span>
+        </div>
+    </div>
+    <div class="header-actions">
+        <button class="icon-btn" id="themeToggle" title="تغيير المظهر" aria-label="تغيير المظهر">🌙</button>
+    </div>
+</div>
+
+<!-- Main Calculator Card -->
+<div class="card">
+    <div class="card-inner">
+
+        <!-- Mode Tabs -->
+        <div class="tabs" role="tablist" aria-label="طريقة الحساب">
+            <button class="tab active" role="tab" data-mode="water" onclick="setMode('water')">💧 بالماء</button>
+            <button class="tab" role="tab" data-mode="sugar" onclick="setMode('sugar')">🍬 بالسكر</button>
+            <button class="tab" role="tab" data-mode="tea" onclick="setMode('tea')">🫖 بالشاي</button>
+        </div>
+
+        <!-- Input -->
+        <div class="input-section">
+            <div class="input-label" id="inputLabel">أدخل كمية الماء</div>
+            <div class="input-wrap">
+                <input class="main-input" id="mainInput" type="text" inputmode="decimal"
+                       placeholder="أدخل القيمة" autocomplete="off" aria-label="قيمة الإدخال">
+                <span class="input-unit" id="inputUnit">مل</span>
+                <button class="clear-btn" onclick="clearInput()" aria-label="مسح">✕</button>
+            </div>
+            <div class="slider-wrap" id="sliderWrap">
+                <input type="range" class="slider" id="waterSlider" min="0" max="10000" step="50" value="0" aria-label="شريط تمرير الماء">
+                <div class="slider-labels">
+                    <span>0</span><span>2500</span><span>5000</span><span>7500</span><span>10000 مل</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls-grid">
+            <div class="control-block">
+                <div class="control-title">🍬 مستوى السكر (جم/لتر)</div>
+                <div class="btn-group" id="sugarGroup">
+                    <button data-value="57" onclick="selectSugar(this, false)">خفيف</button>
+                    <button data-value="75" onclick="selectSugar(this, false)" class="active">معتدل</button>
+                    <button data-value="90" onclick="selectSugar(this, false)">حالي</button>
+                </div>
+            </div>
+            <div class="control-block">
+                <div class="control-title">🫖 قوة الشاي (جم/لتر)</div>
+                <div class="btn-group" id="teaGroup">
+                    <button data-value="11" onclick="selectTea(this)">خفيف</button>
+                    <button data-value="12" onclick="selectTea(this)" class="active">وسط</button>
+                    <button data-value="13" onclick="selectTea(this)">ثقيل</button>
+                </div>
+            </div>
+            <div class="control-block full-width">
+                <div class="control-title">🌿 خلطتي — ربيع 9 + أبو جبل 1 + الوزة 1 + خاثر 1 (12 جم/لتر)</div>
+                <div class="btn-group blend" id="blendGroup">
+                    <button data-value="57" data-blend-type="light" onclick="selectSugar(this, true)">خفيف</button>
+                    <button data-value="75" data-blend-type="medium" onclick="selectSugar(this, true)">وسط</button>
+                    <button data-value="90" data-blend-type="heavy" onclick="selectSugar(this, true)">حالي</button>
+                </div>
+                <div class="blend-detail" id="blendDetail">
+                    <div class="blend-item">
+                        <div class="brand">شاهي ربيع</div>
+                        <div class="grams" id="rabeaGrams">—</div>
+                        <div class="unit">جرام</div>
+                    </div>
+                    <div class="blend-item">
+                        <div class="brand">أبو جبل</div>
+                        <div class="grams" id="abuJabalGrams">—</div>
+                        <div class="unit">جرام</div>
+                    </div>
+                    <div class="blend-item">
+                        <div class="brand">الوزة</div>
+                        <div class="grams" id="alWazahGrams">—</div>
+                        <div class="unit">جرام</div>
+                    </div>
+                    <div class="blend-item">
+                        <div class="brand">خاثر</div>
+                        <div class="grams" id="khatherGrams">—</div>
+                        <div class="unit">جرام</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Card -->
+        <div class="result-card" id="resultCard">
+            <div class="result-row">
+                <div class="result-tag water">
+                    <span class="label">💧 الماء</span>
+                    <span class="value" id="resWater">—</span>
+                    <span class="unit">مل</span>
+                </div>
+                <div class="result-tag sugar">
+                    <span class="label">🍬 السكر</span>
+                    <span class="value" id="resSugar">—</span>
+                    <span class="unit">جم</span>
+                </div>
+                <div class="result-tag tea">
+                    <span class="label">🫖 الشاي</span>
+                    <span class="value" id="resTea">—</span>
+                    <span class="unit">جم</span>
+                </div>
+            </div>
+            <div class="result-actions">
+                <button class="action-btn" onclick="copyResult()">📋 نسخ النتيجة</button>
+                <button class="action-btn" style="background:#25D366;color:#fff;border-color:#25D366;" onclick="shareWhatsApp()">📤 واتساب</button>
+                <button class="action-btn primary" onclick="saveToHistory()">📌 حفظ</button>
+            </div>
+        </div>
+
+        <!-- Visual Cups -->
+        <p style="text-align:center; font-size:0.8rem; color:var(--text-muted); margin-bottom:10px;">
+            <span class="underline-r">إذا لم يتوفر الميزان استخدم البيالة — المقاييس مختبرة مسبقاً</span>
+        </p>
+        <div class="real-scales">
+            <div class="scale-card">
+                <div class="scale-title">سكر</div>
+                <div class="photo-wrap">
+                    <img src="assets/image-1.jpg" alt="مقياس السكر الحقيقي" width="220" height="220">
+                    <div class="real-pointer" id="sugarPointer" aria-hidden="true"></div>
+                </div>
+                <div class="cup-note" id="sugarNote">
+                    <span class="cups" id="sugarCups">0</span> بيالة
+                    <span class="plus">+</span>
+                    <span class="remainder" id="sugarRemainder">0</span> جم
+                </div>
+            </div>
+            <div class="scale-card">
+                <div class="scale-title">شاهي</div>
+                <div class="photo-wrap">
+                    <img src="assets/image-2.jpg" alt="مقياس الشاهي الحقيقي" width="220" height="220">
+                    <div class="real-pointer tea" id="teaPointer" aria-hidden="true"></div>
+                </div>
+                <div class="cup-note" id="teaNote">
+                    <span class="cups" id="teaCups">0</span> بيالة
+                    <span class="plus">+</span>
+                    <span class="remainder" id="teaRemainder">0</span> جم
+                </div>
+            </div>
+        </div>
+
+<div class="card">
+    <div class="card-inner">
+        <div class="converter-card">
+            <div class="converter-header">
+                <span>🍬</span>
+                <h2>حاسبة السكر للبيالة (73 مل)</h2>
+            </div>
+            <div class="converter-btns">
+                <button class="conv-btn" data-value="57" onclick="setConvSugar(57, this)">خفيف<br><small>57 جم/لتر</small></button>
+                <button class="conv-btn" data-value="75" onclick="setConvSugar(75, this)">وسط<br><small>75 جم/لتر</small></button>
+                <button class="conv-btn" data-value="90" onclick="setConvSugar(90, this)">حالي<br><small>90 جم/لتر</small></button>
+            </div>
+            <div class="conv-result" id="convResult">
+                <div class="conv-label">كمية السكر للبيالة الواحدة (73 مل)</div>
+                <div class="conv-value" id="convValue">—</div>
+                <div class="conv-unit">جرام سكر</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- History -->
+<div class="card">
+    <div class="card-inner">
+        <div class="history-card">
+            <div class="history-header">
+                <h2>📋 سجل الحسابات</h2>
+                <button class="clear-history-btn" onclick="clearHistory()">مسح الكل</button>
+            </div>
+            <div class="history-list" id="historyList">
+                <div class="history-empty">لا يوجد حسابات محفوظة بعد</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- شاهي أبو جبل Calculator -->
+<div class="card">
+    <div class="card-inner">
+        <div class="abujabalsection-header">
+            <span style="font-size:1.5rem;">🍵</span>
+            <h2>شاهي أبو جبل</h2>
+            <span class="badge">وصفة ثابتة</span>
+        </div>
+        <!-- Tabs -->
+        <div class="abujabal-tabs">
+            <button class="abujabal-tab active" data-ajmode="water" onclick="ajSetMode('water')">💧 بالماء</button>
+            <button class="abujabal-tab" data-ajmode="sugar" onclick="ajSetMode('sugar')">🍬 بالسكر</button>
+            <button class="abujabal-tab" data-ajmode="tea" onclick="ajSetMode('tea')">🫖 بالشاي</button>
+        </div>
+
+        <!-- Input -->
+        <div class="abujabal-input-section">
+            <div class="input-label" id="ajInputLabel">أدخل كمية الماء</div>
+            <div class="abujabal-input-wrap">
+                <input class="abujabal-input" id="ajInput" type="text" inputmode="decimal"
+                       placeholder="أدخل القيمة" autocomplete="off">
+                <span class="abujabal-input-unit" id="ajInputUnit">مل</span>
+                <button class="abujabal-clear" onclick="ajClearInput()">✕</button>
+            </div>
+            <div class="abujabal-slider-wrap" id="ajSliderWrap">
+                <input type="range" class="abujabal-slider" id="ajSlider" min="0" max="10000" step="50" value="0">
+                <div class="abujabal-slider-labels">
+                    <span>0</span><span>2500</span><span>5000</span><span>7500</span><span>10000 مل</span>
+                </div>
+                <div class="aj-strength-wrap">
+                    <span class="aj-strength-label">🫖 قوة الشاي</span>
+                    <div class="aj-strength-group">
+                        <button class="aj-strength-btn" id="ajBtnLight" onclick="ajSetStrength('light', this)">
+                            خفيف<span class="sval">١٢ جم/ل</span>
+                        </button>
+                        <button class="aj-strength-btn active-normal" id="ajBtnNormal" onclick="ajSetStrength('normal', this)">
+                            عادي<span class="sval">١٢.٢٥ جم/ل</span>
+                        </button>
+                        <button class="aj-strength-btn" id="ajBtnHeavy" onclick="ajSetStrength('heavy', this)">
+                            ثقيل<span class="sval">١٢.٧٥ جم/ل</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result -->
+        <div class="abujabal-result" id="ajResult">
+            <div class="abujabal-result-row">
+                <div class="abujabal-tag water">
+                    <span class="label">💧 الماء</span>
+                    <span class="value" id="ajResWater">—</span>
+                    <span class="unit">مل</span>
+                </div>
+                <div class="abujabal-tag sugar">
+                    <span class="label">🍬 السكر</span>
+                    <span class="value" id="ajResSugar">—</span>
+                    <span class="unit">جم</span>
+                </div>
+                <div class="abujabal-tag tea">
+                    <span class="label">🫖 الشاي</span>
+                    <span class="value" id="ajResTea">—</span>
+                    <span class="unit">جم</span>
+                </div>
+            </div>
+            <div style="display:flex; justify-content:center; gap:10px;">
+                <button class="abujabal-copy-btn" onclick="ajCopyResult()">📋 نسخ النتيجة</button>
+                <button class="abujabal-copy-btn" style="background:#25D366;border-color:#25D366;" onclick="ajShareWhatsApp()">📤 واتساب</button>
+            </div>
+        </div>
+
+        <!-- Visual Cups — شاهي أبو جبل -->
+        <p style="text-align:center; font-size:0.8rem; color:var(--text-muted); margin: 14px 0 10px;">
+            <span class="underline-r">إذا لم يتوفر الميزان استخدم البيالة — المقاييس مختبرة مسبقاً</span>
+        </p>
+        <div class="aj-real-scales">
+            <div class="aj-scale-card">
+                <div class="aj-scale-title">سكر</div>
+                <div class="aj-photo-wrap">
+                    <img src="assets/image-3.jpg" alt="مقياس سكر الحقيقي" width="220" height="220">
+                    <div class="aj-pointer" id="ajSugarPointer" aria-hidden="true"></div>
+                </div>
+                <div class="aj-scale-note" id="ajSugarNote">
+                    <span class="cups" id="ajSugarCups">0</span> بيالة
+                    <span class="plus">+</span>
+                    <span class="remainder" id="ajSugarRemainder">0</span> جم
+                </div>
+            </div>
+            <div class="aj-scale-card">
+                <div class="aj-scale-title">شاهي</div>
+                <div class="aj-photo-wrap">
+                    <img src="assets/image-4.jpg" alt="مقياس شاهي الحقيقي" width="220" height="220">
+                    <div class="aj-pointer tea" id="ajTeaPointer" aria-hidden="true"></div>
+                </div>
+                <div class="aj-scale-note" id="ajTeaNote">
+                    <span class="cups" id="ajTeaCups">0</span> بيالة
+                    <span class="plus">+</span>
+                    <span class="remainder" id="ajTeaRemainder">0</span> جم
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer Notes -->
+
+<div class="card">
+    <div class="card-inner">
+        <div class="footer-card">
+            <details>
+                <summary>📖 ملاحظات وطريقة الحساب</summary>
+                <div class="footer-notes-content">
+                    <p><span class="underline-r">البيالة المستخدمة في القياس هي بيالة "بادريق"</span></p>
+                    <p>البيالة العادية من الماء إلى المستوى الطبيعي المتعارف عليه تساوي تقريباً <span class="r">73</span> مل، أي أن <span class="r">1</span> لتر يساوي <span class="r">13.69</span> بيالة.</p>
+                    <p><span style="color: red;">(لجميع أنواع الشاهي)</span> تقريباً هذه الوزنة مناسبة للجميع مع التعديل حسب الحاجة لواحد لتر</p>
+                    <p><span class="r">السكر: 50 إلى 55 جم</span><br><span class="r">الشاي: 12 إلى 12.5 جم</span></p>
+                    <p>
+                        <strong class="r">طريقة الحساب:</strong><br>
+                        <span class="r">السكر (جم)</span> = (الماء بالمل ÷ 1000) × <span class="b">50–55</span><br>
+                        <span class="r">الشاي (جم)</span> = (الماء بالمل ÷ 1000) × <span class="b">12–12.5</span>
+                    </p>
+                    <p><strong class="r">ملاحظة:</strong> قد تختلف النتيجة حسب نوع الشاي، يفضل التجربة والضبط حسب الذوق.</p>
+                </div>
+            </details>
+        </div>
+    </div>
+</div>
+
+<!-- Tea Reference Link -->
+<div style="text-align:center; margin-bottom: 8px; font-size: 0.92rem; color: var(--text-muted);">
+    <p>للمزيد من المعلومات حول تصنيفات الشاي، تفضل بزيارة: <a href="BlackTeaGradingReference.html" style="color: var(--accent); text-decoration: none; font-weight: 700;">تصنيفات الشاي</a></p>
+</div>
+
+<!-- Attribution -->
+<div class="attribution">
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Easter Egg Modal -->
+<div class="egg-overlay" id="eggOverlay" onclick="closeEasterEgg()">
+    <div class="egg-modal" onclick="event.stopPropagation()">
+        <span class="egg-sparkle">✨</span>
+        <div class="egg-app-name">حاسبة شاهي ربيع<br>وأبو جبل</div>
+        <div class="egg-divider"></div>
+        <div class="egg-label">برمجة وتطوير</div>
+        <div class="egg-dev-name">سليمان الحمود</div>
+        <div class="egg-copy">
+            <span>© 2025</span> جميع الحقوق محفوظة<br>
+            يُمنع إعادة النشر أو التوزيع<br>بدون إذن صريح من المطوّر
+        </div>
+        <div class="egg-tap-hint">اضغط في أي مكان للإغلاق</div>
+    </div>
+</div>
+
+<!-- Cup Zoom Modal -->
+<div class="cup-zoom-overlay" id="cupZoomOverlay" onclick="closeCupZoom()">
+    <div class="cup-zoom-inner" onclick="event.stopPropagation()">
+        <button class="cup-zoom-close" onclick="closeCupZoom()">✕</button>
+        <img id="cupZoomImg" src="" alt="">
+        <div class="cup-zoom-pointer" id="cupZoomPointer"></div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
