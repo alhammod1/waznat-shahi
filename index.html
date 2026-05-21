@@ -1,0 +1,662 @@
+<!--
+   ______                            __
+  / ____/___  ____ ___  ____  __  __/ /____  _____
+ / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
+\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
+                    /_/
+        Created with Perplexity Computer
+        https://www.perplexity.ai/computer
+-->
+<meta name="generator" content="Perplexity Computer">
+<meta name="author" content="Perplexity Computer">
+<meta property="og:see_also" content="https://www.perplexity.ai/computer">
+<link rel="author" href="https://www.perplexity.ai/computer">
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <script>
+        (function() {
+            const allowed = 'https://alhammod1.github.io/waznat-shahi';
+            const loc = location.href.split('?')[0].replace(/\/$/, '');
+            if (!loc.startsWith(allowed)) {
+                document.documentElement.innerHTML = '';
+                location.replace(allowed);
+            }
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وزنة شاهي ربيع</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+    /* ============================================================
+       وزنة شاهي ربيع — UI Redesign (Visual Only, Zero JS Changes)
+       ============================================================ */
+    :root {
+        --bg:           #F7EDD8;
+        --surface:      #FFFCF4;
+        --surface-2:    #EFE0C4;
+        --surface-3:    #E4D0AE;
+        --accent:       #B87808;
+        --accent-light: #D4960E;
+        --accent-sub:   rgba(184,120,8,0.13);
+        --water:        #2878A8;
+        --water-sub:    rgba(40,120,168,0.13);
+        --sugar:        #C87010;
+        --sugar-sub:    rgba(200,112,16,0.13);
+        --tea:          #7A4220;
+        --tea-sub:      rgba(122,66,32,0.13);
+        --text:         #261808;
+        --text-muted:   #896848;
+        --border:       #DFC890;
+        --border-sub:   #EDD8A8;
+        --shadow:       0 2px 12px rgba(38,24,8,0.09);
+        --r:  16px; --r-sm: 10px; --r-xs: 7px;
+    }
+    html[data-theme="dark"], body.dark-mode {
+        --bg:           #1A1006; --surface: #221408; --surface-2: #2E1C0A; --surface-3: #3A2210;
+        --accent:       #D4960E; --accent-light: #E8AA22; --accent-sub: rgba(212,150,14,0.16);
+        --water:        #4A9AC8; --water-sub: rgba(74,154,200,0.16);
+        --sugar:        #E08030; --sugar-sub: rgba(224,128,48,0.16);
+        --tea:          #C88060; --tea-sub: rgba(200,128,96,0.16);
+        --text:         #F5E8D0; --text-muted: #A88868;
+        --border:       #4A3010; --border-sub: #382008;
+        --shadow:       0 2px 12px rgba(0,0,0,0.35);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;direction:rtl;font-size:15px;line-height:1.6;padding-bottom:48px}
+
+    /* HEADER */
+    .header{background:var(--surface);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:var(--shadow)}
+    .logo{display:flex;align-items:center;gap:10px}
+    .logo-icon{width:40px;height:40px;flex-shrink:0}
+    .logo-text h1{font-size:1.05rem;font-weight:800;color:var(--accent);line-height:1.2}
+    .logo-text span{font-size:.7rem;color:var(--text-muted);display:block}
+    .icon-btn{background:var(--accent-sub);border:1px solid var(--border);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;font-size:1rem;cursor:pointer;color:var(--accent);transition:all .2s}
+    .icon-btn:hover{background:var(--accent);color:#fff}
+    .header-actions{display:flex;align-items:center;gap:8px}
+
+    /* CARDS */
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);margin:12px;box-shadow:var(--shadow);overflow:visible}
+    .card-inner{padding:16px}
+
+    /* TABS */
+    .tabs{display:flex;gap:5px;background:var(--surface-2);border-radius:50px;padding:4px;margin-bottom:16px}
+    .tab{flex:1;padding:8px 4px;border:none;border-radius:50px;font-family:'Cairo',sans-serif;font-size:.8rem;font-weight:700;cursor:pointer;background:transparent;color:var(--text-muted);transition:all .22s}
+    .tab.active{background:var(--accent);color:#fff;box-shadow:0 2px 10px rgba(184,120,8,.35)}
+
+    /* INPUT */
+    .input-section{margin-bottom:14px}
+    .input-label{font-size:.75rem;font-weight:700;color:var(--text-muted);margin-bottom:7px;letter-spacing:.03em}
+    .input-wrap{display:flex;align-items:center;gap:8px;background:var(--surface-2);border:1.5px solid var(--border);border-radius:var(--r-sm);padding:10px 12px;transition:border-color .2s,box-shadow .2s}
+    .input-wrap:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-sub)}
+    .main-input{flex:1;background:transparent;border:none;outline:none;font-family:'Cairo',sans-serif;font-size:1.1rem;font-weight:700;color:var(--text);text-align:center;direction:ltr;min-width:0}
+    .main-input::placeholder{color:var(--border)}
+    .input-unit{font-size:.75rem;font-weight:800;color:var(--accent);background:var(--accent-sub);padding:3px 9px;border-radius:20px;white-space:nowrap}
+    .clear-btn{background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:.85rem;padding:2px 4px;border-radius:4px;transition:color .15s}
+    .clear-btn:hover{color:#e53e3e}
+
+    /* SLIDER */
+    .slider-wrap{margin-top:10px}
+    .slider{width:100%;-webkit-appearance:none;height:5px;border-radius:5px;background:var(--surface-3);outline:none;cursor:pointer}
+    .slider::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--accent);box-shadow:0 2px 8px rgba(184,120,8,.45);cursor:pointer;transition:transform .15s;border:2px solid #fff}
+    .slider::-webkit-slider-thumb:hover{transform:scale(1.15)}
+    .slider-labels{display:flex;justify-content:space-between;font-size:.63rem;color:var(--text-muted);margin-top:5px}
+
+    /* CONTROLS */
+    .controls-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+    .control-block{background:var(--surface-2);border:1px solid var(--border-sub);border-radius:var(--r-sm);padding:10px}
+    .control-block.full-width{grid-column:1/-1}
+    .control-title{font-size:.7rem;font-weight:700;color:var(--text-muted);margin-bottom:8px;line-height:1.4}
+
+    /* BTN GROUP */
+    .btn-group{display:flex;gap:5px}
+    .btn-group button{flex:1;padding:7px 4px;border:1.5px solid var(--border);border-radius:var(--r-xs);background:var(--surface);font-family:'Cairo',sans-serif;font-size:.8rem;font-weight:700;color:var(--text-muted);cursor:pointer;transition:all .18s}
+    .btn-group button:hover{border-color:var(--accent);color:var(--accent)}
+    .btn-group button.active{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(184,120,8,.3)}
+
+    /* BLEND */
+    .blend-detail{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px}
+    .blend-item{background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-xs);padding:8px 6px;text-align:center}
+    .blend-item .brand{font-size:.68rem;font-weight:700;color:var(--text-muted)}
+    .blend-item .grams{font-size:1.25rem;font-weight:800;color:var(--accent);line-height:1.1}
+    .blend-item .unit{font-size:.62rem;color:var(--text-muted)}
+
+    /* RESULT CARD (HERO) */
+    .result-card{background:linear-gradient(145deg,#1C1204 0%,#261608 60%,#180C02 100%);border-radius:var(--r);padding:18px 14px;margin-bottom:4px;box-shadow:0 8px 36px rgba(0,0,0,.32),0 1px 0 rgba(184,120,8,.15) inset;border:1px solid rgba(184,120,8,.22);position:relative;overflow:hidden}
+    .result-card::before{content:'';position:absolute;top:0;right:0;left:0;height:2px;background:linear-gradient(90deg,transparent,#D4960E 50%,transparent)}
+    .result-row{display:flex;gap:8px;margin-bottom:12px}
+    .result-tag{flex:1;display:flex;flex-direction:column;align-items:center;padding:11px 4px 8px;border-radius:var(--r-sm);border-bottom:3px solid transparent}
+    .result-tag .label{font-size:.68rem;font-weight:700;color:rgba(232,208,160,.75);margin-bottom:4px}
+    .result-tag .value{font-size:1.85rem;font-weight:800;line-height:1}
+    .result-tag .unit{font-size:.66rem;color:rgba(232,208,160,.55);margin-top:3px}
+    .result-tag.water{background:rgba(40,120,168,.13);border-bottom-color:#5AAAD0}
+    .result-tag.water .value{color:#7DCEF5}
+    .result-tag.sugar{background:rgba(200,112,16,.13);border-bottom-color:#E08030}
+    .result-tag.sugar .value{color:#F0A840}
+    .result-tag.tea{background:rgba(180,100,48,.13);border-bottom-color:#C87050}
+    .result-tag.tea .value{color:#E0A878}
+    .result-actions{display:flex;gap:7px}
+    .action-btn{flex:1;padding:9px 5px;border-radius:var(--r-xs);border:1px solid rgba(184,120,8,.4);background:rgba(184,120,8,.1);color:#D4960E;font-family:'Cairo',sans-serif;font-size:.76rem;font-weight:700;cursor:pointer;transition:background .18s;white-space:nowrap}
+    .action-btn:hover{background:rgba(184,120,8,.22)}
+    .action-btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+    .action-btn.primary:hover{background:var(--accent-light)}
+
+    /* COLLAPSIBLE */
+    details.scales-collapsible,details.aj-scales-collapsible,details.converter-details,details.history-details{border-top:1px solid var(--border-sub);margin-top:12px}
+    details.scales-collapsible>summary,details.aj-scales-collapsible>summary,details.converter-details>summary,details.history-details>summary{list-style:none;cursor:pointer;padding:10px 2px;font-size:.8rem;font-weight:700;color:var(--text-muted);display:flex;align-items:center;gap:6px;user-select:none;-webkit-tap-highlight-color:transparent}
+    details.scales-collapsible>summary::-webkit-details-marker,details.aj-scales-collapsible>summary::-webkit-details-marker,details.converter-details>summary::-webkit-details-marker,details.history-details>summary::-webkit-details-marker{display:none}
+    .chevron{margin-right:auto;font-size:.85rem;transition:transform .22s;display:inline-block}
+    details[open]>summary .chevron{transform:rotate(180deg)}
+
+    /* SCALES */
+    .real-scales,.aj-real-scales{display:flex;gap:10px;margin-top:10px;justify-content:center}
+    .scale-card,.aj-scale-card{flex:1;max-width:155px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden;text-align:center}
+    .scale-title,.aj-scale-title{font-size:.72rem;font-weight:800;color:var(--accent);padding:5px;background:var(--accent-sub)}
+    .photo-wrap,.aj-photo-wrap{position:relative;overflow:hidden}
+    .photo-wrap img,.aj-photo-wrap img{width:100%;height:auto;display:block;object-fit:cover}
+    .real-pointer{position:absolute;width:100%;left:0;height:2px;background:#e53e3e;pointer-events:none}
+    .real-pointer.tea{background:var(--tea)}
+    .aj-pointer{position:absolute;width:100%;left:0;height:2px;background:#e53e3e;pointer-events:none}
+    .aj-pointer.tea{background:var(--tea)}
+    .cup-note,.aj-scale-note{font-size:.75rem;font-weight:700;color:var(--text);padding:6px 4px;display:flex;align-items:center;justify-content:center;gap:3px;flex-wrap:wrap}
+    .cup-note .cups,.aj-scale-note .cups{color:var(--accent);font-size:.95rem}
+    .cup-note .plus,.aj-scale-note .plus,.cup-note .remainder,.aj-scale-note .remainder{color:var(--text-muted)}
+
+    /* CONVERTER */
+    .converter-header{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+    .converter-header h2{font-size:.92rem;font-weight:800;color:var(--text)}
+    .converter-btns{display:flex;gap:6px;margin-bottom:12px}
+    .conv-btn{flex:1;padding:10px 4px;border:1.5px solid var(--border);border-radius:var(--r-sm);background:var(--surface-2);font-family:'Cairo',sans-serif;font-size:.8rem;font-weight:700;color:var(--text-muted);cursor:pointer;text-align:center;transition:all .18s;line-height:1.4}
+    .conv-btn small{display:block;font-size:.62rem;opacity:.8}
+    .conv-btn:hover,.conv-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+    .conv-result{background:var(--accent-sub);border:1px solid var(--border);border-radius:var(--r-sm);padding:14px;text-align:center}
+    .conv-label{font-size:.72rem;color:var(--text-muted);margin-bottom:5px}
+    .conv-value{font-size:2.2rem;font-weight:800;color:var(--accent);line-height:1}
+    .conv-unit{font-size:.72rem;color:var(--text-muted);margin-top:4px}
+
+    /* HISTORY */
+    .history-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+    .history-header h2{font-size:.92rem;font-weight:800;color:var(--text)}
+    .clear-history-btn{background:none;border:1px solid rgba(229,62,62,.3);border-radius:var(--r-xs);color:#e53e3e;font-family:'Cairo',sans-serif;font-size:.72rem;font-weight:700;padding:5px 10px;cursor:pointer;transition:background .18s}
+    .clear-history-btn:hover{background:rgba(229,62,62,.1)}
+    .history-list{display:flex;flex-direction:column;gap:6px}
+    .history-empty{text-align:center;color:var(--text-muted);font-size:.8rem;padding:20px 0}
+
+    /* ABU JABAL */
+    .abujabalsection-header{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+    .abujabalsection-header h2{font-size:.98rem;font-weight:800;color:var(--text)}
+    .badge{font-size:.62rem;font-weight:700;background:var(--accent-sub);color:var(--accent);border:1px solid var(--border);border-radius:20px;padding:2px 8px}
+    .abujabal-tabs{display:flex;gap:5px;background:var(--surface-2);border-radius:50px;padding:4px;margin-bottom:16px}
+    .abujabal-tab{flex:1;padding:8px 4px;border:none;border-radius:50px;font-family:'Cairo',sans-serif;font-size:.8rem;font-weight:700;cursor:pointer;background:transparent;color:var(--text-muted);transition:all .22s}
+    .abujabal-tab.active{background:var(--accent);color:#fff;box-shadow:0 2px 10px rgba(184,120,8,.35)}
+    .abujabal-input-section{margin-bottom:14px}
+    .abujabal-input-wrap{display:flex;align-items:center;gap:8px;background:var(--surface-2);border:1.5px solid var(--border);border-radius:var(--r-sm);padding:10px 12px;transition:border-color .2s,box-shadow .2s}
+    .abujabal-input-wrap:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-sub)}
+    .abujabal-input{flex:1;background:transparent;border:none;outline:none;font-family:'Cairo',sans-serif;font-size:1.1rem;font-weight:700;color:var(--text);text-align:center;direction:ltr;min-width:0}
+    .abujabal-input-unit{font-size:.75rem;font-weight:800;color:var(--accent);background:var(--accent-sub);padding:3px 9px;border-radius:20px}
+    .abujabal-clear{background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:.85rem;transition:color .15s}
+    .abujabal-clear:hover{color:#e53e3e}
+    .abujabal-slider-wrap{margin-top:10px}
+    .abujabal-slider{width:100%;-webkit-appearance:none;height:5px;border-radius:5px;background:var(--surface-3);outline:none;cursor:pointer}
+    .abujabal-slider::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--accent);box-shadow:0 2px 8px rgba(184,120,8,.45);cursor:pointer;border:2px solid #fff;transition:transform .15s}
+    .abujabal-slider::-webkit-slider-thumb:hover{transform:scale(1.15)}
+    .abujabal-slider-labels{display:flex;justify-content:space-between;font-size:.63rem;color:var(--text-muted);margin-top:5px}
+    .aj-strength-wrap{margin-top:12px;background:var(--surface-2);border:1px solid var(--border-sub);border-radius:var(--r-sm);padding:10px}
+    .aj-strength-label{font-size:.7rem;font-weight:700;color:var(--text-muted);display:block;margin-bottom:8px}
+    .aj-strength-group{display:flex;gap:6px}
+    .aj-strength-btn{flex:1;padding:8px 4px;border:1.5px solid var(--border);border-radius:var(--r-xs);background:var(--surface);font-family:'Cairo',sans-serif;font-size:.78rem;font-weight:700;color:var(--text-muted);cursor:pointer;text-align:center;transition:all .18s;display:flex;flex-direction:column;align-items:center;gap:2px}
+    .aj-strength-btn .sval{font-size:.58rem;font-weight:600;opacity:.75}
+    .aj-strength-btn:hover,.aj-strength-btn.active-normal,.aj-strength-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+
+    /* ABU JABAL RESULT */
+    .abujabal-result{background:linear-gradient(145deg,#1C1204 0%,#261608 60%,#180C02 100%);border-radius:var(--r);padding:16px 14px;margin-bottom:4px;box-shadow:0 8px 36px rgba(0,0,0,.32),0 1px 0 rgba(184,120,8,.15) inset;border:1px solid rgba(184,120,8,.22);position:relative;overflow:hidden}
+    .abujabal-result::before{content:'';position:absolute;top:0;right:0;left:0;height:2px;background:linear-gradient(90deg,transparent,#D4960E 50%,transparent)}
+    .abujabal-result-row{display:flex;gap:8px;margin-bottom:12px}
+    .abujabal-tag{flex:1;display:flex;flex-direction:column;align-items:center;padding:10px 4px 8px;border-radius:var(--r-sm);border-bottom:3px solid transparent}
+    .abujabal-tag .label{font-size:.66rem;font-weight:700;color:rgba(232,208,160,.75);margin-bottom:4px}
+    .abujabal-tag .value{font-size:1.6rem;font-weight:800;line-height:1}
+    .abujabal-tag .unit{font-size:.64rem;color:rgba(232,208,160,.55);margin-top:3px}
+    .abujabal-tag.water{background:rgba(40,120,168,.13);border-bottom-color:#5AAAD0}
+    .abujabal-tag.water .value{color:#7DCEF5}
+    .abujabal-tag.sugar{background:rgba(200,112,16,.13);border-bottom-color:#E08030}
+    .abujabal-tag.sugar .value{color:#F0A840}
+    .abujabal-tag.tea{background:rgba(180,100,48,.13);border-bottom-color:#C87050}
+    .abujabal-tag.tea .value{color:#E0A878}
+    .abujabal-copy-btn{flex:1;padding:10px 6px;border:1px solid rgba(184,120,8,.4);border-radius:var(--r-xs);background:rgba(184,120,8,.1);color:#D4960E;font-family:'Cairo',sans-serif;font-size:.76rem;font-weight:700;cursor:pointer;transition:background .18s}
+    .abujabal-copy-btn:hover{background:rgba(184,120,8,.22)}
+
+    /* FOOTER NOTES */
+    .footer-card details>summary{list-style:none;cursor:pointer;padding:12px 2px;font-size:.88rem;font-weight:800;color:var(--text);display:flex;align-items:center;justify-content:space-between}
+    .footer-card details>summary::-webkit-details-marker{display:none}
+    .footer-card details>summary::after{content:'▾';font-size:.85rem;color:var(--text-muted);transition:transform .22s}
+    .footer-card details[open]>summary::after{transform:rotate(180deg)}
+    .footer-notes-content p{font-size:.8rem;color:var(--text-muted);margin-bottom:8px;line-height:1.75}
+    .footer-notes-content .r{color:var(--accent);font-weight:700}
+    .footer-notes-content .b{color:var(--water);font-weight:700}
+    .underline-r{border-bottom:1.5px solid var(--accent);padding-bottom:1px}
+
+    /* TOAST */
+    .toast{position:fixed;bottom:24px;right:50%;transform:translateX(50%);background:#28180A;color:#F0D890;padding:10px 22px;border-radius:50px;font-size:.82rem;font-weight:700;box-shadow:0 4px 20px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:opacity .28s;z-index:9999;white-space:nowrap;border:1px solid rgba(184,120,8,.3)}
+    .toast.show{opacity:1}
+
+    /* EGG */
+    .egg-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+    .egg-overlay.show{display:flex}
+    .egg-modal{background:linear-gradient(145deg,#1C1204,#2E1A08);border:1px solid rgba(184,120,8,.4);border-radius:var(--r);padding:28px 24px;text-align:center;max-width:290px;width:90%;box-shadow:0 16px 48px rgba(0,0,0,.5)}
+    .egg-sparkle{font-size:2rem;display:block;margin-bottom:10px}
+    .egg-app-name{font-size:1.15rem;font-weight:800;color:#D4960E;margin-bottom:10px;line-height:1.5}
+    .egg-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(184,120,8,.5),transparent);margin:10px 0}
+    .egg-label{font-size:.76rem;color:#A88868;margin-bottom:5px}
+    .egg-dev-name{font-size:1.15rem;font-weight:800;color:#E8C870}
+    .egg-copy{font-size:.7rem;color:#886848;margin-top:14px;line-height:1.8}
+    .egg-tap-hint{font-size:.65rem;color:#604830;margin-top:14px}
+
+    /* CUP ZOOM */
+    .cup-zoom-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9500;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+    .cup-zoom-overlay.show{display:flex}
+    .cup-zoom-inner{position:relative;max-width:320px;width:90%;border-radius:var(--r);overflow:hidden;border:2px solid rgba(184,120,8,.4)}
+    .cup-zoom-close{position:absolute;top:8px;left:8px;z-index:10;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.2);border-radius:50%;width:30px;height:30px;color:#fff;font-size:.85rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+    .cup-zoom-inner img{width:100%;display:block}
+    .cup-zoom-pointer{position:absolute;width:100%;left:0;height:3px;background:#e53e3e;pointer-events:none}
+
+    .attribution{text-align:center;font-size:.7rem;color:var(--text-muted);padding:6px 0 4px}
+
+    /* ANIMATIONS */
+    @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    .card{animation:fadeUp .38s ease both}
+    .card:nth-child(2){animation-delay:.04s}.card:nth-child(3){animation-delay:.08s}
+    .card:nth-child(4){animation-delay:.12s}.card:nth-child(5){animation-delay:.16s}
+    .card:nth-child(6){animation-delay:.2s}
+
+    /* RESPONSIVE */
+    @media(max-width:380px){.controls-grid{grid-template-columns:1fr}.control-block.full-width{grid-column:1}.result-tag .value{font-size:1.55rem}.abujabal-tag .value{font-size:1.4rem}}
+    @media(max-width:340px){.card-inner{padding:12px}.tab,.abujabal-tab{font-size:.74rem}}
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+    <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="شاهي ربيع">
+            <circle cx="24" cy="24" r="23" fill="var(--accent)" opacity="0.12" stroke="var(--accent)" stroke-width="1.5"/>
+            <path d="M14 16h20l-2.5 18a2 2 0 01-2 1.8H18.5a2 2 0 01-2-1.8L14 16z" fill="var(--accent)" opacity="0.9"/>
+            <path d="M34 20h2a3 3 0 010 6h-2" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M20 11 Q21 9 20 7" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" opacity="0.7"/>
+            <path d="M24 11 Q25 8.5 24 6" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" opacity="0.7"/>
+            <path d="M28 11 Q29 9 28 7" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" opacity="0.7"/>
+        </svg>
+        <div class="logo-text">
+            <h1>وزنة شاهي ربيع</h1>
+            <span>حاسبة الشاي والسكر</span>
+        </div>
+    </div>
+    <div class="header-actions">
+        <button class="icon-btn" id="themeToggle" title="تغيير المظهر" aria-label="تغيير المظهر">🌙</button>
+    </div>
+</div>
+
+<!-- Main Calculator Card -->
+<div class="card">
+    <div class="card-inner">
+
+        <!-- Mode Tabs -->
+        <div class="tabs" role="tablist" aria-label="طريقة الحساب">
+            <button class="tab active" role="tab" data-mode="water" onclick="setMode('water')">💧 بالماء</button>
+            <button class="tab" role="tab" data-mode="sugar" onclick="setMode('sugar')">🍬 بالسكر</button>
+            <button class="tab" role="tab" data-mode="tea" onclick="setMode('tea')">🫖 بالشاي</button>
+        </div>
+
+        <!-- Input -->
+        <div class="input-section">
+            <div class="input-label" id="inputLabel">أدخل كمية الماء</div>
+            <div class="input-wrap">
+                <input class="main-input" id="mainInput" type="text" inputmode="decimal"
+                       placeholder="أدخل القيمة" autocomplete="off" aria-label="قيمة الإدخال">
+                <span class="input-unit" id="inputUnit">مل</span>
+                <button class="clear-btn" onclick="clearInput()" aria-label="مسح">✕</button>
+            </div>
+            <div class="slider-wrap" id="sliderWrap">
+                <input type="range" class="slider" id="waterSlider" min="0" max="10000" step="50" value="0" aria-label="شريط تمرير الماء">
+                <div class="slider-labels">
+                    <span>0</span><span>2500</span><span>5000</span><span>7500</span><span>10000 مل</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls-grid">
+            <div class="control-block">
+                <div class="control-title">🍬 مستوى السكر (جم/لتر)</div>
+                <div class="btn-group" id="sugarGroup">
+                    <button data-value="57" onclick="selectSugar(this, false)">خفيف</button>
+                    <button data-value="75" onclick="selectSugar(this, false)" class="active">معتدل</button>
+                    <button data-value="90" onclick="selectSugar(this, false)">حالي</button>
+                </div>
+            </div>
+            <div class="control-block">
+                <div class="control-title">🫖 قوة الشاي (جم/لتر)</div>
+                <div class="btn-group" id="teaGroup">
+                    <button data-value="11" onclick="selectTea(this)">خفيف</button>
+                    <button data-value="12" onclick="selectTea(this)" class="active">وسط</button>
+                    <button data-value="13" onclick="selectTea(this)">ثقيل</button>
+                </div>
+            </div>
+            <div class="control-block full-width">
+                <div class="control-title">🌿 خلطتي — ربيع 9 + أبو جبل 1 + الوزة 1 + خاثر 1 (12 جم/لتر)</div>
+                <div class="btn-group blend" id="blendGroup">
+                    <button data-value="57" data-blend-type="light" onclick="selectSugar(this, true)">خفيف</button>
+                    <button data-value="75" data-blend-type="medium" onclick="selectSugar(this, true)">وسط</button>
+                    <button data-value="90" data-blend-type="heavy" onclick="selectSugar(this, true)">حالي</button>
+                </div>
+                <div class="blend-detail" id="blendDetail">
+                    <div class="blend-item">
+                        <div class="brand">شاهي ربيع</div>
+                        <div class="grams" id="rabeaGrams">—</div>
+                        <div class="unit">جرام</div>
+                    </div>
+                    <div class="blend-item">
+                        <div class="brand">أبو جبل</div>
+                        <div class="grams" id="abuJabalGrams">—</div>
+                        <div class="unit">جرام</div>
+                    </div>
+                    <div class="blend-item">
+                        <div class="brand">الوزة</div>
+                        <div class="grams" id="alWazahGrams">—</div>
+                        <div class="unit">جرام</div>
+                    </div>
+                    <div class="blend-item">
+                        <div class="brand">خاثر</div>
+                        <div class="grams" id="khatherGrams">—</div>
+                        <div class="unit">جرام</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Card (HERO) -->
+        <div class="result-card" id="resultCard">
+            <div class="result-row">
+                <div class="result-tag water">
+                    <span class="label">💧 الماء</span>
+                    <span class="value" id="resWater">—</span>
+                    <span class="unit">مل</span>
+                </div>
+                <div class="result-tag sugar">
+                    <span class="label">🍬 السكر</span>
+                    <span class="value" id="resSugar">—</span>
+                    <span class="unit">جم</span>
+                </div>
+                <div class="result-tag tea">
+                    <span class="label">🫖 الشاي</span>
+                    <span class="value" id="resTea">—</span>
+                    <span class="unit">جم</span>
+                </div>
+            </div>
+            <div class="result-actions">
+                <button class="action-btn" onclick="copyResult()">📋 نسخ</button>
+                <button class="action-btn" style="background:rgba(37,211,102,0.15);color:#25D366;border-color:rgba(37,211,102,0.4);" onclick="shareWhatsApp()">📤 واتساب</button>
+                <button class="action-btn primary" onclick="saveToHistory()">📌 حفظ</button>
+            </div>
+        </div>
+
+        <!-- Visual Cups (Collapsible) -->
+        <details class="scales-collapsible">
+            <summary>
+                📊 مقاييس البيالة (ربيع)
+                <span class="chevron">▾</span>
+            </summary>
+            <p style="text-align:center;font-size:.75rem;color:var(--text-muted);margin:8px 0 10px;">
+                <span class="underline-r">إذا لم يتوفر الميزان استخدم البيالة — المقاييس مختبرة مسبقاً</span>
+            </p>
+            <div class="real-scales">
+                <div class="scale-card">
+                    <div class="scale-title">سكر</div>
+                    <div class="photo-wrap">
+                        <img src="assets/image-1.jpg" alt="مقياس السكر الحقيقي" width="220" height="220">
+                        <div class="real-pointer" id="sugarPointer" aria-hidden="true"></div>
+                    </div>
+                    <div class="cup-note" id="sugarNote">
+                        <span class="cups" id="sugarCups">0</span> بيالة
+                        <span class="plus">+</span>
+                        <span class="remainder" id="sugarRemainder">0</span> جم
+                    </div>
+                </div>
+                <div class="scale-card">
+                    <div class="scale-title">شاهي</div>
+                    <div class="photo-wrap">
+                        <img src="assets/image-2.jpg" alt="مقياس الشاهي الحقيقي" width="220" height="220">
+                        <div class="real-pointer tea" id="teaPointer" aria-hidden="true"></div>
+                    </div>
+                    <div class="cup-note" id="teaNote">
+                        <span class="cups" id="teaCups">0</span> بيالة
+                        <span class="plus">+</span>
+                        <span class="remainder" id="teaRemainder">0</span> جم
+                    </div>
+                </div>
+            </div>
+        </details>
+
+    </div>
+</div>
+
+<!-- Converter Card -->
+<div class="card">
+    <div class="card-inner">
+        <details class="converter-details">
+            <summary>
+                🍬 حاسبة السكر للبيالة (73 مل)
+                <span class="chevron">▾</span>
+            </summary>
+            <div style="padding-top:10px;">
+                <div class="converter-btns">
+                    <button class="conv-btn" data-value="57" onclick="setConvSugar(57, this)">خفيف<br><small>57 جم/لتر</small></button>
+                    <button class="conv-btn" data-value="75" onclick="setConvSugar(75, this)">وسط<br><small>75 جم/لتر</small></button>
+                    <button class="conv-btn" data-value="90" onclick="setConvSugar(90, this)">حالي<br><small>90 جم/لتر</small></button>
+                </div>
+                <div class="conv-result" id="convResult">
+                    <div class="conv-label">كمية السكر للبيالة الواحدة (73 مل)</div>
+                    <div class="conv-value" id="convValue">—</div>
+                    <div class="conv-unit">جرام سكر</div>
+                </div>
+            </div>
+        </details>
+    </div>
+</div>
+
+<!-- History Card -->
+<div class="card">
+    <div class="card-inner">
+        <details class="history-details">
+            <summary>
+                📋 سجل الحسابات
+                <span class="chevron">▾</span>
+            </summary>
+            <div style="padding-top:10px;">
+                <div class="history-header">
+                    <h2>الحسابات المحفوظة</h2>
+                    <button class="clear-history-btn" onclick="event.stopPropagation();clearHistory()">مسح الكل</button>
+                </div>
+                <div class="history-list" id="historyList">
+                    <div class="history-empty">لا يوجد حسابات محفوظة بعد</div>
+                </div>
+            </div>
+        </details>
+    </div>
+</div>
+
+<!-- شاهي أبو جبل Calculator -->
+<div class="card">
+    <div class="card-inner">
+        <div class="abujabalsection-header">
+            <span style="font-size:1.5rem;">🍵</span>
+            <h2>شاهي أبو جبل</h2>
+            <span class="badge">وصفة ثابتة</span>
+        </div>
+
+        <div class="abujabal-tabs">
+            <button class="abujabal-tab active" data-ajmode="water" onclick="ajSetMode('water')">💧 بالماء</button>
+            <button class="abujabal-tab" data-ajmode="sugar" onclick="ajSetMode('sugar')">🍬 بالسكر</button>
+            <button class="abujabal-tab" data-ajmode="tea" onclick="ajSetMode('tea')">🫖 بالشاي</button>
+        </div>
+
+        <div class="abujabal-input-section">
+            <div class="input-label" id="ajInputLabel">أدخل كمية الماء</div>
+            <div class="abujabal-input-wrap">
+                <input class="abujabal-input" id="ajInput" type="text" inputmode="decimal"
+                       placeholder="أدخل القيمة" autocomplete="off">
+                <span class="abujabal-input-unit" id="ajInputUnit">مل</span>
+                <button class="abujabal-clear" onclick="ajClearInput()">✕</button>
+            </div>
+            <div class="abujabal-slider-wrap" id="ajSliderWrap">
+                <input type="range" class="abujabal-slider" id="ajSlider" min="0" max="10000" step="50" value="0">
+                <div class="abujabal-slider-labels">
+                    <span>0</span><span>2500</span><span>5000</span><span>7500</span><span>10000 مل</span>
+                </div>
+                <div class="aj-strength-wrap">
+                    <span class="aj-strength-label">🫖 قوة الشاي</span>
+                    <div class="aj-strength-group">
+                        <button class="aj-strength-btn" id="ajBtnLight" onclick="ajSetStrength('light', this)">
+                            خفيف<span class="sval">١٢ جم/ل</span>
+                        </button>
+                        <button class="aj-strength-btn active-normal" id="ajBtnNormal" onclick="ajSetStrength('normal', this)">
+                            عادي<span class="sval">١٢.٢٥ جم/ل</span>
+                        </button>
+                        <button class="aj-strength-btn" id="ajBtnHeavy" onclick="ajSetStrength('heavy', this)">
+                            ثقيل<span class="sval">١٢.٧٥ جم/ل</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="abujabal-result" id="ajResult">
+            <div class="abujabal-result-row">
+                <div class="abujabal-tag water">
+                    <span class="label">💧 الماء</span>
+                    <span class="value" id="ajResWater">—</span>
+                    <span class="unit">مل</span>
+                </div>
+                <div class="abujabal-tag sugar">
+                    <span class="label">🍬 السكر</span>
+                    <span class="value" id="ajResSugar">—</span>
+                    <span class="unit">جم</span>
+                </div>
+                <div class="abujabal-tag tea">
+                    <span class="label">🫖 الشاي</span>
+                    <span class="value" id="ajResTea">—</span>
+                    <span class="unit">جم</span>
+                </div>
+            </div>
+            <div style="display:flex;justify-content:center;gap:10px;">
+                <button class="abujabal-copy-btn" onclick="ajCopyResult()">📋 نسخ النتيجة</button>
+                <button class="abujabal-copy-btn" style="background:rgba(37,211,102,0.15);border-color:rgba(37,211,102,0.4);color:#25D366;" onclick="ajShareWhatsApp()">📤 واتساب</button>
+            </div>
+        </div>
+
+        <!-- Visual Cups — أبو جبل (Collapsible) -->
+        <details class="aj-scales-collapsible">
+            <summary>
+                📊 مقاييس البيالة (أبو جبل)
+                <span class="chevron">▾</span>
+            </summary>
+            <p style="text-align:center;font-size:.75rem;color:var(--text-muted);margin:8px 0 10px;">
+                <span class="underline-r">إذا لم يتوفر الميزان استخدم البيالة — المقاييس مختبرة مسبقاً</span>
+            </p>
+            <div class="aj-real-scales">
+                <div class="aj-scale-card">
+                    <div class="aj-scale-title">سكر</div>
+                    <div class="aj-photo-wrap">
+                        <img src="assets/image-3.jpg" alt="مقياس سكر الحقيقي" width="220" height="220">
+                        <div class="aj-pointer" id="ajSugarPointer" aria-hidden="true"></div>
+                    </div>
+                    <div class="aj-scale-note" id="ajSugarNote">
+                        <span class="cups" id="ajSugarCups">0</span> بيالة
+                        <span class="plus">+</span>
+                        <span class="remainder" id="ajSugarRemainder">0</span> جم
+                    </div>
+                </div>
+                <div class="aj-scale-card">
+                    <div class="aj-scale-title">شاهي</div>
+                    <div class="aj-photo-wrap">
+                        <img src="assets/image-4.jpg" alt="مقياس شاهي الحقيقي" width="220" height="220">
+                        <div class="aj-pointer tea" id="ajTeaPointer" aria-hidden="true"></div>
+                    </div>
+                    <div class="aj-scale-note" id="ajTeaNote">
+                        <span class="cups" id="ajTeaCups">0</span> بيالة
+                        <span class="plus">+</span>
+                        <span class="remainder" id="ajTeaRemainder">0</span> جم
+                    </div>
+                </div>
+            </div>
+        </details>
+
+    </div>
+</div>
+
+<!-- Footer Notes -->
+<div class="card">
+    <div class="card-inner">
+        <div class="footer-card">
+            <details>
+                <summary>📖 ملاحظات وطريقة الحساب</summary>
+                <div class="footer-notes-content">
+                    <p><span class="underline-r">البيالة المستخدمة في القياس هي بيالة "بادريق"</span></p>
+                    <p>البيالة العادية من الماء إلى المستوى الطبيعي المتعارف عليه تساوي تقريباً <span class="r">73</span> مل، أي أن <span class="r">1</span> لتر يساوي <span class="r">13.69</span> بيالة.</p>
+                    <p><span style="color:red;">(لجميع أنواع الشاهي)</span> تقريباً هذه الوزنة مناسبة للجميع مع التعديل حسب الحاجة لواحد لتر</p>
+                    <p><span class="r">السكر: 50 إلى 55 جم</span><br><span class="r">الشاي: 12 إلى 12.5 جم</span></p>
+                    <p>
+                        <strong class="r">طريقة الحساب:</strong><br>
+                        <span class="r">السكر (جم)</span> = (الماء بالمل ÷ 1000) × <span class="b">50–55</span><br>
+                        <span class="r">الشاي (جم)</span> = (الماء بالمل ÷ 1000) × <span class="b">12–12.5</span>
+                    </p>
+                    <p><strong class="r">ملاحظة:</strong> قد تختلف النتيجة حسب نوع الشاي، يفضل التجربة والضبط حسب الذوق.</p>
+                </div>
+            </details>
+        </div>
+    </div>
+</div>
+
+<!-- Tea Reference Link -->
+<div style="text-align:center;margin-bottom:8px;font-size:.88rem;color:var(--text-muted);">
+    <p>للمزيد من المعلومات حول تصنيفات الشاي، تفضل بزيارة: <a href="BlackTeaGradingReference.html" style="color:var(--accent);text-decoration:none;font-weight:800;">تصنيفات الشاي</a></p>
+</div>
+
+<!-- Attribution -->
+<div class="attribution"></div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Easter Egg Modal -->
+<div class="egg-overlay" id="eggOverlay" onclick="closeEasterEgg()">
+    <div class="egg-modal" onclick="event.stopPropagation()">
+        <span class="egg-sparkle">✨</span>
+        <div class="egg-app-name">حاسبة شاهي ربيع<br>وأبو جبل</div>
+        <div class="egg-divider"></div>
+        <div class="egg-label">برمجة وتطوير</div>
+        <div class="egg-dev-name">سليمان الحمود</div>
+        <div class="egg-copy">
+            <span>© 2025</span> جميع الحقوق محفوظة<br>
+            يُمنع إعادة النشر أو التوزيع<br>بدون إذن صريح من المطوّر
+        </div>
+        <div class="egg-tap-hint">اضغط في أي مكان للإغلاق</div>
+    </div>
+</div>
+
+<!-- Cup Zoom Modal -->
+<div class="cup-zoom-overlay" id="cupZoomOverlay" onclick="closeCupZoom()">
+    <div class="cup-zoom-inner" onclick="event.stopPropagation()">
+        <button class="cup-zoom-close" onclick="closeCupZoom()">✕</button>
+        <img id="cupZoomImg" src="" alt="">
+        <div class="cup-zoom-pointer" id="cupZoomPointer"></div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
