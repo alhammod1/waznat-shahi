@@ -327,14 +327,26 @@ function setConvSugar(gPerLiter, btn) {
 }
 
 // ── Theme ──────────────────────────────────────────
+function applyTheme(theme) {
+    const isDark = theme === 'dark';
+    document.body.classList.toggle('dark', isDark);
+    document.documentElement.classList.toggle('dark', isDark);
+    document.body.classList.toggle('light', !isDark);
+    document.documentElement.classList.toggle('light', !isDark);
+    const btn = document.getElementById('themeToggle');
+    if (btn) btn.textContent = isDark ? '☀️' : '🌙';
+}
+
 function toggleTheme() {
-    const isLight = document.body.classList.toggle('light');
-    document.getElementById('themeToggle').textContent = isLight ? '🌙' : '☀️';
+    const nextTheme = document.body.classList.contains('dark') ? 'light' : 'dark';
+    applyTheme(nextTheme);
+    try { localStorage.setItem('shahi_theme', nextTheme); } catch(e) {}
 }
 
 function loadTheme() {
-    // Dark is default — no class needed
-    document.getElementById('themeToggle').textContent = '☀️';
+    let savedTheme = 'light';
+    try { savedTheme = localStorage.getItem('shahi_theme') || 'light'; } catch(e) {}
+    applyTheme(savedTheme);
 }
 
 // ── Toast ──────────────────────────────────────────
@@ -533,19 +545,20 @@ function closeCupZoom() {
 // Attach click to all cup photos
 document.addEventListener('DOMContentLoaded', () => {
     [
-        { wrap: 'sugarPointer', img: 'sugar.jpg', tea: false },
-        { wrap: 'teaPointer',   img: 'tea.jpg',   tea: true  },
-        { wrap: 'ajSugarPointer', img: 'sugar.jpg', tea: false },
-        { wrap: 'ajTeaPointer',   img: 'tea.jpg',   tea: true  }
-    ].forEach(({ wrap, img, tea }) => {
+        { wrap: 'sugarPointer', tea: false },
+        { wrap: 'teaPointer', tea: true },
+        { wrap: 'ajSugarPointer', tea: false },
+        { wrap: 'ajTeaPointer', tea: true }
+    ].forEach(({ wrap, tea }) => {
         const ptr = document.getElementById(wrap);
         if (!ptr) return;
         const photoWrap = ptr.closest('.photo-wrap, .aj-photo-wrap');
         if (!photoWrap) return;
+        const imgEl = photoWrap.querySelector('img');
         photoWrap.style.cursor = 'zoom-in';
         photoWrap.addEventListener('click', () => {
             const topPct = parseFloat(ptr.style.top) || 50;
-            openCupZoom(img, topPct, tea);
+            openCupZoom(imgEl ? imgEl.getAttribute('src') : '', topPct, tea);
         });
     });
 });
