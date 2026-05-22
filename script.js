@@ -334,7 +334,7 @@ function applyTheme(theme) {
     document.body.classList.toggle('light', !isDark);
     document.documentElement.classList.toggle('light', !isDark);
     const btn = document.getElementById('themeToggle');
-    if (btn) btn.textContent = isDark ? '☀️' : '🌙';
+    if (btn) btn.textContent = isDark ? '🌙' : '☀️';
 }
 
 function toggleTheme() {

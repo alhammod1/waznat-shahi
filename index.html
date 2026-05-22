@@ -79,26 +79,33 @@
     }
 
     body.dark, html.dark body, [data-theme="dark"] {
-      /* Dark toggle remains within the same requested palette */
-      --bg:        #1E232B;
-      --surface:   #222831;
-      --surface-2: #303641;
-      --surface-3: #393E46;
-      --border:       rgba(223,208,184,0.20);
-      --border-light: rgba(223,208,184,0.11);
-      --text:           #DFD0B8;
-      --text-secondary: #D8C8AD;
-      --text-muted:     #948979;
-      --text-light:     rgba(223,208,184,0.42);
-      --water-bg:     rgba(34,40,49,0.80);
-      --water-border: rgba(138,184,216,0.28);
-      --sugar-bg:     rgba(148,137,121,0.14);
-      --sugar-border: rgba(223,208,184,0.18);
-      --tea-bg:       rgba(34,40,49,0.70);
-      --tea-border:   rgba(148,137,121,0.24);
-      --shadow-sm:     0 1px 6px rgba(0,0,0,0.42);
-      --shadow-md:     0 4px 20px rgba(0,0,0,0.55);
-      --shadow-result: 0 6px 28px rgba(0,0,0,0.55), 0 0 0 3px rgba(223,208,184,0.08);
+      /* Alternate theme — palette: #F4F4F2 / #E8E8E8 / #BBBFCA / #495464 */
+      --bg:        #F4F4F2;
+      --surface:   #FFFFFF;
+      --surface-2: #E8E8E8;
+      --surface-3: #BBBFCA;
+      --border:       rgba(73,84,100,0.20);
+      --border-light: rgba(73,84,100,0.12);
+      --accent:       #495464;
+      --accent-hover: #343D49;
+      --accent-light: rgba(73,84,100,0.10);
+      --accent-glow:  rgba(73,84,100,0.14);
+      --text:           #202020;
+      --text-secondary: #495464;
+      --text-muted:     #737A86;
+      --text-light:     rgba(73,84,100,0.48);
+      --water:        #495464;
+      --water-bg:     #EEF1F5;
+      --water-border: #BBBFCA;
+      --sugar:        #495464;
+      --sugar-bg:     #F4F4F2;
+      --sugar-border: #DADDE4;
+      --tea:          #495464;
+      --tea-bg:       #E8E8E8;
+      --tea-border:   #BBBFCA;
+      --shadow-sm:     0 1px 6px rgba(73,84,100,0.08);
+      --shadow-md:     0 4px 20px rgba(73,84,100,0.12);
+      --shadow-result: 0 6px 28px rgba(73,84,100,0.16), 0 0 0 3px rgba(73,84,100,0.06);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
