@@ -31,12 +31,9 @@
     body{
       margin:0;
       font-family:'Cairo', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background:
-        radial-gradient(circle at 12% 0%, rgba(201,137,52,.18), transparent 32rem),
-        radial-gradient(circle at 92% 8%, rgba(47,107,79,.14), transparent 30rem),
-        linear-gradient(180deg, #fffaf2 0%, var(--bg) 45%, #f8f0e5 100%);
+      background: linear-gradient(180deg, #fffaf2 0%, var(--bg) 55%, #fffaf2 100%);
       color:var(--ink);
-      line-height:1.9;
+      line-height:1.65;
       overflow-x:hidden;
     }
     a{ color:inherit; }
@@ -55,7 +52,7 @@
         linear-gradient(135deg, rgba(63,42,29,.96), rgba(90,55,36,.92)),
         radial-gradient(circle at 18% 18%, rgba(201,137,52,.4), transparent 22rem);
       color:#fff9ef;
-      padding:34px 30px;
+      padding:26px 26px;
       box-shadow:var(--shadow);
     }
     .hero:before{
@@ -163,12 +160,12 @@
     .toolbar a:hover{ transform:translateY(-1px); background:var(--tea-dark); color:#fff7e8; }
 
     .section{
-      margin-top:22px;
+      margin-top:16px;
       background:rgba(255,253,248,.86);
       border:1px solid var(--line);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
-      padding:24px;
+      padding:18px;
     }
     .section-header{
       display:flex;
@@ -208,7 +205,7 @@
       direction:rtl;
     }
     th,td{
-      padding:15px 16px;
+      padding:10px 12px;
       border-bottom:1px solid #f0e3d2;
       vertical-align:top;
       text-align:right;
@@ -315,7 +312,7 @@
       margin-top:16px;
     }
     .comparison-card .category-header{
-      padding:15px;
+      padding:11px 13px;
       background:linear-gradient(135deg, var(--leaf), #1f513a);
       color:white;
       font-weight:800;
@@ -323,7 +320,7 @@
       direction:ltr;
     }
     .comparison-card .row{
-      padding:11px 14px;
+      padding:8px 12px;
       border-bottom:1px dashed #eadbc6;
     }
     .comparison-card .row:last-child{ border-bottom:none; }
@@ -341,7 +338,7 @@
 
     .gallery{
       display:grid;
-      grid-template-columns:repeat(4, minmax(0,1fr));
+      grid-template-columns:repeat(4, minmax(220px,1fr));
       gap:16px;
       margin-top:18px;
     }
@@ -353,7 +350,7 @@
       box-shadow:0 10px 25px rgba(63,42,29,.07);
     }
     .image-frame{
-      aspect-ratio:4/3;
+      aspect-ratio:16/10;
       background:
         linear-gradient(135deg, rgba(90,55,36,.08), rgba(201,137,52,.18)),
         #fff7ec;
@@ -364,7 +361,7 @@
     .image-card img{
       width:100%;
       height:100%;
-      object-fit:cover;
+      object-fit:contain;
       display:block;
     }
     .image-card img[data-error="true"]{ display:none; }
@@ -504,7 +501,7 @@
     <section id="gallery" class="section">
       <span class="section-kicker">🖼️ مرجع بصري</span>
       <h2>معرض صور درجات الشاي</h2>
-
+      <p>تم الحفاظ على أسماء الصور الأصلية كما هي، لذلك ستظهر مباشرة عند وضع هذا الملف بجانب ملفات الصور نفسها.</p>
       <div class="gallery" id="gallery-grid"></div>
     </section>
 
