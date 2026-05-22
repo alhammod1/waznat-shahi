@@ -3,513 +3,307 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#3f2a1d" />
   <title>المرجع الكامل لتصنيفات الشاي الأسود | وزنة شاي ربيع</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap');
 
-    :root{
-      --bg:#fbf7ef;
-      --surface:#fffdf8;
-      --surface-2:#f7efe2;
-      --ink:#2a2018;
+    :root{ color-scheme: light; }
+    html, body{ margin:0; padding:0; background:#f8f3ea; }
+    body{ font-family:'Cairo', Arial, sans-serif; color:#38271d; }
+
+    .tea-ref{
+      --bg:#f8f3ea;
+      --card:#fffdf8;
+      --card2:#fff8ee;
+      --ink:#38271d;
       --muted:#75685e;
-      --line:#eadbc6;
-      --tea:#5a3724;
-      --tea-dark:#3f2a1d;
-      --leaf:#2f6b4f;
-      --leaf-soft:#e8f4ed;
+      --line:#ead8bf;
+      --leaf:#2f6f50;
+      --tea:#5b3825;
+      --tea2:#3f291e;
       --gold:#c98934;
-      --amber:#a95f2b;
-      --danger:#b4532a;
-      --shadow:0 18px 45px rgba(63,42,29,.10);
-      --radius:22px;
-    }
-
-    *{ box-sizing:border-box; }
-    html{ scroll-behavior:smooth; }
-    body{
-      margin:0;
-      font-family:'Cairo', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: linear-gradient(180deg, #fffaf2 0%, var(--bg) 55%, #fffaf2 100%);
-      color:var(--ink);
-      line-height:1.65;
-      overflow-x:hidden;
-    }
-    a{ color:inherit; }
-    .page{
+      --danger:#b65a2c;
+      --shadow:0 10px 26px rgba(63,41,30,.08);
       width:min(1120px, calc(100% - 28px));
-      margin:auto;
-      padding:22px 0 42px;
+      margin:0 auto;
+      padding:18px 0 34px;
+      background:transparent;
+      line-height:1.55;
+      box-sizing:border-box;
     }
+    .tea-ref *{ box-sizing:border-box; }
 
-    .hero{
-      position:relative;
-      overflow:hidden;
-      border:1px solid rgba(90,55,36,.12);
-      border-radius:30px;
-      background:
-        linear-gradient(135deg, rgba(63,42,29,.96), rgba(90,55,36,.92)),
-        radial-gradient(circle at 18% 18%, rgba(201,137,52,.4), transparent 22rem);
-      color:#fff9ef;
-      padding:26px 26px;
-      box-shadow:var(--shadow);
-    }
-    .hero:before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background:
-        radial-gradient(circle at 8% 18%, rgba(255,255,255,.14), transparent 10rem),
-        radial-gradient(circle at 100% 0%, rgba(201,137,52,.24), transparent 18rem);
-      pointer-events:none;
-    }
-    .hero > *{ position:relative; z-index:1; }
-    .brand-row{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      margin-bottom:22px;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      font-weight:800;
-      letter-spacing:-.02em;
-    }
-    .brand-mark{
-      width:48px;
-      height:48px;
-      display:grid;
-      place-items:center;
-      border-radius:18px;
-      background:linear-gradient(135deg, #f6d28b, #c98934 60%, #8a4f25);
-      color:#3f2a1d;
-      box-shadow:0 10px 26px rgba(0,0,0,.18);
-      font-size:26px;
-    }
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 14px;
-      border-radius:999px;
-      background:rgba(255,255,255,.12);
-      border:1px solid rgba(255,255,255,.18);
-      color:#ffe9c6;
-      font-size:.92rem;
-      white-space:nowrap;
-    }
-    h1{
-      margin:0;
-      font-size:clamp(2rem, 5vw, 4rem);
-      line-height:1.25;
-      letter-spacing:-.05em;
-      max-width:850px;
-    }
-    .lead{
-      max-width:850px;
-      margin:16px 0 0;
-      color:#f1dcc0;
-      font-size:clamp(1rem, 2.2vw, 1.16rem);
-    }
-    .hero-stats{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(0,1fr));
-      gap:12px;
-      margin-top:26px;
-    }
-    .stat{
-      padding:14px 16px;
-      border-radius:18px;
-      background:rgba(255,255,255,.10);
-      border:1px solid rgba(255,255,255,.14);
-      backdrop-filter:blur(8px);
-    }
-    .stat strong{ display:block; font-size:1.5rem; color:#ffd88d; line-height:1.2; }
-    .stat span{ color:#f3dfc3; font-size:.92rem; }
-
-    .toolbar{
-      position:sticky;
-      top:10px;
-      z-index:20;
-      margin:18px 0 0;
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      padding:10px;
-      border-radius:22px;
-      background:rgba(255,253,248,.84);
-      border:1px solid rgba(234,219,198,.86);
-      box-shadow:0 12px 30px rgba(63,42,29,.08);
-      backdrop-filter:blur(14px);
-    }
-    .toolbar a{
-      text-decoration:none;
-      color:var(--tea-dark);
-      background:#fff7e8;
-      border:1px solid #ead7bd;
-      border-radius:999px;
-      padding:8px 13px;
-      font-weight:700;
-      font-size:.93rem;
-      transition:.2s ease;
-    }
-    .toolbar a:hover{ transform:translateY(-1px); background:var(--tea-dark); color:#fff7e8; }
-
-    .section{
-      margin-top:16px;
-      background:rgba(255,253,248,.86);
+    .tea-ref__hero{
+      background:linear-gradient(135deg,#fffdf8,#fff5e6);
       border:1px solid var(--line);
-      border-radius:var(--radius);
+      border-radius:22px;
+      padding:18px 20px;
       box-shadow:var(--shadow);
-      padding:18px;
     }
-    .section-header{
+    .tea-ref__brand{
       display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:16px;
-      margin-bottom:18px;
-    }
-    h2{
-      margin:0;
-      color:var(--tea-dark);
-      font-size:clamp(1.35rem, 3vw, 2rem);
-      letter-spacing:-.03em;
-      line-height:1.45;
-    }
-    .section-kicker{
-      display:inline-flex;
       align-items:center;
+      justify-content:space-between;
+      gap:12px;
       margin-bottom:8px;
       color:var(--leaf);
       font-weight:800;
-      font-size:.92rem;
+      font-size:.95rem;
     }
-    .section p{ margin:0 0 14px; color:var(--muted); }
+    .tea-ref__title{
+      margin:0;
+      color:var(--tea2);
+      font-size:clamp(1.65rem, 3vw, 2.4rem);
+      line-height:1.25;
+      letter-spacing:-.04em;
+    }
+    .tea-ref__lead{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size:1rem;
+      max-width:900px;
+    }
 
-    .table-wrap{
-      overflow:auto;
+    .tea-ref__nav{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin:12px 0;
+      padding:8px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:rgba(255,253,248,.9);
+      box-shadow:0 6px 18px rgba(63,41,30,.05);
+    }
+    .tea-ref__nav a{
+      text-decoration:none;
+      color:var(--tea2);
+      background:#fff5e7;
+      border:1px solid #ead8bf;
+      border-radius:999px;
+      padding:6px 11px;
+      font-weight:700;
+      font-size:.88rem;
+    }
+
+    .tea-ref__section{
+      background:var(--card);
       border:1px solid var(--line);
       border-radius:20px;
-      background:#fff;
+      box-shadow:var(--shadow);
+      padding:16px;
+      margin-top:12px;
+      overflow:hidden;
     }
-    table{
-      width:100%;
-      border-collapse:separate;
-      border-spacing:0;
-      min-width:760px;
-      direction:rtl;
-    }
-    th,td{
-      padding:10px 12px;
-      border-bottom:1px solid #f0e3d2;
-      vertical-align:top;
-      text-align:right;
-    }
-    th{
-      position:sticky;
-      top:0;
-      background:linear-gradient(135deg, var(--tea-dark), var(--tea));
-      color:#fff6e8;
+    .tea-ref__kicker{
+      display:block;
+      color:var(--leaf);
       font-weight:800;
-      z-index:1;
+      font-size:.9rem;
+      margin-bottom:3px;
     }
-    tr:last-child td{ border-bottom:none; }
-    tbody tr:nth-child(even) td{ background:#fffaf2; }
-    tbody tr:hover td{ background:#f7efe2; }
-    .grade-code{
+    .tea-ref__section h2{
+      margin:0 0 8px;
+      color:var(--tea2);
+      font-size:clamp(1.25rem, 2vw, 1.7rem);
+      line-height:1.35;
+    }
+    .tea-ref__section p{ margin:0 0 10px; color:var(--muted); }
+
+    .tea-ref__table-wrap{
+      overflow:auto;
+      border:1px solid var(--line);
+      border-radius:15px;
+      background:white;
+    }
+    .tea-ref table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:720px;
+      background:white;
+    }
+    .tea-ref th{
+      background:linear-gradient(135deg,#5b3825,#3f291e);
+      color:#fff8ed;
+      padding:9px 10px;
+      font-size:.92rem;
+      text-align:right;
+      white-space:nowrap;
+    }
+    .tea-ref td{
+      padding:8px 10px;
+      border-bottom:1px solid #f0e3d1;
+      color:#3e3028;
+      vertical-align:top;
+      font-size:.92rem;
+    }
+    .tea-ref tr:nth-child(even) td{ background:#fff9f0; }
+    .tea-ref__code{
+      direction:ltr;
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      min-width:86px;
-      padding:5px 10px;
-      border-radius:999px;
-      background:var(--leaf-soft);
-      color:var(--leaf);
-      border:1px solid #cfe7d8;
+      min-width:76px;
+      padding:3px 8px;
+      border-radius:10px;
+      background:#f3e5cf;
+      color:var(--tea2);
+      border:1px solid #e7d0ad;
+      font-weight:800;
       font-family:ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-weight:800;
-      direction:ltr;
     }
-    .taste-tag{
+    .tea-ref__tag{
       display:inline-flex;
-      margin-top:6px;
-      padding:3px 9px;
+      margin-inline-start:6px;
+      margin-top:2px;
+      padding:2px 8px;
       border-radius:999px;
-      background:#fff0db;
+      background:#fff0dd;
       color:var(--danger);
-      border:1px solid #f1c894;
+      border:1px solid #efc797;
       font-weight:800;
+      font-size:.86rem;
       white-space:nowrap;
     }
 
-    .cards-grid{
+    .tea-ref__cards,
+    .tea-ref__list,
+    .tea-ref__compare,
+    .tea-ref__gallery{
       display:grid;
-      grid-template-columns:repeat(3, minmax(0,1fr));
-      gap:14px;
-      margin-top:14px;
+      gap:10px;
+      margin-top:10px;
     }
-    .grade-card, .info-card, .comparison-card{
-      background:#fff;
+    .tea-ref__cards{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .tea-ref__list{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .tea-ref__compare{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .tea-ref__gallery{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+
+    .tea-ref__card{
+      background:white;
       border:1px solid var(--line);
-      border-radius:20px;
+      border-radius:16px;
       overflow:hidden;
-      box-shadow:0 12px 28px rgba(63,42,29,.06);
+      box-shadow:0 6px 16px rgba(63,41,30,.05);
     }
-    .grade-card{ display:none; }
-    .grade-title{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:13px 15px;
-      background:linear-gradient(135deg,#fff2dc,#f6e2c3);
-      color:var(--tea-dark);
+    .tea-ref__card-title{
+      background:#fff1dc;
       border-bottom:1px solid var(--line);
+      color:var(--tea2);
       font-weight:800;
+      padding:8px 10px;
       direction:ltr;
-    }
-    .grade-body{ padding:14px 15px 16px; }
-    .label{
-      display:block;
-      color:var(--leaf);
-      font-size:.86rem;
-      font-weight:800;
-      margin-bottom:3px;
-    }
-    .grade-body p{ color:var(--ink); margin:0 0 12px; }
-
-    .info-list{
-      display:grid;
-      grid-template-columns:repeat(2, minmax(0,1fr));
-      gap:12px;
-      margin-top:14px;
-    }
-    .info-card{ padding:15px; }
-    .info-card .code{
-      display:inline-flex;
-      direction:ltr;
-      padding:3px 9px;
-      margin-left:6px;
-      margin-bottom:6px;
-      border-radius:10px;
-      background:#f4ead9;
-      color:var(--tea-dark);
-      border:1px solid #e8d3b6;
-      font-family:ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-weight:800;
-    }
-    .info-card p{ margin:0; color:#4f4238; }
-
-    .comparison-grid{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(0,1fr));
-      gap:14px;
-      margin-top:16px;
-    }
-    .comparison-card .category-header{
-      padding:11px 13px;
-      background:linear-gradient(135deg, var(--leaf), #1f513a);
-      color:white;
-      font-weight:800;
       text-align:center;
-      direction:ltr;
     }
-    .comparison-card .row{
-      padding:8px 12px;
-      border-bottom:1px dashed #eadbc6;
-    }
-    .comparison-card .row:last-child{ border-bottom:none; }
-    .comparison-card .row:nth-child(odd){ background:#fffaf2; }
-    .comparison-card b{ display:block; color:var(--tea-dark); margin-bottom:2px; }
-    .note{
-      margin-top:16px;
-      padding:14px 16px;
-      border-radius:18px;
-      background:linear-gradient(135deg, #fff3dd, #fff9ef);
-      border:1px solid #edd0a1;
+    .tea-ref__card-body{ padding:10px; }
+    .tea-ref__label{ display:block; color:var(--leaf); font-weight:800; font-size:.84rem; margin-bottom:2px; }
+    .tea-ref__mini{ padding:11px; }
+    .tea-ref__mini p{ margin:4px 0 0; color:#4d3d33; font-size:.92rem; }
+
+    .tea-ref__compare-card .tea-ref__card-title{ background:linear-gradient(135deg,#2f6f50,#23533d); color:white; }
+    .tea-ref__row{ padding:8px 10px; border-bottom:1px dashed #ead8bf; font-size:.92rem; }
+    .tea-ref__row:nth-child(odd){ background:#fffaf2; }
+    .tea-ref__row:last-child{ border-bottom:0; }
+    .tea-ref__row b{ display:block; color:var(--tea2); margin-bottom:1px; }
+
+    .tea-ref__note{
+      margin-top:10px;
+      padding:11px 12px;
+      border-radius:15px;
+      background:#fff3df;
+      border:1px solid #edcea0;
       color:#4b3827;
-      font-weight:600;
+      font-weight:700;
     }
 
-    .gallery{
-      display:grid;
-      grid-template-columns:repeat(4, minmax(220px,1fr));
-      gap:16px;
-      margin-top:18px;
-    }
-    .image-card{
-      overflow:hidden;
+    /* المعرض: لا يوجد قص للصورة نهائيًا */
+    .tea-ref__image-card{
+      background:white;
       border:1px solid var(--line);
-      border-radius:20px;
-      background:#fff;
-      box-shadow:0 10px 25px rgba(63,42,29,.07);
-    }
-    .image-frame{
-      aspect-ratio:16/10;
-      background:
-        linear-gradient(135deg, rgba(90,55,36,.08), rgba(201,137,52,.18)),
-        #fff7ec;
-      display:grid;
-      place-items:center;
+      border-radius:16px;
       overflow:hidden;
+      box-shadow:0 6px 16px rgba(63,41,30,.06);
     }
-    .image-card img{
-      width:100%;
-      height:100%;
-      object-fit:contain;
+    .tea-ref__image-frame{
+      background:#fffaf3;
       display:block;
+      overflow:visible;
     }
-    .image-card img[data-error="true"]{ display:none; }
-    .fallback{
-      display:none;
-      text-align:center;
-      color:var(--tea);
-      font-weight:800;
-      padding:20px;
+    .tea-ref__image-frame img{
+      display:block;
+      width:100%;
+      height:auto;
+      max-height:none;
+      object-fit:contain;
     }
-    .image-card:has(img[data-error="true"]) .fallback{ display:block; }
-    .image-caption{
-      padding:11px 12px 13px;
+    .tea-ref__caption{
+      padding:8px 10px;
       text-align:center;
-      font-weight:800;
-      color:var(--tea-dark);
+      color:var(--tea2);
       border-top:1px solid var(--line);
+      font-weight:800;
+      font-size:.92rem;
       direction:ltr;
+      background:#fffdf8;
     }
 
-    footer{
-      margin-top:22px;
+    .tea-ref__footer{
+      padding:15px 0 0;
       text-align:center;
       color:var(--muted);
-      font-size:.92rem;
-      padding:18px;
+      font-size:.88rem;
     }
 
-    @media (max-width: 860px){
-      .page{ width:min(100% - 20px, 720px); padding-top:10px; }
-      .hero{ padding:25px 20px; border-radius:24px; }
-      .brand-row{ align-items:flex-start; flex-direction:column; }
-      .hero-stats{ grid-template-columns:1fr; }
-      .section{ padding:18px; border-radius:20px; }
-      .section-header{ display:block; }
-      .table-wrap{ display:none; }
-      .grade-card{ display:block; }
-      .cards-grid, .info-list, .comparison-grid, .gallery{ grid-template-columns:1fr; }
-      .toolbar{ position:relative; top:auto; border-radius:18px; }
-      .toolbar a{ flex:1 1 auto; text-align:center; }
+    @media (max-width:860px){
+      .tea-ref{ width:min(100% - 18px, 720px); padding-top:10px; }
+      .tea-ref__hero{ border-radius:18px; padding:15px; }
+      .tea-ref__section{ border-radius:17px; padding:13px; }
+      .tea-ref__table-wrap{ display:none; }
+      .tea-ref__cards,
+      .tea-ref__list,
+      .tea-ref__compare,
+      .tea-ref__gallery{ grid-template-columns:1fr; }
+      .tea-ref__nav a{ flex:1 1 auto; text-align:center; }
     }
-    @media (min-width: 861px){
-      .cards-grid.mobile-only{ display:none; }
+    @media (min-width:861px){
+      .tea-ref__cards--mobile{ display:none; }
     }
   </style>
 </head>
 <body>
-  <main class="page">
-    <header class="hero">
-      <div class="brand-row">
-        <div class="brand"><span class="brand-mark">☕</span><span>وزنة شاي ربيع</span></div>
-        <span class="pill">مرجع سريع ومنسّق لتصنيفات الشاي</span>
-      </div>
-      <h1>المرجع الكامل لتصنيفات الشاي الأسود</h1>
-      <p class="lead">يعتمد نظام تصنيف الشاي الأسود على حجم الورقة، وعدد البراعم الذهبية، ومكان القطفة في النبات. يستخدم هذا المرجع لتمييز جودة الشاي ومظهره وطعمه بطريقة سهلة ومناسبة للتصفح من الجوال والكمبيوتر.</p>
-      <div class="hero-stats" aria-label="ملخص المرجع">
-        <div class="stat"><strong>14</strong><span>تصنيفًا شائعًا في الجدول الرئيسي</span></div>
-        <div class="stat"><strong>4</strong><span>فئات أساسية: كامل، مكسّر، فتات، غبار</span></div>
-        <div class="stat"><strong>OP</strong><span>مقارنة خاصة بين OP و OP1 و OPA</span></div>
-      </div>
+  <main class="tea-ref">
+    <header class="tea-ref__hero">
+      <div class="tea-ref__brand"><span>☕ وزنة شاي ربيع</span><span>مرجع سريع</span></div>
+      <h1 class="tea-ref__title">المرجع الكامل لتصنيفات الشاي الأسود</h1>
+      <p class="tea-ref__lead">يعتمد نظام تصنيف الشاي الأسود على حجم الورقة، وعدد البراعم الذهبية، ومكان القطفة في النبات. يهدف هذا المرجع إلى توضيح جودة الشاي ومظهره وطعمه بطريقة مرتبة وسهلة القراءة.</p>
     </header>
 
-    <nav class="toolbar" aria-label="روابط داخلية">
-      <a href="#popular">التصنيفات المشهورة</a>
-      <a href="#whole">الورقة الكاملة</a>
-      <a href="#broken">الأوراق المكسّرة</a>
-      <a href="#fannings">الفتات</a>
-      <a href="#dust">الغبار</a>
-      <a href="#compare">مقارنة OP</a>
-      <a href="#gallery">الصور</a>
+    <nav class="tea-ref__nav" aria-label="روابط داخلية">
+      <a href="#popular">التصنيفات</a><a href="#whole">الورقة الكاملة</a><a href="#broken">المكسّرة</a><a href="#fannings">الفتات</a><a href="#dust">الغبار</a><a href="#compare">مقارنة OP</a><a href="#gallery">الصور</a>
     </nav>
 
-    <section id="popular" class="section">
-      <div class="section-header">
-        <div>
-          <span class="section-kicker">🌿 التصنيفات المشهورة</span>
-          <h2>قائمة درجات الشاي الأسود</h2>
-        </div>
-      </div>
-      <div class="table-wrap" role="region" aria-label="جدول تصنيفات الشاي الأسود" tabindex="0">
-        <table>
-          <thead><tr><th>التصنيف</th><th>نوع الورق</th><th>الطعم والمذاق المميز</th></tr></thead>
-          <tbody id="grades-table"></tbody>
-        </table>
-      </div>
-      <div class="cards-grid mobile-only" id="grades-cards"></div>
+    <section id="popular" class="tea-ref__section">
+      <span class="tea-ref__kicker">🌿 التصنيفات المشهورة</span>
+      <h2>قائمة درجات الشاي الأسود</h2>
+      <div class="tea-ref__table-wrap"><table><thead><tr><th>التصنيف</th><th>نوع الورق</th><th>الطعم والمذاق المميز</th></tr></thead><tbody id="gradesTable"></tbody></table></div>
+      <div class="tea-ref__cards tea-ref__cards--mobile" id="gradesCards"></div>
     </section>
 
-    <section id="whole" class="section">
-      <span class="section-kicker">🌿 الفئة الأولى</span>
-      <h2>تصنيفات الورقة الكاملة</h2>
-      <p>تُعد هذه الفئة الأعلى جودة غالبًا، حيث تبقى الأوراق كاملة دون تكسير.</p>
-      <div class="info-list" id="whole-list"></div>
-    </section>
+    <section id="whole" class="tea-ref__section"><span class="tea-ref__kicker">🌿 الفئة الأولى</span><h2>تصنيفات الورقة الكاملة</h2><p>تُعد هذه الفئة الأعلى جودة غالبًا، حيث تبقى الأوراق كاملة دون تكسير.</p><div class="tea-ref__list" id="wholeList"></div></section>
+    <section id="broken" class="tea-ref__section"><span class="tea-ref__kicker">🍃 الفئة الثانية</span><h2>تصنيفات الأوراق المكسّرة</h2><p>تُكسر الأوراق عمدًا لتسهيل الاستخلاص وإنتاج نكهة أقوى.</p><div class="tea-ref__list" id="brokenList"></div></section>
+    <section id="fannings" class="tea-ref__section"><span class="tea-ref__kicker">🍂 الفئة الثالثة</span><h2>تصنيفات الفتات</h2><p>فتات أوراق صغيرة تنتج أثناء الغربلة، وتُستخدم غالبًا في أكياس الشاي عالية الجودة.</p><div class="tea-ref__list" id="fanningsList"></div></section>
+    <section id="dust" class="tea-ref__section"><span class="tea-ref__kicker">🌰 الفئة الرابعة</span><h2>تصنيفات الغبار</h2><p>أصغر جزيئات أوراق الشاي، وتُستخدم في الشاي التجاري وأكياس الشاي الاقتصادية.</p><div class="tea-ref__list" id="dustList"></div></section>
+    <section class="tea-ref__section"><span class="tea-ref__kicker">🌸 رموز مساعدة</span><h2>رموز إضافية تُستخدم أحيانًا</h2><div class="tea-ref__list" id="symbolsList"></div></section>
 
-    <section id="broken" class="section">
-      <span class="section-kicker">🍃 الفئة الثانية</span>
-      <h2>تصنيفات الأوراق المكسّرة</h2>
-      <p>تُكسر الأوراق عمدًا لتسهيل الاستخلاص وإنتاج نكهة أقوى، وتُستخدم عادة في المزج والشاي القوي.</p>
-      <div class="info-list" id="broken-list"></div>
-    </section>
+    <section id="compare" class="tea-ref__section"><span class="tea-ref__kicker">🍵 مقارنة خاصة</span><h2>مقارنة تفصيلية بين OP و OP1 و OPA</h2><p>تُستخدم هذه الرموز لتمييز درجات الشاي ضمن فئة Orange Pekoe.</p><div class="tea-ref__compare" id="comparisonCards"></div><div class="tea-ref__note">باختصار: OP1 هو الأفضل من حيث الدقة والعناية بالجودة، بينما OPA أقوى في الطعم وأقل نعومة. يعتمد الاختيار على الذوق الشخصي بين النعومة أو القوة.</div></section>
 
-    <section id="fannings" class="section">
-      <span class="section-kicker">🍂 الفئة الثالثة</span>
-      <h2>تصنيفات الفتات</h2>
-      <p>فتات أوراق صغيرة تنتج أثناء الغربلة، وتُستخدم كثيرًا في أكياس الشاي عالية الجودة وسريعة الاستخلاص.</p>
-      <div class="info-list" id="fannings-list"></div>
-    </section>
+    <section id="gallery" class="tea-ref__section"><span class="tea-ref__kicker">🖼️ مرجع بصري</span><h2>معرض صور درجات الشاي</h2><p>الصور تُعرض بنسبة أبعادها الأصلية بدون قص. ضع ملفات الصور بجانب هذا الملف بنفس أسمائها حتى تظهر مباشرة.</p><div class="tea-ref__gallery" id="galleryGrid"></div></section>
 
-    <section id="dust" class="section">
-      <span class="section-kicker">🌰 الفئة الرابعة</span>
-      <h2>تصنيفات الغبار</h2>
-      <p>أصغر جزيئات أوراق الشاي، وتُستخدم في الشاي التجاري وأكياس الشاي الاقتصادية لأنها سريعة الاستخلاص وقوية اللون.</p>
-      <div class="info-list" id="dust-list"></div>
-    </section>
-
-    <section id="symbols" class="section">
-      <span class="section-kicker">🌸 رموز مساعدة</span>
-      <h2>رموز إضافية تُستخدم أحيانًا</h2>
-      <div class="info-list" id="symbols-list"></div>
-    </section>
-
-    <section id="compare" class="section">
-      <span class="section-kicker">🍵 مقارنة عملية</span>
-      <h2>مقارنة تفصيلية بين OP و OP1 و OPA</h2>
-      <p>تُستخدم هذه الرموز لتمييز درجات الشاي ضمن فئة Orange Pekoe، وهي من أكثر الفئات شهرة في الشاي السيلاني والهندي.</p>
-      <div class="table-wrap" role="region" aria-label="جدول مقارنة OP و OP1 و OPA" tabindex="0">
-        <table>
-          <thead><tr><th>الخاصية</th><th>OP</th><th>OP1</th><th>OPA</th></tr></thead>
-          <tbody id="comparison-table"></tbody>
-        </table>
-      </div>
-      <div class="comparison-grid" id="comparison-cards"></div>
-      <div class="note">الخلاصة: <strong>OP1</strong> هو الأفضل من حيث الدقة والعناية بالجودة، بينما <strong>OPA</strong> أقوى في الطعم وأقل نعومة. يعتمد الاختيار على الذوق الشخصي بين النعومة أو القوة.</div>
-    </section>
-
-    <section id="gallery" class="section">
-      <span class="section-kicker">🖼️ مرجع بصري</span>
-      <h2>معرض صور درجات الشاي</h2>
-      <p>تم الحفاظ على أسماء الصور الأصلية كما هي، لذلك ستظهر مباشرة عند وضع هذا الملف بجانب ملفات الصور نفسها.</p>
-      <div class="gallery" id="gallery-grid"></div>
-    </section>
-
-    <footer>© 2025 المرجع الكامل لتصنيفات الشاي الأسود – إعداد أبو إبراهيم</footer>
+    <footer class="tea-ref__footer">© 2025 المرجع الكامل لتصنيفات الشاي الأسود – إعداد أبو إبراهيم</footer>
   </main>
 
   <script>
-    const grades = [
+    const grades=[
       ['SFTGFOP','ورقة كاملة جدًا مع أعلى نسبة من البراعم الذهبية (tips)','ناعم، عطري، حلو المذاق، غني بالنكهات الزهرية والفواكه.','بدون مرارة'],
       ['FTGFOP','أوراق كاملة دقيقة تحتوي على براعم كثيرة','طعم فاخر ومتوازن بين الحلاوة والعطر الزهري، لون ذهبي مشرق.','بدون مرارة'],
       ['TGFOP','أوراق كاملة مع كمية معتدلة من البراعم','نكهة زهرية خفيفة، قوام ناعم، لون كهرماني ذهبي.','بدون مرارة'],
@@ -525,117 +319,25 @@
       ['PF','فتات ناعمة من أوراق الشاي','شاي سريع التحضير، طعم قوي مركز، قليل التعقيد.','مرارة واضحة'],
       ['D / Dust','جزيئات دقيقة جدًا من الشاي','طعم قوي جدًا يميل للمرارة، لون داكن عميق، يُستخدم في الشاي التجاري.','مرارة قوية جدًا']
     ];
-
-    const lists = {
-      'whole-list': [
-        ['OP','Orange Pekoe: أوراق كاملة متوسطة الحجم، نكهة ناعمة متوازنة.'],
-        ['FOP','Flowery Orange Pekoe: تحتوي على بعض البراعم الزهرية، رائحة خفيفة.'],
-        ['GFOP','Golden Flowery Orange Pekoe: أوراق تحتوي على براعم ذهبية، نكهة أغنى.'],
-        ['TGFOP','Tippy Golden Flowery Orange Pekoe: نسبة عالية من البراعم الذهبية، جودة ممتازة.'],
-        ['FTGFOP','Finest Tippy Golden Flowery Orange Pekoe: من أرقى الأنواع، نكهة متوازنة فاخرة.'],
-        ['FTGFOP1','Grade 1: درجة تجارية فائقة من FTGFOP، تحتوي على نسبة عالية من البراعم الذهبية.'],
-        ['SFTGFOP','Super Finest Tippy Golden Flowery Orange Pekoe: أعلى درجات الشاي الكامل الورقة، نادر وفاخر جدًا.'],
-        ['STGFOP1','Special Tippy Golden Flowery Orange Pekoe: نوع خاص من الدرجة الممتازة، جودة فائقة.']
-      ],
-      'broken-list': [
-        ['BOP','Broken Orange Pekoe: أوراق مكسّرة متوسطة الحجم، نكهة قوية.'],
-        ['BOP1','Broken Orange Pekoe Grade 1: أوراق مكسرة ذات شكل منتظم ونكهة ناعمة.'],
-        ['FBOP','Flowery Broken Orange Pekoe: تحتوي على بعض البراعم، نكهة زهرية لطيفة.'],
-        ['FBOP1','Flowery Broken Orange Pekoe Grade 1: درجة أعلى من FBOP، تحتوي على المزيد من البراعم الذهبية.'],
-        ['FBOPF','Flowery Broken Orange Pekoe Fannings: مزيج بين الأوراق المكسرة والفتات الصغيرة، نكهة مركزة.'],
-        ['FBOPF1','Flowery Broken Orange Pekoe Fannings 1: درجة أعلى قليلاً من FBOPF، تحتوي على براعم أكثر.'],
-        ['FBOPFSP','Special Flowery Broken Orange Pekoe Fannings: فئة خاصة عالية الجودة من الأوراق المكسرة.'],
-        ['FBOPFEXSP','Extra Special Flowery Broken Orange Pekoe Fannings: درجة استثنائية نادرة، تُستخدم في الشاي الفاخر جدًا.']
-      ],
-      'fannings-list': [
-        ['PF','Pekoe Fannings: فتات صغيرة من أوراق الشاي الجيدة.'],
-        ['BOPF','Broken Orange Pekoe Fannings: نكهة قوية، تُستخدم في الشاي سريع الاستخلاص.'],
-        ['FBOPF','Flowery Broken Orange Pekoe Fannings: نكهة متوازنة مع بعض البراعم.'],
-        ['TGFOPF','Tippy Golden Flowery Orange Pekoe Fannings: فتات من شاي فاخر يحتوي على براعم ذهبية.']
-      ],
-      'dust-list': [
-        ['D','Dust: جزيئات صغيرة جدًا من الشاي، نكهة قوية لكن أقل تعقيدًا.'],
-        ['PD','Pekoe Dust: غبار شاي عالي الجودة من أوراق متوسطة.'],
-        ['FD','Fine Dust: ناعم وسريع الاستخلاص، لون داكن جدًا.'],
-        ['GD','Golden Dust: يحتوي على بعض البراعم الذهبية، نكهة أفضل من الغبار العادي.']
-      ],
-      'symbols-list': [
-        ['CH','Choppy: يشير إلى أوراق مقطعة غير منتظمة الشكل.'],
-        ['CL','Clonal: شاي منتج من نوع نبات محدد عالي الجودة (استنساخي).'],
-        ['S','Special: يدل على دفعة خاصة أو مميزة من الشاي.'],
-        ['Ex','Extra: جودة إضافية عن المعتاد في نفس الفئة.'],
-        ['SP','Special / Supreme: أعلى مستوى من الجودة في نوع معين.'],
-        ['G','Golden: وجود براعم ذهبية.'],
-        ['T','Tippy: نسبة عالية من البراعم (Tips).']
-      ]
+    const lists={
+      wholeList:[['OP – Orange Pekoe','أوراق كاملة متوسطة الحجم، نكهة ناعمة متوازنة.'],['FOP – Flowery Orange Pekoe','تحتوي على بعض البراعم الزهرية، رائحة خفيفة.'],['GFOP – Golden Flowery Orange Pekoe','أوراق تحتوي على براعم ذهبية، نكهة أغنى.'],['TGFOP – Tippy Golden Flowery Orange Pekoe','نسبة عالية من البراعم الذهبية، جودة ممتازة.'],['FTGFOP – Finest Tippy Golden Flowery Orange Pekoe','من أرقى الأنواع، نكهة متوازنة فاخرة.'],['FTGFOP1 – Grade 1','درجة تجارية فائقة من FTGFOP، تحتوي على نسبة عالية من البراعم الذهبية.'],['SFTGFOP – Super Finest Tippy Golden Flowery Orange Pekoe','أعلى درجات الشاي الكامل الورقة، نادر وفاخر جدًا.'],['STGFOP1 – Special Tippy Golden Flowery Orange Pekoe','نوع خاص من الدرجة الممتازة، جودة فائقة.']],
+      brokenList:[['BOP – Broken Orange Pekoe','أوراق مكسّرة متوسطة الحجم، نكهة قوية.'],['BOP1 – Broken Orange Pekoe Grade 1','أوراق مكسرة ذات شكل منتظم ونكهة ناعمة.'],['FBOP – Flowery Broken Orange Pekoe','تحتوي على بعض البراعم، نكهة زهرية لطيفة.'],['FBOP1 – Flowery Broken Orange Pekoe Grade 1','درجة أعلى من FBOP، تحتوي على المزيد من البراعم الذهبية.'],['FBOPF – Flowery Broken Orange Pekoe Fannings','مزيج بين الأوراق المكسرة والفتات الصغيرة، نكهة مركزة.'],['FBOPF1 – Flowery Broken Orange Pekoe Fannings 1','درجة أعلى قليلاً من FBOPF، تحتوي على براعم أكثر.'],['FBOPFSP – Special Flowery Broken Orange Pekoe Fannings','فئة خاصة عالية الجودة من الأوراق المكسرة.'],['FBOPFEXSP – Extra Special Flowery Broken Orange Pekoe Fannings','درجة استثنائية نادرة، تُستخدم في الشاي الفاخر جدًا.']],
+      fanningsList:[['PF – Pekoe Fannings','فتات صغيرة من أوراق الشاي الجيدة.'],['BOPF – Broken Orange Pekoe Fannings','نكهة قوية، تُستخدم في الشاي سريع الاستخلاص.'],['FBOPF – Flowery Broken Orange Pekoe Fannings','نكهة متوازنة مع بعض البراعم.'],['TGFOPF – Tippy Golden Flowery Orange Pekoe Fannings','فتات من شاي فاخر يحتوي على براعم ذهبية.']],
+      dustList:[['D – Dust','جزيئات صغيرة جدًا من الشاي، نكهة قوية لكن أقل تعقيدًا.'],['PD – Pekoe Dust','غبار شاي عالي الجودة من أوراق متوسطة.'],['FD – Fine Dust','ناعم وسريع الاستخلاص، لون داكن جدًا.'],['GD – Golden Dust','يحتوي على بعض البراعم الذهبية، نكهة أفضل من الغبار العادي.']],
+      symbolsList:[['CH – Choppy','يشير إلى أوراق مقطعة غير منتظمة الشكل.'],['CL – Clonal','شاي منتج من نوع نبات محدد عالي الجودة.'],['S – Special','يدل على دفعة خاصة أو مميزة من الشاي.'],['Ex – Extra','جودة إضافية عن المعتاد في نفس الفئة.'],['SP – Special / Supreme','أعلى مستوى من الجودة في نوع معين.'],['G – Golden','وجود براعم ذهبية.'],['T – Tippy','نسبة عالية من البراعم (Tips).']]
     };
-
-    const comparison = [
-      ['حجم الورقة','متوسطة وطويلة قليلاً','أدق وأنحف وأكثر تجانسًا','أكبر وأعرض وأكثر خشونة'],
-      ['المظهر','ورقة كاملة متوسطة الالتواء','ملفوفة بإتقان وناعمة الملمس','ورقة فضفاضة وخشنة المظهر'],
-      ['النكهة','ناعمة ومعتدلة','زهرية متوازنة ورقيقة الطعم','قوية وغنية وأثقل في الفم'],
-      ['لون الشاي في الكوب','ذهبي مائل للعنبر','ذهبي صافٍ وفاتح','كهرماني داكن'],
-      ['التصنيف العام','أساسي جيد','أعلى من OPA','أدنى من OP1 لكن بطعم أقوى']
+    const comparison=[
+      ['حجم الورقة','متوسطة وطويلة قليلاً','أدق وأنحف وأكثر تجانسًا','أكبر وأعرض وأكثر خشونة'],['المظهر','ورقة كاملة متوسطة الالتواء','ملفوفة بإتقان وناعمة الملمس','ورقة فضفاضة وخشنة المظهر'],['النكهة','ناعمة ومعتدلة','زهرية متوازنة ورقيقة الطعم','قوية وغنية وأثقل في الفم'],['لون الشاي في الكوب','ذهبي مائل للعنبر','ذهبي صافٍ وفاتح','كهرماني داكن'],['التصنيف العام','أساسي جيد','أعلى من OPA','أدنى من OP1 لكن بطعم أقوى']
     ];
-
-    const images = [
-      ['Screen Shot 2025-10-29 at 12.26.37 AM.png','OP - Orange Pekoe','صنف الشاي OP - Orange Pekoe'],
-      ['Screen Shot 2025-10-29 at 12.26.49 AM.png','BOP - Broken Orange Pekoe','صنف الشاي BOP - Broken Orange Pekoe'],
-      ['Screen Shot 2025-10-29 at 12.27.07 AM.png','OP1','صنف الشاي OP1'],
-      ['Screen Shot 2025-10-29 at 12.27.17 AM.png','OPA','صنف الشاي OPA'],
-      ['Screen Shot 2025-10-29 at 12.28.09 AM.png','PEKOE','صنف الشاي Pekoe'],
-      ['Screen Shot 2025-10-29 at 12.27.40 AM.png','BOP1','صنف الشاي BOP1'],
-      ['Screen Shot 2025-10-29 at 12.27.53 AM.png','BOP1A','صنف الشاي BOP1A'],
-      ['Screen Shot 2025-10-29 at 12.28.01 AM.png','BOPF','صنف الشاي BOPF'],
-      ['Screen Shot 2025-10-29 at 12.27.30 AM.png','FBOPFSP','صنف الشاي FBOPFSP'],
-      ['Screen Shot 2025-10-29 at 12.28.21 AM.png','GREEN TEA - GP1','صنف الشاي الأخضر GP1']
-    ];
-
-    function escapeHTML(value){
-      return String(value).replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
-    }
-
-    document.getElementById('grades-table').innerHTML = grades.map(([code, leaf, taste, bitter]) => `
-      <tr>
-        <td><span class="grade-code">${escapeHTML(code)}</span></td>
-        <td>${escapeHTML(leaf)}</td>
-        <td>${escapeHTML(taste)} <span class="taste-tag">${escapeHTML(bitter)}</span></td>
-      </tr>`).join('');
-
-    document.getElementById('grades-cards').innerHTML = grades.map(([code, leaf, taste, bitter]) => `
-      <article class="grade-card">
-        <div class="grade-title"><span>${escapeHTML(code)}</span><span>☕</span></div>
-        <div class="grade-body">
-          <span class="label">نوع الورق</span>
-          <p>${escapeHTML(leaf)}</p>
-          <span class="label">الطعم والمذاق المميز</span>
-          <p>${escapeHTML(taste)} <span class="taste-tag">${escapeHTML(bitter)}</span></p>
-        </div>
-      </article>`).join('');
-
-    Object.entries(lists).forEach(([id, items]) => {
-      document.getElementById(id).innerHTML = items.map(([code, desc]) => `
-        <article class="info-card"><span class="code">${escapeHTML(code)}</span><p>${escapeHTML(desc)}</p></article>`).join('');
-    });
-
-    document.getElementById('comparison-table').innerHTML = comparison.map(row => `
-      <tr>${row.map((cell, index) => `<td${index === 0 ? ' style="font-weight:800;color:var(--tea-dark)"' : ''}>${escapeHTML(cell)}</td>`).join('')}</tr>`).join('');
-
-    const cards = ['OP - Orange Pekoe','OP1 - Orange Pekoe Grade 1','OPA - Orange Pekoe A'];
-    document.getElementById('comparison-cards').innerHTML = cards.map((title, cardIndex) => `
-      <article class="comparison-card">
-        <div class="category-header">${escapeHTML(title)}</div>
-        ${comparison.map(row => `<div class="row"><b>${escapeHTML(row[0])}</b><span>${escapeHTML(row[cardIndex + 1])}</span></div>`).join('')}
-      </article>`).join('');
-
-    document.getElementById('gallery-grid').innerHTML = images.map(([src, caption, alt]) => `
-      <article class="image-card">
-        <div class="image-frame">
-          <img src="${escapeHTML(src)}" alt="${escapeHTML(alt)}" loading="lazy" onerror="this.dataset.error='true'" />
-          <div class="fallback">${escapeHTML(caption)}</div>
-        </div>
-        <div class="image-caption">${escapeHTML(caption)}</div>
-      </article>`).join('');
+    const imageBase='';
+    const images=[['Screen Shot 2025-10-29 at 12.26.37 AM.png','OP - Orange Pekoe'],['Screen Shot 2025-10-29 at 12.26.49 AM.png','BOP - Broken Orange Pekoe'],['Screen Shot 2025-10-29 at 12.27.07 AM.png','OP1'],['Screen Shot 2025-10-29 at 12.27.17 AM.png','OPA'],['Screen Shot 2025-10-29 at 12.28.09 AM.png','PEKOE'],['Screen Shot 2025-10-29 at 12.27.40 AM.png','BOP1'],['Screen Shot 2025-10-29 at 12.27.53 AM.png','BOP1A'],['Screen Shot 2025-10-29 at 12.28.01 AM.png','BOPF'],['Screen Shot 2025-10-29 at 12.27.30 AM.png','FBOPFSP'],['Screen Shot 2025-10-29 at 12.28.21 AM.png','GREEN TEA - GP1']];
+    const esc=s=>String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+    gradesTable.innerHTML=grades.map(g=>`<tr><td><span class="tea-ref__code">${esc(g[0])}</span></td><td>${esc(g[1])}</td><td>${esc(g[2])}<span class="tea-ref__tag">${esc(g[3])}</span></td></tr>`).join('');
+    gradesCards.innerHTML=grades.map(g=>`<article class="tea-ref__card"><div class="tea-ref__card-title">${esc(g[0])}</div><div class="tea-ref__card-body"><span class="tea-ref__label">نوع الورق</span><p>${esc(g[1])}</p><span class="tea-ref__label">الطعم والمذاق</span><p>${esc(g[2])}<span class="tea-ref__tag">${esc(g[3])}</span></p></div></article>`).join('');
+    Object.entries(lists).forEach(([id,items])=>{document.getElementById(id).innerHTML=items.map(i=>`<article class="tea-ref__card tea-ref__mini"><span class="tea-ref__code">${esc(i[0])}</span><p>${esc(i[1])}</p></article>`).join('')});
+    const compTitles=['OP - Orange Pekoe','OP1 - Orange Pekoe Grade 1','OPA - Orange Pekoe A'];
+    comparisonCards.innerHTML=compTitles.map((t,idx)=>`<article class="tea-ref__card tea-ref__compare-card"><div class="tea-ref__card-title">${esc(t)}</div>${comparison.map(r=>`<div class="tea-ref__row"><b>${esc(r[0])}</b><span>${esc(r[idx+1])}</span></div>`).join('')}</article>`).join('');
+    galleryGrid.innerHTML=images.map(i=>`<article class="tea-ref__image-card"><div class="tea-ref__image-frame"><img src="${esc(imageBase+i[0])}" alt="${esc(i[1])}" loading="lazy"></div><div class="tea-ref__caption">${esc(i[1])}</div></article>`).join('');
   </script>
 </body>
 </html>
