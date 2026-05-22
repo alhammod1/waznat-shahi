@@ -1,554 +1,644 @@
 <!DOCTYPE html>
-
-<html dir="rtl" lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="utf-8"/>
-    <!-- إضافة وسم viewport لضمان التجاوب مع شاشات الجوال -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>المرجع الكامل لتصنيفات الشاي الأسود </title>
-    <style>
-        /* استيراد خط القاهرة */
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
-        
-        body {
-            font-family: 'Cairo', sans-serif;
-            direction: rtl;
-            background-color: #fafafa;
-            color: #222;
-            margin: 0;
-            padding: 15px;
-            line-height: 1.7;
-			
-			.image-gallery {
-			    display: flex;
-			    flex-direction: column; /* يجعل الصور تحت بعضها */
-			    align-items: center;    /* لتوسيطها في المنتصف */
-			    gap: 20px;              /* مسافة بين الصور */
-			}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#3f2a1d" />
+  <title>المرجع الكامل لتصنيفات الشاي الأسود | وزنة شاي ربيع</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap');
 
-			.image-card {
-			    text-align: center;     /* لتوسيط النص أسفل كل صورة */
-			}
+    :root{
+      --bg:#fbf7ef;
+      --surface:#fffdf8;
+      --surface-2:#f7efe2;
+      --ink:#2a2018;
+      --muted:#75685e;
+      --line:#eadbc6;
+      --tea:#5a3724;
+      --tea-dark:#3f2a1d;
+      --leaf:#2f6b4f;
+      --leaf-soft:#e8f4ed;
+      --gold:#c98934;
+      --amber:#a95f2b;
+      --danger:#b4532a;
+      --shadow:0 18px 45px rgba(63,42,29,.10);
+      --radius:22px;
+    }
 
-			.image-card img {
-			    display: block;
-			    margin: 0 auto;         /* لتوسيط الصورة داخل البطاقة */
-			}
-			
-            /* منع التمرير الأفقي للصفحة ككل بشكل قاطع */
-            overflow-x: hidden; 
-        }
-        h1, h2, h3 {
-            font-weight: bold;
-            max-width: 100%; 
-            word-wrap: break-word;
-        }
-        h1 {
-            text-align: center;
-            color: #1b4332;
-            font-size: 2em; 
-            margin-bottom: 20px;
-        }
-        h2 {
-            background-color: #d8f3dc;
-            border-right: 6px solid #2d6a4f;
-            padding: 10px 12px;
-            border-radius: 8px; 
-            color: #1b4332;
-            margin-top: 25px;
-            font-size: 1.4em;
-        }
-        h3 {
-            color: #145a32;
-            margin-top: 15px;
-            font-size: 1.2em;
-        }
-        p {
-            font-size: 1em; 
-        }
-        ul {
-            background-color: #f1faee;
-            padding: 10px 20px;
-            border-radius: 8px;
-            list-style-type: none;
-            max-width: 100%;
-        }
-        li {
-            padding: 4px 0;
-            /* التأكد من التفاف النص داخل القوائم النقطية */
-            word-wrap: break-word; 
-            white-space: normal;
-        }
-        .intro {
-            background-color: #e3f2fd;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #90caf9;
-            margin-bottom: 20px;
-        }
-        .code {
-            color: #1565c0;
-            font-weight: bold;
-            word-wrap: break-word; 
-            white-space: normal;
-        }
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 0.8em;
-            color: #555;
-        }
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family:'Cairo', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background:
+        radial-gradient(circle at 12% 0%, rgba(201,137,52,.18), transparent 32rem),
+        radial-gradient(circle at 92% 8%, rgba(47,107,79,.14), transparent 30rem),
+        linear-gradient(180deg, #fffaf2 0%, var(--bg) 45%, #f8f0e5 100%);
+      color:var(--ink);
+      line-height:1.9;
+      overflow-x:hidden;
+    }
+    a{ color:inherit; }
+    .page{
+      width:min(1120px, calc(100% - 28px));
+      margin:auto;
+      padding:22px 0 42px;
+    }
 
-        /* ---------------------------------------------------- */
-        /* الجداول الرئيسية: نظام العرض المزدوج (جدول/بطاقات) */
-        /* ---------------------------------------------------- */
-        
-        /* تنسيق عام للبطاقات الجديدة */
-        .grade-card {
-            background-color: white;
-            border: 1px solid #b7e4c7;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .grade-card .grade-title {
-            background-color: #d8f3dc;
-            padding: 10px 15px;
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #1b4332;
-            text-align: center;
-            border-bottom: 2px solid #95d5b2;
-        }
-        .grade-card .detail-row {
-            padding: 8px 15px;
-            display: flex;
-            flex-direction: column;
-            border-bottom: 1px dashed #eee;
-        }
-        .grade-card .detail-row:last-child {
-            border-bottom: none;
-        }
-        .grade-card .detail-label {
-            font-weight: bold;
-            color: #2d6a4f;
-            margin-bottom: 2px;
-            font-size: 0.9em;
-        }
-        .grade-card .detail-content {
-            font-size: 1em;
-            line-height: 1.5;
-        }
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border:1px solid rgba(90,55,36,.12);
+      border-radius:30px;
+      background:
+        linear-gradient(135deg, rgba(63,42,29,.96), rgba(90,55,36,.92)),
+        radial-gradient(circle at 18% 18%, rgba(201,137,52,.4), transparent 22rem);
+      color:#fff9ef;
+      padding:34px 30px;
+      box-shadow:var(--shadow);
+    }
+    .hero:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(circle at 8% 18%, rgba(255,255,255,.14), transparent 10rem),
+        radial-gradient(circle at 100% 0%, rgba(201,137,52,.24), transparent 18rem);
+      pointer-events:none;
+    }
+    .hero > *{ position:relative; z-index:1; }
+    .brand-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:22px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:800;
+      letter-spacing:-.02em;
+    }
+    .brand-mark{
+      width:48px;
+      height:48px;
+      display:grid;
+      place-items:center;
+      border-radius:18px;
+      background:linear-gradient(135deg, #f6d28b, #c98934 60%, #8a4f25);
+      color:#3f2a1d;
+      box-shadow:0 10px 26px rgba(0,0,0,.18);
+      font-size:26px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.18);
+      color:#ffe9c6;
+      font-size:.92rem;
+      white-space:nowrap;
+    }
+    h1{
+      margin:0;
+      font-size:clamp(2rem, 5vw, 4rem);
+      line-height:1.25;
+      letter-spacing:-.05em;
+      max-width:850px;
+    }
+    .lead{
+      max-width:850px;
+      margin:16px 0 0;
+      color:#f1dcc0;
+      font-size:clamp(1rem, 2.2vw, 1.16rem);
+    }
+    .hero-stats{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:12px;
+      margin-top:26px;
+    }
+    .stat{
+      padding:14px 16px;
+      border-radius:18px;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.14);
+      backdrop-filter:blur(8px);
+    }
+    .stat strong{ display:block; font-size:1.5rem; color:#ffd88d; line-height:1.2; }
+    .stat span{ color:#f3dfc3; font-size:.92rem; }
 
-        /* إخفاء البطاقات على سطح المكتب وإظهار الجدول */
-        @media (min-width: 769px) {
-            .mobile-grade-list, .mobile-comparison {
-                display: none; 
-            }
-            .desktop-grade-table, .desktop-comparison {
-                display: block; 
-            }
-            .desktop-grade-table table {
-                width: 100%;
-                border-collapse: collapse;
-                margin: 20px 0;
-            }
-            .desktop-grade-table tr td, .desktop-grade-table tr th {
-                padding: 10px;
-                border: 1px solid #eee;
-                white-space: normal;
-            }
-            .desktop-comparison table {
-                width: 100%;
-                border-collapse: collapse;
-                margin-top: 15px;
-            }
-        }
-        
-        /* إظهار البطاقات على الجوال وإخفاء الجدول */
-        @media (max-width: 768px) {
-            .desktop-grade-table, .desktop-comparison {
-                display: none; 
-            }
-            .mobile-grade-list, .mobile-comparison {
-                display: block;
-            }
-            .mobile-comparison {
-                padding-top: 15px;
-            }
+    .toolbar{
+      position:sticky;
+      top:10px;
+      z-index:20;
+      margin:18px 0 0;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      padding:10px;
+      border-radius:22px;
+      background:rgba(255,253,248,.84);
+      border:1px solid rgba(234,219,198,.86);
+      box-shadow:0 12px 30px rgba(63,42,29,.08);
+      backdrop-filter:blur(14px);
+    }
+    .toolbar a{
+      text-decoration:none;
+      color:var(--tea-dark);
+      background:#fff7e8;
+      border:1px solid #ead7bd;
+      border-radius:999px;
+      padding:8px 13px;
+      font-weight:700;
+      font-size:.93rem;
+      transition:.2s ease;
+    }
+    .toolbar a:hover{ transform:translateY(-1px); background:var(--tea-dark); color:#fff7e8; }
 
-            /* تنسيق بطاقات المقارنة (نظام OP1, OP, OPA) */
-            .comparison-card {
-                display: block;
-                margin-bottom: 20px;
-                border: 1px solid #ccc;
-                border-radius: 8px;
-                overflow: hidden;
-            }
-            .comparison-card .category-header {
-                font-size: 1.1em;
-                padding: 10px;
-                text-align: center;
-                background-color: #2d6a4f;
-                color: white;
-            }
-            .comparison-card div:not(.category-header) {
-                padding: 10px 15px;
-                border-bottom: 1px dashed #ddd;
-                display: flex;
-                flex-direction: column; /* تحويل التسمية والقيمة إلى عمودية */
-                font-size: 0.95em;
-            }
-            .comparison-card div:nth-child(even) {
-                background-color: #f9f9f9;
-            }
-            .comparison-card .label {
-                font-weight: bold;
-                color: #2d6a4f;
-                margin-bottom: 2px;
-            }
-            /* تحديث هام: لضمان التفاف النص داخل بطاقات المقارنة */
-            .comparison-card div span {
-                word-break: break-word;
-            }
-        }
-    </style>
+    .section{
+      margin-top:22px;
+      background:rgba(255,253,248,.86);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:24px;
+    }
+    .section-header{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:18px;
+    }
+    h2{
+      margin:0;
+      color:var(--tea-dark);
+      font-size:clamp(1.35rem, 3vw, 2rem);
+      letter-spacing:-.03em;
+      line-height:1.45;
+    }
+    .section-kicker{
+      display:inline-flex;
+      align-items:center;
+      margin-bottom:8px;
+      color:var(--leaf);
+      font-weight:800;
+      font-size:.92rem;
+    }
+    .section p{ margin:0 0 14px; color:var(--muted); }
+
+    .table-wrap{
+      overflow:auto;
+      border:1px solid var(--line);
+      border-radius:20px;
+      background:#fff;
+    }
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      min-width:760px;
+      direction:rtl;
+    }
+    th,td{
+      padding:15px 16px;
+      border-bottom:1px solid #f0e3d2;
+      vertical-align:top;
+      text-align:right;
+    }
+    th{
+      position:sticky;
+      top:0;
+      background:linear-gradient(135deg, var(--tea-dark), var(--tea));
+      color:#fff6e8;
+      font-weight:800;
+      z-index:1;
+    }
+    tr:last-child td{ border-bottom:none; }
+    tbody tr:nth-child(even) td{ background:#fffaf2; }
+    tbody tr:hover td{ background:#f7efe2; }
+    .grade-code{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:86px;
+      padding:5px 10px;
+      border-radius:999px;
+      background:var(--leaf-soft);
+      color:var(--leaf);
+      border:1px solid #cfe7d8;
+      font-family:ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-weight:800;
+      direction:ltr;
+    }
+    .taste-tag{
+      display:inline-flex;
+      margin-top:6px;
+      padding:3px 9px;
+      border-radius:999px;
+      background:#fff0db;
+      color:var(--danger);
+      border:1px solid #f1c894;
+      font-weight:800;
+      white-space:nowrap;
+    }
+
+    .cards-grid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:14px;
+      margin-top:14px;
+    }
+    .grade-card, .info-card, .comparison-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:0 12px 28px rgba(63,42,29,.06);
+    }
+    .grade-card{ display:none; }
+    .grade-title{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:13px 15px;
+      background:linear-gradient(135deg,#fff2dc,#f6e2c3);
+      color:var(--tea-dark);
+      border-bottom:1px solid var(--line);
+      font-weight:800;
+      direction:ltr;
+    }
+    .grade-body{ padding:14px 15px 16px; }
+    .label{
+      display:block;
+      color:var(--leaf);
+      font-size:.86rem;
+      font-weight:800;
+      margin-bottom:3px;
+    }
+    .grade-body p{ color:var(--ink); margin:0 0 12px; }
+
+    .info-list{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:12px;
+      margin-top:14px;
+    }
+    .info-card{ padding:15px; }
+    .info-card .code{
+      display:inline-flex;
+      direction:ltr;
+      padding:3px 9px;
+      margin-left:6px;
+      margin-bottom:6px;
+      border-radius:10px;
+      background:#f4ead9;
+      color:var(--tea-dark);
+      border:1px solid #e8d3b6;
+      font-family:ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-weight:800;
+    }
+    .info-card p{ margin:0; color:#4f4238; }
+
+    .comparison-grid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:14px;
+      margin-top:16px;
+    }
+    .comparison-card .category-header{
+      padding:15px;
+      background:linear-gradient(135deg, var(--leaf), #1f513a);
+      color:white;
+      font-weight:800;
+      text-align:center;
+      direction:ltr;
+    }
+    .comparison-card .row{
+      padding:11px 14px;
+      border-bottom:1px dashed #eadbc6;
+    }
+    .comparison-card .row:last-child{ border-bottom:none; }
+    .comparison-card .row:nth-child(odd){ background:#fffaf2; }
+    .comparison-card b{ display:block; color:var(--tea-dark); margin-bottom:2px; }
+    .note{
+      margin-top:16px;
+      padding:14px 16px;
+      border-radius:18px;
+      background:linear-gradient(135deg, #fff3dd, #fff9ef);
+      border:1px solid #edd0a1;
+      color:#4b3827;
+      font-weight:600;
+    }
+
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0,1fr));
+      gap:16px;
+      margin-top:18px;
+    }
+    .image-card{
+      overflow:hidden;
+      border:1px solid var(--line);
+      border-radius:20px;
+      background:#fff;
+      box-shadow:0 10px 25px rgba(63,42,29,.07);
+    }
+    .image-frame{
+      aspect-ratio:4/3;
+      background:
+        linear-gradient(135deg, rgba(90,55,36,.08), rgba(201,137,52,.18)),
+        #fff7ec;
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+    }
+    .image-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .image-card img[data-error="true"]{ display:none; }
+    .fallback{
+      display:none;
+      text-align:center;
+      color:var(--tea);
+      font-weight:800;
+      padding:20px;
+    }
+    .image-card:has(img[data-error="true"]) .fallback{ display:block; }
+    .image-caption{
+      padding:11px 12px 13px;
+      text-align:center;
+      font-weight:800;
+      color:var(--tea-dark);
+      border-top:1px solid var(--line);
+      direction:ltr;
+    }
+
+    footer{
+      margin-top:22px;
+      text-align:center;
+      color:var(--muted);
+      font-size:.92rem;
+      padding:18px;
+    }
+
+    @media (max-width: 860px){
+      .page{ width:min(100% - 20px, 720px); padding-top:10px; }
+      .hero{ padding:25px 20px; border-radius:24px; }
+      .brand-row{ align-items:flex-start; flex-direction:column; }
+      .hero-stats{ grid-template-columns:1fr; }
+      .section{ padding:18px; border-radius:20px; }
+      .section-header{ display:block; }
+      .table-wrap{ display:none; }
+      .grade-card{ display:block; }
+      .cards-grid, .info-list, .comparison-grid, .gallery{ grid-template-columns:1fr; }
+      .toolbar{ position:relative; top:auto; border-radius:18px; }
+      .toolbar a{ flex:1 1 auto; text-align:center; }
+    }
+    @media (min-width: 861px){
+      .cards-grid.mobile-only{ display:none; }
+    }
+  </style>
 </head>
 <body>
-<h1>📜 المرجع الكامل لتصنيفات الشاي الأسود</h1>
-<div class="intro">
-<p>
-            يعتمد نظام تصنيف الشاي الأسود على حجم الورقة، وعدد البراعم الذهبية (Tips)، ومكان القطفة في النبات.
-            يُستخدم هذا النظام في الهند، وسريلانكا، ونيبال، وكينيا، وغيرها.
-            يهدف التصنيف إلى تحديد جودة الشاي ومظهره وطعمه.
-        </p>
-</div>
-<h2 style="background-color:#d8f3dc; padding:10px; border-right:6px solid #2d6a4f;">
-🌿 قائمة تصنيفات الشاي الأسود المشهورة
-</h2>
+  <main class="page">
+    <header class="hero">
+      <div class="brand-row">
+        <div class="brand"><span class="brand-mark">☕</span><span>وزنة شاي ربيع</span></div>
+        <span class="pill">مرجع سريع ومنسّق لتصنيفات الشاي</span>
+      </div>
+      <h1>المرجع الكامل لتصنيفات الشاي الأسود</h1>
+      <p class="lead">يعتمد نظام تصنيف الشاي الأسود على حجم الورقة، وعدد البراعم الذهبية، ومكان القطفة في النبات. يستخدم هذا المرجع لتمييز جودة الشاي ومظهره وطعمه بطريقة سهلة ومناسبة للتصفح من الجوال والكمبيوتر.</p>
+      <div class="hero-stats" aria-label="ملخص المرجع">
+        <div class="stat"><strong>14</strong><span>تصنيفًا شائعًا في الجدول الرئيسي</span></div>
+        <div class="stat"><strong>4</strong><span>فئات أساسية: كامل، مكسّر، فتات، غبار</span></div>
+        <div class="stat"><strong>OP</strong><span>مقارنة خاصة بين OP و OP1 و OPA</span></div>
+      </div>
+    </header>
 
-<!-- 1. محتوى الجدول الرئيسي في وضع سطح المكتب (يتم إخفاؤه في الجوال) -->
-<div class="desktop-grade-table">
-    <table style="width:100%; border-collapse:collapse; direction:rtl;">
-        <tr style="background-color:#d8f3dc; font-weight:bold;">
-            <th>التصنيف</th>
-            <th>نوع الورق</th>
-            <th>الطعم والمذاق المميز</th>
-        </tr>
-        <tr><td style="color:#1b4332;font-weight:bold;">SFTGFOP</td><td>ورقة كاملة جدًا مع أعلى نسبة من البراعم الذهبية (tips)</td><td>ناعم، عطري، حلو المذاق، غني بالنكهات الزهرية والفواكه. <span style="color:#cc5500;">بدون مرارة</span></td></tr>
-        <tr><td style="color:#1b4332;font-weight:bold;">FTGFOP</td><td>أوراق كاملة دقيقة تحتوي على براعم كثيرة</td><td>طعم فاخر ومتوازن بين الحلاوة والعطر الزهري، لون ذهبي مشرق. <span style="color:#cc5500;">بدون مرارة</span></td></tr>
-        <tr><td style="color:#1b4332;font-weight:bold;">TGFOP</td><td>أوراق كاملة مع كمية معتدلة من البراعم</td><td>نكهة زهرية خفيفة، قوام ناعم، لون كهرماني ذهبي. <span style="color:#cc5500;">بدون مرارة</span></td></tr>
-        <tr><td style="color:#1b4332;font-weight:bold;">GFOP</td><td>أوراق كاملة مع بعض البراعم الذهبية</td><td>نكهة متوسطة القوة، زهرية معتدلة، لون كهرماني. <span style="color:#cc5500;">مرارة خفيفة</span></td></tr>
-        <tr><td style="color:#1b4332;font-weight:bold;">FOP</td><td>أوراق كاملة تحتوي على براعم قليلة</td><td>نكهة زهرية ناعمة، قوام لطيف، لون ذهبي فاتح. <span style="color:#cc5500;">مرارة خفيفة</span></td></tr>
-        <tr><td style="color:#1b4332;font-weight:bold;">OP</td><td>أوراق كاملة متوسطة الحجم</td><td>نكهة ناعمة متوازنة، لون ذهبي مائل للعنبر. <span style="color:#cc5500;">بدون مرارة</span></td></tr>
-        <tr><td style="color:#1b4332;font-weight:bold;">OP1</td><td>أوراق كاملة أدق وأنحف من OP</td><td>طعم أنعم وأرقّ، لون ذهبي صافٍ، نكهة زهرية خفيفة. <span style="color:#cc5500;">بدون مرارة</span></td></tr>
-        <tr><td style="color:#1b4332;font-weight:bold;">OPA</td><td>أوراق أكبر حجمًا وأكثر خشونة</td><td>نكهة قوية وغنية، لون أحمر داكن، أقل نعومة من OP1. <span style="color:#cc5500;">مرارة خفيفة إلى متوسطة</span></td></tr>
-        <tr><td style="color:#1b4332;font-weight:bold;">BOP</td><td>أوراق مكسّرة متوسطة الحجم</td><td>طعم قوي وكثيف، لون أحمر نحاسي، مثالي لشاي الإفطار. <span style="color:#cc5500;">مرارة متوسطة</span></td></tr>
-        <tr><td style="color:#1b4332;font-weight:bold;">FBOP</td><td>أوراق مكسّرة مع بعض البراعم</td><td>نكهة متوازنة مع لمسة زهرية خفيفة. <span style="color:#cc5500;">مرارة متوسطة</span></td></tr>
-        <tr><td style="color:#1b4332;font-weight:bold;">FBOP1</td><td>أوراق مكسّرة دقيقة وبراعم أكثر</td><td>نكهة غنية متجانسة، لون داكن جميل، ملمس ناعم. <span style="color:#cc5500;">مرارة متوسطة</span></td></tr>
-        <tr><td style="color:#1b4332;font-weight:bold;">BOPF</td><td>فتات أوراق مكسّرة صغيرة</td><td>نكهة مركّزة قوية، لون أحمر داكن جدًا، يُستخدم في أكياس الشاي. <span style="color:#cc5500;">مرارة واضحة</span></td></tr>
-        <tr><td style="color:#1b4332;font-weight:bold;">PF</td><td>فتات ناعمة من أوراق الشاي</td><td>شاي سريع التحضير، طعم قوي مركز، قليل التعقيد. <span style="color:#cc5500;">مرارة واضحة</span></td></tr>
-        <tr><td style="color:#1b4332;font-weight:bold;">D / Dust</td><td>جزيئات دقيقة جدًا من الشاي</td><td>طعم قوي جدًا يميل للمرارة، لون داكن عميق، يُستخدم في الشاي التجاري. <span style="color:#cc5500;">مرارة قوية جدًا</span></td></tr>
-    </table>
-</div>
+    <nav class="toolbar" aria-label="روابط داخلية">
+      <a href="#popular">التصنيفات المشهورة</a>
+      <a href="#whole">الورقة الكاملة</a>
+      <a href="#broken">الأوراق المكسّرة</a>
+      <a href="#fannings">الفتات</a>
+      <a href="#dust">الغبار</a>
+      <a href="#compare">مقارنة OP</a>
+      <a href="#gallery">الصور</a>
+    </nav>
 
-<!-- 2. محتوى الجدول الرئيسي في وضع الجوال (بطاقات عمودية) -->
-<div class="mobile-grade-list">
-    
-    <!-- SFTGFOP -->
-    <div class="grade-card">
-        <div class="grade-title">SFTGFOP</div>
-        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">ورقة كاملة جدًا مع أعلى نسبة من البراعم الذهبية (tips)</span></div>
-        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">ناعم، عطري، حلو المذاق، غني بالنكهات الزهرية والفواكه. <span style="color:#cc5500; font-weight: bold;">بدون مرارة</span></span></div>
-    </div>
-    
-    <!-- FTGFOP -->
-    <div class="grade-card">
-        <div class="grade-title">FTGFOP</div>
-        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">أوراق كاملة دقيقة تحتوي على براعم كثيرة</span></div>
-        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">طعم فاخر ومتوازن بين الحلاوة والعطر الزهري، لون ذهبي مشرق. <span style="color:#cc5500; font-weight: bold;">بدون مرارة</span></span></div>
-    </div>
+    <section id="popular" class="section">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">🌿 التصنيفات المشهورة</span>
+          <h2>قائمة درجات الشاي الأسود</h2>
+        </div>
+      </div>
+      <div class="table-wrap" role="region" aria-label="جدول تصنيفات الشاي الأسود" tabindex="0">
+        <table>
+          <thead><tr><th>التصنيف</th><th>نوع الورق</th><th>الطعم والمذاق المميز</th></tr></thead>
+          <tbody id="grades-table"></tbody>
+        </table>
+      </div>
+      <div class="cards-grid mobile-only" id="grades-cards"></div>
+    </section>
 
-    <!-- TGFOP -->
-    <div class="grade-card">
-        <div class="grade-title">TGFOP</div>
-        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">أوراق كاملة مع كمية معتدلة من البراعم</span></div>
-        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">نكهة زهرية خفيفة، قوام ناعم، لون كهرماني ذهبي. <span style="color:#cc5500; font-weight: bold;">بدون مرارة</span></span></div>
-    </div>
+    <section id="whole" class="section">
+      <span class="section-kicker">🌿 الفئة الأولى</span>
+      <h2>تصنيفات الورقة الكاملة</h2>
+      <p>تُعد هذه الفئة الأعلى جودة غالبًا، حيث تبقى الأوراق كاملة دون تكسير.</p>
+      <div class="info-list" id="whole-list"></div>
+    </section>
 
-    <!-- GFOP -->
-    <div class="grade-card">
-        <div class="grade-title">GFOP</div>
-        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">أوراق كاملة مع بعض البراعم الذهبية</span></div>
-        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">نكهة متوسطة القوة، زهرية معتدلة، لون كهرماني. <span style="color:#cc5500; font-weight: bold;">مرارة خفيفة</span></span></div>
-    </div>
+    <section id="broken" class="section">
+      <span class="section-kicker">🍃 الفئة الثانية</span>
+      <h2>تصنيفات الأوراق المكسّرة</h2>
+      <p>تُكسر الأوراق عمدًا لتسهيل الاستخلاص وإنتاج نكهة أقوى، وتُستخدم عادة في المزج والشاي القوي.</p>
+      <div class="info-list" id="broken-list"></div>
+    </section>
 
-    <!-- FOP -->
-    <div class="grade-card">
-        <div class="grade-title">FOP</div>
-        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">أوراق كاملة تحتوي على براعم قليلة</span></div>
-        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">نكهة زهرية ناعمة، قوام لطيف، لون ذهبي فاتح. <span style="color:#cc5500; font-weight: bold;">مرارة خفيفة</span></span></div>
-    </div>
+    <section id="fannings" class="section">
+      <span class="section-kicker">🍂 الفئة الثالثة</span>
+      <h2>تصنيفات الفتات</h2>
+      <p>فتات أوراق صغيرة تنتج أثناء الغربلة، وتُستخدم كثيرًا في أكياس الشاي عالية الجودة وسريعة الاستخلاص.</p>
+      <div class="info-list" id="fannings-list"></div>
+    </section>
 
-    <!-- OP -->
-    <div class="grade-card">
-        <div class="grade-title">OP</div>
-        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">أوراق كاملة متوسطة الحجم</span></div>
-        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">نكهة ناعمة متوازنة، لون ذهبي مائل للعنبر. <span style="color:#cc5500; font-weight: bold;">بدون مرارة</span></span></div>
-    </div>
+    <section id="dust" class="section">
+      <span class="section-kicker">🌰 الفئة الرابعة</span>
+      <h2>تصنيفات الغبار</h2>
+      <p>أصغر جزيئات أوراق الشاي، وتُستخدم في الشاي التجاري وأكياس الشاي الاقتصادية لأنها سريعة الاستخلاص وقوية اللون.</p>
+      <div class="info-list" id="dust-list"></div>
+    </section>
 
-    <!-- OP1 -->
-    <div class="grade-card">
-        <div class="grade-title">OP1</div>
-        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">أوراق كاملة أدق وأنحف من OP</span></div>
-        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">طعم أنعم وأرقّ، لون ذهبي صافٍ، نكهة زهرية خفيفة. <span style="color:#cc5500; font-weight: bold;">بدون مرارة</span></span></div>
-    </div>
+    <section id="symbols" class="section">
+      <span class="section-kicker">🌸 رموز مساعدة</span>
+      <h2>رموز إضافية تُستخدم أحيانًا</h2>
+      <div class="info-list" id="symbols-list"></div>
+    </section>
 
-    <!-- OPA -->
-    <div class="grade-card">
-        <div class="grade-title">OPA</div>
-        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">أوراق أكبر حجمًا وأكثر خشونة</span></div>
-        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">نكهة قوية وغنية، لون أحمر داكن، أقل نعومة من OP1. <span style="color:#cc5500; font-weight: bold;">مرارة خفيفة إلى متوسطة</span></span></div>
-    </div>
+    <section id="compare" class="section">
+      <span class="section-kicker">🍵 مقارنة عملية</span>
+      <h2>مقارنة تفصيلية بين OP و OP1 و OPA</h2>
+      <p>تُستخدم هذه الرموز لتمييز درجات الشاي ضمن فئة Orange Pekoe، وهي من أكثر الفئات شهرة في الشاي السيلاني والهندي.</p>
+      <div class="table-wrap" role="region" aria-label="جدول مقارنة OP و OP1 و OPA" tabindex="0">
+        <table>
+          <thead><tr><th>الخاصية</th><th>OP</th><th>OP1</th><th>OPA</th></tr></thead>
+          <tbody id="comparison-table"></tbody>
+        </table>
+      </div>
+      <div class="comparison-grid" id="comparison-cards"></div>
+      <div class="note">الخلاصة: <strong>OP1</strong> هو الأفضل من حيث الدقة والعناية بالجودة، بينما <strong>OPA</strong> أقوى في الطعم وأقل نعومة. يعتمد الاختيار على الذوق الشخصي بين النعومة أو القوة.</div>
+    </section>
 
-    <!-- BOP -->
-    <div class="grade-card">
-        <div class="grade-title">BOP</div>
-        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">أوراق مكسّرة متوسطة الحجم</span></div>
-        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">طعم قوي وكثيف، لون أحمر نحاسي، مثالي لشاي الإفطار. <span style="color:#cc5500; font-weight: bold;">مرارة متوسطة</span></span></div>
-    </div>
+    <section id="gallery" class="section">
+      <span class="section-kicker">🖼️ مرجع بصري</span>
+      <h2>معرض صور درجات الشاي</h2>
+      <p>تم الحفاظ على أسماء الصور الأصلية كما هي، لذلك ستظهر مباشرة عند وضع هذا الملف بجانب ملفات الصور نفسها.</p>
+      <div class="gallery" id="gallery-grid"></div>
+    </section>
 
-    <!-- FBOP -->
-    <div class="grade-card">
-        <div class="grade-title">FBOP</div>
-        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">أوراق مكسّرة مع بعض البراعم</span></div>
-        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">نكهة متوازنة مع لمسة زهرية خفيفة. <span style="color:#cc5500; font-weight: bold;">مرارة متوسطة</span></span></div>
-    </div>
+    <footer>© 2025 المرجع الكامل لتصنيفات الشاي الأسود – إعداد أبو إبراهيم</footer>
+  </main>
 
-    <!-- FBOP1 -->
-    <div class="grade-card">
-        <div class="grade-title">FBOP1</div>
-        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">أوراق مكسّرة دقيقة وبراعم أكثر</span></div>
-        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">نكهة غنية متجانسة، لون داكن جميل، ملمس ناعم. <span style="color:#cc5500; font-weight: bold;">مرارة متوسطة</span></span></div>
-    </div>
+  <script>
+    const grades = [
+      ['SFTGFOP','ورقة كاملة جدًا مع أعلى نسبة من البراعم الذهبية (tips)','ناعم، عطري، حلو المذاق، غني بالنكهات الزهرية والفواكه.','بدون مرارة'],
+      ['FTGFOP','أوراق كاملة دقيقة تحتوي على براعم كثيرة','طعم فاخر ومتوازن بين الحلاوة والعطر الزهري، لون ذهبي مشرق.','بدون مرارة'],
+      ['TGFOP','أوراق كاملة مع كمية معتدلة من البراعم','نكهة زهرية خفيفة، قوام ناعم، لون كهرماني ذهبي.','بدون مرارة'],
+      ['GFOP','أوراق كاملة مع بعض البراعم الذهبية','نكهة متوسطة القوة، زهرية معتدلة، لون كهرماني.','مرارة خفيفة'],
+      ['FOP','أوراق كاملة تحتوي على براعم قليلة','نكهة زهرية ناعمة، قوام لطيف، لون ذهبي فاتح.','مرارة خفيفة'],
+      ['OP','أوراق كاملة متوسطة الحجم','نكهة ناعمة متوازنة، لون ذهبي مائل للعنبر.','بدون مرارة'],
+      ['OP1','أوراق كاملة أدق وأنحف من OP','طعم أنعم وأرقّ، لون ذهبي صافٍ، نكهة زهرية خفيفة.','بدون مرارة'],
+      ['OPA','أوراق أكبر حجمًا وأكثر خشونة','نكهة قوية وغنية، لون أحمر داكن، أقل نعومة من OP1.','مرارة خفيفة إلى متوسطة'],
+      ['BOP','أوراق مكسّرة متوسطة الحجم','طعم قوي وكثيف، لون أحمر نحاسي، مثالي لشاي الإفطار.','مرارة متوسطة'],
+      ['FBOP','أوراق مكسّرة مع بعض البراعم','نكهة متوازنة مع لمسة زهرية خفيفة.','مرارة متوسطة'],
+      ['FBOP1','أوراق مكسّرة دقيقة وبراعم أكثر','نكهة غنية متجانسة، لون داكن جميل، ملمس ناعم.','مرارة متوسطة'],
+      ['BOPF','فتات أوراق مكسّرة صغيرة','نكهة مركّزة قوية، لون أحمر داكن جدًا، يُستخدم في أكياس الشاي.','مرارة واضحة'],
+      ['PF','فتات ناعمة من أوراق الشاي','شاي سريع التحضير، طعم قوي مركز، قليل التعقيد.','مرارة واضحة'],
+      ['D / Dust','جزيئات دقيقة جدًا من الشاي','طعم قوي جدًا يميل للمرارة، لون داكن عميق، يُستخدم في الشاي التجاري.','مرارة قوية جدًا']
+    ];
 
-    <!-- BOPF -->
-    <div class="grade-card">
-        <div class="grade-title">BOPF</div>
-        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">فتات أوراق مكسّرة صغيرة</span></div>
-        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">نكهة مركّزة قوية، لون أحمر داكن جدًا، يُستخدم في أكياس الشاي. <span style="color:#cc5500; font-weight: bold;">مرارة واضحة</span></span></div>
-    </div>
+    const lists = {
+      'whole-list': [
+        ['OP','Orange Pekoe: أوراق كاملة متوسطة الحجم، نكهة ناعمة متوازنة.'],
+        ['FOP','Flowery Orange Pekoe: تحتوي على بعض البراعم الزهرية، رائحة خفيفة.'],
+        ['GFOP','Golden Flowery Orange Pekoe: أوراق تحتوي على براعم ذهبية، نكهة أغنى.'],
+        ['TGFOP','Tippy Golden Flowery Orange Pekoe: نسبة عالية من البراعم الذهبية، جودة ممتازة.'],
+        ['FTGFOP','Finest Tippy Golden Flowery Orange Pekoe: من أرقى الأنواع، نكهة متوازنة فاخرة.'],
+        ['FTGFOP1','Grade 1: درجة تجارية فائقة من FTGFOP، تحتوي على نسبة عالية من البراعم الذهبية.'],
+        ['SFTGFOP','Super Finest Tippy Golden Flowery Orange Pekoe: أعلى درجات الشاي الكامل الورقة، نادر وفاخر جدًا.'],
+        ['STGFOP1','Special Tippy Golden Flowery Orange Pekoe: نوع خاص من الدرجة الممتازة، جودة فائقة.']
+      ],
+      'broken-list': [
+        ['BOP','Broken Orange Pekoe: أوراق مكسّرة متوسطة الحجم، نكهة قوية.'],
+        ['BOP1','Broken Orange Pekoe Grade 1: أوراق مكسرة ذات شكل منتظم ونكهة ناعمة.'],
+        ['FBOP','Flowery Broken Orange Pekoe: تحتوي على بعض البراعم، نكهة زهرية لطيفة.'],
+        ['FBOP1','Flowery Broken Orange Pekoe Grade 1: درجة أعلى من FBOP، تحتوي على المزيد من البراعم الذهبية.'],
+        ['FBOPF','Flowery Broken Orange Pekoe Fannings: مزيج بين الأوراق المكسرة والفتات الصغيرة، نكهة مركزة.'],
+        ['FBOPF1','Flowery Broken Orange Pekoe Fannings 1: درجة أعلى قليلاً من FBOPF، تحتوي على براعم أكثر.'],
+        ['FBOPFSP','Special Flowery Broken Orange Pekoe Fannings: فئة خاصة عالية الجودة من الأوراق المكسرة.'],
+        ['FBOPFEXSP','Extra Special Flowery Broken Orange Pekoe Fannings: درجة استثنائية نادرة، تُستخدم في الشاي الفاخر جدًا.']
+      ],
+      'fannings-list': [
+        ['PF','Pekoe Fannings: فتات صغيرة من أوراق الشاي الجيدة.'],
+        ['BOPF','Broken Orange Pekoe Fannings: نكهة قوية، تُستخدم في الشاي سريع الاستخلاص.'],
+        ['FBOPF','Flowery Broken Orange Pekoe Fannings: نكهة متوازنة مع بعض البراعم.'],
+        ['TGFOPF','Tippy Golden Flowery Orange Pekoe Fannings: فتات من شاي فاخر يحتوي على براعم ذهبية.']
+      ],
+      'dust-list': [
+        ['D','Dust: جزيئات صغيرة جدًا من الشاي، نكهة قوية لكن أقل تعقيدًا.'],
+        ['PD','Pekoe Dust: غبار شاي عالي الجودة من أوراق متوسطة.'],
+        ['FD','Fine Dust: ناعم وسريع الاستخلاص، لون داكن جدًا.'],
+        ['GD','Golden Dust: يحتوي على بعض البراعم الذهبية، نكهة أفضل من الغبار العادي.']
+      ],
+      'symbols-list': [
+        ['CH','Choppy: يشير إلى أوراق مقطعة غير منتظمة الشكل.'],
+        ['CL','Clonal: شاي منتج من نوع نبات محدد عالي الجودة (استنساخي).'],
+        ['S','Special: يدل على دفعة خاصة أو مميزة من الشاي.'],
+        ['Ex','Extra: جودة إضافية عن المعتاد في نفس الفئة.'],
+        ['SP','Special / Supreme: أعلى مستوى من الجودة في نوع معين.'],
+        ['G','Golden: وجود براعم ذهبية.'],
+        ['T','Tippy: نسبة عالية من البراعم (Tips).']
+      ]
+    };
 
-    <!-- PF -->
-    <div class="grade-card">
-        <div class="grade-title">PF</div>
-        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">فتات ناعمة من أوراق الشاي</span></div>
-        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">شاي سريع التحضير، طعم قوي مركز، قليل التعقيد. <span style="color:#cc5500; font-weight: bold;">مرارة واضحة</span></span></div>
-    </div>
+    const comparison = [
+      ['حجم الورقة','متوسطة وطويلة قليلاً','أدق وأنحف وأكثر تجانسًا','أكبر وأعرض وأكثر خشونة'],
+      ['المظهر','ورقة كاملة متوسطة الالتواء','ملفوفة بإتقان وناعمة الملمس','ورقة فضفاضة وخشنة المظهر'],
+      ['النكهة','ناعمة ومعتدلة','زهرية متوازنة ورقيقة الطعم','قوية وغنية وأثقل في الفم'],
+      ['لون الشاي في الكوب','ذهبي مائل للعنبر','ذهبي صافٍ وفاتح','كهرماني داكن'],
+      ['التصنيف العام','أساسي جيد','أعلى من OPA','أدنى من OP1 لكن بطعم أقوى']
+    ];
 
-    <!-- D / Dust -->
-    <div class="grade-card">
-        <div class="grade-title">D / Dust</div>
-        <div class="detail-row"><span class="detail-label">نوع الورق:</span> <span class="detail-content">جزيئات دقيقة جدًا من الشاي</span></div>
-        <div class="detail-row"><span class="detail-label">الطعم والمذاق المميز:</span> <span class="detail-content">طعم قوي جدًا يميل للمرارة، لون داكن عميق، يُستخدم في الشاي التجاري. <span style="color:#cc5500; font-weight: bold;">مرارة قوية جدًا</span></span></div>
-    </div>
+    const images = [
+      ['Screen Shot 2025-10-29 at 12.26.37 AM.png','OP - Orange Pekoe','صنف الشاي OP - Orange Pekoe'],
+      ['Screen Shot 2025-10-29 at 12.26.49 AM.png','BOP - Broken Orange Pekoe','صنف الشاي BOP - Broken Orange Pekoe'],
+      ['Screen Shot 2025-10-29 at 12.27.07 AM.png','OP1','صنف الشاي OP1'],
+      ['Screen Shot 2025-10-29 at 12.27.17 AM.png','OPA','صنف الشاي OPA'],
+      ['Screen Shot 2025-10-29 at 12.28.09 AM.png','PEKOE','صنف الشاي Pekoe'],
+      ['Screen Shot 2025-10-29 at 12.27.40 AM.png','BOP1','صنف الشاي BOP1'],
+      ['Screen Shot 2025-10-29 at 12.27.53 AM.png','BOP1A','صنف الشاي BOP1A'],
+      ['Screen Shot 2025-10-29 at 12.28.01 AM.png','BOPF','صنف الشاي BOPF'],
+      ['Screen Shot 2025-10-29 at 12.27.30 AM.png','FBOPFSP','صنف الشاي FBOPFSP'],
+      ['Screen Shot 2025-10-29 at 12.28.21 AM.png','GREEN TEA - GP1','صنف الشاي الأخضر GP1']
+    ];
 
-</div> <!-- نهاية .mobile-grade-list -->
+    function escapeHTML(value){
+      return String(value).replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
+    }
 
-<hr style="border:2px solid #b7e4c7; margin:25px 0;">
+    document.getElementById('grades-table').innerHTML = grades.map(([code, leaf, taste, bitter]) => `
+      <tr>
+        <td><span class="grade-code">${escapeHTML(code)}</span></td>
+        <td>${escapeHTML(leaf)}</td>
+        <td>${escapeHTML(taste)} <span class="taste-tag">${escapeHTML(bitter)}</span></td>
+      </tr>`).join('');
 
+    document.getElementById('grades-cards').innerHTML = grades.map(([code, leaf, taste, bitter]) => `
+      <article class="grade-card">
+        <div class="grade-title"><span>${escapeHTML(code)}</span><span>☕</span></div>
+        <div class="grade-body">
+          <span class="label">نوع الورق</span>
+          <p>${escapeHTML(leaf)}</p>
+          <span class="label">الطعم والمذاق المميز</span>
+          <p>${escapeHTML(taste)} <span class="taste-tag">${escapeHTML(bitter)}</span></p>
+        </div>
+      </article>`).join('');
 
-<h2>🌿 أولاً: تصنيفات الورقة الكاملة (Whole Leaf Grades)</h2>
-<p>تُعد هذه الفئة الأعلى جودة، حيث تبقى الأوراق كاملة دون تكسير.</p>
-<ul>
-<li><span class="code">OP</span> – Orange Pekoe: أوراق كاملة متوسطة الحجم، نكهة ناعمة متوازنة.</li>
-<li><span class="code">FOP</span> – Flowery Orange Pekoe: تحتوي على بعض البراعم الزهرية، رائحة خفيفة.</li>
-<li><span class="code">GFOP</span> – Golden Flowery Orange Pekoe: أوراق تحتوي على براعم ذهبية، نكهة أغنى.</li>
-<li><span class="code">TGFOP</span> – Tippy Golden Flowery Orange Pekoe: نسبة عالية من البراعم الذهبية، جودة ممتازة.</li>
-<li><span class="code">FTGFOP</span> – Finest Tippy Golden Flowery Orange Pekoe: من أرقى الأنواع، نكهة متوازنة فاخرة.</li>
-<li><span class="code">FTGFOP1</span> – Grade 1: درجة تجارية فائقة من FTGFOP، تحتوي على نسبة عالية من البراعم الذهبية.</li>
-<li><span class="code">SFTGFOP</span> – Super Finest Tippy Golden Flowery Orange Pekoe: أعلى درجات الشاي الكامل الورقة، نادر وفاخر جدًا.</li>
-<li><span class="code">STGFOP1</span> – Special Tippy Golden Flowery Orange Pekoe: نوع خاص من الدرجة الممتازة، جودة فائقة.</li>
-</ul>
-<h2>🍃 ثانيًا: تصنيفات الأوراق المكسّرة (Broken Leaf Grades)</h2>
-<p>تُكسر الأوراق عمدًا لتسهيل الاستخلاص وإنتاج نكهة أقوى. تُستخدم عادة في المزج والشاي القوي.</p>
-<ul>
-<li><span class="code">BOP</span> – Broken Orange Pekoe: أوراق مكسّرة متوسطة الحجم، نكهة قوية.</li>
-<li><span class="code">BOP1</span> – Broken Orange Pekoe Grade 1: أوراق مكسرة ذات شكل منتظم ونكهة ناعمة.</li>
-<li><span class="code">FBOP</span> – Flowery Broken Orange Pekoe: تحتوي على بعض البراعم، نكهة زهرية لطيفة.</li>
-<li><span class="code">FBOP1</span> – Flowery Broken Orange Pekoe Grade 1: درجة أعلى من FBOP، تحتوي على المزيد من البراعم الذهبية.</li>
-<li><span class="code">FBOPF</span> – Flowery Broken Orange Pekoe Fannings: مزيج بين الأوراق المكسرة والفتات الصغيرة، نكهة مركزة.</li>
-<li><span class="code">FBOPF1</span> – Flowery Broken Orange Pekoe Fannings 1: درجة أعلى قليلاً من FBOPF، تحتوي على براعم أكثر.</li>
-<li><span class="code">FBOPFSP</span> – Special Flowery Broken Orange Pekoe Fannings: فئة خاصة عالية الجودة من الأوراق المكسرة.</li>
-<li><span class="code">FBOPFEXSP</span> – Extra Special Flowery Broken Orange Pekoe Fannings: درجة استثنائية نادرة، تُستخدم في الشاي الفاخر جدًا.</li>
-</ul>
-<h2>🍂 ثالثًا: تصنيفات الفتات (Fannings Grades)</h2>
-<p>فتات أوراق صغيرة تنتج أثناء الغربلة. تُستخدم في أكياس الشاي عالية الجودة.</p>
-<ul>
-<li><span class="code">PF</span> – Pekoe Fannings: فتات صغيرة من أوراق الشاي الجيدة.</li>
-<li><span class="code">BOPF</span> – Broken Orange Pekoe Fannings: نكهة قوية، تُستخدم في الشاي سريع الاستخلاص.</li>
-<li><span class="code">FBOPF</span> – Flowery Broken Orange Pekoe Fannings: نكهة متوازنة مع بعض البراعم.</li>
-<li><span class="code">TGFOPF</span> – Tippy Golden Flowery Orange Pekoe Fannings: فتات من شاي فاخر يحتوي على براعم ذهبية.</li>
-</ul>
-<h2>🌰 رابعًا: تصنيفات الغبار (Dust Grades)</h2>
-<p>أصغر جزيئات أوراق الشاي، تُستخدم في الشاي التجاري وأكياس الشاي الاقتصادية.</p>
-<ul>
-<li><span class="code">D</span> – Dust: جزيئات صغيرة جدًا من الشاي، نكهة قوية لكن أقل تعقيدًا.</li>
-<li><span class="code">PD</span> – Pekoe Dust: غبار شاي عالي الجودة من أوراق متوسطة.</li>
-<li><span class="code">FD</span> – Fine Dust: ناعم وسريع الاستخلاص، لون داكن جدًا.</li>
-<li><span class="code">GD</span> – Golden Dust: يحتوي على بعض البراعم الذهبية، نكهة أفضل من الغبار العادي.</li>
-</ul>
-<h2>🌸 خامسًا: رموز إضافية تُستخدم أحيانًا</h2>
-<ul>
-<li><span class="code">CH</span> – Choppy: يشير إلى أوراق مقطعة غير منتظمة الشكل.</li>
-<li><span class="code">CL</span> – Clonal: شاي منتج من نوع نبات محدد عالي الجودة (استنساخي).</li>
-<li><span class="code">S</span> – Special: يدل على دفعة خاصة أو مميزة من الشاي.</li>
-<li><span class="code">Ex</span> – Extra: جودة إضافية عن المعتاد في نفس الفئة.</li>
-<li><span class="code">SP</span> – Special / Supreme: أعلى مستوى من الجودة في نوع معين.</li>
-<li><span class="code">G</span> – Golden: وجود براعم ذهبية.</li>
-<li><span class="code">T</span> – Tippy: نسبة عالية من البراعم (Tips).</li>
-</ul>
-<h2>🍵 مقارنة تفصيلية بين OP و OP1 و OPA</h2>
-<p>تُستخدم هذه الرموز لتمييز درجات الشاي ضمن فئة <strong>Orange Pekoe</strong>، وهي من أكثر الفئات شهرة في الشاي السيلاني والهندي.</p>
-<!-- جدول سطح المكتب (يتم إخفاؤه على الجوال) -->
-<div class="desktop-comparison">
-    <table class="comparison-table" style="width:100%; border-collapse:collapse;">
-        <tr style="background-color:#2d6a4f; color:white;">
-            <th style="padding:10px;">الخاصية</th>
-            <th style="padding:10px;">OP</th>
-            <th style="padding:10px;">OP1</th>
-            <th style="padding:10px;">OPA</th>
-        </tr>
-        <tr style="background-color:#f1faee;">
-            <td style="padding:10px; color:#1b4332; font-weight:bold;">حجم الورقة</td>
-            <td style="padding:10px;">متوسطة وطويلة قليلاً</td>
-            <td style="padding:10px;">أدق وأنحف وأكثر تجانسًا</td>
-            <td style="padding:10px;">أكبر وأعرض وأكثر خشونة</td>
-        </tr>
-        <tr style="background-color:#ffffff;">
-            <td style="padding:10px; color:#1b4332; font-weight:bold;">المظهر</td>
-            <td style="padding:10px;">ورقة كاملة متوسطة الالتواء</td>
-            <td style="padding:10px;">ملفوفة بإتقان وناعمة الملمس</td>
-            <td style="padding:10px;">ورقة فضفاضة وخشنة المظهر</td>
-        </tr>
-        <tr style="background-color:#f1faee;">
-            <td style="padding:10px; color:#1b4332; font-weight:bold;">النكهة</td>
-            <td style="padding:10px;">ناعمة ومعتدلة</td>
-            <td style="padding:10px;">زهرية متوازنة ورقيقة الطعم</td>
-            <td style="padding:10px;">قوية وغنية وأثقل في الفم</td>
-        </tr>
-        <tr style="background-color:#ffffff;">
-            <td style="padding:10px; color:#1b4332; font-weight:bold;">لون الشاي في الكوب</td>
-            <td style="padding:10px;">ذهبي مائل للعنبر</td>
-            <td style="padding:10px;">ذهبي صافٍ وفاتح</td>
-            <td style="padding:10px;">كهرماني داكن</td>
-        </tr>
-        <tr style="background-color:#f1faee;">
-            <td style="padding:10px; color:#1b4332; font-weight:bold;">التصنيف العام</td>
-            <td style="padding:10px;">أساسي جيد</td>
-            <td style="padding:10px; font-weight:bold; color:#1565c0;">أعلى من OPA</td>
-            <td style="padding:10px;">أدنى من OP1 لكن بطعم أقوى</td>
-        </tr>
-    </table>
-</div>
+    Object.entries(lists).forEach(([id, items]) => {
+      document.getElementById(id).innerHTML = items.map(([code, desc]) => `
+        <article class="info-card"><span class="code">${escapeHTML(code)}</span><p>${escapeHTML(desc)}</p></article>`).join('');
+    });
 
-<!-- بطاقات الجوال (يتم إخفاؤها على سطح المكتب) -->
-<div class="mobile-comparison">
-    
-    <!-- OP -->
-    <div class="comparison-card">
-        <div class="category-header">OP - Orange Pekoe</div>
-        <div><span class="label">حجم الورقة:</span> <span>متوسطة وطويلة قليلاً</span></div>
-        <div><span class="label">المظهر:</span> <span>ورقة كاملة متوسطة الالتواء</span></div>
-        <div><span class="label">النكهة:</span> <span>ناعمة ومعتدلة</span></div>
-        <div><span class="label">لون الشاي في الكوب:</span> <span>ذهبي مائل للعنبر</span></div>
-        <div><span class="label">التصنيف العام:</span> <span>أساسي جيد</span></div>
-    </div>
+    document.getElementById('comparison-table').innerHTML = comparison.map(row => `
+      <tr>${row.map((cell, index) => `<td${index === 0 ? ' style="font-weight:800;color:var(--tea-dark)"' : ''}>${escapeHTML(cell)}</td>`).join('')}</tr>`).join('');
 
-    <!-- OP1 -->
-    <div class="comparison-card">
-        <div class="category-header">OP1 - Orange Pekoe Grade 1</div>
-        <div><span class="label">حجم الورقة:</span> <span>أدق وأنحف وأكثر تجانسًا</span></div>
-        <div><span class="label">المظهر:</span> <span>ملفوفة بإتقان وناعمة الملمس</span></div>
-        <div><span class="label">النكهة:</span> <span>زهرية متوازنة ورقيقة الطعم</span></div>
-        <div><span class="label">لون الشاي في الكوب:</span> <span>ذهبي صافٍ وفاتح</span></div>
-        <div><span class="label">التصنيف العام:</span> <span style="font-weight:bold; color:#1565c0;">أعلى من OPA</span></div>
-    </div>
+    const cards = ['OP - Orange Pekoe','OP1 - Orange Pekoe Grade 1','OPA - Orange Pekoe A'];
+    document.getElementById('comparison-cards').innerHTML = cards.map((title, cardIndex) => `
+      <article class="comparison-card">
+        <div class="category-header">${escapeHTML(title)}</div>
+        ${comparison.map(row => `<div class="row"><b>${escapeHTML(row[0])}</b><span>${escapeHTML(row[cardIndex + 1])}</span></div>`).join('')}
+      </article>`).join('');
 
-    <!-- OPA -->
-    <div class="comparison-card">
-        <div class="category-header">OPA - Orange Pekoe A</div>
-        <div><span class="label">حجم الورقة:</span> <span>أكبر وأعرض وأكثر خشونة</span></div>
-        <div><span class="label">المظهر:</span> <span>ورقة فضفاضة وخشنة المظهر</span></div>
-        <div><span class="label">النكهة:</span> <span>قوية وغنية وأثقل في الفم</span></div>
-        <div><span class="label">لون الشاي في الكوب:</span> <span>كهرماني داكن</span></div>
-        <div><span class="label">التصنيف العام:</span> <span>أدنى من OP1 لكن بطعم أقوى</span></div>
-    </div>
-</div>
-
-<p style="margin-top:15px;">
-        🔹 باختصار: <strong>OP1</strong> هو الأفضل من حيث الدقة والعناية بالجودة، بينما <strong>OPA</strong> أقوى في الطعم وأقل نعومة.
-        يعتمد الاختيار على الذوق الشخصي بين النعومة أو القوة.
-    </p>
-
-<!-- معرض الصور المتجاوب -->
-<div class="image-gallery">
-    <!-- OP -->
-    <div class="image-card">
-        <img src="Screen Shot 2025-10-29 at 12.26.37 AM.png" onerror="this.onerror=null; this.src='https://alhammod1.github.io/waznat-shahi/';" alt="صنف الشاي OP - Orange Pekoe"/>
-        <div class="image-caption">OP - Orange Pekoe</div>
-    </div>
-    <!-- BOP -->
-    <div class="image-card">
-        <img src="Screen Shot 2025-10-29 at 12.26.49 AM.png" onerror="this.onerror=null; this.src='https://alhammod1.github.io/waznat-shahi/';" alt="صنف الشاي BOP - Broken Orange Pekoe"/>
-        <div class="image-caption">BOP - Broken Orange Pekoe</div>
-    </div>
-    <!-- OP1 -->
-    <div class="image-card">
-        <img src="Screen Shot 2025-10-29 at 12.27.07 AM.png" onerror="this.onerror=null; this.src='https://alhammod1.github.io/waznat-shahi/';" alt="صنف الشاي OP1"/>
-        <div class="image-caption">OP1</div>
-    </div>
-    <!-- OPA -->
-    <div class="image-card">
-        <img src="Screen Shot 2025-10-29 at 12.27.17 AM.png" onerror="this.onerror=null; this.src='https://alhammod1.github.io/waznat-shahi/';" alt="صنف الشاي OPA"/>
-        <div class="image-caption">OPA</div>
-    </div>
-    <!-- PEKOE -->
-    <div class="image-card">
-        <img src="Screen Shot 2025-10-29 at 12.28.09 AM.png" onerror="this.onerror=null; this.src='https://alhammod1.github.io/waznat-shahi/';" alt="صنف الشاي Pekoe"/>
-        <div class="image-caption">PEKOE</div>
-    </div>
-    <!-- BOP1 -->
-    <div class="image-card">
-        <img src="Screen Shot 2025-10-29 at 12.27.40 AM.png" onerror="this.onerror=null; this.src='https://alhammod1.github.io/waznat-shahi/';" alt="صنف الشاي BOP1"/>
-        <div class="image-caption">BOP1</div>
-    </div>
-    <!-- BOP1A -->
-    <div class="image-card">
-        <img src="Screen Shot 2025-10-29 at 12.27.53 AM.png" onerror="this.onerror=null; this.src='https://alhammod1.github.io/waznat-shahi/';" alt="صنف الشاي BOP1A"/>
-        <div class="image-caption">BOP1A</div>
-    </div>
-    <!-- BOPF -->
-    <div class="image-card">
-        <img src="Screen Shot 2025-10-29 at 12.28.01 AM.png" onerror="this.onerror=null; this.src='https://alhammod1.github.io/waznat-shahi/';" alt="صنف الشاي BOPF"/>
-        <div class="image-caption">BOPF</div>
-    </div>
-    <!-- FBOPFSP -->
-    <div class="image-card">
-        <img src="Screen Shot 2025-10-29 at 12.27.30 AM.png" onerror="this.onerror=null; this.src='https://alhammod1.github.io/waznat-shahi/';" alt="صنف الشاي FBOPFSP"/>
-        <div class="image-caption">FBOPFSP</div>
-    </div>
-    <!-- GREEN TEA - GP1 -->
-    <div class="image-card">
-        <img src="Screen Shot 2025-10-29 at 12.28.21 AM.png" onerror="this.onerror=null; this.src='https://alhammod1.github.io/waznat-shahi/';" alt="صنف الشاي الأخضر GP1"/>
-        <div class="image-caption">GREEN TEA - GP1 (شاي أخضر)</div>
-    </div>
-</div>
-
-<hr style="border:2px solid #b7e4c7; margin:25px 0;">
-<footer>
-<p>© 2025 المرجع الكامل لتصنيفات الشاي الأسود – إعداد أبو إبراهيم</p>
-</footer>
+    document.getElementById('gallery-grid').innerHTML = images.map(([src, caption, alt]) => `
+      <article class="image-card">
+        <div class="image-frame">
+          <img src="${escapeHTML(src)}" alt="${escapeHTML(alt)}" loading="lazy" onerror="this.dataset.error='true'" />
+          <div class="fallback">${escapeHTML(caption)}</div>
+        </div>
+        <div class="image-caption">${escapeHTML(caption)}</div>
+      </article>`).join('');
+  </script>
 </body>
 </html>
