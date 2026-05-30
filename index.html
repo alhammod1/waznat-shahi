@@ -1394,51 +1394,64 @@
 <script>
 /* ── Theme Picker Dropdown (no JS calc logic touched) ── */
 (function () {
-  const THEMES = {
-    default: { bodyClass: '',     attr: '',      label: 'داكن دافئ' },
-    light:   { bodyClass: 'dark', attr: 'dark',  label: 'فاتح'      },
-    navy:    { bodyClass: '',     attr: 'navy',  label: 'بحري'      },
-  };
+  /*
+   * Mapping: key → data-theme value on <html>
+   * CSS already covers:
+   *   (none / "")   → :root dark-warm
+   *   "dark"        → body.dark / [data-theme="dark"] light
+   *   "navy"        → [data-theme="navy"] navy
+   *
+   * We avoid touching body.className entirely to prevent
+   * conflicts with script.js which may also write that class.
+   * Instead we rely solely on the data-theme attribute on <html>
+   * and add a [data-theme=""] rule = same as :root.
+   */
+  const ATTR = { default: '', light: 'dark', navy: 'navy' };
 
-  const pickerBtn  = document.getElementById('themeToggle');
-  const menu       = document.getElementById('themeMenu');
-  const options    = document.querySelectorAll('.theme-option');
-  if (!pickerBtn || !menu) return;
+  const html = document.documentElement;
 
-  // Neutralise script.js themeToggle listener by cloning
-  const newBtn = pickerBtn.cloneNode(true);
-  pickerBtn.parentNode.replaceChild(newBtn, pickerBtn);
+  /* --- Neutralise script.js listener by replacing the button --- */
+  const orig = document.getElementById('themeToggle');
+  if (!orig) return;
+  const btn  = orig.cloneNode(true);
+  orig.parentNode.replaceChild(btn, orig);
 
+  const menu    = document.getElementById('themeMenu');
+  const options = document.querySelectorAll('.theme-option');
+
+  /* --- Apply theme --- */
   function applyTheme(key) {
-    const t = THEMES[key] || THEMES.default;
-    document.body.className = t.bodyClass;
-    document.documentElement.setAttribute('data-theme', t.attr);
+    if (!ATTR.hasOwnProperty(key)) key = 'default';
+    html.setAttribute('data-theme', ATTR[key]);
+    /* keep body.dark in sync for any existing CSS using it */
+    document.body.classList.toggle('dark', key === 'light');
     options.forEach(o => o.classList.toggle('active', o.dataset.themeKey === key));
     localStorage.setItem('wazna-theme', key);
   }
 
+  /* --- Toggle dropdown --- */
   function toggleMenu(force) {
-    const open = force !== undefined ? force : !menu.classList.contains('open');
+    const open = (force !== undefined) ? !!force : !menu.classList.contains('open');
     menu.classList.toggle('open', open);
-    newBtn.setAttribute('aria-expanded', open);
+    btn.setAttribute('aria-expanded', String(open));
   }
 
-  newBtn.addEventListener('click', function (e) {
+  btn.addEventListener('click', function (e) {
     e.stopPropagation();
     toggleMenu();
   });
 
-  options.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      applyTheme(btn.dataset.themeKey);
+  options.forEach(function (opt) {
+    opt.addEventListener('click', function (e) {
+      e.stopPropagation();
+      applyTheme(opt.dataset.themeKey);
       toggleMenu(false);
     });
   });
 
   document.addEventListener('click', function () { toggleMenu(false); });
-  menu.addEventListener('click', function (e) { e.stopPropagation(); });
 
-  // Restore saved theme
+  /* --- Restore on load --- */
   const saved = localStorage.getItem('wazna-theme') || 'default';
   applyTheme(saved);
 })();
