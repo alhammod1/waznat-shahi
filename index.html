@@ -78,7 +78,7 @@
       --ease: 0.2s ease;
     }
 
-    body.dark, html.dark body, [data-theme="dark"] {
+    body.dark, html.dark body, html[data-theme="light"], [data-theme="light"] {
       /* Alternate theme — palette: #F4F4F2 / #E8E8E8 / #BBBFCA / #495464 */
       --bg:        #F4F4F2;
       --surface:   #FFFFFF;
@@ -1392,68 +1392,114 @@
 <script src="script.js"></script>
 
 <script>
-/* ── Theme Picker Dropdown (no JS calc logic touched) ── */
+/* ── Theme Picker Dropdown: fixed, conflict-resistant ── */
 (function () {
-  /*
-   * Mapping: key → data-theme value on <html>
-   * CSS already covers:
-   *   (none / "")   → :root dark-warm
-   *   "dark"        → body.dark / [data-theme="dark"] light
-   *   "navy"        → [data-theme="navy"] navy
-   *
-   * We avoid touching body.className entirely to prevent
-   * conflicts with script.js which may also write that class.
-   * Instead we rely solely on the data-theme attribute on <html>
-   * and add a [data-theme=""] rule = same as :root.
-   */
-  const ATTR = { default: '', light: 'dark', navy: 'navy' };
+  const THEMES = {
+    default: { attr: '',      bodyDark: false }, // داكن دافئ
+    light:   { attr: 'light', bodyDark: true  }, // فاتح
+    navy:    { attr: 'navy',  bodyDark: false }  // بحري
+  };
 
   const html = document.documentElement;
+  let currentTheme = localStorage.getItem('wazna-theme') || 'default';
+  let internalChange = false;
 
-  /* --- Neutralise script.js listener by replacing the button --- */
-  const orig = document.getElementById('themeToggle');
-  if (!orig) return;
-  const btn  = orig.cloneNode(true);
-  orig.parentNode.replaceChild(btn, orig);
-
-  const menu    = document.getElementById('themeMenu');
-  const options = document.querySelectorAll('.theme-option');
-
-  /* --- Apply theme --- */
-  function applyTheme(key) {
-    if (!ATTR.hasOwnProperty(key)) key = 'default';
-    html.setAttribute('data-theme', ATTR[key]);
-    /* keep body.dark in sync for any existing CSS using it */
-    document.body.classList.toggle('dark', key === 'light');
-    options.forEach(o => o.classList.toggle('active', o.dataset.themeKey === key));
-    localStorage.setItem('wazna-theme', key);
+  function getParts() {
+    return {
+      btn: document.getElementById('themeToggle'),
+      menu: document.getElementById('themeMenu'),
+      options: document.querySelectorAll('.theme-option')
+    };
   }
 
-  /* --- Toggle dropdown --- */
+  function normalizeKey(key) {
+    return Object.prototype.hasOwnProperty.call(THEMES, key) ? key : 'default';
+  }
+
+  function applyTheme(key, persist = true) {
+    key = normalizeKey(key);
+    currentTheme = key;
+    const theme = THEMES[key];
+    const { options } = getParts();
+
+    internalChange = true;
+
+    if (theme.attr) {
+      html.setAttribute('data-theme', theme.attr);
+    } else {
+      html.removeAttribute('data-theme');
+    }
+
+    // تنظيف أي آثار من السكربت القديم حتى لا يطغى على الثيم البحري
+    html.classList.remove('dark', 'light', 'navy');
+    document.body.classList.remove('light', 'navy');
+    document.body.classList.toggle('dark', theme.bodyDark);
+
+    options.forEach(option => {
+      option.classList.toggle('active', option.dataset.themeKey === key);
+    });
+
+    if (persist) {
+      localStorage.setItem('wazna-theme', key);
+    }
+
+    requestAnimationFrame(() => { internalChange = false; });
+  }
+
   function toggleMenu(force) {
+    const { btn, menu } = getParts();
+    if (!btn || !menu) return;
     const open = (force !== undefined) ? !!force : !menu.classList.contains('open');
     menu.classList.toggle('open', open);
     btn.setAttribute('aria-expanded', String(open));
   }
 
-  btn.addEventListener('click', function (e) {
-    e.stopPropagation();
-    toggleMenu();
-  });
+  function bindThemePicker() {
+    const { btn, options } = getParts();
+    if (!btn) return;
 
-  options.forEach(function (opt) {
-    opt.addEventListener('click', function (e) {
-      e.stopPropagation();
-      applyTheme(opt.dataset.themeKey);
+    // Capture + stopImmediatePropagation يمنع مستمعات script.js القديمة من تنفيذ تبديل ثيم متعارض
+    btn.addEventListener('click', function (event) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      toggleMenu();
+    }, true);
+
+    options.forEach(option => {
+      option.addEventListener('click', function (event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        applyTheme(option.dataset.themeKey || 'default');
+        toggleMenu(false);
+      }, true);
+    });
+
+    document.addEventListener('click', function () {
       toggleMenu(false);
     });
-  });
+  }
 
-  document.addEventListener('click', function () { toggleMenu(false); });
+  // مراقبة أي سكربت قديم يحاول تغيير class/data-theme وإرجاع الثيم المختار فورًا
+  function protectThemeState() {
+    const observer = new MutationObserver(() => {
+      if (!internalChange) applyTheme(currentTheme, false);
+    });
 
-  /* --- Restore on load --- */
-  const saved = localStorage.getItem('wazna-theme') || 'default';
-  applyTheme(saved);
+    observer.observe(html, { attributes: true, attributeFilter: ['class', 'data-theme'] });
+    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  }
+
+  bindThemePicker();
+  applyTheme(currentTheme, false);
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () {
+      applyTheme(localStorage.getItem('wazna-theme') || currentTheme, false);
+      protectThemeState();
+    }, { once: true });
+  } else {
+    protectThemeState();
+  }
 })();
 </script>
 </body>
