@@ -502,7 +502,6 @@
       max-width: 140px; height: auto; border-radius: var(--r-md);
     }
 
-    /* مؤشر البيالة الحقيقي — يجب أن يعتمد على top لأن الجافاسكربت يحدّث style.top */
     .real-pointer, .aj-pointer {
       position: absolute;
       left: 49.1%;
@@ -675,18 +674,14 @@
       background: var(--surface);
       border: 1.5px solid var(--border);
       border-radius: var(--r-sm);
-      padding: 9px 4px 7px; cursor: pointer; transition: var(--ease);
-      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      padding: 9px 4px; cursor: pointer; transition: var(--ease);
+      display: flex; align-items: center; justify-content: center;
     }
-
-    .aj-strength-btn .sval { font-size: 0.58rem; font-weight: 500; color: var(--text-light); }
 
     .aj-strength-btn:hover, .aj-strength-btn.active-normal {
       background: var(--accent); border-color: var(--accent);
       color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.22);
     }
-
-    .aj-strength-btn:hover .sval, .aj-strength-btn.active-normal .sval { color: rgba(255,255,255,0.75); }
 
     /* Abu Jabal Result */
     .abujabal-result {
@@ -1154,15 +1149,9 @@
                 <div class="aj-strength-wrap">
                     <span class="aj-strength-label">🫖 قوة الشاي</span>
                     <div class="aj-strength-group">
-                        <button class="aj-strength-btn" id="ajBtnLight" onclick="ajSetStrength('light', this)">
-                            خفيف<span class="sval">١٢ جم/ل</span>
-                        </button>
-                        <button class="aj-strength-btn active-normal" id="ajBtnNormal" onclick="ajSetStrength('normal', this)">
-                            عادي<span class="sval">١٢.٢٥ جم/ل</span>
-                        </button>
-                        <button class="aj-strength-btn" id="ajBtnHeavy" onclick="ajSetStrength('heavy', this)">
-                            ثقيل<span class="sval">١٢.٧٥ جم/ل</span>
-                        </button>
+                        <button class="aj-strength-btn" id="ajBtnLight" onclick="ajSetStrength('light', this)">خفيف</button>
+                        <button class="aj-strength-btn active-normal" id="ajBtnNormal" onclick="ajSetStrength('normal', this)">عادي</button>
+                        <button class="aj-strength-btn" id="ajBtnHeavy" onclick="ajSetStrength('heavy', this)">ثقيل</button>
                     </div>
                 </div>
             </div>
