@@ -1077,6 +1077,192 @@
     [data-theme="rose"] .control-block.full-width {
       background: var(--surface-2) !important;
     }
+
+
+    /* === Tea Weights Reference Card === */
+    .tea-reference-card {
+      background: var(--surface-2);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 14px 12px;
+      margin: 16px 0 14px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tea-ref-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .tea-ref-header h2 {
+      font-size: 0.92rem;
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .tea-ref-header span:last-child {
+      margin-right: auto;
+      font-size: 0.62rem;
+      color: var(--accent);
+      background: var(--accent-light);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3px 8px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .tea-ref-search-wrap { position: relative; margin-bottom: 10px; }
+
+    .tea-ref-search {
+      width: 100%;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 11px 12px 11px 36px;
+      outline: none;
+      transition: var(--ease);
+    }
+
+    .tea-ref-search:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .tea-ref-select-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+      font-size: 0.76rem;
+    }
+
+    .tea-ref-levels {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 5px;
+      margin-bottom: 12px;
+    }
+
+    .tea-ref-levels button {
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--text-secondary);
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-sm);
+      padding: 8px 2px;
+      cursor: pointer;
+      transition: var(--ease);
+    }
+
+    .tea-ref-levels button:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+    .tea-ref-levels button.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .tea-ref-levels button:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    .tea-ref-summary {
+      background: var(--surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--r-lg);
+      padding: 12px;
+    }
+
+    .tea-ref-name-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 9px;
+      border-bottom: 1px solid var(--border-light);
+      margin-bottom: 10px;
+    }
+
+    .tea-ref-name {
+      font-size: 1.05rem;
+      color: var(--accent);
+      font-weight: 900;
+    }
+
+    .tea-ref-level-name {
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      font-weight: 800;
+      background: var(--accent-light);
+      border-radius: 999px;
+      padding: 3px 8px;
+      white-space: nowrap;
+    }
+
+    .tea-ref-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+    }
+
+    .tea-ref-item {
+      border: 1px solid var(--border-light);
+      border-radius: var(--r-md);
+      padding: 10px 6px;
+      text-align: center;
+      background: var(--surface-2);
+      min-height: 76px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2px;
+    }
+
+    .tea-ref-item .k { color: var(--text-muted); font-size: 0.64rem; font-weight: 800; }
+    .tea-ref-item .v { color: var(--text); font-size: 0.95rem; font-weight: 900; line-height: 1.35; }
+    .tea-ref-item .s { color: var(--text-light); font-size: 0.58rem; font-weight: 700; }
+
+    .tea-ref-calculated {
+      margin-top: 8px;
+      padding: 9px 10px;
+      border-radius: var(--r-md);
+      background: var(--accent-light);
+      color: var(--text-secondary);
+      font-size: 0.76rem;
+      font-weight: 700;
+      line-height: 1.8;
+    }
+
+    .tea-ref-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .tea-ref-apply, .tea-ref-reset {
+      font-family: 'Cairo', sans-serif;
+      border-radius: var(--r-md);
+      padding: 9px 12px;
+      cursor: pointer;
+      font-size: 0.76rem;
+      font-weight: 800;
+      transition: var(--ease);
+    }
+
+    .tea-ref-apply { background: var(--accent); color: #fff; border: 1.5px solid var(--accent); flex: 1; }
+    .tea-ref-reset { background: var(--surface); color: var(--text-secondary); border: 1.5px solid var(--border); }
+    .tea-ref-apply:hover, .tea-ref-reset:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+
+    @media (max-width: 380px) {
+      .tea-ref-levels { grid-template-columns: repeat(2, 1fr); }
+      .tea-ref-grid { grid-template-columns: 1fr; }
+      .tea-ref-item { min-height: auto; }
+    }
     </style>
 </head>
 <body>
@@ -1196,6 +1382,59 @@
                         <div class="grams" id="khatherGrams">—</div>
                         <div class="unit">جرام</div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Tea Weights Reference -->
+        <div class="tea-reference-card" id="teaReferenceCard">
+            <div class="tea-ref-header">
+                <span>📚</span>
+                <h2>مرجع الوزنيات حسب نوع الشاي</h2>
+                <span>من جدول ملك الشواهي</span>
+            </div>
+
+            <div class="tea-ref-search-wrap">
+                <input class="tea-ref-search" id="teaRefSearch" list="teaRefList" placeholder="ابحث أو اختر نوع الشاي" autocomplete="off" aria-label="اختر نوع الشاي">
+                <span class="tea-ref-select-icon">▾</span>
+                <datalist id="teaRefList"></datalist>
+            </div>
+
+            <div class="tea-ref-levels" id="teaRefLevels" aria-label="مستوى الوزنة">
+                <button type="button" data-level="nosugar">بدون سكر</button>
+                <button type="button" data-level="light">خفيف</button>
+                <button type="button" data-level="medium" class="active">وسط</button>
+                <button type="button" data-level="heavy">ثقيل</button>
+            </div>
+
+            <div class="tea-ref-summary" id="teaRefSummary">
+                <div class="tea-ref-name-row">
+                    <div class="tea-ref-name" id="teaRefName">اختر نوع الشاي</div>
+                    <div class="tea-ref-level-name" id="teaRefLevelName">وسط</div>
+                </div>
+                <div class="tea-ref-grid">
+                    <div class="tea-ref-item">
+                        <span class="k">⏱️ الخدرة</span>
+                        <span class="v" id="teaRefKhadra">—</span>
+                        <span class="s">حسب الجدول</span>
+                    </div>
+                    <div class="tea-ref-item">
+                        <span class="k">🍬 السكر</span>
+                        <span class="v" id="teaRefSugar">—</span>
+                        <span class="s">لكل لتر ماء</span>
+                    </div>
+                    <div class="tea-ref-item">
+                        <span class="k">🫖 الشاي</span>
+                        <span class="v" id="teaRefTea">—</span>
+                        <span class="s">لكل لتر ماء</span>
+                    </div>
+                </div>
+                <div class="tea-ref-calculated" id="teaRefCalculated">اختر نوع الشاي، ثم أدخل كمية الماء ليظهر الحساب لهذه الكمية.</div>
+                <div class="tea-ref-actions">
+                    <button class="tea-ref-apply" type="button" onclick="applyTeaReferenceToMainCalculator()">تطبيق الوزنة على الحاسبة</button>
+                    <button class="tea-ref-reset" type="button" onclick="resetMainCalculatorRatios()">إرجاع الافتراضي</button>
                 </div>
             </div>
         </div>
@@ -1461,6 +1700,219 @@
 </div>
 
 <script src="script.js"></script>
+
+
+
+<script>
+/* === Tea Weights Reference — data from reviewed PDF table === */
+window.TEA_WEIGHT_REFERENCE = [{"id":1,"name":"زهرة الشاي","khadraText":"30 دقيقة","khadraFrom":30.0,"khadraTo":30.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"10-11 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":10.0,"teaTo":11.0,"sugarAvg":0.0,"teaAvg":10.5},"light":{"label":"خفيف","available":true,"sugarText":"35-40 غرام سكر","teaText":"12 غرام شاي","sugarFrom":35.0,"sugarTo":40.0,"teaFrom":12.0,"teaTo":12.0,"sugarAvg":37.5,"teaAvg":12.0},"medium":{"label":"وسط","available":true,"sugarText":"50-53 غرام سكر","teaText":"12.5-13.5 غرام شاي","sugarFrom":50.0,"sugarTo":53.0,"teaFrom":12.5,"teaTo":13.5,"sugarAvg":51.5,"teaAvg":13.0},"heavy":{"label":"ثقيل","available":true,"sugarText":"55 غرام سكر","teaText":"14 غرام شاي","sugarFrom":55.0,"sugarTo":55.0,"teaFrom":14.0,"teaTo":14.0,"sugarAvg":55.0,"teaAvg":14.0}}},{"id":2,"name":"المقدم","khadraText":"25-30 دقيقة","khadraFrom":25.0,"khadraTo":30.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"10-11 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":10.0,"teaTo":11.0,"sugarAvg":0.0,"teaAvg":10.5},"light":{"label":"خفيف","available":true,"sugarText":"30-35 غرام سكر","teaText":"12-12.5 غرام شاي","sugarFrom":30.0,"sugarTo":35.0,"teaFrom":12.0,"teaTo":12.5,"sugarAvg":32.5,"teaAvg":12.25},"medium":{"label":"وسط","available":true,"sugarText":"50-53 غرام سكر","teaText":"13-13.5 غرام شاي","sugarFrom":50.0,"sugarTo":53.0,"teaFrom":13.0,"teaTo":13.5,"sugarAvg":51.5,"teaAvg":13.25},"heavy":{"label":"ثقيل","available":true,"sugarText":"55-58 غرام سكر","teaText":"14-14.5 غرام شاي","sugarFrom":55.0,"sugarTo":58.0,"teaFrom":14.0,"teaTo":14.5,"sugarAvg":56.5,"teaAvg":14.25}}},{"id":3,"name":"البطين","khadraText":"25-30 دقيقة","khadraFrom":25.0,"khadraTo":30.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"9.5-10.5 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":9.5,"teaTo":10.5,"sugarAvg":0.0,"teaAvg":10.0},"light":{"label":"خفيف","available":true,"sugarText":"35 غرام سكر","teaText":"11 غرام شاي","sugarFrom":35.0,"sugarTo":35.0,"teaFrom":11.0,"teaTo":11.0,"sugarAvg":35.0,"teaAvg":11.0},"medium":{"label":"وسط","available":true,"sugarText":"50-55 غرام سكر","teaText":"11.5-12 غرام شاي","sugarFrom":50.0,"sugarTo":55.0,"teaFrom":11.5,"teaTo":12.0,"sugarAvg":52.5,"teaAvg":11.75},"heavy":{"label":"ثقيل","available":true,"sugarText":"55-57 غرام سكر","teaText":"12.5-13 غرام شاي","sugarFrom":55.0,"sugarTo":57.0,"teaFrom":12.5,"teaTo":13.0,"sugarAvg":56.0,"teaAvg":12.75}}},{"id":4,"name":"المنيس","khadraText":"20-25 دقيقة","khadraFrom":20.0,"khadraTo":25.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"9-10 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":9.0,"teaTo":10.0,"sugarAvg":0.0,"teaAvg":9.5},"light":{"label":"خفيف","available":true,"sugarText":"30-40 غرام سكر","teaText":"10-10.5 غرام شاي","sugarFrom":30.0,"sugarTo":40.0,"teaFrom":10.0,"teaTo":10.5,"sugarAvg":35.0,"teaAvg":10.25},"medium":{"label":"وسط","available":true,"sugarText":"50-53 غرام سكر","teaText":"11-11.5 غرام شاي","sugarFrom":50.0,"sugarTo":53.0,"teaFrom":11.0,"teaTo":11.5,"sugarAvg":51.5,"teaAvg":11.25},"heavy":{"label":"ثقيل","available":true,"sugarText":"53-57 غرام سكر","teaText":"12-13 غرام شاي","sugarFrom":53.0,"sugarTo":57.0,"teaFrom":12.0,"teaTo":13.0,"sugarAvg":55.0,"teaAvg":12.5}}},{"id":5,"name":"كرزة","khadraText":"20-25 دقيقة","khadraFrom":20.0,"khadraTo":25.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"9.5-10.5 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":9.5,"teaTo":10.5,"sugarAvg":0.0,"teaAvg":10.0},"light":{"label":"خفيف","available":true,"sugarText":"35 غرام سكر","teaText":"11 غرام شاي","sugarFrom":35.0,"sugarTo":35.0,"teaFrom":11.0,"teaTo":11.0,"sugarAvg":35.0,"teaAvg":11.0},"medium":{"label":"وسط","available":true,"sugarText":"50-55 غرام سكر","teaText":"11.5-12.5 غرام شاي","sugarFrom":50.0,"sugarTo":55.0,"teaFrom":11.5,"teaTo":12.5,"sugarAvg":52.5,"teaAvg":12.0},"heavy":{"label":"ثقيل","available":true,"sugarText":"55-58 غرام سكر","teaText":"13-13.5 غرام شاي","sugarFrom":55.0,"sugarTo":58.0,"teaFrom":13.0,"teaTo":13.5,"sugarAvg":56.5,"teaAvg":13.25}}},{"id":6,"name":"كشتة","khadraText":"25-30 دقيقة","khadraFrom":25.0,"khadraTo":30.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"10-11 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":10.0,"teaTo":11.0,"sugarAvg":0.0,"teaAvg":10.5},"light":{"label":"خفيف","available":true,"sugarText":"35 غرام سكر","teaText":"11-11.5 غرام شاي","sugarFrom":35.0,"sugarTo":35.0,"teaFrom":11.0,"teaTo":11.5,"sugarAvg":35.0,"teaAvg":11.25},"medium":{"label":"وسط","available":true,"sugarText":"50-55 غرام سكر","teaText":"12-13 غرام شاي","sugarFrom":50.0,"sugarTo":55.0,"teaFrom":12.0,"teaTo":13.0,"sugarAvg":52.5,"teaAvg":12.5},"heavy":{"label":"ثقيل","available":true,"sugarText":"58 غرام سكر","teaText":"13.5-14 غرام شاي","sugarFrom":58.0,"sugarTo":58.0,"teaFrom":13.5,"teaTo":14.0,"sugarAvg":58.0,"teaAvg":13.75}}},{"id":7,"name":"الجمر","khadraText":"20-25 دقيقة","khadraFrom":20.0,"khadraTo":25.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"10-11 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":10.0,"teaTo":11.0,"sugarAvg":0.0,"teaAvg":10.5},"light":{"label":"خفيف","available":true,"sugarText":"35-40 غرام سكر","teaText":"11 غرام شاي","sugarFrom":35.0,"sugarTo":40.0,"teaFrom":11.0,"teaTo":11.0,"sugarAvg":37.5,"teaAvg":11.0},"medium":{"label":"وسط","available":true,"sugarText":"50-53 غرام سكر","teaText":"11.5-12.5 غرام شاي","sugarFrom":50.0,"sugarTo":53.0,"teaFrom":11.5,"teaTo":12.5,"sugarAvg":51.5,"teaAvg":12.0},"heavy":{"label":"ثقيل","available":true,"sugarText":"55 غرام سكر","teaText":"13-13.5 غرام شاي","sugarFrom":55.0,"sugarTo":55.0,"teaFrom":13.0,"teaTo":13.5,"sugarAvg":55.0,"teaAvg":13.25}}},{"id":8,"name":"مذاق","khadraText":"20-25 دقيقة","khadraFrom":20.0,"khadraTo":25.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"11-12 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":11.0,"teaTo":12.0,"sugarAvg":0.0,"teaAvg":11.5},"light":{"label":"خفيف","available":true,"sugarText":"35 غرام سكر","teaText":"12 غرام شاي","sugarFrom":35.0,"sugarTo":35.0,"teaFrom":12.0,"teaTo":12.0,"sugarAvg":35.0,"teaAvg":12.0},"medium":{"label":"وسط","available":true,"sugarText":"48-52 غرام سكر","teaText":"12.5-13.5 غرام شاي","sugarFrom":48.0,"sugarTo":52.0,"teaFrom":12.5,"teaTo":13.5,"sugarAvg":50.0,"teaAvg":13.0},"heavy":{"label":"ثقيل","available":true,"sugarText":"55 غرام سكر","teaText":"14 غرام شاي","sugarFrom":55.0,"sugarTo":55.0,"teaFrom":14.0,"teaTo":14.0,"sugarAvg":55.0,"teaAvg":14.0}}},{"id":9,"name":"سنقيل","khadraText":"30 دقيقة","khadraFrom":30.0,"khadraTo":30.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"10-10.5 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":10.0,"teaTo":10.5,"sugarAvg":0.0,"teaAvg":10.25},"light":{"label":"خفيف","available":true,"sugarText":"35-40 غرام سكر","teaText":"11 غرام شاي","sugarFrom":35.0,"sugarTo":40.0,"teaFrom":11.0,"teaTo":11.0,"sugarAvg":37.5,"teaAvg":11.0},"medium":{"label":"وسط","available":true,"sugarText":"50-55 غرام سكر","teaText":"11.5-12.5 غرام شاي","sugarFrom":50.0,"sugarTo":55.0,"teaFrom":11.5,"teaTo":12.5,"sugarAvg":52.5,"teaAvg":12.0},"heavy":{"label":"ثقيل","available":true,"sugarText":"56-58 غرام سكر","teaText":"13.5 غرام شاي","sugarFrom":56.0,"sugarTo":58.0,"teaFrom":13.5,"teaTo":13.5,"sugarAvg":57.0,"teaAvg":13.5}}},{"id":10,"name":"الغضا","khadraText":"20-25 دقيقة","khadraFrom":20.0,"khadraTo":25.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"9.5-10.5 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":9.5,"teaTo":10.5,"sugarAvg":0.0,"teaAvg":10.0},"light":{"label":"خفيف","available":true,"sugarText":"35 غرام سكر","teaText":"11 غرام شاي","sugarFrom":35.0,"sugarTo":35.0,"teaFrom":11.0,"teaTo":11.0,"sugarAvg":35.0,"teaAvg":11.0},"medium":{"label":"وسط","available":true,"sugarText":"52-55 غرام سكر","teaText":"11.5-12 غرام شاي","sugarFrom":52.0,"sugarTo":55.0,"teaFrom":11.5,"teaTo":12.0,"sugarAvg":53.5,"teaAvg":11.75},"heavy":{"label":"ثقيل","available":true,"sugarText":"55-57 غرام سكر","teaText":"12.5-13 غرام شاي","sugarFrom":55.0,"sugarTo":57.0,"teaFrom":12.5,"teaTo":13.0,"sugarAvg":56.0,"teaAvg":12.75}}},{"id":11,"name":"النهرين","khadraText":"20-25 دقيقة","khadraFrom":20.0,"khadraTo":25.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"10-11 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":10.0,"teaTo":11.0,"sugarAvg":0.0,"teaAvg":10.5},"light":{"label":"خفيف","available":true,"sugarText":"30-35 غرام سكر","teaText":"11.5-12 غرام شاي","sugarFrom":30.0,"sugarTo":35.0,"teaFrom":11.5,"teaTo":12.0,"sugarAvg":32.5,"teaAvg":11.75},"medium":{"label":"وسط","available":true,"sugarText":"50-55 غرام سكر","teaText":"12.5-13.5 غرام شاي","sugarFrom":50.0,"sugarTo":55.0,"teaFrom":12.5,"teaTo":13.5,"sugarAvg":52.5,"teaAvg":13.0},"heavy":{"label":"ثقيل","available":true,"sugarText":"55-57 غرام سكر","teaText":"13.5-14 غرام شاي","sugarFrom":55.0,"sugarTo":57.0,"teaFrom":13.5,"teaTo":14.0,"sugarAvg":56.0,"teaAvg":13.75}}},{"id":12,"name":"غمدان","khadraText":"20-25 دقيقة","khadraFrom":20.0,"khadraTo":25.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"9.5-11 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":9.5,"teaTo":11.0,"sugarAvg":0.0,"teaAvg":10.25},"light":{"label":"خفيف","available":true,"sugarText":"30-35 غرام سكر","teaText":"12 غرام شاي","sugarFrom":30.0,"sugarTo":35.0,"teaFrom":12.0,"teaTo":12.0,"sugarAvg":32.5,"teaAvg":12.0},"medium":{"label":"وسط","available":true,"sugarText":"50-53 غرام سكر","teaText":"12.5-13 غرام شاي","sugarFrom":50.0,"sugarTo":53.0,"teaFrom":12.5,"teaTo":13.0,"sugarAvg":51.5,"teaAvg":12.75},"heavy":{"label":"ثقيل","available":true,"sugarText":"55 غرام سكر","teaText":"13.5-14 غرام شاي","sugarFrom":55.0,"sugarTo":55.0,"teaFrom":13.5,"teaTo":14.0,"sugarAvg":55.0,"teaAvg":13.75}}},{"id":13,"name":"قرناس","khadraText":"25 دقيقة","khadraFrom":25.0,"khadraTo":25.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"10-11 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":10.0,"teaTo":11.0,"sugarAvg":0.0,"teaAvg":10.5},"light":{"label":"خفيف","available":true,"sugarText":"35 غرام سكر","teaText":"11.5-12 غرام شاي","sugarFrom":35.0,"sugarTo":35.0,"teaFrom":11.5,"teaTo":12.0,"sugarAvg":35.0,"teaAvg":11.75},"medium":{"label":"وسط","available":true,"sugarText":"50-53 غرام سكر","teaText":"12.5-13.5 غرام شاي","sugarFrom":50.0,"sugarTo":53.0,"teaFrom":12.5,"teaTo":13.5,"sugarAvg":51.5,"teaAvg":13.0},"heavy":{"label":"ثقيل","available":true,"sugarText":"55-58 غرام سكر","teaText":"14 غرام شاي","sugarFrom":55.0,"sugarTo":58.0,"teaFrom":14.0,"teaTo":14.0,"sugarAvg":56.5,"teaAvg":14.0}}},{"id":14,"name":"ابوغوري","khadraText":"20-30 دقيقة","khadraFrom":20.0,"khadraTo":30.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"10-11 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":10.0,"teaTo":11.0,"sugarAvg":0.0,"teaAvg":10.5},"light":{"label":"خفيف","available":true,"sugarText":"35 غرام سكر","teaText":"11 غرام شاي","sugarFrom":35.0,"sugarTo":35.0,"teaFrom":11.0,"teaTo":11.0,"sugarAvg":35.0,"teaAvg":11.0},"medium":{"label":"وسط","available":true,"sugarText":"50 غرام سكر","teaText":"12 غرام شاي","sugarFrom":50.0,"sugarTo":50.0,"teaFrom":12.0,"teaTo":12.0,"sugarAvg":50.0,"teaAvg":12.0},"heavy":{"label":"ثقيل","available":true,"sugarText":"55 غرام سكر","teaText":"13 غرام شاي","sugarFrom":55.0,"sugarTo":55.0,"teaFrom":13.0,"teaTo":13.0,"sugarAvg":55.0,"teaAvg":13.0}}},{"id":15,"name":"الصمان","khadraText":"30 دقيقة","khadraFrom":30.0,"khadraTo":30.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"10.5-11 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":10.5,"teaTo":11.0,"sugarAvg":0.0,"teaAvg":10.75},"light":{"label":"خفيف","available":true,"sugarText":"35 غرام سكر","teaText":"11.5-12 غرام شاي","sugarFrom":35.0,"sugarTo":35.0,"teaFrom":11.5,"teaTo":12.0,"sugarAvg":35.0,"teaAvg":11.75},"medium":{"label":"وسط","available":true,"sugarText":"50 غرام سكر","teaText":"12.5-13 غرام شاي","sugarFrom":50.0,"sugarTo":50.0,"teaFrom":12.5,"teaTo":13.0,"sugarAvg":50.0,"teaAvg":12.75},"heavy":{"label":"ثقيل","available":true,"sugarText":"60 غرام سكر","teaText":"14 غرام شاي","sugarFrom":60.0,"sugarTo":60.0,"teaFrom":14.0,"teaTo":14.0,"sugarAvg":60.0,"teaAvg":14.0}}},{"id":16,"name":"الصمان الذهبي","khadraText":"25 دقيقة","khadraFrom":25.0,"khadraTo":25.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"10-11 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":10.0,"teaTo":11.0,"sugarAvg":0.0,"teaAvg":10.5},"light":{"label":"خفيف","available":true,"sugarText":"30 غرام سكر","teaText":"11 غرام شاي","sugarFrom":30.0,"sugarTo":30.0,"teaFrom":11.0,"teaTo":11.0,"sugarAvg":30.0,"teaAvg":11.0},"medium":{"label":"وسط","available":true,"sugarText":"50 غرام سكر","teaText":"12 غرام شاي","sugarFrom":50.0,"sugarTo":50.0,"teaFrom":12.0,"teaTo":12.0,"sugarAvg":50.0,"teaAvg":12.0},"heavy":{"label":"ثقيل","available":true,"sugarText":"55 غرام سكر","teaText":"13-13.5 غرام شاي","sugarFrom":55.0,"sugarTo":55.0,"teaFrom":13.0,"teaTo":13.5,"sugarAvg":55.0,"teaAvg":13.25}}},{"id":17,"name":"راس الحصان","khadraText":"20-25 دقيقة","khadraFrom":20.0,"khadraTo":25.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"10-11 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":10.0,"teaTo":11.0,"sugarAvg":0.0,"teaAvg":10.5},"light":{"label":"خفيف","available":true,"sugarText":"35 غرام سكر","teaText":"11-12 غرام شاي","sugarFrom":35.0,"sugarTo":35.0,"teaFrom":11.0,"teaTo":12.0,"sugarAvg":35.0,"teaAvg":11.5},"medium":{"label":"وسط","available":true,"sugarText":"50-55 غرام سكر","teaText":"12-13 غرام شاي","sugarFrom":50.0,"sugarTo":55.0,"teaFrom":12.0,"teaTo":13.0,"sugarAvg":52.5,"teaAvg":12.5},"heavy":{"label":"ثقيل","available":true,"sugarText":"60 غرام سكر","teaText":"14 غرام شاي","sugarFrom":60.0,"sugarTo":60.0,"teaFrom":14.0,"teaTo":14.0,"sugarAvg":60.0,"teaAvg":14.0}}},{"id":18,"name":"ازركي اذري","khadraText":"20-25 دقيقة","khadraFrom":20.0,"khadraTo":25.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"9.5-11 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":9.5,"teaTo":11.0,"sugarAvg":0.0,"teaAvg":10.25},"light":{"label":"خفيف","available":true,"sugarText":"30-35 غرام سكر","teaText":"11-12 غرام شاي","sugarFrom":30.0,"sugarTo":35.0,"teaFrom":11.0,"teaTo":12.0,"sugarAvg":32.5,"teaAvg":11.5},"medium":{"label":"وسط","available":true,"sugarText":"50-53 غرام سكر","teaText":"12.5-13.5 غرام شاي","sugarFrom":50.0,"sugarTo":53.0,"teaFrom":12.5,"teaTo":13.5,"sugarAvg":51.5,"teaAvg":13.0},"heavy":{"label":"ثقيل","available":true,"sugarText":"55-58 غرام سكر","teaText":"13.5-14.5 غرام شاي","sugarFrom":55.0,"sugarTo":58.0,"teaFrom":13.5,"teaTo":14.5,"sugarAvg":56.5,"teaAvg":14.0}}},{"id":19,"name":"القمة","khadraText":"20-25 دقيقة","khadraFrom":20.0,"khadraTo":25.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"9.5-10.5 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":9.5,"teaTo":10.5,"sugarAvg":0.0,"teaAvg":10.0},"light":{"label":"خفيف","available":true,"sugarText":"30-35 غرام سكر","teaText":"10.5-11 غرام شاي","sugarFrom":30.0,"sugarTo":35.0,"teaFrom":10.5,"teaTo":11.0,"sugarAvg":32.5,"teaAvg":10.75},"medium":{"label":"وسط","available":true,"sugarText":"50-53 غرام سكر","teaText":"11-12 غرام شاي","sugarFrom":50.0,"sugarTo":53.0,"teaFrom":11.0,"teaTo":12.0,"sugarAvg":51.5,"teaAvg":11.5},"heavy":{"label":"ثقيل","available":true,"sugarText":"55-57 غرام سكر","teaText":"12.5-13.5 غرام شاي","sugarFrom":55.0,"sugarTo":57.0,"teaFrom":12.5,"teaTo":13.5,"sugarAvg":56.0,"teaAvg":13.0}}},{"id":20,"name":"البيدر","khadraText":"25-30 دقيقة","khadraFrom":25.0,"khadraTo":30.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"10-10.5 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":10.0,"teaTo":10.5,"sugarAvg":0.0,"teaAvg":10.25},"light":{"label":"خفيف","available":true,"sugarText":"35 غرام سكر","teaText":"11.5-12 غرام شاي","sugarFrom":35.0,"sugarTo":35.0,"teaFrom":11.5,"teaTo":12.0,"sugarAvg":35.0,"teaAvg":11.75},"medium":{"label":"وسط","available":true,"sugarText":"50-55 غرام سكر","teaText":"12-12.5 غرام شاي","sugarFrom":50.0,"sugarTo":55.0,"teaFrom":12.0,"teaTo":12.5,"sugarAvg":52.5,"teaAvg":12.25},"heavy":{"label":"ثقيل","available":true,"sugarText":"60 غرام سكر","teaText":"13-13.5 غرام شاي","sugarFrom":60.0,"sugarTo":60.0,"teaFrom":13.0,"teaTo":13.5,"sugarAvg":60.0,"teaAvg":13.25}}},{"id":21,"name":"ابوجبل","khadraText":"30 دقيقة","khadraFrom":30.0,"khadraTo":30.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"9-11 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":9.0,"teaTo":11.0,"sugarAvg":0.0,"teaAvg":10.0},"light":{"label":"خفيف","available":true,"sugarText":"35 غرام سكر","teaText":"11 غرام شاي","sugarFrom":35.0,"sugarTo":35.0,"teaFrom":11.0,"teaTo":11.0,"sugarAvg":35.0,"teaAvg":11.0},"medium":{"label":"وسط","available":true,"sugarText":"55 غرام سكر","teaText":"12 غرام شاي","sugarFrom":55.0,"sugarTo":55.0,"teaFrom":12.0,"teaTo":12.0,"sugarAvg":55.0,"teaAvg":12.0},"heavy":{"label":"ثقيل","available":true,"sugarText":"55 غرام سكر","teaText":"13 غرام شاي","sugarFrom":55.0,"sugarTo":55.0,"teaFrom":13.0,"teaTo":13.0,"sugarAvg":55.0,"teaAvg":13.0}}},{"id":22,"name":"ربيع حديد","khadraText":"25 دقيقة","khadraFrom":25.0,"khadraTo":25.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"10-11 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":10.0,"teaTo":11.0,"sugarAvg":0.0,"teaAvg":10.5},"light":{"label":"خفيف","available":true,"sugarText":"35-40 غرام سكر","teaText":"11 غرام شاي","sugarFrom":35.0,"sugarTo":40.0,"teaFrom":11.0,"teaTo":11.0,"sugarAvg":37.5,"teaAvg":11.0},"medium":{"label":"وسط","available":true,"sugarText":"50-55 غرام سكر","teaText":"12 غرام شاي","sugarFrom":50.0,"sugarTo":55.0,"teaFrom":12.0,"teaTo":12.0,"sugarAvg":52.5,"teaAvg":12.0},"heavy":{"label":"ثقيل","available":true,"sugarText":"57-60 غرام سكر","teaText":"13 غرام شاي","sugarFrom":57.0,"sugarTo":60.0,"teaFrom":13.0,"teaTo":13.0,"sugarAvg":58.5,"teaAvg":13.0}}},{"id":23,"name":"ربيع خشب","khadraText":"20-25 دقيقة","khadraFrom":20.0,"khadraTo":25.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"9.5-10.5 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":9.5,"teaTo":10.5,"sugarAvg":0.0,"teaAvg":10.0},"light":{"label":"خفيف","available":true,"sugarText":"30-35 غرام سكر","teaText":"11-11.5 غرام شاي","sugarFrom":30.0,"sugarTo":35.0,"teaFrom":11.0,"teaTo":11.5,"sugarAvg":32.5,"teaAvg":11.25},"medium":{"label":"وسط","available":true,"sugarText":"50-53 غرام سكر","teaText":"12 غرام شاي","sugarFrom":50.0,"sugarTo":53.0,"teaFrom":12.0,"teaTo":12.0,"sugarAvg":51.5,"teaAvg":12.0},"heavy":{"label":"ثقيل","available":true,"sugarText":"55-57 غرام سكر","teaText":"12.5-13.5 غرام شاي","sugarFrom":55.0,"sugarTo":57.0,"teaFrom":12.5,"teaTo":13.5,"sugarAvg":56.0,"teaAvg":13.0}}},{"id":24,"name":"ابوطير","khadraText":"25 دقيقة","khadraFrom":25.0,"khadraTo":25.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"9.5-10.5 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":9.5,"teaTo":10.5,"sugarAvg":0.0,"teaAvg":10.0},"light":{"label":"خفيف","available":true,"sugarText":"35 غرام سكر","teaText":"11 غرام شاي","sugarFrom":35.0,"sugarTo":35.0,"teaFrom":11.0,"teaTo":11.0,"sugarAvg":35.0,"teaAvg":11.0},"medium":{"label":"وسط","available":true,"sugarText":"50-55 غرام سكر","teaText":"11-12 غرام شاي","sugarFrom":50.0,"sugarTo":55.0,"teaFrom":11.0,"teaTo":12.0,"sugarAvg":52.5,"teaAvg":11.5},"heavy":{"label":"ثقيل","available":true,"sugarText":"55-60 غرام سكر","teaText":"13-14 غرام شاي","sugarFrom":55.0,"sugarTo":60.0,"teaFrom":13.0,"teaTo":14.0,"sugarAvg":57.5,"teaAvg":13.5}}},{"id":25,"name":"الاولين","khadraText":"25 دقيقة","khadraFrom":25.0,"khadraTo":25.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"9.5-10.5 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":9.5,"teaTo":10.5,"sugarAvg":0.0,"teaAvg":10.0},"light":{"label":"خفيف","available":true,"sugarText":"30-35 غرام سكر","teaText":"11.5-12 غرام شاي","sugarFrom":30.0,"sugarTo":35.0,"teaFrom":11.5,"teaTo":12.0,"sugarAvg":32.5,"teaAvg":11.75},"medium":{"label":"وسط","available":true,"sugarText":"50-53 غرام سكر","teaText":"12.5-13 غرام شاي","sugarFrom":50.0,"sugarTo":53.0,"teaFrom":12.5,"teaTo":13.0,"sugarAvg":51.5,"teaAvg":12.75},"heavy":{"label":"ثقيل","available":true,"sugarText":"55-60 غرام سكر","teaText":"13.5-14 غرام شاي","sugarFrom":55.0,"sugarTo":60.0,"teaFrom":13.5,"teaTo":14.0,"sugarAvg":57.5,"teaAvg":13.75}}},{"id":26,"name":"كواليتي","khadraText":"20-25 دقيقة","khadraFrom":20.0,"khadraTo":25.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"9-11 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":9.0,"teaTo":11.0,"sugarAvg":0.0,"teaAvg":10.0},"light":{"label":"خفيف","available":true,"sugarText":"30-35 غرام سكر","teaText":"12 غرام شاي","sugarFrom":30.0,"sugarTo":35.0,"teaFrom":12.0,"teaTo":12.0,"sugarAvg":32.5,"teaAvg":12.0},"medium":{"label":"وسط","available":true,"sugarText":"50-53 غرام سكر","teaText":"13-13.5 غرام شاي","sugarFrom":50.0,"sugarTo":53.0,"teaFrom":13.0,"teaTo":13.5,"sugarAvg":51.5,"teaAvg":13.25},"heavy":{"label":"ثقيل","available":true,"sugarText":"55-57 غرام سكر","teaText":"14 غرام شاي","sugarFrom":55.0,"sugarTo":57.0,"teaFrom":14.0,"teaTo":14.0,"sugarAvg":56.0,"teaAvg":14.0}}},{"id":27,"name":"999","khadraText":"20-25 دقيقة","khadraFrom":20.0,"khadraTo":25.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"9.5-10.5 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":9.5,"teaTo":10.5,"sugarAvg":0.0,"teaAvg":10.0},"light":{"label":"خفيف","available":true,"sugarText":"35 غرام سكر","teaText":"11.5 غرام شاي","sugarFrom":35.0,"sugarTo":35.0,"teaFrom":11.5,"teaTo":11.5,"sugarAvg":35.0,"teaAvg":11.5},"medium":{"label":"وسط","available":true,"sugarText":"50-53 غرام سكر","teaText":"12.5-13.5 غرام شاي","sugarFrom":50.0,"sugarTo":53.0,"teaFrom":12.5,"teaTo":13.5,"sugarAvg":51.5,"teaAvg":13.0},"heavy":{"label":"ثقيل","available":true,"sugarText":"55-57 غرام سكر","teaText":"13.5-14 غرام شاي","sugarFrom":55.0,"sugarTo":57.0,"teaFrom":13.5,"teaTo":14.0,"sugarAvg":56.0,"teaAvg":13.75}}},{"id":28,"name":"واردات الكويت","khadraText":"20-25 دقيقة","khadraFrom":20.0,"khadraTo":25.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"11 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":11.0,"teaTo":11.0,"sugarAvg":0.0,"teaAvg":11.0},"light":{"label":"خفيف","available":true,"sugarText":"35 غرام سكر","teaText":"12 غرام شاي","sugarFrom":35.0,"sugarTo":35.0,"teaFrom":12.0,"teaTo":12.0,"sugarAvg":35.0,"teaAvg":12.0},"medium":{"label":"وسط","available":true,"sugarText":"47-52 غرام سكر","teaText":"13-13.5 غرام شاي","sugarFrom":47.0,"sugarTo":52.0,"teaFrom":13.0,"teaTo":13.5,"sugarAvg":49.5,"teaAvg":13.25},"heavy":{"label":"ثقيل","available":true,"sugarText":"55 غرام سكر","teaText":"14-14.5 غرام شاي","sugarFrom":55.0,"sugarTo":55.0,"teaFrom":14.0,"teaTo":14.5,"sugarAvg":55.0,"teaAvg":14.25}}},{"id":29,"name":"الوزة حديد مربع","khadraText":"20-25 دقيقة","khadraFrom":20.0,"khadraTo":25.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"9-10.5 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":9.0,"teaTo":10.5,"sugarAvg":0.0,"teaAvg":9.75},"light":{"label":"خفيف","available":true,"sugarText":"30-35 غرام سكر","teaText":"11-11.5 غرام شاي","sugarFrom":30.0,"sugarTo":35.0,"teaFrom":11.0,"teaTo":11.5,"sugarAvg":32.5,"teaAvg":11.25},"medium":{"label":"وسط","available":true,"sugarText":"50-53 غرام سكر","teaText":"12 غرام شاي","sugarFrom":50.0,"sugarTo":53.0,"teaFrom":12.0,"teaTo":12.0,"sugarAvg":51.5,"teaAvg":12.0},"heavy":{"label":"ثقيل","available":true,"sugarText":"55-65 غرام سكر","teaText":"13-14 غرام شاي","sugarFrom":55.0,"sugarTo":65.0,"teaFrom":13.0,"teaTo":14.0,"sugarAvg":60.0,"teaAvg":13.5}}},{"id":30,"name":"بنتليز","khadraText":"20-25 دقيقة","khadraFrom":20.0,"khadraTo":25.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"10-11 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":10.0,"teaTo":11.0,"sugarAvg":0.0,"teaAvg":10.5},"light":{"label":"خفيف","available":false,"sugarText":"","teaText":"","sugarFrom":null,"sugarTo":null,"teaFrom":null,"teaTo":null,"sugarAvg":null,"teaAvg":null},"medium":{"label":"وسط","available":true,"sugarText":"50-53 غرام سكر","teaText":"12-13 غرام شاي","sugarFrom":50.0,"sugarTo":53.0,"teaFrom":12.0,"teaTo":13.0,"sugarAvg":51.5,"teaAvg":12.5},"heavy":{"label":"ثقيل","available":false,"sugarText":"","teaText":"","sugarFrom":null,"sugarTo":null,"teaFrom":null,"teaTo":null,"sugarAvg":null,"teaAvg":null}}},{"id":31,"name":"الشايب","khadraText":"20-25 دقيقة","khadraFrom":20.0,"khadraTo":25.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"9-10 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":9.0,"teaTo":10.0,"sugarAvg":0.0,"teaAvg":9.5},"light":{"label":"خفيف","available":false,"sugarText":"","teaText":"","sugarFrom":null,"sugarTo":null,"teaFrom":null,"teaTo":null,"sugarAvg":null,"teaAvg":null},"medium":{"label":"وسط","available":true,"sugarText":"50-55 غرام سكر","teaText":"11-12 غرام شاي","sugarFrom":50.0,"sugarTo":55.0,"teaFrom":11.0,"teaTo":12.0,"sugarAvg":52.5,"teaAvg":11.5},"heavy":{"label":"ثقيل","available":false,"sugarText":"","teaText":"","sugarFrom":null,"sugarTo":null,"teaFrom":null,"teaTo":null,"sugarAvg":null,"teaAvg":null}}},{"id":32,"name":"الفرسان","khadraText":"25 دقيقة","khadraFrom":25.0,"khadraTo":25.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"9.5-10.5 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":9.5,"teaTo":10.5,"sugarAvg":0.0,"teaAvg":10.0},"light":{"label":"خفيف","available":false,"sugarText":"","teaText":"","sugarFrom":null,"sugarTo":null,"teaFrom":null,"teaTo":null,"sugarAvg":null,"teaAvg":null},"medium":{"label":"وسط","available":true,"sugarText":"52-57 غرام سكر","teaText":"12-13 غرام شاي","sugarFrom":52.0,"sugarTo":57.0,"teaFrom":12.0,"teaTo":13.0,"sugarAvg":54.5,"teaAvg":12.5},"heavy":{"label":"ثقيل","available":false,"sugarText":"","teaText":"","sugarFrom":null,"sugarTo":null,"teaFrom":null,"teaTo":null,"sugarAvg":null,"teaAvg":null}}},{"id":33,"name":"النحو السهم الذهبي","khadraText":"25 دقيقة","khadraFrom":25.0,"khadraTo":25.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"10-11 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":10.0,"teaTo":11.0,"sugarAvg":0.0,"teaAvg":10.5},"light":{"label":"خفيف","available":false,"sugarText":"","teaText":"","sugarFrom":null,"sugarTo":null,"teaFrom":null,"teaTo":null,"sugarAvg":null,"teaAvg":null},"medium":{"label":"وسط","available":true,"sugarText":"50-53 غرام سكر","teaText":"12-13 غرام شاي","sugarFrom":50.0,"sugarTo":53.0,"teaFrom":12.0,"teaTo":13.0,"sugarAvg":51.5,"teaAvg":12.5},"heavy":{"label":"ثقيل","available":false,"sugarText":"","teaText":"","sugarFrom":null,"sugarTo":null,"teaFrom":null,"teaTo":null,"sugarAvg":null,"teaAvg":null}}},{"id":34,"name":"الطائي","khadraText":"20-25 دقيقة","khadraFrom":20.0,"khadraTo":25.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"11-12 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":11.0,"teaTo":12.0,"sugarAvg":0.0,"teaAvg":11.5},"light":{"label":"خفيف","available":false,"sugarText":"","teaText":"","sugarFrom":null,"sugarTo":null,"teaFrom":null,"teaTo":null,"sugarAvg":null,"teaAvg":null},"medium":{"label":"وسط","available":true,"sugarText":"50-55 غرام سكر","teaText":"13-14 غرام شاي","sugarFrom":50.0,"sugarTo":55.0,"teaFrom":13.0,"teaTo":14.0,"sugarAvg":52.5,"teaAvg":13.5},"heavy":{"label":"ثقيل","available":false,"sugarText":"","teaText":"","sugarFrom":null,"sugarTo":null,"teaFrom":null,"teaTo":null,"sugarAvg":null,"teaAvg":null}}},{"id":35,"name":"الخير","khadraText":"20-25 دقيقة","khadraFrom":20.0,"khadraTo":25.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"11-11.5 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":11.0,"teaTo":11.5,"sugarAvg":0.0,"teaAvg":11.25},"light":{"label":"خفيف","available":false,"sugarText":"","teaText":"","sugarFrom":null,"sugarTo":null,"teaFrom":null,"teaTo":null,"sugarAvg":null,"teaAvg":null},"medium":{"label":"وسط","available":true,"sugarText":"50-55 غرام سكر","teaText":"12.5-13.5 غرام شاي","sugarFrom":50.0,"sugarTo":55.0,"teaFrom":12.5,"teaTo":13.5,"sugarAvg":52.5,"teaAvg":13.0},"heavy":{"label":"ثقيل","available":false,"sugarText":"","teaText":"","sugarFrom":null,"sugarTo":null,"teaFrom":null,"teaTo":null,"sugarAvg":null,"teaAvg":null}}},{"id":36,"name":"الغزالين","khadraText":"20-25 دقيقة","khadraFrom":20.0,"khadraTo":25.0,"levels":{"nosugar":{"label":"بدون سكر","available":true,"sugarText":"بدون سكر","teaText":"9-10 غرام شاي","sugarFrom":0.0,"sugarTo":0.0,"teaFrom":9.0,"teaTo":10.0,"sugarAvg":0.0,"teaAvg":9.5},"light":{"label":"خفيف","available":false,"sugarText":"","teaText":"","sugarFrom":null,"sugarTo":null,"teaFrom":null,"teaTo":null,"sugarAvg":null,"teaAvg":null},"medium":{"label":"وسط","available":true,"sugarText":"50-55 غرام سكر","teaText":"11-12 غرام شاي","sugarFrom":50.0,"sugarTo":55.0,"teaFrom":11.0,"teaTo":12.0,"sugarAvg":52.5,"teaAvg":11.5},"heavy":{"label":"ثقيل","available":false,"sugarText":"","teaText":"","sugarFrom":null,"sugarTo":null,"teaFrom":null,"teaTo":null,"sugarAvg":null,"teaAvg":null}}}];
+
+(function () {
+  const DEFAULT_RATIOS = { sugar: [57, 75, 90], tea: [11, 12, 13] };
+  const LEVELS = {
+    nosugar: { label: 'بدون سكر', btnIndex: 1 },
+    light:   { label: 'خفيف', btnIndex: 0 },
+    medium:  { label: 'وسط', btnIndex: 1 },
+    heavy:   { label: 'ثقيل', btnIndex: 2 }
+  };
+
+  let selectedTea = null;
+  let selectedLevel = 'medium';
+
+  function num(v) {
+    if (v === null || v === undefined || v === '') return null;
+    const n = Number(String(v).replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/,/g, '.').replace(/[^0-9.\-]/g, ''));
+    return Number.isFinite(n) ? n : null;
+  }
+
+  function fmt(n) {
+    if (n === null || n === undefined || !Number.isFinite(Number(n))) return '—';
+    n = Number(n);
+    return Number.isInteger(n) ? String(n) : String(Math.round(n * 10) / 10);
+  }
+
+  function rangeText(from, to, unit) {
+    from = num(from); to = num(to);
+    if (from === null && to === null) return '—';
+    if (to === null || from === to) return fmt(from) + ' ' + unit;
+    return fmt(from) + '–' + fmt(to) + ' ' + unit;
+  }
+
+  function getCurrentWaterMl() {
+    const res = num(document.getElementById('resWater')?.textContent);
+    if (res && res > 0) return res;
+    const slider = num(document.getElementById('waterSlider')?.value);
+    const input = num(document.getElementById('mainInput')?.value);
+    const mode = document.querySelector('.tab.active')?.dataset?.mode || 'water';
+    if (mode === 'water' && input && input > 0) return input;
+    if (slider && slider > 0) return slider;
+    return null;
+  }
+
+  function amountForWater(avgPerLiter, waterMl) {
+    if (avgPerLiter === null || !waterMl) return null;
+    return (avgPerLiter * waterMl) / 1000;
+  }
+
+  function fillDatalist() {
+    const list = document.getElementById('teaRefList');
+    if (!list) return;
+    list.innerHTML = window.TEA_WEIGHT_REFERENCE.map(item => `<option value="${item.name}"></option>`).join('');
+  }
+
+  function findTeaByName(name) {
+    const q = String(name || '').trim();
+    if (!q) return null;
+    return window.TEA_WEIGHT_REFERENCE.find(item => item.name === q)
+      || window.TEA_WEIGHT_REFERENCE.find(item => item.name.includes(q) || q.includes(item.name))
+      || null;
+  }
+
+  function updateLevelButtons() {
+    const wrap = document.getElementById('teaRefLevels');
+    if (!wrap) return;
+    const levels = selectedTea?.levels || {};
+    wrap.querySelectorAll('button').forEach(btn => {
+      const key = btn.dataset.level;
+      const available = !selectedTea || levels[key]?.available;
+      btn.disabled = selectedTea ? !available : false;
+      btn.classList.toggle('active', key === selectedLevel);
+    });
+    if (selectedTea && !levels[selectedLevel]?.available) {
+      const fallback = ['medium', 'light', 'heavy', 'nosugar'].find(k => levels[k]?.available) || 'medium';
+      selectedLevel = fallback;
+      updateLevelButtons();
+    }
+  }
+
+  function updateSummary() {
+    updateLevelButtons();
+    const nameEl = document.getElementById('teaRefName');
+    const levelEl = document.getElementById('teaRefLevelName');
+    const khadraEl = document.getElementById('teaRefKhadra');
+    const sugarEl = document.getElementById('teaRefSugar');
+    const teaEl = document.getElementById('teaRefTea');
+    const calcEl = document.getElementById('teaRefCalculated');
+    if (!nameEl || !levelEl || !khadraEl || !sugarEl || !teaEl || !calcEl) return;
+
+    if (!selectedTea) {
+      nameEl.textContent = 'اختر نوع الشاي';
+      levelEl.textContent = LEVELS[selectedLevel].label;
+      khadraEl.textContent = '—';
+      sugarEl.textContent = '—';
+      teaEl.textContent = '—';
+      calcEl.textContent = 'اختر نوع الشاي، ثم أدخل كمية الماء ليظهر الحساب لهذه الكمية.';
+      return;
+    }
+
+    const level = selectedTea.levels[selectedLevel];
+    const water = getCurrentWaterMl();
+    const sugarAmt = amountForWater(level.sugarAvg, water);
+    const teaAmt = amountForWater(level.teaAvg, water);
+
+    nameEl.textContent = selectedTea.name;
+    levelEl.textContent = LEVELS[selectedLevel].label;
+    khadraEl.textContent = selectedTea.khadraText || rangeText(selectedTea.khadraFrom, selectedTea.khadraTo, 'دقيقة');
+    sugarEl.textContent = selectedLevel === 'nosugar' ? 'بدون سكر' : (level.sugarText || rangeText(level.sugarFrom, level.sugarTo, 'جم'));
+    teaEl.textContent = level.teaText || rangeText(level.teaFrom, level.teaTo, 'جم');
+
+    if (water) {
+      const sugarText = selectedLevel === 'nosugar' ? 'بدون سكر' : `${fmt(sugarAmt)} جم سكر`;
+      calcEl.innerHTML = `لهذه الكمية <strong>${fmt(water)} مل</strong>: ${sugarText}، و <strong>${fmt(teaAmt)} جم شاي</strong>.`;
+    } else {
+      calcEl.textContent = 'أدخل كمية الماء في الحاسبة ليظهر حساب السكر والشاي لهذه الكمية.';
+    }
+  }
+
+  function triggerMainRecalc() {
+    const input = document.getElementById('mainInput');
+    if (input) input.dispatchEvent(new Event('input', { bubbles: true }));
+    const slider = document.getElementById('waterSlider');
+    if (slider) slider.dispatchEvent(new Event('input', { bubbles: true }));
+    if (typeof calculate === 'function') calculate();
+    setTimeout(updateSummary, 80);
+  }
+
+  function labelButton(btn, base, value) {
+    if (!btn) return;
+    btn.dataset.value = String(value);
+    btn.textContent = `${base} ${fmt(value)}`;
+    btn.title = `${base} — ${fmt(value)} جم/لتر حسب جدول نوع الشاي`;
+  }
+
+  window.applyTeaReferenceToMainCalculator = function () {
+    if (!selectedTea) { showToast?.('اختر نوع الشاي أولاً'); return; }
+    const level = selectedTea.levels[selectedLevel];
+    if (!level?.available) { showToast?.('لا توجد بيانات لهذا المستوى في الجدول'); return; }
+
+    const sugarButtons = Array.from(document.querySelectorAll('#sugarGroup button'));
+    const teaButtons = Array.from(document.querySelectorAll('#teaGroup button'));
+    const lvs = selectedTea.levels;
+
+    labelButton(sugarButtons[0], 'خفيف', lvs.light?.sugarAvg ?? DEFAULT_RATIOS.sugar[0]);
+    labelButton(sugarButtons[1], 'وسط', lvs.medium?.sugarAvg ?? DEFAULT_RATIOS.sugar[1]);
+    labelButton(sugarButtons[2], 'ثقيل', lvs.heavy?.sugarAvg ?? DEFAULT_RATIOS.sugar[2]);
+    labelButton(teaButtons[0], 'خفيف', lvs.light?.teaAvg ?? DEFAULT_RATIOS.tea[0]);
+    labelButton(teaButtons[1], 'وسط', lvs.medium?.teaAvg ?? DEFAULT_RATIOS.tea[1]);
+    labelButton(teaButtons[2], 'ثقيل', lvs.heavy?.teaAvg ?? DEFAULT_RATIOS.tea[2]);
+
+    const idx = LEVELS[selectedLevel].btnIndex;
+    const sugarBtn = sugarButtons[idx];
+    const teaBtn = teaButtons[idx];
+    if (selectedLevel === 'nosugar') {
+      if (sugarBtn) { sugarBtn.dataset.value = '0'; sugarBtn.textContent = 'بدون سكر'; }
+      if (teaBtn && level.teaAvg !== null) { teaBtn.dataset.value = String(level.teaAvg); teaBtn.textContent = `شاي ${fmt(level.teaAvg)}`; }
+    }
+
+    if (typeof selectSugar === 'function' && sugarBtn) selectSugar(sugarBtn, false);
+    if (typeof selectTea === 'function' && teaBtn) selectTea(teaBtn);
+    triggerMainRecalc();
+    showToast?.('تم تطبيق وزنة ' + selectedTea.name + ' على الحاسبة');
+  };
+
+  window.resetMainCalculatorRatios = function () {
+    const sugarButtons = Array.from(document.querySelectorAll('#sugarGroup button'));
+    const teaButtons = Array.from(document.querySelectorAll('#teaGroup button'));
+    ['خفيف','معتدل','حالي'].forEach((label, i) => labelButton(sugarButtons[i], label, DEFAULT_RATIOS.sugar[i]));
+    ['خفيف','وسط','ثقيل'].forEach((label, i) => labelButton(teaButtons[i], label, DEFAULT_RATIOS.tea[i]));
+    if (typeof selectSugar === 'function' && sugarButtons[1]) selectSugar(sugarButtons[1], false);
+    if (typeof selectTea === 'function' && teaButtons[1]) selectTea(teaButtons[1]);
+    triggerMainRecalc();
+    showToast?.('تم إرجاع الوزنة الافتراضية');
+  };
+
+  function bindTeaReference() {
+    fillDatalist();
+    const search = document.getElementById('teaRefSearch');
+    const levels = document.getElementById('teaRefLevels');
+    if (search) {
+      const first = window.TEA_WEIGHT_REFERENCE[0];
+      if (first) { search.value = first.name; selectedTea = first; }
+      search.addEventListener('input', () => { selectedTea = findTeaByName(search.value); updateSummary(); });
+      search.addEventListener('change', () => { selectedTea = findTeaByName(search.value); updateSummary(); });
+    }
+    if (levels) {
+      levels.addEventListener('click', event => {
+        const btn = event.target.closest('button[data-level]');
+        if (!btn || btn.disabled) return;
+        selectedLevel = btn.dataset.level;
+        updateSummary();
+      });
+    }
+
+    ['input', 'change', 'click'].forEach(ev => {
+      document.addEventListener(ev, e => {
+        if (e.target.closest?.('#teaReferenceCard')) return;
+        setTimeout(updateSummary, 80);
+      }, true);
+    });
+    updateSummary();
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bindTeaReference, { once: true });
+  else bindTeaReference();
+})();
+</script>
 
 <script>
 /* ── Theme Picker Dropdown: fixed, conflict-resistant ── */
