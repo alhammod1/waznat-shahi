@@ -1115,7 +1115,7 @@
       white-space: nowrap;
     }
 
-    .tea-ref-search-wrap { position: relative; margin-bottom: 10px; }
+    .tea-ref-search-wrap { position: relative; margin-bottom: 10px; z-index: 50; }
 
     .tea-ref-search {
       width: 100%;
@@ -1126,7 +1126,7 @@
       background: var(--surface);
       border: 1.5px solid var(--border);
       border-radius: var(--r-md);
-      padding: 11px 12px 11px 36px;
+      padding: 11px 12px 11px 42px;
       outline: none;
       transition: var(--ease);
     }
@@ -1138,13 +1138,61 @@
 
     .tea-ref-select-icon {
       position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
+      left: 8px;
+      top: 7px;
+      width: 32px;
+      height: 32px;
+      border: none;
+      border-radius: var(--r-sm);
+      background: transparent;
       color: var(--text-muted);
-      pointer-events: none;
-      font-size: 0.76rem;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: var(--ease);
     }
+
+    .tea-ref-select-icon:hover { background: var(--accent-light); color: var(--accent); }
+
+    .tea-ref-dropdown {
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      left: 0;
+      max-height: 260px;
+      overflow-y: auto;
+      background: var(--surface);
+      border: 1.5px solid var(--accent);
+      border-radius: var(--r-md);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.34);
+      padding: 6px;
+      display: none;
+      z-index: 300;
+    }
+
+    .tea-ref-dropdown.open { display: block; }
+
+    .tea-ref-option {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.84rem;
+      font-weight: 800;
+      color: var(--text-secondary);
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: var(--r-sm);
+      padding: 9px 10px;
+      cursor: pointer;
+      text-align: right;
+      transition: var(--ease);
+    }
+
+    .tea-ref-option small { color: var(--text-muted); font-size: 0.62rem; font-weight: 700; white-space: nowrap; }
+    .tea-ref-option:hover, .tea-ref-option.active { background: var(--accent-light); color: var(--accent); border-color: var(--border); }
+    .tea-ref-no-results { padding: 12px; text-align: center; color: var(--text-muted); font-size: 0.8rem; font-weight: 700; }
 
     .tea-ref-levels {
       display: grid;
@@ -1396,10 +1444,10 @@
                 <span>من جدول ملك الشواهي</span>
             </div>
 
-            <div class="tea-ref-search-wrap">
-                <input class="tea-ref-search" id="teaRefSearch" list="teaRefList" placeholder="ابحث أو اختر نوع الشاي" autocomplete="off" aria-label="اختر نوع الشاي">
-                <span class="tea-ref-select-icon">▾</span>
-                <datalist id="teaRefList"></datalist>
+            <div class="tea-ref-search-wrap" id="teaRefSearchWrap">
+                <input class="tea-ref-search" id="teaRefSearch" placeholder="ابحث أو اختر نوع الشاي" autocomplete="off" aria-label="اختر نوع الشاي">
+                <button class="tea-ref-select-icon" type="button" id="teaRefOpenBtn" aria-label="عرض قائمة أنواع الشاي">▾</button>
+                <div class="tea-ref-dropdown" id="teaRefDropdown" role="listbox" aria-label="قائمة أنواع الشاي"></div>
             </div>
 
             <div class="tea-ref-levels" id="teaRefLevels" aria-label="مستوى الوزنة">
@@ -1754,18 +1802,48 @@ window.TEA_WEIGHT_REFERENCE = [{"id":1,"name":"زهرة الشاي","khadraText"
     return (avgPerLiter * waterMl) / 1000;
   }
 
-  function fillDatalist() {
-    const list = document.getElementById('teaRefList');
-    if (!list) return;
-    list.innerHTML = window.TEA_WEIGHT_REFERENCE.map(item => `<option value="${item.name}"></option>`).join('');
+  function normalizeArabicText(value) {
+    return String(value || '')
+      .trim()
+      .replace(/[أإآ]/g, 'ا')
+      .replace(/ى/g, 'ي')
+      .replace(/ة/g, 'ه')
+      .replace(/ـ/g, '')
+      .replace(/\s+/g, ' ');
   }
 
   function findTeaByName(name) {
-    const q = String(name || '').trim();
+    const q = normalizeArabicText(name);
     if (!q) return null;
-    return window.TEA_WEIGHT_REFERENCE.find(item => item.name === q)
-      || window.TEA_WEIGHT_REFERENCE.find(item => item.name.includes(q) || q.includes(item.name))
+    return window.TEA_WEIGHT_REFERENCE.find(item => normalizeArabicText(item.name) === q)
+      || window.TEA_WEIGHT_REFERENCE.find(item => normalizeArabicText(item.name).includes(q) || q.includes(normalizeArabicText(item.name)))
       || null;
+  }
+
+  function openTeaDropdown() {
+    const dd = document.getElementById('teaRefDropdown');
+    if (dd) dd.classList.add('open');
+  }
+
+  function closeTeaDropdown() {
+    const dd = document.getElementById('teaRefDropdown');
+    if (dd) dd.classList.remove('open');
+  }
+
+  function renderTeaDropdown(filter = '') {
+    const dd = document.getElementById('teaRefDropdown');
+    if (!dd) return;
+    const q = normalizeArabicText(filter);
+    const items = window.TEA_WEIGHT_REFERENCE.filter(item => !q || normalizeArabicText(item.name).includes(q));
+    if (!items.length) {
+      dd.innerHTML = '<div class="tea-ref-no-results">لا توجد نتيجة مطابقة</div>';
+      return;
+    }
+    dd.innerHTML = items.map(item => {
+      const active = selectedTea && selectedTea.name === item.name ? ' active' : '';
+      const khadra = item.khadraText || rangeText(item.khadraFrom, item.khadraTo, 'دقيقة');
+      return `<button class="tea-ref-option${active}" type="button" role="option" data-tea-name="${item.name}"><span>${item.name}</span><small>${khadra}</small></button>`;
+    }).join('');
   }
 
   function updateLevelButtons() {
@@ -1882,15 +1960,48 @@ window.TEA_WEIGHT_REFERENCE = [{"id":1,"name":"زهرة الشاي","khadraText"
   };
 
   function bindTeaReference() {
-    fillDatalist();
     const search = document.getElementById('teaRefSearch');
+    const openBtn = document.getElementById('teaRefOpenBtn');
+    const dropdown = document.getElementById('teaRefDropdown');
     const levels = document.getElementById('teaRefLevels');
+
+    renderTeaDropdown('');
+
     if (search) {
-      const first = window.TEA_WEIGHT_REFERENCE[0];
-      if (first) { search.value = first.name; selectedTea = first; }
-      search.addEventListener('input', () => { selectedTea = findTeaByName(search.value); updateSummary(); });
+      search.value = '';
+      selectedTea = null;
+      search.addEventListener('focus', () => { renderTeaDropdown(search.value); openTeaDropdown(); });
+      search.addEventListener('input', () => {
+        selectedTea = findTeaByName(search.value);
+        renderTeaDropdown(search.value);
+        openTeaDropdown();
+        updateSummary();
+      });
       search.addEventListener('change', () => { selectedTea = findTeaByName(search.value); updateSummary(); });
     }
+
+    if (openBtn) {
+      openBtn.addEventListener('click', () => {
+        const isOpen = dropdown?.classList.contains('open');
+        renderTeaDropdown('');
+        if (isOpen) closeTeaDropdown(); else openTeaDropdown();
+        search?.focus();
+      });
+    }
+
+    if (dropdown) {
+      dropdown.addEventListener('click', event => {
+        const btn = event.target.closest('button[data-tea-name]');
+        if (!btn) return;
+        const tea = findTeaByName(btn.dataset.teaName);
+        if (!tea) return;
+        selectedTea = tea;
+        if (search) search.value = tea.name;
+        closeTeaDropdown();
+        updateSummary();
+      });
+    }
+
     if (levels) {
       levels.addEventListener('click', event => {
         const btn = event.target.closest('button[data-level]');
@@ -1899,6 +2010,10 @@ window.TEA_WEIGHT_REFERENCE = [{"id":1,"name":"زهرة الشاي","khadraText"
         updateSummary();
       });
     }
+
+    document.addEventListener('click', event => {
+      if (!event.target.closest?.('#teaRefSearchWrap')) closeTeaDropdown();
+    }, true);
 
     ['input', 'change', 'click'].forEach(ev => {
       document.addEventListener(ev, e => {
