@@ -1343,6 +1343,56 @@
       .tea-ref-grid { grid-template-columns: 1fr; }
       .tea-ref-item { min-height: auto; }
     }
+
+
+    /* === User refinement: lighter result cards + refined action buttons === */
+    .result-card,
+    .abujabal-result {
+      border: 1px solid var(--border-light) !important;
+      box-shadow: var(--shadow-sm) !important;
+      background: var(--surface) !important;
+    }
+
+    .result-card::before,
+    .result-card::after {
+      display: none !important;
+    }
+
+    .action-btn.copy-btn,
+    .abujabal-copy-btn.copy-btn,
+    .action-btn.whatsapp-btn,
+    .abujabal-copy-btn.whatsapp-btn {
+      min-height: 44px;
+      gap: 7px;
+      background: var(--surface) !important;
+      color: var(--text-secondary) !important;
+      border: 1.5px solid var(--border) !important;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .action-btn.copy-btn:hover,
+    .abujabal-copy-btn.copy-btn:hover,
+    .action-btn.whatsapp-btn:hover,
+    .abujabal-copy-btn.whatsapp-btn:hover {
+      background: var(--accent-light) !important;
+      color: var(--accent) !important;
+      border-color: var(--accent) !important;
+      transform: translateY(-1px);
+    }
+
+    .btn-icon {
+      width: 22px;
+      height: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.82rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
     </style>
 </head>
 <body>
@@ -1539,8 +1589,8 @@
                 </div>
             </div>
             <div class="result-actions">
-                <button class="action-btn" onclick="copyResult()">📋 نسخ النتيجة</button>
-                <button class="action-btn" style="background:#25D366;color:#fff;border-color:#25D366;" onclick="shareWhatsApp()">📤 واتساب</button>
+                <button class="action-btn copy-btn" onclick="copyResult()"><span class="btn-icon">⧉</span> نسخ النتيجة</button>
+                <button class="action-btn whatsapp-btn" onclick="shareWhatsApp()"><span class="btn-icon">↗</span> واتساب</button>
                 <button class="action-btn primary" onclick="saveToHistory()">📌 حفظ</button>
             </div>
         </div>
@@ -1682,8 +1732,8 @@
                 </div>
             </div>
             <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
-                <button class="abujabal-copy-btn" onclick="ajCopyResult()">📋 نسخ النتيجة</button>
-                <button class="abujabal-copy-btn" style="background:#25D366;border-color:#25D366;color:#fff;" onclick="ajShareWhatsApp()">📤 واتساب</button>
+                <button class="abujabal-copy-btn copy-btn" onclick="ajCopyResult()"><span class="btn-icon">⧉</span> نسخ النتيجة</button>
+                <button class="abujabal-copy-btn whatsapp-btn" onclick="ajShareWhatsApp()"><span class="btn-icon">↗</span> واتساب</button>
             </div>
         </div>
 
